@@ -1,242 +1,159 @@
 import {
-    useTranslate,
-    IResourceComponentsProps,
-    CrudFilters,
-    HttpError,
+  useTranslate,
+  IResourceComponentsProps,
+  useDelete,
+  useNavigation,
 } from "@pankod/refine-core";
 
 import {
-    List,
-    Table,
-    Avatar,
-    useTable,
-    DateField,
-    BooleanField,
-    Card,
-    Input,
-    Icons,
-    Form,
-    DatePicker,
-    Button,
-    Select,
-    FormProps,
-    Row,
-    Col,
-    ShowButton,
+  List,
+  Table,
+  Avatar,
+  useTable,
+  Dropdown,
+  Menu,
+  Icons,
+  Space,
+  Typography,
+  BooleanField,
 } from "@pankod/refine-antd";
 
-import { IUser, IUserFilterVariables } from "interfaces";
+import { ICourier } from "interfaces";
 
-export const UserList: React.FC<IResourceComponentsProps> = () => {
-    const { tableProps, searchFormProps } = useTable<
-        IUser,
-        HttpError,
-        IUserFilterVariables
-    >({
-        initialSorter: [
-            {
-                field: "id",
-                order: "desc",
+export const UsersList: React.FC<IResourceComponentsProps> = () => {
+  const { show, edit } = useNavigation();
+  const t = useTranslate();
+
+  const { tableProps } = useTable<ICourier>({
+    initialSorter: [
+      {
+        field: "id",
+        order: "desc",
+      },
+    ],
+  });
+
+  const { mutate: mutateDelete } = useDelete();
+
+  const moreMenu = (id: number) => (
+    <Menu
+      mode="vertical"
+      onClick={({ domEvent }) => domEvent.stopPropagation()}
+    >
+      <Menu.Item
+        key="accept"
+        style={{
+          fontSize: 15,
+          display: "flex",
+          alignItems: "center",
+          fontWeight: 500,
+        }}
+        icon={
+          <Icons.EditOutlined
+            style={{
+              color: "#52c41a",
+              fontSize: 17,
+              fontWeight: 500,
+            }}
+          />
+        }
+        onClick={() => {
+          edit("users", id);
+        }}
+      >
+        {t("buttons.edit")}
+      </Menu.Item>
+      <Menu.Item
+        key="reject"
+        style={{
+          fontSize: 15,
+          display: "flex",
+          alignItems: "center",
+          fontWeight: 500,
+        }}
+        icon={
+          <Icons.CloseCircleOutlined
+            style={{
+              color: "#EE2A1E",
+              fontSize: 17,
+            }}
+          />
+        }
+        onClick={() => {
+          mutateDelete({
+            resource: "users",
+            id,
+            mutationMode: "undoable",
+          });
+        }}
+      >
+        {t("buttons.delete")}
+      </Menu.Item>
+    </Menu>
+  );
+
+  return (
+    <List>
+      <Table
+        {...tableProps}
+        rowKey="id"
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              show("users", record.id);
             },
-        ],
-        onSearch: (params) => {
-            const filters: CrudFilters = [];
-            const { q, status, createdAt, gender, isActive } = params;
-
-            filters.push({
-                field: "q",
-                operator: "eq",
-                value: q,
-            });
-
-            filters.push(
-                {
-                    field: "createdAt",
-                    operator: "gte",
-                    value: createdAt
-                        ? createdAt[0].startOf("day").toISOString()
-                        : undefined,
-                },
-                {
-                    field: "createdAt",
-                    operator: "lte",
-                    value: createdAt
-                        ? createdAt[1].endOf("day").toISOString()
-                        : undefined,
-                },
-            );
-
-            filters.push({
-                field: "gender",
-                operator: "eq",
-                value: gender,
-            });
-
-            filters.push({
-                field: "isActive",
-                operator: "eq",
-                value: isActive,
-            });
-
-            filters.push({
-                field: "status.text",
-                operator: "eq",
-                value: status,
-            });
-
-            return filters;
-        },
-        syncWithLocation: false,
-    });
-
-    const t = useTranslate();
-
-    return (
-        <Row gutter={[16, 16]}>
-            <Col xl={6} lg={24} xs={24}>
-                <Card title={t("users.filter.title")}>
-                    <Filter formProps={searchFormProps} />
-                </Card>
-            </Col>
-            <Col xl={18} xs={24}>
-                <List>
-                    <Table {...tableProps} rowKey="id">
-                        <Table.Column
-                            key="gsm"
-                            dataIndex="gsm"
-                            title={t("users.fields.gsm")}
-                        />
-                        <Table.Column
-                            align="center"
-                            key="avatar"
-                            dataIndex={["avatar"]}
-                            title={t("users.fields.avatar.label")}
-                            render={(value) => <Avatar src={value[0].url} />}
-                        />
-                        <Table.Column
-                            key="firstName"
-                            dataIndex="firstName"
-                            title={t("users.fields.firstName")}
-                        />
-                        <Table.Column
-                            key="lastName"
-                            dataIndex="lastName"
-                            title={t("users.fields.lastName")}
-                        />
-                        <Table.Column
-                            key="gender"
-                            dataIndex="gender"
-                            title={t("users.fields.gender.label")}
-                            render={(value) =>
-                                t(`users.fields.gender.${value}`)
-                            }
-                        />
-                        <Table.Column
-                            key="isActive"
-                            dataIndex="isActive"
-                            title={t("users.fields.isActive.label")}
-                            render={(value) => <BooleanField value={value} />}
-                        />
-                        <Table.Column
-                            key="createdAt"
-                            dataIndex="createdAt"
-                            title={t("users.fields.createdAt")}
-                            render={(value) => (
-                                <DateField value={value} format="LLL" />
-                            )}
-                            sorter
-                        />
-                        <Table.Column<IUser>
-                            title={t("table.actions")}
-                            render={(_, record) => (
-                                <ShowButton hideText recordItemId={record.id} />
-                            )}
-                        />
-                    </Table>
-                </List>
-            </Col>
-        </Row>
-    );
-};
-
-const Filter: React.FC<{ formProps: FormProps }> = (props) => {
-    const t = useTranslate();
-
-    const { RangePicker } = DatePicker;
-
-    return (
-        <Form layout="vertical" {...props.formProps}>
-            <Row gutter={[10, 0]} align="bottom">
-                <Col xs={24} xl={24} md={12}>
-                    <Form.Item label={t("users.filter.search.label")} name="q">
-                        <Input
-                            placeholder={t("users.filter.search.placeholder")}
-                            prefix={<Icons.SearchOutlined />}
-                        />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} xl={24} md={12}>
-                    <Form.Item
-                        label={t("users.filter.createdAt.label")}
-                        name="createdAt"
-                    >
-                        <RangePicker style={{ width: "100%" }} />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} xl={24} md={8}>
-                    <Form.Item
-                        label={t("users.filter.gender.label")}
-                        name="gender"
-                    >
-                        <Select
-                            allowClear
-                            placeholder={t("users.filter.gender.placeholder")}
-                            options={[
-                                {
-                                    label: t("users.filter.gender.male"),
-                                    value: "Male",
-                                },
-                                {
-                                    label: t("users.filter.gender.female"),
-                                    value: "Female",
-                                },
-                            ]}
-                        />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} xl={24} md={8}>
-                    <Form.Item
-                        label={t("users.filter.isActive.label")}
-                        name="isActive"
-                    >
-                        <Select
-                            allowClear
-                            placeholder={t("users.filter.isActive.placeholder")}
-                            options={[
-                                {
-                                    label: t("users.filter.isActive.true"),
-                                    value: "true",
-                                },
-                                {
-                                    label: t("users.filter.isActive.false"),
-                                    value: "false",
-                                },
-                            ]}
-                        />
-                    </Form.Item>
-                </Col>
-                <Col xs={24} xl={24} md={8}>
-                    <Form.Item>
-                        <Button
-                            style={{ width: "100%" }}
-                            htmlType="submit"
-                            type="primary"
-                        >
-                            {t("users.filter.submit")}
-                        </Button>
-                    </Form.Item>
-                </Col>
-            </Row>
-        </Form>
-    );
+          };
+        }}
+      >
+        <Table.Column
+          key="name"
+          title={t("users.fields.name")}
+          render={(record) => (
+            <Space>
+              <Avatar size={74} src={record.avatar?.[0]?.url} />
+              <Typography.Text>
+                {record.first_name} {record.last_name}
+              </Typography.Text>
+            </Space>
+          )}
+        />
+        <Table.Column dataIndex="role_id" title={t("users.fields.role")} />
+        <Table.Column dataIndex="email" title={t("users.fields.email")} />
+        <Table.Column
+          key="is_active"
+          dataIndex="is_active"
+          title={t("users.fields.is_active.label")}
+          render={(value) => <BooleanField value={value} />}
+        />
+        <Table.Column
+          key="is_designer"
+          dataIndex="is_designer"
+          title={t("users.fields.is_designer.label")}
+          render={(value) => <BooleanField value={value} />}
+        />
+        <Table.Column
+          key="is_superuser"
+          dataIndex="is_superuser"
+          title={t("users.fields.is_superuser.label")}
+          render={(value) => <BooleanField value={value} />}
+        />
+        <Table.Column<ICourier>
+          fixed="right"
+          title={t("table.actions")}
+          dataIndex="actions"
+          key="actions"
+          render={(_, record) => (
+            <Dropdown overlay={moreMenu(record.id)} trigger={["click"]}>
+              <Icons.MoreOutlined
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  fontSize: 24,
+                }}
+              />
+            </Dropdown>
+          )}
+        />
+      </Table>
+    </List>
+  );
 };
