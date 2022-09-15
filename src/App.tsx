@@ -9,11 +9,9 @@ import {
   Layout,
   ErrorComponent,
 } from "@pankod/refine-antd";
-import jsonServerDataProvider from "@pankod/refine-simple-rest";
 import de_DE from "antd/lib/locale/de_DE";
-import { authProvider } from "authProvider";
-import axios, { AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
+import { authProvider, dataProvider } from "./services/providers";
 
 import "styles/antd.less";
 import "dayjs/locale/de";
@@ -26,7 +24,6 @@ import { useTranslation } from "react-i18next";
 import { Header, Title, OffLayoutArea } from "components";
 import { BikeWhiteIcon, PizzaIcon } from "components/icons";
 
-import { TOKEN_KEY, API_URL } from "./services/constants";
 import {
   ApplicationURLCreate,
   ApplicationURLEdit,
@@ -34,47 +31,13 @@ import {
 } from "pages/applicationUrl";
 import { JobCreate, JobList } from "pages/jobs";
 
-const axiosInstance = axios.create();
-
-axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
-  const token = localStorage.getItem(TOKEN_KEY);
-  if (token) {
-    if (request.headers) {
-      request.headers["Authorization"] = `Bearer ${token}`;
-    } else {
-      request.headers = {
-        Authorization: `Bearer ${token}`,
-      };
-    }
-  }
-
-  return request;
-});
-
 const App: React.FC = () => {
-  const dataProvider = jsonServerDataProvider(`${API_URL}/v1`, axiosInstance);
-
-  // const dataProvider = {
-  //   ...jsonServerDataProvider(`${API_URL}/v1`, axiosInstance),
-  //   update: async ({ resource, id, variables }:any) => {
-  //     const url = `${apiUrl}/${resource}/${id}`;
-
-  //     const { data } = await httpClient.put(url, variables);
-
-  //     return {
-  //       data,
-  //     };
-  //   },
-  // };
-
   const { t, i18n } = useTranslation();
-
   const i18nProvider = {
     translate: (key: string, params: object) => t(key, params),
     changeLocale: (lang: string) => i18n.changeLanguage(lang),
     getLocale: () => i18n.language,
   };
-
   const locale = i18nProvider.getLocale();
 
   useEffect(() => {
@@ -107,7 +70,7 @@ const App: React.FC = () => {
             ],
           }}
           dataProvider={dataProvider}
-          authProvider={authProvider(axiosInstance)}
+          authProvider={authProvider()}
           i18nProvider={i18nProvider}
           OffLayoutArea={OffLayoutArea}
           DashboardPage={DashboardPage}

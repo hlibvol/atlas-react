@@ -2,10 +2,10 @@ import { AuthProvider } from "@pankod/refine-core";
 import { notification } from "@pankod/refine-antd";
 
 import decodeJwt from "jwt-decode";
-import { TOKEN_KEY, API_URL } from "./services/constants";
-import axios, { AxiosInstance } from "axios";
+import { TOKEN_KEY, API_URL } from "../constants";
+import axios from "axios";
 
-export const authProvider = (axiosInstance: AxiosInstance): AuthProvider => {
+export const authProvider = (): AuthProvider => {
   return {
     login: async ({ email, password }) => {
       let formData = new FormData();
