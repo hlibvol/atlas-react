@@ -356,6 +356,7 @@
       "first_name": "First Name",
       "last_name": "Last Name",
       "email": "Email Id",
+      "password": "Password",
       "role": "Process Role",
       "is_active": {
         "label": "Is Active",

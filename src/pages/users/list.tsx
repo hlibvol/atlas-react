@@ -18,13 +18,13 @@ import {
   BooleanField,
 } from "@pankod/refine-antd";
 
-import { ICourier } from "interfaces";
+import { IUser } from "interfaces";
 
 export const UsersList: React.FC<IResourceComponentsProps> = () => {
   const { show, edit } = useNavigation();
   const t = useTranslate();
 
-  const { tableProps } = useTable<ICourier>({
+  const { tableProps } = useTable<IUser>({
     initialSorter: [
       {
         field: "id",
@@ -137,7 +137,7 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
           title={t("users.fields.is_superuser.label")}
           render={(value) => <BooleanField value={value} />}
         />
-        <Table.Column<ICourier>
+        <Table.Column<IUser>
           fixed="right"
           title={t("table.actions")}
           dataIndex="actions"

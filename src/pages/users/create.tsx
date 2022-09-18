@@ -44,6 +44,8 @@ export const UsersCreate: React.FC<IResourceComponentsProps> = () => {
 
   const { selectProps: roleSelectProps } = useSelect<IRole>({
     resource: "roles",
+    optionLabel: "name",
+    optionValue: "id",
   });
 
   const formList = [
@@ -99,63 +101,14 @@ export const UsersCreate: React.FC<IResourceComponentsProps> = () => {
         <Col xs={24} lg={16}>
           <Row gutter={10}>
             <Col xs={24} lg={12}>
-              <Form.Item
-                label={t("users.fields.first_name")}
-                name="first_name"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
+              <Form.Item label={t("users.fields.first_name")} name="first_name">
                 <Input />
               </Form.Item>
-              <Form.Item
-                label={t("users.fields.last_name")}
-                name="last_name"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
+              <Form.Item label={t("users.fields.last_name")} name="last_name">
                 <Input />
-              </Form.Item>
-              <Form.Item
-                label={t("users.fields.is_superuser.label")}
-                name="is_superuser"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Select
-                  options={[
-                    {
-                      label: t("users.fields.is_superuser.true"),
-                      value: true,
-                    },
-                    {
-                      label: t("users.fields.is_superuser.false"),
-                      value: false,
-                    },
-                  ]}
-                />
               </Form.Item>
             </Col>
             <Col xs={24} lg={12}>
-              <Form.Item
-                label={t("users.fields.role")}
-                name={["role_id", "name"]}
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Select {...roleSelectProps} />
-              </Form.Item>
               <Form.Item
                 label={t("users.fields.email")}
                 name="email"
@@ -169,26 +122,26 @@ export const UsersCreate: React.FC<IResourceComponentsProps> = () => {
                 <Input />
               </Form.Item>
               <Form.Item
-                label={t("users.fields.is_designer.label")}
-                name="is_designer"
+                label={t("users.fields.password")}
+                name="password"
                 rules={[
                   {
                     required: true,
                   },
                 ]}
               >
-                <Select
-                  options={[
-                    {
-                      label: t("users.fields.is_designer.true"),
-                      value: true,
-                    },
-                    {
-                      label: t("users.fields.is_designer.false"),
-                      value: false,
-                    },
-                  ]}
-                />
+                <Input type="password" placeholder="●●●●●●●●" />
+              </Form.Item>
+              <Form.Item
+                label={t("users.fields.role")}
+                name="role_id"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Select {...roleSelectProps} />
               </Form.Item>
             </Col>
           </Row>
@@ -196,7 +149,55 @@ export const UsersCreate: React.FC<IResourceComponentsProps> = () => {
       </Row>
     </>,
     <Row key="relations" gutter={20}>
-      <Col xs={24} lg={12}>
+      <Col xs={12} lg={8}>
+        <Form.Item
+          label={t("users.fields.is_superuser.label")}
+          name="is_superuser"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select
+            options={[
+              {
+                label: t("users.fields.is_superuser.true"),
+                value: true,
+              },
+              {
+                label: t("users.fields.is_superuser.false"),
+                value: false,
+              },
+            ]}
+          />
+        </Form.Item>
+      </Col>
+      <Col xs={12} lg={8}>
+        <Form.Item
+          label={t("users.fields.is_designer.label")}
+          name="is_designer"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select
+            options={[
+              {
+                label: t("users.fields.is_designer.true"),
+                value: true,
+              },
+              {
+                label: t("users.fields.is_designer.false"),
+                value: false,
+              },
+            ]}
+          />
+        </Form.Item>
+      </Col>
+      <Col xs={12} lg={8}>
         <Form.Item label={t("users.addresses.address")} name="address">
           <Input.TextArea />
         </Form.Item>

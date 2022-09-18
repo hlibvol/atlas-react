@@ -4,6 +4,7 @@ import {
   useNavigation,
   useShow,
   useDelete,
+  useMany,
 } from "@pankod/refine-core";
 
 import {
@@ -17,67 +18,34 @@ import {
   Icons,
   Avatar,
   useModal,
+  TextField,
+  ShowButton,
+  EditButton,
+  Space,
+  DeleteButton,
 } from "@pankod/refine-antd";
 
 const { FormOutlined } = Icons;
 
-import { IJobs } from "interfaces";
+import { IAppUrl, IJobs } from "interfaces";
 
 export const JobList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable<IJobs>();
-  const { edit } = useNavigation();
-  const { modalProps, show } = useModal();
-
   const t = useTranslate();
+  const { queryResult } = useShow<IJobs>();
 
-  const { queryResult, setShowId } = useShow<IJobs>();
-
-  const { data: showQueryResult } = queryResult;
-  const record = showQueryResult?.data;
-
-  const { mutate: mutateDelete } = useDelete();
-
-  const moreMenu = (id: number) => (
-    <Menu mode="vertical">
-      <Menu.Item
-        key="1"
-        style={{
-          fontSize: 15,
-          fontWeight: 500,
-        }}
-        icon={<FormOutlined style={{ color: "green", fontSize: "15px" }} />}
-        onClick={() => edit("jobs", id)}
-      >
-        {t("buttons.edit")}
-      </Menu.Item>
-      <Menu.Item
-        key="reject"
-        style={{
-          fontSize: 15,
-          display: "flex",
-          alignItems: "center",
-          fontWeight: 500,
-        }}
-        icon={
-          <Icons.CloseCircleOutlined
-            style={{
-              color: "#EE2A1E",
-              fontSize: 17,
-            }}
-          />
-        }
-        onClick={() => {
-          mutateDelete({
-            resource: "jobs",
-            id,
-            mutationMode: "undoable",
-          });
-        }}
-      >
-        {t("buttons.delete")}
-      </Menu.Item>
-    </Menu>
-  );
+  // const { data: showQueryResult } = queryResult;
+  // const record = showQueryResult?.data;
+  console.log("dadada", tableProps);
+  const appurlIds =
+    tableProps?.dataSource?.map((item) => item.application_url_id.id) ?? [];
+  const { data: appurlData, isLoading } = useMany<IAppUrl>({
+    resource: "application-urls",
+    ids: appurlIds,
+    queryOptions: {
+      enabled: appurlIds.length > 0,
+    },
+  });
 
   return (
     <>
@@ -94,25 +62,31 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
             title={t("jobs.fields.application-url-id")}
           />
           <Table.Column
-            key="application_urls.id"
-            dataIndex={["application_urls", "title"]}
+            dataIndex={["application-urls", "id"]}
             title={t("jobs.fields.application-url-id")}
-          />
+            render={(value) => {
+              if (isLoading) {
+                return <TextField value="Loading..." />;
+              }
 
+              return (
+                <TextField
+                  value={
+                    appurlData?.data.find((item) => item.id === value)?.name
+                  }
+                />
+              );
+            }}
+          />
           <Table.Column<IJobs>
-            fixed="right"
             title={t("table.actions")}
             dataIndex="actions"
-            key="actions"
-            align="center"
             render={(_, record) => (
-              <Dropdown overlay={moreMenu(record.id)} trigger={["click"]}>
-                <Icons.MoreOutlined
-                  style={{
-                    fontSize: 24,
-                  }}
-                />
-              </Dropdown>
+              <Space>
+                <EditButton hideText size="small" recordItemId={record.id} />
+                {/* <ShowButton hideText size="small" recordItemId={record.id} /> */}
+                <DeleteButton hideText size="small" recordItemId={record.id} />
+              </Space>
             )}
           />
         </Table>

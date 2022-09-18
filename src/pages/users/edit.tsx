@@ -24,11 +24,9 @@ import {
   InputProps,
 } from "@pankod/refine-antd";
 
-import InputMask from "react-input-mask";
-
 const { Text } = Typography;
 
-import { ICourier, IRole } from "interfaces";
+import { IRole, IUser } from "interfaces";
 
 export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -39,13 +37,16 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
     formProps,
     saveButtonProps,
     queryResult,
-  } = useStepsForm<ICourier>();
-  const courierData = queryResult?.data?.data;
+  } = useStepsForm<IUser>();
+  const userData = queryResult?.data?.data;
+  // console.log("data", userData);
   const apiUrl = useApiUrl();
 
-  const { selectProps: storeSelectProps } = useSelect<IRole>({
+  const { selectProps: roleSelectProps } = useSelect<IRole>({
     resource: "roles",
-    defaultValue: courierData?.store.id,
+    optionLabel: "name",
+    optionValue: "id",
+    // defaultValue: userData?.store.id,
   });
 
   const formList = [
@@ -101,70 +102,16 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
         <Col xs={24} lg={16}>
           <Row gutter={10}>
             <Col xs={24} lg={12}>
-              <Form.Item
-                label={t("couriers.fields.name")}
-                name="name"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
+              <Form.Item label={t("users.fields.first_name")} name="first_name">
                 <Input />
               </Form.Item>
-              <Form.Item
-                label={t("couriers.fields.surname")}
-                name="surname"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
+              <Form.Item label={t("users.fields.last_name")} name="last_name">
                 <Input />
-              </Form.Item>
-              <Form.Item
-                label={t("couriers.fields.gender.label")}
-                name="gender"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Select
-                  options={[
-                    {
-                      label: t("couriers.fields.gender.male"),
-                      value: "Male",
-                    },
-                    {
-                      label: t("couriers.fields.gender.female"),
-                      value: "Female",
-                    },
-                  ]}
-                />
               </Form.Item>
             </Col>
             <Col xs={24} lg={12}>
               <Form.Item
-                label={t("couriers.fields.gsm")}
-                name="gsm"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <InputMask mask="(999) 999 99 99">
-                  {/* 
-                                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                                    // @ts-ignore */}
-                  {(props: InputProps) => <Input {...props} />}
-                </InputMask>
-              </Form.Item>
-              <Form.Item
-                label={t("couriers.fields.email")}
+                label={t("users.fields.email")}
                 name="email"
                 rules={[
                   {
@@ -175,58 +122,74 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
               >
                 <Input />
               </Form.Item>
+              <Form.Item
+                label={t("users.fields.role")}
+                name="role_id"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Select {...roleSelectProps} />
+              </Form.Item>
             </Col>
           </Row>
-          <Form.Item
-            label={t("couriers.fields.address")}
-            name="address"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Input.TextArea />
-          </Form.Item>
         </Col>
       </Row>
     </>,
     <Row key="relations" gutter={20}>
-      <Col xs={24} lg={12}>
+      <Col xs={12} lg={8}>
         <Form.Item
-          label={t("couriers.fields.store")}
-          name={["store", "id"]}
+          label={t("users.fields.is_superuser.label")}
+          name="is_superuser"
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Select {...storeSelectProps} />
-        </Form.Item>
-        <Form.Item
-          label={t("couriers.fields.accountNumber")}
-          name="accountNumber"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
+          <Select
+            options={[
+              {
+                label: t("users.fields.is_superuser.true"),
+                value: true,
+              },
+              {
+                label: t("users.fields.is_superuser.false"),
+                value: false,
+              },
+            ]}
+          />
         </Form.Item>
       </Col>
-      <Col xs={24} lg={12}>
+      <Col xs={12} lg={8}>
         <Form.Item
-          label={t("couriers.fields.vehicle")}
-          name="licensePlate"
+          label={t("users.fields.is_designer.label")}
+          name="is_designer"
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Input />
+          <Select
+            options={[
+              {
+                label: t("users.fields.is_designer.true"),
+                value: true,
+              },
+              {
+                label: t("users.fields.is_designer.false"),
+                value: false,
+              },
+            ]}
+          />
+        </Form.Item>
+      </Col>
+      <Col xs={12} lg={8}>
+        <Form.Item label={t("users.addresses.address")} name="address">
+          <Input.TextArea />
         </Form.Item>
       </Col>
     </Row>,

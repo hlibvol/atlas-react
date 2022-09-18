@@ -31,12 +31,13 @@ export interface IUser {
   email: string;
   first_name: string;
   last_name: string;
+  hashed_password: string;
   is_designer: boolean;
   is_active: boolean;
   is_superuser: boolean;
   role_id: IRole;
   avatar: IFile[];
-  address: IAddress[];
+  address: string;
 }
 
 export interface IAddress {
@@ -72,7 +73,8 @@ export interface IJobs {
   id: number;
   name: string;
   description: string;
-  application_url_id: IAppUrl;
+  // applications: IAppUrl;
+  application_url_id: { id: number };
 }
 
 export interface ICourier {

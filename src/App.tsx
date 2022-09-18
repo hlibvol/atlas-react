@@ -21,7 +21,7 @@ import { AuthPage } from "./pages/auth";
 import { UsersList, UserShow, UsersCreate, UsersEdit } from "./pages/users";
 import { RoleCreate, RoleList, RoleEdit } from "./pages/roles";
 import { useTranslation } from "react-i18next";
-import { Header, Title, OffLayoutArea } from "components";
+import { Header, Title } from "components";
 import { BikeWhiteIcon, PizzaIcon } from "components/icons";
 
 import {
@@ -29,7 +29,7 @@ import {
   ApplicationURLEdit,
   ApplicationURLList,
 } from "pages/applicationUrl";
-import { JobCreate, JobList } from "pages/jobs";
+import { JobCreate, JobList, JobEdit } from "pages/jobs";
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -72,7 +72,6 @@ const App: React.FC = () => {
           dataProvider={dataProvider}
           authProvider={authProvider()}
           i18nProvider={i18nProvider}
-          OffLayoutArea={OffLayoutArea}
           DashboardPage={DashboardPage}
           LoginPage={() => <AuthPage type="login" />}
           Title={Title}
@@ -107,7 +106,7 @@ const App: React.FC = () => {
               name: "jobs",
               list: JobList,
               create: JobCreate,
-              // edit: JobEdit,
+              edit: JobEdit,
             },
           ]}
           notificationProvider={notificationProvider}

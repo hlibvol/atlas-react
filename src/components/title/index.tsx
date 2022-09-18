@@ -1,18 +1,18 @@
 import "./style.less";
-import { BikeWhiteIcon } from "components";
+import { GlobeIcon } from "components/icons/globe";
 
 type TitleProps = {
-    collapsed: boolean;
+  collapsed: boolean;
 };
 
 export const Title: React.FC<TitleProps> = ({ collapsed }) => {
-    return (
-        <div className="logo">
-            {collapsed ? (
-                <BikeWhiteIcon style={{ color: "white" }} />
-            ) : (
-                <img src="/images/fine-foods.svg" alt="Finefood" />
-            )}
-        </div>
-    );
+  return (
+    <div className="logo">
+      {collapsed ? (
+        <GlobeIcon style={{ color: "white" }} />
+      ) : (
+        <h3 className="logo-text">ATLAS-BEACON</h3>
+      )}
+    </div>
+  );
 };

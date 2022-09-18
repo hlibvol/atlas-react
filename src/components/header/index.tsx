@@ -32,7 +32,7 @@ const { SearchOutlined, DownOutlined } = Icons;
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
 
-import { IOrder, IRole, ICourier } from "interfaces";
+import { IRole, IUser, IJobs } from "interfaces";
 import "./style.less";
 
 interface IOptionGroup {
@@ -75,32 +75,32 @@ export const Header: React.FC = () => {
   const [value, setValue] = useState<string>("");
   const [options, setOptions] = useState<IOptions[]>([]);
 
-  const { refetch: refetchOrders } = useList<IOrder>({
-    resource: "orders",
+  const { refetch: refetchOrders } = useList<IUser>({
+    resource: "users",
     config: {
       filters: [{ field: "q", operator: "contains", value }],
     },
-    queryOptions: {
-      enabled: false,
-      onSuccess: (data) => {
-        const orderOptionGroup = data.data.map((item) =>
-          renderItem(
-            `${item.store.title} / #${item.orderNumber}`,
-            "/images/default-order-img.png",
-            `/orders/show/${item.id}`
-          )
-        );
-        if (orderOptionGroup.length > 0) {
-          setOptions((prevOptions) => [
-            ...prevOptions,
-            {
-              label: renderTitle(t("orders.orders")),
-              options: orderOptionGroup,
-            },
-          ]);
-        }
-      },
-    },
+    // queryOptions: {
+    //   enabled: false,
+    //   onSuccess: (data) => {
+    //     const orderOptionGroup = data.data.map((item) =>
+    //       renderItem(
+    //         `${item.store.title} / #${item.orderNumber}`,
+    //         "/images/default-order-img.png",
+    //         `/users/show/${item.id}`
+    //       )
+    //     );
+    //     if (orderOptionGroup.length > 0) {
+    //       setOptions((prevOptions) => [
+    //         ...prevOptions,
+    //         {
+    //           label: renderTitle(t("users.users")),
+    //           options: orderOptionGroup,
+    //         },
+    //       ]);
+    //     }
+    //   },
+    // },
   });
 
   const { refetch: refetchStores } = useList<IRole>({
@@ -131,32 +131,32 @@ export const Header: React.FC = () => {
     },
   });
 
-  const { refetch: refetchCouriers } = useList<ICourier>({
-    resource: "couriers",
+  const { refetch: refetchCouriers } = useList<IJobs>({
+    resource: "jobs",
     config: {
       filters: [{ field: "q", operator: "contains", value }],
     },
-    queryOptions: {
-      enabled: false,
-      onSuccess: (data) => {
-        const courierOptionGroup = data.data.map((item) =>
-          renderItem(
-            `${item.name} ${item.surname}`,
-            item.avatar[0].url,
-            `/couriers/show/${item.id}`
-          )
-        );
-        if (courierOptionGroup.length > 0) {
-          setOptions((prevOptions) => [
-            ...prevOptions,
-            {
-              label: renderTitle(t("couriers.couriers")),
-              options: courierOptionGroup,
-            },
-          ]);
-        }
-      },
-    },
+    // queryOptions: {
+    //   enabled: false,
+    //   onSuccess: (data) => {
+    //     const courierOptionGroup = data.data.map((item) =>
+    //       renderItem(
+    //         `${item.name} ${item.surname}`,
+    //         item.avatar[0].url,
+    //         `/couriers/show/${item.id}`
+    //       )
+    //     );
+    //     if (courierOptionGroup.length > 0) {
+    //       setOptions((prevOptions) => [
+    //         ...prevOptions,
+    //         {
+    //           label: renderTitle(t("couriers.couriers")),
+    //           options: courierOptionGroup,
+    //         },
+    //       ]);
+    //     }
+    //   },
+    // },
   });
 
   useEffect(() => {

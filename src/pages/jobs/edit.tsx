@@ -8,15 +8,23 @@ import {
   Row,
   Col,
   Typography,
+  useSelect,
+  Select,
 } from "@pankod/refine-antd";
 
 const { Text } = Typography;
 
-import { IAppUrl } from "interfaces";
+import { IAppUrl, IJobs } from "interfaces";
 
-export const ApplicationURLEdit: React.FC<IResourceComponentsProps> = () => {
+export const JobEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const { formProps, saveButtonProps, queryResult } = useForm<IAppUrl>();
+  const { formProps, saveButtonProps, queryResult } = useForm<IJobs>();
+
+  const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
+    resource: "application-urls",
+    optionLabel: "name",
+    optionValue: "id",
+  });
 
   return (
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
@@ -31,7 +39,7 @@ export const ApplicationURLEdit: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={[64, 0]} wrap>
           <Col xs={24} lg={8}>
             <Form.Item
-              label={t("application-urls.fields.title")}
+              label={t("jobs.fields.title")}
               name="name"
               rules={[
                 {
@@ -42,15 +50,15 @@ export const ApplicationURLEdit: React.FC<IResourceComponentsProps> = () => {
               <Input />
             </Form.Item>
             <Form.Item
-              label={t("application-urls.fields.url")}
-              name="url"
+              label={t("jobs.fields.application-url-id")}
+              name="application_url_id"
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
-              <Input />
+              <Select {...urlSelectProps} />
             </Form.Item>
           </Col>
         </Row>

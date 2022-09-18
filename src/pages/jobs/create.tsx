@@ -24,7 +24,10 @@ export const JobCreate: React.FC<IResourceComponentsProps> = () => {
 
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
     resource: "application-urls",
+    optionLabel: "name",
+    optionValue: "id",
   });
+
   return (
     <Create
       isLoading={queryResult?.isFetching}
@@ -53,6 +56,7 @@ export const JobCreate: React.FC<IResourceComponentsProps> = () => {
             <Form.Item label={t("jobs.fields.discription")} name="description">
               <Input.TextArea />
             </Form.Item>
+
             <Form.Item
               label={t("jobs.fields.application-url-id")}
               name="application_url_id"
