@@ -111,6 +111,7 @@ const App: React.FC = () => {
           ]}
           notificationProvider={notificationProvider}
           catchAll={<ErrorComponent />}
+          reactQueryDevtoolConfig={false}
         />
       </ConfigProvider>
     </RefineKbarProvider>
