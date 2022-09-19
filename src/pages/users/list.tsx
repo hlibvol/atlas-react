@@ -3,6 +3,7 @@ import {
   IResourceComponentsProps,
   useDelete,
   useNavigation,
+  useList,
 } from "@pankod/refine-core";
 
 import {
@@ -16,9 +17,10 @@ import {
   Space,
   Typography,
   BooleanField,
+  TextField,
 } from "@pankod/refine-antd";
 
-import { IUser } from "interfaces";
+import { IUser, IRole } from "interfaces";
 
 export const UsersList: React.FC<IResourceComponentsProps> = () => {
   const { show, edit } = useNavigation();
@@ -31,6 +33,10 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
         order: "desc",
       },
     ],
+  });
+
+  const { data: roles, isLoading } = useList<IRole>({
+    resource: "roles",
   });
 
   const { mutate: mutateDelete } = useDelete();
@@ -118,6 +124,22 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
           )}
         />
         <Table.Column dataIndex="role_id" title={t("users.fields.role")} />
+
+        <Table.Column
+          dataIndex={["role_id"]}
+          title={t("users.fields.role")}
+          render={(value) => {
+            if (isLoading) {
+              return <TextField value="Loading..." />;
+            }
+            return (
+              <TextField
+                value={roles?.data.find((item) => item.id === value)?.name}
+              />
+            );
+          }}
+        />
+
         <Table.Column dataIndex="email" title={t("users.fields.email")} />
         <Table.Column
           key="is_active"
