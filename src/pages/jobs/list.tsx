@@ -5,6 +5,7 @@ import {
   useShow,
   useDelete,
   useMany,
+  useList,
 } from "@pankod/refine-core";
 
 import {
@@ -32,19 +33,9 @@ import { IAppUrl, IJobs } from "interfaces";
 export const JobList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable<IJobs>();
   const t = useTranslate();
-  const { queryResult } = useShow<IJobs>();
 
-  // const { data: showQueryResult } = queryResult;
-  // const record = showQueryResult?.data;
-  console.log("dadada", tableProps);
-  const appurlIds =
-    tableProps?.dataSource?.map((item) => item.application_url_id.id) ?? [];
-  const { data: appurlData, isLoading } = useMany<IAppUrl>({
+  const { data: applicationurls, isLoading } = useList<IAppUrl>({
     resource: "application-urls",
-    ids: appurlIds,
-    queryOptions: {
-      enabled: appurlIds.length > 0,
-    },
   });
 
   return (
@@ -57,22 +48,19 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
             title={t("jobs.fields.id")}
           />
           <Table.Column dataIndex="name" title={t("jobs.fields.title")} />
+
           <Table.Column
-            dataIndex="application_url_id"
-            title={t("jobs.fields.application-url-id")}
-          />
-          <Table.Column
-            dataIndex={["application-urls", "id"]}
+            dataIndex={["application_url_id"]}
             title={t("jobs.fields.application-url-id")}
             render={(value) => {
               if (isLoading) {
                 return <TextField value="Loading..." />;
               }
-
               return (
                 <TextField
                   value={
-                    appurlData?.data.find((item) => item.id === value)?.name
+                    applicationurls?.data.find((item) => item.id === value)
+                      ?.name
                   }
                 />
               );

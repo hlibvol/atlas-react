@@ -11,8 +11,8 @@ RUN npm install
 
 COPY . /opt/app
 
-RUN npm run bootstrap -- --scope fine-foods -- --force
-RUN npm run build -- --scope fine-foods
+RUN npm run bootstrap -- --scope atlas-beacon -- --force
+RUN npm run build -- --scope atlas-beacon
 
 FROM node:16-alpine
 

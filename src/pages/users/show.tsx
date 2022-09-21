@@ -22,33 +22,26 @@ import {
   Avatar,
 } from "@pankod/refine-antd";
 
-import { ICourier, IOrder, IOrderFilterVariables } from "interfaces";
+import { IUser, IRole } from "interfaces";
 
 const { useBreakpoint } = Grid;
 
 export const UserShow: React.FC<IResourceComponentsProps> = () => {
   const { xl } = useBreakpoint();
-  const { queryResult: courierQueryResult } = useShow<ICourier>();
-  const courier = courierQueryResult.data?.data;
+  const { queryResult: userQueryResult } = useShow<IUser>();
+  const user = userQueryResult.data?.data;
 
-  const { tableProps } = useTable<IOrder, HttpError, IOrderFilterVariables>({
-    resource: "reviews",
+  const { tableProps } = useTable<IRole>({
+    resource: "roles",
     initialSorter: [
       {
         field: "id",
         order: "desc",
       },
     ],
-    permanentFilter: [
-      {
-        field: "order.courier.id",
-        operator: "eq",
-        value: courier?.id,
-      },
-    ],
     initialPageSize: 4,
     queryOptions: {
-      enabled: courier !== undefined,
+      enabled: user !== undefined,
     },
     syncWithLocation: false,
   });
@@ -65,9 +58,9 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
               direction="vertical"
               style={{ textAlign: "center", width: "100%" }}
             >
-              <Avatar size={120} src={courier?.avatar?.[0].url}></Avatar>
+              <Avatar size={120} src={user?.avatar?.[0].url}></Avatar>
               <Typography.Title level={3}>
-                {courier?.name} {courier?.surname}
+                {user?.first_name} {user?.last_name}
               </Typography.Title>
             </Space>
             <Space
@@ -78,86 +71,14 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
               }}
             >
               <Typography.Text>
-                <Icons.EnvironmentOutlined /> {courier?.store.title}
+                <Icons.MailOutlined /> {user?.email}
               </Typography.Text>
               <Typography.Text>
-                <Icons.PhoneOutlined /> {courier?.gsm}
-              </Typography.Text>
-              <Typography.Text>
-                <Icons.MailOutlined /> {courier?.email}
-              </Typography.Text>
-              <Typography.Text>
-                <Icons.BankOutlined /> {courier?.accountNumber}
-              </Typography.Text>
-              <Typography.Text>
-                <Icons.HomeOutlined /> {courier?.address}
-              </Typography.Text>
-              <Typography.Text>
-                <Icons.CarOutlined /> {courier?.licensePlate}
+                <Icons.HomeOutlined /> {user?.address}
               </Typography.Text>
             </Space>
           </Space>
         </Card>
-      </Col>
-      <Col xl={18} xs={24}>
-        <List
-          title={t("reviews.reviews")}
-          pageHeaderProps={{
-            extra: <></>,
-          }}
-        >
-          <Table {...tableProps} rowKey="id">
-            <Table.Column
-              dataIndex={["order", "id"]}
-              title={t("reviews.fields.orderId")}
-              render={(value) => (
-                <Button
-                  onClick={() => {
-                    show("orders", value);
-                  }}
-                  type="text"
-                >
-                  #{value}
-                </Button>
-              )}
-            />
-            <Table.Column
-              width={250}
-              dataIndex="comment"
-              title={t("reviews.fields.review")}
-            />
-            <Table.Column
-              dataIndex="star"
-              title={t("reviews.fields.rating")}
-              align="center"
-              render={(value) => (
-                <Space
-                  direction="vertical"
-                  style={{
-                    rowGap: 0,
-                  }}
-                >
-                  <Typography.Text
-                    style={{
-                      fontSize: 31,
-                      fontWeight: 800,
-                    }}
-                  >
-                    {value}
-                  </Typography.Text>
-                  <Rate
-                    character={<Icons.StarOutlined />}
-                    disabled
-                    value={value}
-                    style={{
-                      color: "#FA8C16",
-                    }}
-                  />
-                </Space>
-              )}
-            />
-          </Table>
-        </List>
       </Col>
     </Row>
   );
