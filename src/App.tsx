@@ -10,11 +10,9 @@ import {
   ErrorComponent,
 } from "@pankod/refine-antd";
 import de_DE from "antd/lib/locale/de_DE";
-import dayjs from "dayjs";
 import { authProvider, dataProvider } from "./services/providers";
 
 import "styles/antd.less";
-import "dayjs/locale/de";
 
 import { DashboardPage } from "./pages/dashboard";
 import { AuthPage } from "./pages/auth";
@@ -22,7 +20,6 @@ import { UsersList, UserShow, UsersCreate, UsersEdit } from "./pages/users";
 import { RoleCreate, RoleList, RoleEdit } from "./pages/roles";
 import { useTranslation } from "react-i18next";
 import { Header, Title } from "components";
-import { BikeWhiteIcon, PizzaIcon } from "components/icons";
 
 import {
   ApplicationURLCreate,
@@ -39,14 +36,6 @@ const App: React.FC = () => {
     getLocale: () => i18n.language,
   };
   const locale = i18nProvider.getLocale();
-
-  useEffect(() => {
-    if (locale === "de") {
-      dayjs.locale("de");
-    } else {
-      dayjs.locale("en");
-    }
-  }, [locale]);
 
   return (
     <RefineKbarProvider>
