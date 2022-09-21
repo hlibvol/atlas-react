@@ -11,7 +11,7 @@ export const authProvider = (): AuthProvider => {
       let formData = new FormData();
       formData.append("username", email);
       formData.append("password", password);
-      axios({
+      const response = await axios({
         method: "post",
         url: `${API_URL}/token`,
         data: formData,
@@ -19,20 +19,19 @@ export const authProvider = (): AuthProvider => {
       })
         .then((response) => {
           if (response.status < 200 || response.status >= 300) {
-            Promise.reject(response.statusText);
-            //   throw new Error(response.statusText);
+            return Promise.reject(response.data.detail);
+          } else {
+            const decodedToken: any = decodeJwt(response.data.access_token);
+            if (decodedToken.permissions !== "admin") {
+              return Promise.reject("Forbidden");
+            }
+            localStorage.setItem(TOKEN_KEY, response.data.access_token);
+            localStorage.setItem("permissions", decodedToken.permissions);
+            return Promise.resolve();
           }
-          return response;
         })
-        .then((response: any) => {
-          const decodedToken: any = decodeJwt(response.data.access_token);
-          if (decodedToken.permissions !== "admin") {
-            Promise.reject("Forbidden");
-            //   throw new Error("Forbidden");
-          }
-          localStorage.setItem(TOKEN_KEY, response.data.access_token);
-          localStorage.setItem("permissions", decodedToken.permissions);
-          return Promise.resolve();
+        .catch((error) => {
+          return Promise.reject(error.response.data.detail);
         });
     },
     updatePassword: async () => {
@@ -53,7 +52,12 @@ export const authProvider = (): AuthProvider => {
       localStorage.removeItem(TOKEN_KEY);
       return Promise.resolve();
     },
-    checkError: () => Promise.resolve(),
+    checkError: (error) => {
+      if (error && error.statusCode === 401) {
+        return Promise.reject();
+      }
+      return Promise.resolve();
+    },
     checkAuth: () => {
       const token = localStorage.getItem(TOKEN_KEY);
       if (token) {
