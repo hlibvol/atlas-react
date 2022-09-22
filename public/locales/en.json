@@ -451,5 +451,22 @@
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
+  },
+  "playbooks": {
+    "playbooks": "Playbooks",
+    "titles": {
+      "create": "Create Playbook",
+      "edit": "Edit Playbook",
+      "list": "Playbooks"
+    },
+    "fields": {
+      "id": " Playbook ID",
+      "title": "Name",
+      "discription": "Description",
+      "page-content": "Page Content",
+      "process-role": "Process Role"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
   }
 }

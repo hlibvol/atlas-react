@@ -27,6 +27,7 @@ import {
   ApplicationURLList,
 } from "pages/applicationUrl";
 import { JobCreate, JobList, JobEdit } from "pages/jobs";
+import { CreatePlayBook, PlayBookList } from "pages/playbooks";
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -96,6 +97,12 @@ const App: React.FC = () => {
               list: JobList,
               create: JobCreate,
               edit: JobEdit,
+            },
+            {
+              name: "playbooks",
+              list: PlayBookList,
+              create: CreatePlayBook,
+              // edit: JobEdit,
             },
           ]}
           notificationProvider={notificationProvider}

@@ -48,3 +48,11 @@ export interface IUserFilterVariables {
   status: boolean;
   is_active: boolean;
 }
+
+export interface IPlayBook {
+  id: number;
+  name: string;
+  description: string;
+  roles: IRole;
+  page_content: string;
+}
