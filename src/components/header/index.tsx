@@ -80,27 +80,27 @@ export const Header: React.FC = () => {
     config: {
       filters: [{ field: "q", operator: "contains", value }],
     },
-    // queryOptions: {
-    //   enabled: false,
-    //   onSuccess: (data) => {
-    //     const orderOptionGroup = data.data.map((item) =>
-    //       renderItem(
-    //         `${item.store.title} / #${item.orderNumber}`,
-    //         "/images/default-order-img.png",
-    //         `/users/show/${item.id}`
-    //       )
-    //     );
-    //     if (orderOptionGroup.length > 0) {
-    //       setOptions((prevOptions) => [
-    //         ...prevOptions,
-    //         {
-    //           label: renderTitle(t("users.users")),
-    //           options: orderOptionGroup,
-    //         },
-    //       ]);
-    //     }
-    //   },
-    // },
+    queryOptions: {
+      enabled: false,
+      onSuccess: (data) => {
+        const orderOptionGroup = data.data.map((item) =>
+          renderItem(
+            `${item.first_name}`,
+            "/images/user-default-img.png",
+            `/users/show/${item.id}`
+          )
+        );
+        if (orderOptionGroup.length > 0) {
+          setOptions((prevOptions) => [
+            ...prevOptions,
+            {
+              label: renderTitle(t("users.users")),
+              options: orderOptionGroup,
+            },
+          ]);
+        }
+      },
+    },
   });
 
   const { refetch: refetchStores } = useList<IRole>({
@@ -115,14 +115,14 @@ export const Header: React.FC = () => {
           renderItem(
             item.name,
             "/images/default-store-img.png",
-            `/stores/edit/${item.id}`
+            `/roles/edit/${item.id}`
           )
         );
         if (storeOptionGroup.length > 0) {
           setOptions((prevOptions) => [
             ...prevOptions,
             {
-              label: renderTitle(t("stores.stores")),
+              label: renderTitle(t("roles.roles")),
               options: storeOptionGroup,
             },
           ]);

@@ -4,6 +4,7 @@ import {
   useShow,
   useNavigation,
   HttpError,
+  useList,
 } from "@pankod/refine-core";
 
 import {
@@ -20,6 +21,8 @@ import {
   Typography,
   Rate,
   Avatar,
+  TextField,
+  Badge,
 } from "@pankod/refine-antd";
 
 import { IUser, IRole } from "interfaces";
@@ -31,19 +34,8 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
   const { queryResult: userQueryResult } = useShow<IUser>();
   const user = userQueryResult.data?.data;
 
-  const { tableProps } = useTable<IRole>({
+  const { data: roles, isLoading } = useList<IRole>({
     resource: "roles",
-    initialSorter: [
-      {
-        field: "id",
-        order: "desc",
-      },
-    ],
-    initialPageSize: 4,
-    queryOptions: {
-      enabled: user !== undefined,
-    },
-    syncWithLocation: false,
   });
 
   const t = useTranslate();
@@ -74,7 +66,74 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
                 <Icons.MailOutlined /> {user?.email}
               </Typography.Text>
               <Typography.Text>
-                <Icons.HomeOutlined /> {user?.address}
+                <Icons.HomeOutlined /> {user?.is_active}
+              </Typography.Text>
+              <Typography.Text>
+                <Icons.CheckOutlined />{" "}
+                <Badge
+                  className="site-badge-count-109"
+                  style={{ backgroundColor: "#52c41a" }}
+                >
+                  {user?.is_active
+                    ? t("users.fields.is_active.true")
+                    : t("users.fields.is_active.false")}
+                </Badge>
+              </Typography.Text>
+            </Space>
+          </Space>
+        </Card>
+      </Col>
+
+      <Col xl={18} xs={24}>
+        <Card bordered={false} style={{ height: "100%" }}>
+          <Space direction="vertical" style={{ width: "100%", height: "100%" }}>
+            <Space
+              direction="vertical"
+              style={{
+                width: "100%",
+                textAlign: xl ? "unset" : "center",
+              }}
+            >
+              <Typography.Text>
+                {user?.is_designer ? (
+                  <Badge.Ribbon text={t("users.fields.is_designer.true")}>
+                    <Card
+                      title={t("users.fields.is_designer.label")}
+                      size="small"
+                    ></Card>
+                  </Badge.Ribbon>
+                ) : (
+                  <Badge.Ribbon
+                    text={t("users.fields.is_designer.false")}
+                    color="red"
+                  >
+                    <Card
+                      title={t("users.fields.is_designer.label")}
+                      size="small"
+                    ></Card>
+                  </Badge.Ribbon>
+                )}
+              </Typography.Text>
+
+              <Typography.Text>
+                {user?.is_superuser ? (
+                  <Badge.Ribbon text={t("users.fields.is_superuser.true")}>
+                    <Card
+                      title={t("users.fields.is_superuser.label")}
+                      size="small"
+                    ></Card>
+                  </Badge.Ribbon>
+                ) : (
+                  <Badge.Ribbon
+                    text={t("users.fields.is_superuser.false")}
+                    color="red"
+                  >
+                    <Card
+                      title={t("users.fields.is_superuser.label")}
+                      size="small"
+                    ></Card>
+                  </Badge.Ribbon>
+                )}
               </Typography.Text>
             </Space>
           </Space>

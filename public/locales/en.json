@@ -103,7 +103,7 @@
     "actions": "Actions"
   },
   "search": {
-    "placeholder": "Search by Store ID, E-mail, Keyword",
+    "placeholder": "Search by User, Process Role, Job...",
     "more": "more"
   },
   "status": {
