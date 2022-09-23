@@ -1,12 +1,4 @@
-# fineFoods
-
-This project was generated with [superplate](https://github.com/pankod/superplate).
-
-## Getting Started
-
-superplate is a Next.js all-in-one project generator. Create your project with the tools you need without spending hours on setting them up.
-
-Every plugin comes with an example to give you a brief knowledge about their usage.
+# Atlas Beacon - Frontend
 
 ## Available Scripts
 
@@ -37,28 +29,3 @@ Every plugin comes with an example to give you a brief knowledge about their usa
 ## Learn More
 
 To learn more about **superplate**, please check out the [Documentation](https://github.com/pankod/superplate).
-
-### **less**
-
-[Go To Documentation]()
-
-### **custom-json-rest-data-provider**
-
-[Go To Documentation]()
-
-### **custom-auth-provider**
-
-[Go To Documentation]()
-
-### **example-resource**
-
-[Go To Documentation]()
-
-### **i18n**
-
-[Go To Documentation]()
-
-## License
-
-MIT
-
