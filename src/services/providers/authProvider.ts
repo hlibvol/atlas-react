@@ -1,32 +1,33 @@
-import { AuthProvider } from "@pankod/refine-core";
-import { notification } from "@pankod/refine-antd";
+import { AuthProvider } from '@pankod/refine-core';
+import { notification } from '@pankod/refine-antd';
 
-import decodeJwt from "jwt-decode";
-import { TOKEN_KEY, API_URL } from "../constants";
-import axios from "axios";
+import decodeJwt from 'jwt-decode';
+import { TOKEN_KEY } from '../constants';
+import { Config } from '../config';
+import axios from 'axios';
 
 export const authProvider = (): AuthProvider => {
   return {
     login: async ({ email, password }) => {
       let formData = new FormData();
-      formData.append("username", email);
-      formData.append("password", password);
+      formData.append('username', email);
+      formData.append('password', password);
       const response = await axios({
-        method: "post",
-        url: `${API_URL}/token`,
+        method: 'post',
+        url: `${Config.apiEndpoint}/token`,
         data: formData,
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { 'Content-Type': 'multipart/form-data' },
       })
         .then((response) => {
           if (response.status < 200 || response.status >= 300) {
             return Promise.reject(response.data.detail);
           } else {
             const decodedToken: any = decodeJwt(response.data.access_token);
-            if (decodedToken.permissions !== "admin") {
-              return Promise.reject("Forbidden");
+            if (decodedToken.permissions !== 'admin') {
+              return Promise.reject('Forbidden');
             }
             localStorage.setItem(TOKEN_KEY, response.data.access_token);
-            localStorage.setItem("permissions", decodedToken.permissions);
+            localStorage.setItem('permissions', decodedToken.permissions);
             return Promise.resolve();
           }
         })
@@ -36,14 +37,14 @@ export const authProvider = (): AuthProvider => {
     },
     updatePassword: async () => {
       notification.success({
-        message: "Updated Password",
-        description: "Password updated successfully",
+        message: 'Updated Password',
+        description: 'Password updated successfully',
       });
       return Promise.resolve();
     },
     resetPassword: async ({ email }) => {
       notification.success({
-        message: "Reset Password",
+        message: 'Reset Password',
         description: `Reset password link sent to "${email}"`,
       });
       return Promise.resolve();
@@ -75,8 +76,8 @@ export const authProvider = (): AuthProvider => {
 
       return Promise.resolve({
         id: 1,
-        name: "Shashi Ojha",
-        avatar: "https://i.pravatar.cc/150",
+        name: 'Shashi Ojha',
+        avatar: 'https://i.pravatar.cc/150',
       });
     },
   };

@@ -5,16 +5,16 @@ import {
   NumberField,
   useSimpleList,
   AntdList,
-} from "@pankod/refine-antd";
-import "./style.less";
+} from '@pankod/refine-antd';
+import './style.less';
 
-import { IUser } from "interfaces";
+import { IUser } from 'interfaces';
 
 const { Text } = Typography;
 
 export const TrendingMenu: React.FC = () => {
   const { listProps } = useSimpleList<IUser>({
-    resource: "users",
+    resource: 'users',
     pagination: { pageSize: 5 },
     syncWithLocation: false,
   });

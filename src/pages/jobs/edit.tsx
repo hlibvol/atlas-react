@@ -1,4 +1,4 @@
-import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
+import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
 
 import {
   Edit,
@@ -10,20 +10,20 @@ import {
   Typography,
   useSelect,
   Select,
-} from "@pankod/refine-antd";
+} from '@pankod/refine-antd';
 
 const { Text } = Typography;
 
-import { IAppUrl, IJobs } from "interfaces";
+import { IAppUrl, IJobs } from 'interfaces';
 
 export const JobEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { formProps, saveButtonProps, queryResult } = useForm<IJobs>();
 
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
-    resource: "application-urls",
-    optionLabel: "name",
-    optionValue: "id",
+    resource: 'application-urls',
+    optionLabel: 'name',
+    optionValue: 'id',
   });
 
   return (
@@ -39,7 +39,7 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={[64, 0]} wrap>
           <Col xs={24} lg={8}>
             <Form.Item
-              label={t("jobs.fields.title")}
+              label={t('jobs.fields.title')}
               name="name"
               rules={[
                 {
@@ -50,7 +50,7 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
               <Input />
             </Form.Item>
             <Form.Item
-              label={t("jobs.fields.application-url-id")}
+              label={t('jobs.fields.application-url-id')}
               name="application_url_id"
               rules={[
                 {

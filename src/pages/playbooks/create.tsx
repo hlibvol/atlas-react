@@ -16,14 +16,14 @@ import InputMask from 'react-input-mask';
 
 const { Text } = Typography;
 
-import { IAppUrl, IJobs } from 'interfaces';
+import { IPlayBook, IRole } from 'interfaces';
 
-export const JobCreate: React.FC<IResourceComponentsProps> = () => {
+export const CreatePlayBook: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const { formProps, saveButtonProps, queryResult } = useForm<IJobs>();
+  const { formProps, saveButtonProps, queryResult } = useForm<IPlayBook>();
 
-  const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
-    resource: 'application-urls',
+  const { selectProps: roleSelectProps } = useSelect<IRole>({
+    resource: 'roles',
     optionLabel: 'name',
     optionValue: 'id',
   });
@@ -43,7 +43,7 @@ export const JobCreate: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={[64, 0]} wrap>
           <Col xs={24} lg={8}>
             <Form.Item
-              label={t('jobs.fields.title')}
+              label={t('playbooks.fields.title')}
               name="name"
               rules={[
                 {
@@ -53,20 +53,14 @@ export const JobCreate: React.FC<IResourceComponentsProps> = () => {
             >
               <Input />
             </Form.Item>
-            <Form.Item label={t('jobs.fields.discription')} name="description">
+            <Form.Item
+              label={t('playbooks.fields.discription')}
+              name="description"
+            >
               <Input.TextArea />
             </Form.Item>
-
-            <Form.Item
-              label={t('jobs.fields.application-url-id')}
-              name="application_url_id"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Select {...urlSelectProps} />
+            <Form.Item label={t('playbooks.fields.process-role')} name="roles">
+              <Select {...roleSelectProps} mode="multiple" />
             </Form.Item>
           </Col>
         </Row>

@@ -21,7 +21,7 @@ export interface IFile {
   name: string;
   percent: number;
   size: number;
-  status: "error" | "success" | "done" | "uploading" | "removed";
+  status: 'error' | 'success' | 'done' | 'uploading' | 'removed';
   type: string;
   uid: string;
   url: string;
@@ -47,4 +47,12 @@ export interface IUserFilterVariables {
   q: string;
   status: boolean;
   is_active: boolean;
+}
+
+export interface IPlayBook {
+  id: number;
+  name: string;
+  description: string;
+  roles: IRole;
+  page_content: string;
 }

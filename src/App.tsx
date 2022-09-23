@@ -1,32 +1,33 @@
-import React, { useEffect } from "react";
-import { Refine } from "@pankod/refine-core";
-import { RefineKbarProvider } from "@pankod/refine-kbar";
-import routerProvider from "@pankod/refine-react-router-v6";
+import React, { useEffect } from 'react';
+import { Refine } from '@pankod/refine-core';
+import { RefineKbarProvider } from '@pankod/refine-kbar';
+import routerProvider from '@pankod/refine-react-router-v6';
 import {
   Icons,
   ConfigProvider,
   notificationProvider,
   Layout,
   ErrorComponent,
-} from "@pankod/refine-antd";
-import de_DE from "antd/lib/locale/de_DE";
-import { authProvider, dataProvider } from "./services/providers";
+} from '@pankod/refine-antd';
+import de_DE from 'antd/lib/locale/de_DE';
+import { authProvider, dataProvider } from './services/providers';
 
-import "styles/antd.less";
+import 'styles/antd.less';
 
-import { DashboardPage } from "./pages/dashboard";
-import { AuthPage } from "./pages/auth";
-import { UsersList, UserShow, UsersCreate, UsersEdit } from "./pages/users";
-import { RoleCreate, RoleList, RoleEdit } from "./pages/roles";
-import { useTranslation } from "react-i18next";
-import { Header, Title } from "components";
+import { DashboardPage } from './pages/dashboard';
+import { AuthPage } from './pages/auth';
+import { UsersList, UserShow, UsersCreate, UsersEdit } from './pages/users';
+import { RoleCreate, RoleList, RoleEdit } from './pages/roles';
+import { useTranslation } from 'react-i18next';
+import { Header, Title } from 'components';
 
 import {
   ApplicationURLCreate,
   ApplicationURLEdit,
   ApplicationURLList,
-} from "pages/applicationUrl";
-import { JobCreate, JobList, JobEdit } from "pages/jobs";
+} from './pages/applicationUrl';
+import { JobCreate, JobList, JobEdit } from './pages/jobs';
+import { CreatePlayBook, PlayBookList } from './pages/playbooks';
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -39,21 +40,21 @@ const App: React.FC = () => {
 
   return (
     <RefineKbarProvider>
-      <ConfigProvider locale={locale === "de" ? de_DE : undefined}>
+      <ConfigProvider locale={locale === 'de' ? de_DE : undefined}>
         <Refine
           routerProvider={{
             ...routerProvider,
             routes: [
               {
-                path: "/register",
+                path: '/register',
                 element: <AuthPage type="register" />,
               },
               {
-                path: "/reset-password",
+                path: '/reset-password',
                 element: <AuthPage type="resetPassword" />,
               },
               {
-                path: "/update-password",
+                path: '/update-password',
                 element: <AuthPage type="updatePassword" />,
               },
             ],
@@ -72,13 +73,13 @@ const App: React.FC = () => {
           }}
           resources={[
             {
-              name: "roles",
+              name: 'roles',
               list: RoleList,
               create: RoleCreate,
               edit: RoleEdit,
             },
             {
-              name: "users",
+              name: 'users',
               list: UsersList,
               show: UserShow,
               create: UsersCreate,
@@ -86,16 +87,22 @@ const App: React.FC = () => {
               icon: <Icons.UsergroupAddOutlined />,
             },
             {
-              name: "application-urls",
+              name: 'application-urls',
               list: ApplicationURLList,
               create: ApplicationURLCreate,
               edit: ApplicationURLEdit,
             },
             {
-              name: "jobs",
+              name: 'jobs',
               list: JobList,
               create: JobCreate,
               edit: JobEdit,
+            },
+            {
+              name: 'playbooks',
+              list: PlayBookList,
+              create: CreatePlayBook,
+              // edit: JobEdit,
             },
           ]}
           notificationProvider={notificationProvider}
