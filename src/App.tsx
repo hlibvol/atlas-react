@@ -82,6 +82,7 @@ const App: React.FC = () => {
               list: RoleList,
               create: RoleCreate,
               edit: RoleEdit,
+              icon: <Icons.TagsOutlined />,
             },
             {
               name: 'users',
@@ -96,12 +97,14 @@ const App: React.FC = () => {
               list: ApplicationURLList,
               create: ApplicationURLCreate,
               edit: ApplicationURLEdit,
+              icon: <Icons.LinkOutlined />,
             },
             {
               name: 'jobs',
               list: JobList,
               create: JobCreate,
               edit: JobEdit,
+              icon: <Icons.SolutionOutlined />,
             },
             {
               name: 'playbooks',
@@ -109,7 +112,7 @@ const App: React.FC = () => {
               create: PlayBookCreate,
               edit: PlayBookEdit,
               show: PlayBookShow,
-              icon: <Icons.BookOutlined />,
+              icon: <Icons.ReadOutlined />,
             },
           ]}
           notificationProvider={notificationProvider}

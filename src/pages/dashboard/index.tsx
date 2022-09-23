@@ -1,6 +1,8 @@
 import { Row, Col, Card, Typography } from '@pankod/refine-antd';
 import { useTranslation } from 'react-i18next';
 
+import { TotalUsers, TotalJobs, TotalRoles } from 'components';
+
 const { Text } = Typography;
 
 export const DashboardPage: React.FC = () => {
@@ -23,7 +25,7 @@ export const DashboardPage: React.FC = () => {
                 backgroundPosition: 'right',
               }}
             >
-              {/* <DailyRevenue /> */}
+              <TotalRoles />
             </Card>
           </Col>
           <Col xl={7} lg={12} md={24} sm={24} xs={24}>
@@ -37,7 +39,9 @@ export const DashboardPage: React.FC = () => {
                 backgroundColor: '#332a4b',
                 backgroundRepeat: 'no-repeat',
               }}
-            ></Card>
+            >
+              <TotalJobs />
+            </Card>
           </Col>
           <Col xl={7} lg={12} md={24} sm={24} xs={24}>
             <Card
@@ -51,7 +55,9 @@ export const DashboardPage: React.FC = () => {
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'right',
               }}
-            ></Card>
+            >
+              <TotalUsers />
+            </Card>
           </Col>
         </Row>
       </Col>

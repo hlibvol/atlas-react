@@ -75,7 +75,7 @@ export const Header: React.FC = () => {
   const [value, setValue] = useState<string>('');
   const [options, setOptions] = useState<IOptions[]>([]);
 
-  const { refetch: refetchOrders } = useList<IUser>({
+  const { refetch: refetchUsers } = useList<IUser>({
     resource: 'users',
     config: {
       filters: [{ field: 'q', operator: 'contains', value }],
@@ -103,7 +103,7 @@ export const Header: React.FC = () => {
     },
   });
 
-  const { refetch: refetchStores } = useList<IRole>({
+  const { refetch: refetchRoles } = useList<IRole>({
     resource: 'roles',
     config: {
       filters: [{ field: 'q', operator: 'contains', value }],
@@ -131,7 +131,7 @@ export const Header: React.FC = () => {
     },
   });
 
-  const { refetch: refetchCouriers } = useList<IJobs>({
+  const { refetch: refetchJobs } = useList<IJobs>({
     resource: 'jobs',
     config: {
       filters: [{ field: 'q', operator: 'contains', value }],
@@ -161,9 +161,9 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     setOptions([]);
-    refetchOrders();
-    refetchCouriers();
-    refetchStores();
+    refetchUsers();
+    refetchJobs();
+    refetchRoles();
   }, [value]);
 
   const menu = (
