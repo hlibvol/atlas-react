@@ -25,9 +25,9 @@ import {
   ApplicationURLCreate,
   ApplicationURLEdit,
   ApplicationURLList,
-} from "pages/applicationUrl";
-import { JobCreate, JobList, JobEdit } from "pages/jobs";
-import { CreatePlayBook, PlayBookList } from "pages/playbooks";
+} from "./pages/applicationUrl";
+import { JobCreate, JobList, JobEdit } from "./pages/jobs";
+import { CreatePlayBook, PlayBookList } from "./pages/playbooks";
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();

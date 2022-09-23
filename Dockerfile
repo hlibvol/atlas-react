@@ -1,26 +1,21 @@
-FROM node:16-alpine
+FROM node:16-alpine as build
 
-WORKDIR /opt/app
+WORKDIR /app
 
-ENV NODE_ENV development
+ENV NODE_PATH=/node_modules
+ENV PATH=$PATH:/app/node_modules/.bin
 
-COPY package*.json ./
-COPY .npmrc ./
+# install app dependencies
+COPY package.json ./
+COPY yarn.lock ./
+RUN yarn install --network-timeout 1000000 --silent
+COPY . ./
+RUN npm run build
 
-RUN npm install
-
-COPY . /opt/app
-
-RUN npm run bootstrap -- --scope atlas-beacon -- --force
-RUN npm run build -- --scope atlas-beacon
-
-FROM node:16-alpine
-
-COPY --from=0 /opt/app/examples/fineFoods/admin/antd/build /opt/app
-WORKDIR /opt/app/
-
-ENV NODE_ENV=production
-
-RUN npm install -g serve
-
-CMD serve -l 5000
+# production environment
+FROM nginx:1.17
+ARG NODE_ENV
+COPY --from=build /app/build/ /usr/share/nginx/html
+COPY --from=build /app/nginx/${NODE_ENV}.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
