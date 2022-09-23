@@ -462,7 +462,7 @@
     "fields": {
       "id": " Playbook ID",
       "title": "Name",
-      "discription": "Description",
+      "description": "Description",
       "page-content": "Page Content",
       "process-role": "Process Role"
     },

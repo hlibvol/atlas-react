@@ -1,24 +1,22 @@
 import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
 
 import {
-  Create,
+  Edit,
   Form,
   Input,
   useForm,
   Row,
   Col,
   Typography,
-  Select,
   useSelect,
+  Select,
 } from '@pankod/refine-antd';
-
-import InputMask from 'react-input-mask';
 
 const { Text } = Typography;
 
 import { IPlayBook, IRole } from 'interfaces';
 
-export const PlayBookCreate: React.FC<IResourceComponentsProps> = () => {
+export const PlayBookEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { formProps, saveButtonProps, queryResult } = useForm<IPlayBook>();
 
@@ -29,15 +27,13 @@ export const PlayBookCreate: React.FC<IResourceComponentsProps> = () => {
   });
 
   return (
-    <Create
-      isLoading={queryResult?.isFetching}
-      saveButtonProps={saveButtonProps}
-    >
+    <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
         layout="vertical"
         initialValues={{
           isActive: true,
+          ...formProps.initialValues,
         }}
       >
         <Row gutter={20} wrap>
@@ -51,34 +47,29 @@ export const PlayBookCreate: React.FC<IResourceComponentsProps> = () => {
                 },
               ]}
             >
-              <Input placeholder="Enter Name" />
+              <Input />
             </Form.Item>
-
             <Form.Item
               label={t('playbooks.fields.process-role')}
               name="role_ids"
             >
-              <Select
-                {...roleSelectProps}
-                mode="multiple"
-                placeholder="Select Process Role"
-              />
+              <Select {...roleSelectProps} mode="multiple" />
             </Form.Item>
             <Form.Item
               label={t('playbooks.fields.description')}
               name="description"
             >
-              <Input.TextArea placeholder="Enter Description" />
+              <Input.TextArea />
             </Form.Item>
             <Form.Item
               label={t('playbooks.fields.page-content')}
               name="page_content"
             >
-              <Input.TextArea placeholder="Enter Page Content" />
+              <Input.TextArea />
             </Form.Item>
           </Col>
         </Row>
       </Form>
-    </Create>
+    </Edit>
   );
 };

@@ -53,6 +53,6 @@ export interface IPlayBook {
   id: number;
   name: string;
   description: string;
-  roles: IRole;
+  role_ids: IRole;
   page_content: string;
 }

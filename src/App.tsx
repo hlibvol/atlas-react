@@ -27,7 +27,12 @@ import {
   ApplicationURLList,
 } from './pages/applicationUrl';
 import { JobCreate, JobList, JobEdit } from './pages/jobs';
-import { CreatePlayBook, PlayBookList } from './pages/playbooks';
+import {
+  PlayBookCreate,
+  PlayBookEdit,
+  PlayBookList,
+  PlayBookShow,
+} from './pages/playbooks';
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -101,8 +106,10 @@ const App: React.FC = () => {
             {
               name: 'playbooks',
               list: PlayBookList,
-              create: CreatePlayBook,
-              // edit: JobEdit,
+              create: PlayBookCreate,
+              edit: PlayBookEdit,
+              show: PlayBookShow,
+              icon: <Icons.BookOutlined />,
             },
           ]}
           notificationProvider={notificationProvider}
