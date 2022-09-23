@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 export const MapMarker: React.FC<{
-    lat?: string;
-    lng?: string;
-    children: React.ReactNode;
+  lat?: string;
+  lng?: string;
+  children: React.ReactNode;
 }> = (props) => {
-    return <>{props.children}</>;
+  return <>{props.children}</>;
 };

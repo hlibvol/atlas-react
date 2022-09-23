@@ -5,7 +5,7 @@ import {
   useNavigation,
   HttpError,
   useList,
-} from "@pankod/refine-core";
+} from '@pankod/refine-core';
 
 import {
   List,
@@ -23,9 +23,9 @@ import {
   Avatar,
   TextField,
   Badge,
-} from "@pankod/refine-antd";
+} from '@pankod/refine-antd';
 
-import { IUser, IRole } from "interfaces";
+import { IUser, IRole } from 'interfaces';
 
 const { useBreakpoint } = Grid;
 
@@ -35,7 +35,7 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
   const user = userQueryResult.data?.data;
 
   const { data: roles, isLoading } = useList<IRole>({
-    resource: "roles",
+    resource: 'roles',
   });
 
   const t = useTranslate();
@@ -44,11 +44,11 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
   return (
     <Row gutter={[16, 16]}>
       <Col xl={6} lg={24} xs={24}>
-        <Card bordered={false} style={{ height: "100%" }}>
-          <Space direction="vertical" style={{ width: "100%", height: "100%" }}>
+        <Card bordered={false} style={{ height: '100%' }}>
+          <Space direction="vertical" style={{ width: '100%', height: '100%' }}>
             <Space
               direction="vertical"
-              style={{ textAlign: "center", width: "100%" }}
+              style={{ textAlign: 'center', width: '100%' }}
             >
               <Avatar size={120} src={user?.avatar?.[0].url}></Avatar>
               <Typography.Title level={3}>
@@ -58,8 +58,8 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
             <Space
               direction="vertical"
               style={{
-                width: "100%",
-                textAlign: xl ? "unset" : "center",
+                width: '100%',
+                textAlign: xl ? 'unset' : 'center',
               }}
             >
               <Typography.Text>
@@ -69,14 +69,14 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
                 <Icons.HomeOutlined /> {user?.is_active}
               </Typography.Text>
               <Typography.Text>
-                <Icons.CheckOutlined />{" "}
+                <Icons.CheckOutlined />{' '}
                 <Badge
                   className="site-badge-count-109"
-                  style={{ backgroundColor: "#52c41a" }}
+                  style={{ backgroundColor: '#52c41a' }}
                 >
                   {user?.is_active
-                    ? t("users.fields.is_active.true")
-                    : t("users.fields.is_active.false")}
+                    ? t('users.fields.is_active.true')
+                    : t('users.fields.is_active.false')}
                 </Badge>
               </Typography.Text>
             </Space>
@@ -85,30 +85,30 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
       </Col>
 
       <Col xl={18} xs={24}>
-        <Card bordered={false} style={{ height: "100%" }}>
-          <Space direction="vertical" style={{ width: "100%", height: "100%" }}>
+        <Card bordered={false} style={{ height: '100%' }}>
+          <Space direction="vertical" style={{ width: '100%', height: '100%' }}>
             <Space
               direction="vertical"
               style={{
-                width: "100%",
-                textAlign: xl ? "unset" : "center",
+                width: '100%',
+                textAlign: xl ? 'unset' : 'center',
               }}
             >
               <Typography.Text>
                 {user?.is_designer ? (
-                  <Badge.Ribbon text={t("users.fields.is_designer.true")}>
+                  <Badge.Ribbon text={t('users.fields.is_designer.true')}>
                     <Card
-                      title={t("users.fields.is_designer.label")}
+                      title={t('users.fields.is_designer.label')}
                       size="small"
                     ></Card>
                   </Badge.Ribbon>
                 ) : (
                   <Badge.Ribbon
-                    text={t("users.fields.is_designer.false")}
+                    text={t('users.fields.is_designer.false')}
                     color="red"
                   >
                     <Card
-                      title={t("users.fields.is_designer.label")}
+                      title={t('users.fields.is_designer.label')}
                       size="small"
                     ></Card>
                   </Badge.Ribbon>
@@ -117,19 +117,19 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
 
               <Typography.Text>
                 {user?.is_superuser ? (
-                  <Badge.Ribbon text={t("users.fields.is_superuser.true")}>
+                  <Badge.Ribbon text={t('users.fields.is_superuser.true')}>
                     <Card
-                      title={t("users.fields.is_superuser.label")}
+                      title={t('users.fields.is_superuser.label')}
                       size="small"
                     ></Card>
                   </Badge.Ribbon>
                 ) : (
                   <Badge.Ribbon
-                    text={t("users.fields.is_superuser.false")}
+                    text={t('users.fields.is_superuser.false')}
                     color="red"
                   >
                     <Card
-                      title={t("users.fields.is_superuser.label")}
+                      title={t('users.fields.is_superuser.label')}
                       size="small"
                     ></Card>
                   </Badge.Ribbon>

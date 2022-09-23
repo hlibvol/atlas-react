@@ -1,4 +1,4 @@
-import { useTranslate, IResourceComponentsProps } from "@pankod/refine-core";
+import { useTranslate, IResourceComponentsProps } from '@pankod/refine-core';
 
 import {
   List,
@@ -16,11 +16,11 @@ import {
   EditButton,
   Space,
   DeleteButton,
-} from "@pankod/refine-antd";
+} from '@pankod/refine-antd';
 
 const { FormOutlined } = Icons;
 
-import { IPlayBook } from "interfaces";
+import { IPlayBook } from 'interfaces';
 
 export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable<IPlayBook>();
@@ -33,12 +33,12 @@ export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
           <Table.Column
             dataIndex="id"
             align="center"
-            title={t("playbooks.fields.id")}
+            title={t('playbooks.fields.id')}
           />
-          <Table.Column dataIndex="name" title={t("playbooks.fields.title")} />
+          <Table.Column dataIndex="name" title={t('playbooks.fields.title')} />
           <Table.Column
-            dataIndex={"roles"}
-            title={t("playbooks.fields.process-role")}
+            dataIndex={'roles'}
+            title={t('playbooks.fields.process-role')}
             render={(value) => {
               return value.map((item: any) => {
                 return <TagField color="blue" value={item.name} />;
@@ -46,7 +46,7 @@ export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
             }}
           />
           <Table.Column<IPlayBook>
-            title={t("table.actions")}
+            title={t('table.actions')}
             dataIndex="actions"
             render={(_, record) => (
               <Space>
