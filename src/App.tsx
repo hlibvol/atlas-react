@@ -27,7 +27,12 @@ import {
   ApplicationURLList,
 } from './pages/applicationUrl';
 import { JobCreate, JobList, JobEdit } from './pages/jobs';
-import { CreatePlayBook, PlayBookList } from './pages/playbooks';
+import {
+  PlayBookCreate,
+  PlayBookEdit,
+  PlayBookList,
+  PlayBookShow,
+} from './pages/playbooks';
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -77,6 +82,7 @@ const App: React.FC = () => {
               list: RoleList,
               create: RoleCreate,
               edit: RoleEdit,
+              icon: <Icons.TagsOutlined />,
             },
             {
               name: 'users',
@@ -91,18 +97,22 @@ const App: React.FC = () => {
               list: ApplicationURLList,
               create: ApplicationURLCreate,
               edit: ApplicationURLEdit,
+              icon: <Icons.LinkOutlined />,
             },
             {
               name: 'jobs',
               list: JobList,
               create: JobCreate,
               edit: JobEdit,
+              icon: <Icons.SolutionOutlined />,
             },
             {
               name: 'playbooks',
               list: PlayBookList,
-              create: CreatePlayBook,
-              // edit: JobEdit,
+              create: PlayBookCreate,
+              edit: PlayBookEdit,
+              show: PlayBookShow,
+              icon: <Icons.ReadOutlined />,
             },
           ]}
           notificationProvider={notificationProvider}

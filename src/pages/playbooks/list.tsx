@@ -4,14 +4,8 @@ import {
   List,
   Table,
   useTable,
-  DateField,
   TagField,
-  BooleanField,
-  Menu,
   Icons,
-  Avatar,
-  useModal,
-  TextField,
   ShowButton,
   EditButton,
   Space,
@@ -51,7 +45,7 @@ export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
             render={(_, record) => (
               <Space>
                 <EditButton hideText size="small" recordItemId={record.id} />
-                {/* <ShowButton hideText size="small" recordItemId={record.id} /> */}
+                <ShowButton hideText size="small" recordItemId={record.id} />
                 <DeleteButton hideText size="small" recordItemId={record.id} />
               </Space>
             )}
