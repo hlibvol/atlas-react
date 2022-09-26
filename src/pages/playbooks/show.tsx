@@ -5,7 +5,7 @@ import {
   useNavigation,
   HttpError,
   useList,
-  useOne,
+  useMany,
 } from '@pankod/refine-core';
 
 import {
@@ -32,24 +32,12 @@ export const PlayBookShow: React.FC<IResourceComponentsProps> = () => {
   const { queryResult: playbookQueryResult } = useShow<IPlayBook>();
   const playbook = playbookQueryResult.data?.data;
 
-  // const { data: roles, isLoading } = useList<IRole>({
-  //   resource: 'roles',
-  // });
-
-  const { data: roles, isLoading } = useOne<IRole>({
-    resource: 'roles',
-    id: playbook?.role_ids.id || '',
-    queryOptions: {
-      enabled: !!playbook?.role_ids.id,
-    },
-  });
-
   const t = useTranslate();
   const { show } = useNavigation();
   const { Title, Text } = Typography;
 
   return (
-    <Show isLoading={isLoading}>
+    <Show>
       <Title level={5}>Title</Title>
       <Text>{playbook?.name}</Text>
 
@@ -59,7 +47,7 @@ export const PlayBookShow: React.FC<IResourceComponentsProps> = () => {
       </Text>
 
       <Title level={5}>Process Role</Title>
-      <Text>{roles?.data.name}</Text>
+      <Text>{playbook?.roles.map((role) => role.name).join(', ')}</Text>
     </Show>
   );
 };
