@@ -42,19 +42,14 @@ export const RoleList: React.FC<IResourceComponentsProps> = () => {
     <>
       <List>
         <Table {...tableProps} rowKey="id">
-          <Table.Column
-            dataIndex="id"
-            align="center"
-            title={t('roles.fields.id')}
-          />
           <Table.Column dataIndex="name" title={t('roles.fields.title')} />
           <Table.Column<IRole>
             title={t('table.actions')}
             dataIndex="actions"
             render={(_, record) => (
               <Space>
-                <DeleteButton hideText size="middle" recordItemId={record.id} />
                 <EditButton hideText size="middle" recordItemId={record.id} />
+                <DeleteButton hideText size="middle" recordItemId={record.id} />
               </Space>
             )}
           />

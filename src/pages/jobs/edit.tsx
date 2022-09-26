@@ -14,7 +14,7 @@ import {
 
 const { Text } = Typography;
 
-import { IAppUrl, IJobs } from 'interfaces';
+import { IAppUrl, IJobs, IRole } from 'interfaces';
 
 export const JobEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -22,6 +22,12 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
 
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
     resource: 'application-urls',
+    optionLabel: 'name',
+    optionValue: 'id',
+  });
+
+  const { selectProps: roleSelectProps } = useSelect<IRole>({
+    resource: 'roles',
     optionLabel: 'name',
     optionValue: 'id',
   });
@@ -37,7 +43,7 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
         }}
       >
         <Row gutter={[64, 0]} wrap>
-          <Col xs={24} lg={8}>
+          <Col xs={24} lg={12}>
             <Form.Item
               label={t('jobs.fields.title')}
               name="name"
@@ -49,6 +55,9 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Input />
             </Form.Item>
+            <Form.Item label={t('jobs.fields.discription')} name="description">
+              <Input.TextArea />
+            </Form.Item>
             <Form.Item
               label={t('jobs.fields.application-url-id')}
               name="application_url_id"
@@ -59,6 +68,9 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
               ]}
             >
               <Select {...urlSelectProps} />
+            </Form.Item>
+            <Form.Item label={t('jobs.fields.process-role')} name="role_ids">
+              <Select {...roleSelectProps} mode="multiple" />
             </Form.Item>
           </Col>
         </Row>

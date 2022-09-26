@@ -40,8 +40,10 @@ export interface IJobs {
   id: number;
   name: string;
   description: string;
-  // applications: IAppUrl;
-  application_url_id: { id: number };
+  roles: IRole[];
+  role_ids: number[];
+  application_url: IAppUrl;
+  application_url_id: number;
 }
 export interface IUserFilterVariables {
   q: string;
@@ -53,6 +55,7 @@ export interface IPlayBook {
   id: number;
   name: string;
   description: string;
-  role_ids: IRole;
+  roles: IRole[];
+  role_ids: number[];
   page_content: string;
 }
