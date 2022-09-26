@@ -24,6 +24,7 @@ import {
   EditButton,
   Space,
   DeleteButton,
+  TagField,
 } from '@pankod/refine-antd';
 
 const { FormOutlined } = Icons;
@@ -42,11 +43,6 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
     <>
       <List>
         <Table {...tableProps} rowKey="id">
-          <Table.Column
-            dataIndex="id"
-            align="center"
-            title={t('jobs.fields.id')}
-          />
           <Table.Column dataIndex="name" title={t('jobs.fields.title')} />
 
           <Table.Column
@@ -64,6 +60,15 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
                   }
                 />
               );
+            }}
+          />
+          <Table.Column
+            dataIndex={'roles'}
+            title={t('jobs.fields.process-role')}
+            render={(value) => {
+              return value.map((item: any) => {
+                return <TagField color="blue" value={item.name} />;
+              });
             }}
           />
           <Table.Column<IJobs>

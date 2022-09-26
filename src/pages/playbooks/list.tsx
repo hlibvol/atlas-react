@@ -24,11 +24,6 @@ export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
     <>
       <List>
         <Table {...tableProps} rowKey="id">
-          <Table.Column
-            dataIndex="id"
-            align="center"
-            title={t('playbooks.fields.id')}
-          />
           <Table.Column dataIndex="name" title={t('playbooks.fields.title')} />
           <Table.Column
             dataIndex={'roles'}
@@ -45,7 +40,7 @@ export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
             render={(_, record) => (
               <Space>
                 <EditButton hideText size="small" recordItemId={record.id} />
-                <ShowButton hideText size="small" recordItemId={record.id} />
+                {/* <ShowButton hideText size="small" recordItemId={record.id} /> */}
                 <DeleteButton hideText size="small" recordItemId={record.id} />
               </Space>
             )}

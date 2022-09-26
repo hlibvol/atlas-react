@@ -44,11 +44,6 @@ export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
       <List>
         <Table {...tableProps} rowKey="id">
           <Table.Column
-            dataIndex="id"
-            align="center"
-            title={t('application-urls.fields.id')}
-          />
-          <Table.Column
             dataIndex="name"
             title={t('application-urls.fields.title')}
           />

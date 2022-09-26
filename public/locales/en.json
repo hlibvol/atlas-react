@@ -295,7 +295,8 @@
       "id": " Job ID",
       "title": "Name",
       "discription": "Description",
-      "application-url-id": "Application URL"
+      "application-url-id": "Application URL",
+      "process-role": "Process Role"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"

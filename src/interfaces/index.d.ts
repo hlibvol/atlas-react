@@ -40,7 +40,8 @@ export interface IJobs {
   id: number;
   name: string;
   description: string;
-  // applications: IAppUrl;
+  // application_url_id: IAppUrl;
+  role_ids: IRole;
   application_url_id: { id: number };
 }
 export interface IUserFilterVariables {
