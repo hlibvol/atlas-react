@@ -55,7 +55,7 @@ export const authProvider = (): AuthProvider => {
     },
     checkError: (error) => {
       if (error && error.statusCode === 401) {
-        return Promise.reject();
+        return Promise.reject(error.message);
       }
       return Promise.resolve();
     },
