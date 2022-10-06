@@ -29,6 +29,7 @@ import {
 import { JobCreate, JobList, JobEdit } from './pages/jobs';
 import {
   PlayBookCreate,
+  PlayBookDesign,
   PlayBookEdit,
   PlayBookList,
   PlayBookShow,
@@ -60,6 +61,10 @@ const App: React.FC = () => {
               },
               {
                 path: '/update-password',
+                element: <AuthPage type="updatePassword" />,
+              },
+              {
+                path: '/design-page',
                 element: <AuthPage type="updatePassword" />,
               },
             ],
@@ -111,7 +116,7 @@ const App: React.FC = () => {
               list: PlayBookList,
               create: PlayBookCreate,
               edit: PlayBookEdit,
-              show: PlayBookShow,
+              show: PlayBookDesign,
               icon: <Icons.ReadOutlined />,
             },
           ]}

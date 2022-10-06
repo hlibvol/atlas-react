@@ -61,12 +61,6 @@ export const PlayBookEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Input.TextArea />
             </Form.Item>
-            <Form.Item
-              label={t('playbooks.fields.page-content')}
-              name="page_content"
-            >
-              <Input.TextArea />
-            </Form.Item>
           </Col>
         </Row>
       </Form>

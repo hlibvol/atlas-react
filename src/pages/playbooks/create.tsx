@@ -70,12 +70,6 @@ export const PlayBookCreate: React.FC<IResourceComponentsProps> = () => {
             >
               <Input.TextArea placeholder="Enter Description" />
             </Form.Item>
-            <Form.Item
-              label={t('playbooks.fields.page-content')}
-              name="page_content"
-            >
-              <Input.TextArea placeholder="Enter Page Content" />
-            </Form.Item>
           </Col>
         </Row>
       </Form>

@@ -3,19 +3,13 @@ import {
   IResourceComponentsProps,
   useNavigation,
   useShow,
-  useDelete,
 } from '@pankod/refine-core';
 
 import {
   List,
   Table,
   useTable,
-  DateField,
-  Dropdown,
-  BooleanField,
-  Menu,
   Icons,
-  Avatar,
   useModal,
   DeleteButton,
   EditButton,

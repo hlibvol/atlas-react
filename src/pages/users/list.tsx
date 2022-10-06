@@ -29,6 +29,7 @@ import {
   Space,
   EditButton,
   DeleteButton,
+  TagField,
 } from '@pankod/refine-antd';
 
 import { IUser, IRole, IUserFilterVariables } from 'interfaces';
@@ -114,7 +115,8 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
                   return <TextField value="Loading..." />;
                 }
                 return (
-                  <TextField
+                  <TagField
+                    color="green"
                     value={roles?.data.find((item) => item.id === value)?.name}
                   />
                 );

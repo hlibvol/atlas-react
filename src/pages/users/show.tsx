@@ -3,29 +3,22 @@ import {
   IResourceComponentsProps,
   useShow,
   useNavigation,
-  HttpError,
   useList,
 } from '@pankod/refine-core';
 
 import {
-  List,
-  Table,
-  useTable,
   Card,
   Icons,
-  Button,
   Space,
   Row,
   Col,
   Grid,
   Typography,
-  Rate,
   Avatar,
-  TextField,
   Badge,
 } from '@pankod/refine-antd';
 
-import { IUser, IRole } from 'interfaces';
+import { IUser } from 'interfaces';
 
 const { useBreakpoint } = Grid;
 
@@ -33,10 +26,6 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
   const { xl } = useBreakpoint();
   const { queryResult: userQueryResult } = useShow<IUser>();
   const user = userQueryResult.data?.data;
-
-  const { data: roles, isLoading } = useList<IRole>({
-    resource: 'roles',
-  });
 
   const t = useTranslate();
   const { show } = useNavigation();

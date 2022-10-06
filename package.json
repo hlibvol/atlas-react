@@ -17,6 +17,13 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "craco-less": "^2.0.0",
+    "grapesjs": "^0.20.1",
+    "grapesjs-blocks-basic": "^1.0.1",
+    "grapesjs-blocks-flexbox": "^0.1.1",
+    "grapesjs-plugin-ckeditor": "^0.0.10",
+    "grapesjs-plugin-forms": "^2.0.5",
+    "grapesjs-preset-webpage": "^1.0.2",
+    "grapesjs-style-filter": "^1.0.1",
     "i18next": "^20.1.0",
     "i18next-browser-languagedetector": "^6.1.1",
     "i18next-xhr-backend": "^3.2.2",
@@ -46,6 +53,7 @@
   ],
   "devDependencies": {
     "@types/lodash": "^4.14.171",
-    "@types/react-input-mask": "^3.0.1"
+    "@types/react-input-mask": "^3.0.1",
+    "node-sass": "^7.0.3"
   }
 }
