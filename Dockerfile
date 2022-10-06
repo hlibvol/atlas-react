@@ -1,9 +1,12 @@
 FROM node:16-alpine as build
 
-WORKDIR /app
+ARG MAX_OLD_SPACE_SIZE=2048
 
+ENV NODE_OPTIONS=--max-old-space-size=${MAX_OLD_SPACE_SIZE}
 ENV NODE_PATH=/node_modules
 ENV PATH=$PATH:/app/node_modules/.bin
+
+WORKDIR /app
 
 # install app dependencies
 COPY package.json ./
