@@ -29,10 +29,10 @@ import {
 
 const { FormOutlined } = Icons;
 
-import { IAppUrl, IJobs } from 'interfaces';
+import { IAppUrl, IJob } from 'interfaces';
 
 export const JobList: React.FC<IResourceComponentsProps> = () => {
-  const { tableProps } = useTable<IJobs>();
+  const { tableProps } = useTable<IJob>();
   const t = useTranslate();
 
   const { data: applicationurls, isLoading } = useList<IAppUrl>({
@@ -71,13 +71,13 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
               });
             }}
           />
-          <Table.Column<IJobs>
+          <Table.Column<IJob>
             title={t('table.actions')}
             dataIndex="actions"
             render={(_, record) => (
               <Space>
                 <EditButton hideText size="small" recordItemId={record.id} />
-                {/* <ShowButton hideText size="small" recordItemId={record.id} /> */}
+                <ShowButton hideText size="small" recordItemId={record.id} />
                 <DeleteButton hideText size="small" recordItemId={record.id} />
               </Space>
             )}

@@ -14,11 +14,11 @@ import {
 
 const { Text } = Typography;
 
-import { IAppUrl, IJobs, IRole } from 'interfaces';
+import { IAppUrl, IJob, IRole } from 'interfaces';
 
 export const JobEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const { formProps, saveButtonProps, queryResult } = useForm<IJobs>();
+  const { formProps, saveButtonProps, queryResult } = useForm<IJob>();
 
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
     resource: 'application-urls',

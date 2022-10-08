@@ -73,10 +73,12 @@ export const authProvider = (): AuthProvider => {
       if (!token) {
         return Promise.reject();
       }
-
+      const decodedToken: any = decodeJwt(token);
       return Promise.resolve({
-        id: 1,
-        name: 'Shashi Ojha',
+        ...decodedToken.user,
+        name: `${decodedToken?.user?.first_name || ''} ${
+          decodedToken?.user?.last_name || ''
+        }`,
         avatar: 'https://i.pravatar.cc/150',
       });
     },

@@ -32,7 +32,7 @@ const { SearchOutlined, DownOutlined } = Icons;
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
 
-import { IRole, IUser, IJobs } from 'interfaces';
+import { IRole, IUser, IJob } from 'interfaces';
 import './style.less';
 
 interface IOptionGroup {
@@ -131,7 +131,7 @@ export const Header: React.FC = () => {
     },
   });
 
-  const { refetch: refetchJobs } = useList<IJobs>({
+  const { refetch: refetchJobs } = useList<IJob>({
     resource: 'jobs',
     config: {
       filters: [{ field: 'q', operator: 'contains', value }],

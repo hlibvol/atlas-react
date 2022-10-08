@@ -36,7 +36,7 @@ export interface IAppUrl {
   name: string;
   url: string;
 }
-export interface IJobs {
+export interface IJob {
   id: number;
   name: string;
   description: string;

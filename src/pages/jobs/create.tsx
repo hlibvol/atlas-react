@@ -16,11 +16,11 @@ import InputMask from 'react-input-mask';
 
 const { Text } = Typography;
 
-import { IAppUrl, IJobs, IRole } from 'interfaces';
+import { IAppUrl, IJob, IRole } from 'interfaces';
 
 export const JobCreate: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const { formProps, saveButtonProps, queryResult } = useForm<IJobs>();
+  const { formProps, saveButtonProps, queryResult } = useForm<IJob>();
 
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
     resource: 'application-urls',

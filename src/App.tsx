@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Refine } from '@pankod/refine-core';
 import { RefineKbarProvider } from '@pankod/refine-kbar';
 import routerProvider from '@pankod/refine-react-router-v6';
@@ -26,13 +26,12 @@ import {
   ApplicationURLEdit,
   ApplicationURLList,
 } from './pages/applicationUrl';
-import { JobCreate, JobList, JobEdit } from './pages/jobs';
+import { JobCreate, JobList, JobEdit, JobShow } from './pages/jobs';
 import {
   PlayBookCreate,
   PlayBookDesign,
   PlayBookEdit,
   PlayBookList,
-  PlayBookShow,
 } from './pages/playbooks';
 
 const App: React.FC = () => {
@@ -109,6 +108,7 @@ const App: React.FC = () => {
               list: JobList,
               create: JobCreate,
               edit: JobEdit,
+              show: JobShow,
               icon: <Icons.SolutionOutlined />,
             },
             {
