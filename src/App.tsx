@@ -33,6 +33,7 @@ import {
   PlayBookEdit,
   PlayBookList,
 } from './pages/playbooks';
+import { CourseCreate, CourseEdit, CourseList } from 'pages/courses';
 
 import {
   LessonCreate,
@@ -125,7 +126,13 @@ const App: React.FC = () => {
               show: PlayBookDesign,
               icon: <Icons.ReadOutlined />,
             },
-
+            {
+              name: 'courses',
+              list: CourseList,
+              create: CourseCreate,
+              edit: CourseEdit,
+              icon: <Icons.BookOutlined />,
+            },
             {
               name: 'lessons',
               list: LessonList,

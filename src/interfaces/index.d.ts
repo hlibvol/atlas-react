@@ -60,6 +60,15 @@ export interface IPlayBook {
   page_content: string;
 }
 
+export interface ICourse {
+  id: number;
+  name: string;
+  description: string;
+  duration: string;
+  enroll_required: boolean;
+  passing_percentage: number;
+}
+
 export interface ILesson {
   id: number;
   name: string;

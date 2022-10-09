@@ -226,16 +226,7 @@
       "title": "Filters",
       "search": {
         "label": "Search",
-        "placeholder": "First_name, last_name, email, etc."
-      },
-      "createdAt": {
-        "label": "Created At"
-      },
-      "gender": {
-        "label": "Gender",
-        "placeholder": "Gender",
-        "male": "Male",
-        "female": "Female"
+        "placeholder": "First Name, Last Name, Email, etc."
       },
       "is_active": {
         "label": "Active",
@@ -314,6 +305,24 @@
       "description": "Description",
       "page-content": "Page Content",
       "process-role": "Process Role"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "courses": {
+    "courses": "Courses",
+    "titles": {
+      "create": "Create Course",
+      "edit": "Edit Course",
+      "list": "Courses"
+    },
+    "fields": {
+      "id": " Course ID",
+      "title": "Name",
+      "description": "Description",
+      "duration": "Duration",
+      "enroll-required": "Enroll Required",
+      "passing-percentage": "Passing Percentage"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
