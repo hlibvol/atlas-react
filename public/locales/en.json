@@ -317,5 +317,22 @@
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
+  },
+  "lessons": {
+    "lessons": "Lessons",
+    "titles": {
+      "create": "Create Lesson",
+      "edit": "Edit Lesson",
+      "list": "Lessons"
+    },
+    "fields": {
+      "id": " Lesson ID",
+      "title": "Name",
+      "description": "Description",
+      "duration": "Duration",
+      "page-content": "Page Content"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
   }
 }

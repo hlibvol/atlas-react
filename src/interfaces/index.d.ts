@@ -59,3 +59,11 @@ export interface IPlayBook {
   role_ids: number[];
   page_content: string;
 }
+
+export interface ILesson {
+  id: number;
+  name: string;
+  description: string;
+  duration: number;
+  page_content: string;
+}

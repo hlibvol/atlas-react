@@ -34,6 +34,12 @@ import {
   PlayBookList,
 } from './pages/playbooks';
 
+import {
+  LessonCreate,
+  LessonDesign,
+  LessonEdit,
+  LessonList,
+} from './pages/lessons';
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
   const i18nProvider = {
@@ -117,6 +123,15 @@ const App: React.FC = () => {
               create: PlayBookCreate,
               edit: PlayBookEdit,
               show: PlayBookDesign,
+              icon: <Icons.ReadOutlined />,
+            },
+
+            {
+              name: 'lessons',
+              list: LessonList,
+              create: LessonCreate,
+              edit: LessonEdit,
+              show: LessonDesign,
               icon: <Icons.ReadOutlined />,
             },
           ]}

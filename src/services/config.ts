@@ -7,7 +7,7 @@ function getConfig() {
     return {
       development: true,
       apiEndpoint: 'http://integration.atlasbeacon.com/api',
-      //apiEndpoint: 'http://localhost:8000/api',
+      // apiEndpoint: 'http://localhost:8000/api',
     };
   } else {
     return {
