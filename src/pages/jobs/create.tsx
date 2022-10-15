@@ -10,6 +10,7 @@ import {
   Typography,
   Select,
   useSelect,
+  Checkbox,
 } from '@pankod/refine-antd';
 
 import InputMask from 'react-input-mask';
@@ -17,6 +18,7 @@ import InputMask from 'react-input-mask';
 const { Text } = Typography;
 
 import { IAppUrl, IJob, IRole } from 'interfaces';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 export const JobCreate: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -33,6 +35,8 @@ export const JobCreate: React.FC<IResourceComponentsProps> = () => {
     optionLabel: 'name',
     optionValue: 'id',
   });
+
+  const onChange = (e: CheckboxChangeEvent) => {};
 
   return (
     <Create
@@ -83,6 +87,11 @@ export const JobCreate: React.FC<IResourceComponentsProps> = () => {
                 mode="multiple"
                 placeholder="Select Process Role"
               />
+            </Form.Item>
+            <Form.Item name="is_template" valuePropName="checked">
+              <Checkbox onChange={onChange}>
+                <Text strong>{t('jobs.fields.is-template.label')}</Text>{' '}
+              </Checkbox>
             </Form.Item>
           </Col>
         </Row>

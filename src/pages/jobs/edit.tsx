@@ -10,11 +10,13 @@ import {
   Typography,
   useSelect,
   Select,
+  Checkbox,
 } from '@pankod/refine-antd';
 
 const { Text } = Typography;
 
 import { IAppUrl, IJob, IRole } from 'interfaces';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 export const JobEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -31,6 +33,8 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
     optionLabel: 'name',
     optionValue: 'id',
   });
+
+  const onChange = (e: CheckboxChangeEvent) => {};
 
   return (
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
@@ -71,6 +75,11 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
             </Form.Item>
             <Form.Item label={t('jobs.fields.process-role')} name="role_ids">
               <Select {...roleSelectProps} mode="multiple" />
+            </Form.Item>
+            <Form.Item name="is_template" valuePropName="checked">
+              <Checkbox onChange={onChange}>
+                <Text strong>{t('jobs.fields.is-template.label')}</Text>{' '}
+              </Checkbox>
             </Form.Item>
           </Col>
         </Row>

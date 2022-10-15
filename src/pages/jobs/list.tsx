@@ -71,6 +71,24 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
               });
             }}
           />
+          <Table.Column
+            key="is_template"
+            dataIndex="is_template"
+            title={t('jobs.fields.is-template.label')}
+            render={(value) =>
+              value ? (
+                <TagField
+                  color="green"
+                  value={t('jobs.fields.is-template.true')}
+                />
+              ) : (
+                <TagField
+                  color="red"
+                  value={t('jobs.fields.is-template.false')}
+                />
+              )
+            }
+          />
           <Table.Column<IJob>
             title={t('table.actions')}
             dataIndex="actions"

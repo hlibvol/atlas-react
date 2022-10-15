@@ -44,6 +44,7 @@ export interface IJob {
   role_ids: number[];
   application_url: IAppUrl;
   application_url_id: number;
+  is_template: boolean;
 }
 export interface IUserFilterVariables {
   q: string;
