@@ -344,7 +344,12 @@
       "title": "Name",
       "description": "Description",
       "duration": "Duration",
-      "page-content": "Page Content"
+      "page-content": "Page Content",
+      "is-template": {
+        "label": "Is Template",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"

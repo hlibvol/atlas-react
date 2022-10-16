@@ -9,6 +9,7 @@ import {
   EditButton,
   Space,
   DeleteButton,
+  TagField,
 } from '@pankod/refine-antd';
 
 const { FormOutlined } = Icons;
@@ -24,6 +25,24 @@ export const LessonList: React.FC<IResourceComponentsProps> = () => {
       <List>
         <Table {...tableProps} rowKey="id">
           <Table.Column dataIndex="name" title={t('lessons.fields.title')} />
+          <Table.Column
+            key="is_template"
+            dataIndex="is_template"
+            title={t('lessons.fields.is-template.label')}
+            render={(value) =>
+              value ? (
+                <TagField
+                  color="green"
+                  value={t('lessons.fields.is-template.true')}
+                />
+              ) : (
+                <TagField
+                  color="red"
+                  value={t('lessons.fields.is-template.false')}
+                />
+              )
+            }
+          />
           <Table.Column<ILesson>
             title={t('table.actions')}
             dataIndex="actions"

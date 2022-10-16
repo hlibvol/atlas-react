@@ -8,15 +8,19 @@ import {
   Row,
   Col,
   Typography,
+  Checkbox,
 } from '@pankod/refine-antd';
 
 const { Text } = Typography;
 
 import { ILesson } from 'interfaces';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 export const LessonCreate: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { formProps, saveButtonProps, queryResult } = useForm<ILesson>();
+
+  const onChange = (e: CheckboxChangeEvent) => {};
 
   return (
     <Create
@@ -53,6 +57,12 @@ export const LessonCreate: React.FC<IResourceComponentsProps> = () => {
 
             <Form.Item label={t('lessons.fields.duration')} name="duration">
               <Input placeholder="Enter Duration" />
+            </Form.Item>
+
+            <Form.Item name="is_template" valuePropName="checked">
+              <Checkbox onChange={onChange}>
+                <Text strong>{t('lessons.fields.is-template.label')}</Text>
+              </Checkbox>
             </Form.Item>
           </Col>
         </Row>

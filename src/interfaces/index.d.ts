@@ -76,4 +76,5 @@ export interface ILesson {
   description: string;
   duration: number;
   page_content: string;
+  is_template: boolean;
 }
