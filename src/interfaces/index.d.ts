@@ -78,3 +78,14 @@ export interface ILesson {
   page_content: string;
   is_template: boolean;
 }
+
+export interface IUseCase {
+  id: number;
+  name: string;
+  description: string;
+  roles: IRole[];
+  role_ids: number[];
+  table_config: string;
+  jobs: IJob[];
+  job_ids: number[];
+}

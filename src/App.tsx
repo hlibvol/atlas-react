@@ -41,6 +41,9 @@ import {
   LessonEdit,
   LessonList,
 } from './pages/lessons';
+
+import { UseCaseCreate, UseCaseEdit, UseCaseList } from './pages/useCases';
+
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
   const i18nProvider = {
@@ -139,6 +142,13 @@ const App: React.FC = () => {
               create: LessonCreate,
               edit: LessonEdit,
               show: LessonDesign,
+              icon: <Icons.ReadOutlined />,
+            },
+            {
+              name: 'use-cases',
+              list: UseCaseList,
+              create: UseCaseCreate,
+              edit: UseCaseEdit,
               icon: <Icons.ReadOutlined />,
             },
           ]}

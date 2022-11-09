@@ -353,5 +353,23 @@
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
+  },
+  "use-cases": {
+    "use-cases": "Use Cases",
+    "titles": {
+      "create": "Create Use Cases",
+      "edit": "Edit Use Cases",
+      "list": "Use Cases"
+    },
+    "fields": {
+      "id": "Use Case ID",
+      "title": "Name",
+      "description": "Description",
+      "table-config": "Table Config",
+      "use-case-role": "Use Case Role",
+      "use-case-job": "Use Case Job"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
   }
 }
