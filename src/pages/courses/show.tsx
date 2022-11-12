@@ -1,53 +1,24 @@
-import {
-  useTranslate,
-  IResourceComponentsProps,
-  useShow,
-  useNavigation,
-  HttpError,
-  useList,
-  useMany,
-} from '@pankod/refine-core';
+import { useShow, useTranslate } from '@pankod/refine-core';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Container } from './show/container';
+import { Col, Row, Show } from '@pankod/refine-antd';
+import { ICourse } from 'interfaces';
 
-import {
-  Card,
-  Space,
-  Row,
-  Col,
-  Grid,
-  Typography,
-  Table,
-  TagField,
-  TextField,
-  Show,
-  Title,
-  Tag,
-} from '@pankod/refine-antd';
-
-import { IRole, IPlayBook } from 'interfaces';
-
-const { useBreakpoint } = Grid;
-
-export const PlayBookShow: React.FC<IResourceComponentsProps> = () => {
-  const { xl } = useBreakpoint();
-  const { queryResult: playbookQueryResult } = useShow<IPlayBook>();
-  const playbook = playbookQueryResult.data?.data;
-
+export const CourseShow: React.FC = () => {
   const t = useTranslate();
-  const { show } = useNavigation();
-  const { Title, Text } = Typography;
-
+  const { queryResult: courseQueryResult } = useShow<ICourse>();
+  const course = courseQueryResult.data?.data;
+  const courseid = course?.id;
   return (
-    <Show>
-      <Title level={5}>Title</Title>
-      <Text>{playbook?.name}</Text>
-
-      <Title level={5}>Description</Title>
-      <Text>
-        <Tag>{playbook?.description}</Tag>
-      </Text>
-
-      <Title level={5}>Process Role</Title>
-      <Text>{playbook?.roles.map((role) => role.name).join(', ')}</Text>
+    <Show title={course?.name} headerButtons={() => <></>}>
+      <Row gutter={20} wrap>
+        <Col xs={24} lg={24}>
+          <DndProvider backend={HTML5Backend}>
+            {courseid ? <Container courseid={courseid} /> : null}
+          </DndProvider>
+        </Col>
+      </Row>
     </Show>
   );
 };

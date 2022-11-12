@@ -66,6 +66,7 @@ export interface ICourse {
   name: string;
   description: string;
   duration: string;
+  items: ILesson[];
   enroll_required: boolean;
   passing_percentage: number;
 }
@@ -88,4 +89,13 @@ export interface IUseCase {
   table_config: string;
   jobs: IJob[];
   job_ids: number[];
+}
+
+export interface ICourseItems {
+  id: number;
+  course_id: string;
+  item_title: string;
+  item_type: string;
+  item_id: number;
+  item_order: number;
 }

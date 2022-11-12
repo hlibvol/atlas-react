@@ -31,6 +31,7 @@ export const CourseList: React.FC<IResourceComponentsProps> = () => {
             render={(_, record) => (
               <Space>
                 <EditButton hideText size="small" recordItemId={record.id} />
+                <ShowButton hideText size="small" recordItemId={record.id} />
                 <DeleteButton hideText size="small" recordItemId={record.id} />
               </Space>
             )}
