@@ -14,23 +14,11 @@ import {
 
 const { Text } = Typography;
 
-import { IUseCase, IRole, IJob } from 'interfaces';
+import { IUseCase } from 'interfaces';
 
 export const UseCaseEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { formProps, saveButtonProps, queryResult } = useForm<IUseCase>();
-
-  const { selectProps: roleSelectProps } = useSelect<IRole>({
-    resource: 'roles',
-    optionLabel: 'name',
-    optionValue: 'id',
-  });
-
-  const { selectProps: jobSelectProps } = useSelect<IJob>({
-    resource: 'jobs',
-    optionLabel: 'name',
-    optionValue: 'id',
-  });
 
   return (
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
@@ -54,19 +42,6 @@ export const UseCaseEdit: React.FC<IResourceComponentsProps> = () => {
               ]}
             >
               <Input />
-            </Form.Item>
-            <Form.Item
-              label={t('use-cases.fields.use-case-role')}
-              name="role_ids"
-            >
-              <Select {...roleSelectProps} mode="multiple" />
-            </Form.Item>
-
-            <Form.Item
-              label={t('use-cases.fields.use-case-job')}
-              name="job_ids"
-            >
-              <Select {...jobSelectProps} mode="multiple" />
             </Form.Item>
 
             <Form.Item

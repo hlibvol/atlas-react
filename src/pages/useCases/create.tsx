@@ -16,23 +16,11 @@ import InputMask from 'react-input-mask';
 
 const { Text } = Typography;
 
-import { IUseCase, IRole, IJob } from 'interfaces';
+import { IUseCase } from 'interfaces';
 
 export const UseCaseCreate: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { formProps, saveButtonProps, queryResult } = useForm<IUseCase>();
-
-  const { selectProps: roleSelectProps } = useSelect<IRole>({
-    resource: 'roles',
-    optionLabel: 'name',
-    optionValue: 'id',
-  });
-
-  const { selectProps: jobSelectProps } = useSelect<IJob>({
-    resource: 'jobs',
-    optionLabel: 'name',
-    optionValue: 'id',
-  });
 
   return (
     <Create
@@ -60,26 +48,6 @@ export const UseCaseCreate: React.FC<IResourceComponentsProps> = () => {
               <Input placeholder="Enter Name" />
             </Form.Item>
 
-            <Form.Item
-              label={t('use-cases.fields.use-case-role')}
-              name="role_ids"
-            >
-              <Select
-                {...roleSelectProps}
-                mode="multiple"
-                placeholder="Select UseCase Role"
-              />
-            </Form.Item>
-            <Form.Item
-              label={t('use-cases.fields.use-case-job')}
-              name="job_ids"
-            >
-              <Select
-                {...jobSelectProps}
-                mode="multiple"
-                placeholder="Select UseCase Jobs"
-              />
-            </Form.Item>
             <Form.Item
               label={t('use-cases.fields.description')}
               name="description"
