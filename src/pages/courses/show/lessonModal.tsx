@@ -1,4 +1,3 @@
-import { useModalForm } from '@pankod/refine-react-hook-form';
 import {
   Button,
   Col,
