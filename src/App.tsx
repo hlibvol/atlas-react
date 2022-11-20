@@ -46,7 +46,6 @@ import {
   LessonEdit,
   LessonList,
 } from './pages/lessons';
-
 import { UseCaseCreate, UseCaseEdit, UseCaseList } from './pages/useCases';
 
 const App: React.FC = () => {
@@ -97,58 +96,81 @@ const App: React.FC = () => {
           }}
           resources={[
             {
+              name: 'User Management',
+              icon: <Icons.UsergroupAddOutlined />,
+            },
+            {
+              name: 'Jobs Design',
+              icon: <Icons.LinkOutlined />,
+            },
+            {
+              name: 'Play Design',
+              icon: <Icons.ReadOutlined />,
+            },
+            {
+              name: 'Learning Design',
+              icon: <Icons.BookOutlined />,
+            },
+            {
               name: 'roles',
+              parentName: 'User Management',
               list: RoleList,
               create: RoleCreate,
               edit: RoleEdit,
-              icon: <Icons.TagsOutlined />,
+              options: { route: 'roles' },
             },
             {
               name: 'users',
+              parentName: 'User Management',
               list: UsersList,
               show: UserShow,
               create: UsersCreate,
               edit: UsersEdit,
-              icon: <Icons.UsergroupAddOutlined />,
+              options: { route: 'users' },
             },
             {
               name: 'application-urls',
+              parentName: 'Jobs Design',
               list: ApplicationURLList,
               create: ApplicationURLCreate,
               edit: ApplicationURLEdit,
-              icon: <Icons.LinkOutlined />,
+              options: { route: 'application-urls' },
             },
             {
               name: 'jobs',
+              parentName: 'Jobs Design',
               list: JobList,
               create: JobCreate,
               edit: JobEdit,
               show: JobShow,
-              icon: <Icons.SolutionOutlined />,
+              options: { route: 'jobs' },
             },
             {
               name: 'playbooks',
+              parentName: 'Play Design',
               list: PlayBookList,
               create: PlayBookCreate,
               edit: PlayBookEdit,
               show: PlayBookDesign,
-              icon: <Icons.ReadOutlined />,
+              options: { route: 'playbooks' },
             },
             {
               name: 'courses',
+              parentName: 'Learning Design',
               list: CourseList,
               create: CourseCreate,
               edit: CourseEdit,
+              options: { route: 'courses' },
               show: CourseShow,
-              icon: <Icons.BookOutlined />,
             },
             {
               name: 'lessons',
+              parentName: 'Learning Design',
               list: LessonList,
               create: LessonCreate,
               edit: LessonEdit,
               show: LessonDesign,
-              icon: <Icons.ReadOutlined />,
+              options: { route: 'lessons' },
             },
             {
               name: 'use-cases',

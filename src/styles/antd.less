@@ -14,6 +14,7 @@
 
 // base variables
 @border-radius-base: 6px;
+@text-transform-capitalize: capitalize;
 
 // colors
 @primary-color: #67be23;
@@ -69,3 +70,19 @@
     opacity: 1;
 }
 
+// TODO: Make the below settings dynamic
+.ant-menu-sub.ant-menu-inline {
+    background-color: @layout-sider-background;
+}
+
+.ant-menu-inline.ant-menu-root .ant-menu-submenu-title > .ant-menu-title-content {
+    text-transform: @text-transform-capitalize;
+}
+
+.ant-layout-sider-dark {
+    min-width: 220px !important;
+}
+
+.ant-menu.ant-menu-sub.ant-menu-vertical {
+    background-color: @layout-sider-background !important; 
+}
