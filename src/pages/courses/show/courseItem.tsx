@@ -18,19 +18,19 @@ const style = {
   cursor: 'move',
   width: '100%',
 };
-export const Card = memo(function Card({
+export const CourseItem = memo(function CourseItem({
   id,
   text,
   itemId,
-  moveCard,
-  findCard,
+  index,
+  moveCourseItem,
+  findCourseItem,
   handleClick,
-  courseId,
 }: any) {
-  const originalIndex = findCard(id).index;
+  const originalIndex = findCourseItem(id).index;
   const [{ isDragging }, drag] = useDrag(
     () => ({
-      type: ItemTypes.CARD,
+      type: ItemTypes.COURSEITEM,
       item: { id, originalIndex },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
@@ -39,24 +39,25 @@ export const Card = memo(function Card({
         const { id: droppedId, originalIndex } = item;
         const didDrop = monitor.didDrop();
         if (!didDrop) {
-          moveCard(droppedId, originalIndex);
+          moveCourseItem(droppedId, originalIndex);
         }
       },
     }),
-    [id, originalIndex, moveCard]
+    [id, originalIndex, moveCourseItem]
   );
 
   const [, drop] = useDrop(
     () => ({
-      accept: ItemTypes.CARD,
+      accept: ItemTypes.COURSEITEM,
       hover({ id: draggedId }: any) {
         if (draggedId !== id) {
-          const { index: overIndex } = findCard(id);
-          moveCard(draggedId, overIndex);
+          const { index: overIndex } = findCourseItem(id);
+          moveCourseItem(draggedId, overIndex);
         }
       },
+      drop(item: any, monitor: DropTargetMonitor) {},
     }),
-    [findCard, moveCard]
+    [findCourseItem, moveCourseItem]
   );
   const opacity = isDragging ? 0 : 1;
   return (
@@ -65,13 +66,16 @@ export const Card = memo(function Card({
         <Row>
           <Col span={8}>
             {itemId ? (
-              <Text style={{ margin: 0 }}>
+              <Text style={{ margin: 0 }} key={itemId}>
                 <Icons.UnorderedListOutlined />
                 &nbsp;&nbsp;{text}
               </Text>
             ) : (
-              <Text strong style={{ margin: 0, fontSize: '12px' }}>
-                <Icons.UnorderedListOutlined />
+              <Text
+                strong
+                style={{ margin: 0, fontSize: '12px', marginLeft: '15px' }}
+                key={itemId}
+              >
                 &nbsp;&nbsp;{text}
               </Text>
             )}

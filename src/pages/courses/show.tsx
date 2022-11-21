@@ -9,13 +9,12 @@ export const CourseShow: React.FC = () => {
   const t = useTranslate();
   const { queryResult: courseQueryResult } = useShow<ICourse>();
   const course = courseQueryResult.data?.data;
-  const courseid = course?.id;
   return (
     <Show title={course?.name} headerButtons={() => <></>}>
       <Row gutter={20} wrap>
         <Col xs={24} lg={24}>
           <DndProvider backend={HTML5Backend}>
-            {courseid ? <Container courseid={courseid} /> : null}
+            <Container />
           </DndProvider>
         </Col>
       </Row>

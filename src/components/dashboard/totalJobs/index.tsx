@@ -22,17 +22,11 @@ export const TotalJobs: React.FC = () => {
   return (
     <div className="daily-revenue-wrapper">
       <div className="title-area">
-        <div className="title-area__amount">
-          <Typography.Title level={3}>
-            {t('dashboard.totalJobs.title')}
-          </Typography.Title>
-          <div className="title-area__number">
-            <NumberField
-              style={{ fontSize: 36 }}
-              strong
-              value={data?.data.total ?? 0}
-            />
-          </div>
+        <Typography.Title level={3}>
+          {t('dashboard.totalJobs.title')}
+        </Typography.Title>
+        <div className="title-area__number">
+          <Typography.Text strong>{data?.data.total ?? 0} </Typography.Text>
         </div>
       </div>
     </div>
