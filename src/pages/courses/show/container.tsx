@@ -131,12 +131,12 @@ export const Container: React.FC = memo(function Container() {
         />
       ))}
       <Row>
-        <Col span={2}>
+        {/* <Col span={2}>
           <LessonModal updateLesson={updateCourse} />
-        </Col>
-        <Col span={11} xs={6} lg={14} style={{ marginTop: 10 }}>
+        </Col> */}
+        <Col span={11} xs={6} lg={18} style={{ marginTop: 10 }}>
           <Input
-            placeholder="Create or add new lesson here..."
+            placeholder="Add new lesson here..."
             name="name"
             value={name || ''}
             onChange={(e) => {
@@ -147,7 +147,7 @@ export const Container: React.FC = memo(function Container() {
             }}
           />
         </Col>
-        <Col span={10} offset={10}>
+        <Col span={10} offset={13}>
           <Text type="secondary">Shift + Enter to add as a section</Text>
         </Col>
       </Row>
