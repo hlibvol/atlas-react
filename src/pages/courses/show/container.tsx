@@ -3,18 +3,9 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { CourseItem } from './courseItem';
 import { ItemTypes } from './ItemTypes';
-import {
-  Button,
-  Col,
-  Icons,
-  Input,
-  message,
-  Row,
-  Typography,
-} from '@pankod/refine-antd';
+import { Col, Input, message, Row, Typography } from '@pankod/refine-antd';
 import { useShow, useUpdate } from '@pankod/refine-core';
 import { ICourse } from 'interfaces';
-import { LessonModal } from './lessonModal';
 const { Text, Title } = Typography;
 
 const style = {
@@ -30,7 +21,7 @@ export const Container: React.FC = memo(function Container() {
 
   useEffect(() => {
     if (course && course.items != courseItems) {
-      setCourseItems(course.items); // This will always use latest value of count
+      setCourseItems(course.items);
     }
   }, [course?.items]);
 
@@ -131,12 +122,9 @@ export const Container: React.FC = memo(function Container() {
         />
       ))}
       <Row>
-        {/* <Col span={2}>
-          <LessonModal updateLesson={updateCourse} />
-        </Col> */}
         <Col span={11} xs={6} lg={18} style={{ marginTop: 10 }}>
           <Input
-            placeholder="Add new lesson here..."
+            placeholder="Add new Lesson or Quiz..."
             name="name"
             value={name || ''}
             onChange={(e) => {
