@@ -1,10 +1,10 @@
-import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
+import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 
-import { Edit, Form, Input, useForm, Row, Col, Typography } from '@pankod/refine-antd';
+import { Edit, Form, Input, useForm, Row, Col, Typography } from "@pankod/refine-antd";
 
 const { Text } = Typography;
 
-import { IAppUrl } from 'interfaces';
+import { IAppUrl } from "interfaces";
 
 export const ApplicationURLEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -23,7 +23,7 @@ export const ApplicationURLEdit: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={[64, 0]} wrap>
           <Col xs={24} lg={8}>
             <Form.Item
-              label={t('application-urls.fields.title')}
+              label={t("application-urls.fields.title")}
               name='name'
               rules={[
                 {
@@ -34,7 +34,7 @@ export const ApplicationURLEdit: React.FC<IResourceComponentsProps> = () => {
               <Input />
             </Form.Item>
             <Form.Item
-              label={t('application-urls.fields.url')}
+              label={t("application-urls.fields.url")}
               name='url'
               rules={[
                 {

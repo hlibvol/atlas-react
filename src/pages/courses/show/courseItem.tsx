@@ -1,14 +1,14 @@
-import { Button, Col, Icons, Row, Space, Tooltip, Typography } from '@pankod/refine-antd';
-import { memo } from 'react';
-import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd';
-import { ItemTypes } from './ItemTypes';
+import { Button, Col, Icons, Row, Space, Tooltip, Typography } from "@pankod/refine-antd";
+import { memo } from "react";
+import { DropTargetMonitor, useDrag, useDrop } from "react-dnd";
+import { ItemTypes } from "./ItemTypes";
 const { Text } = Typography;
 const style = {
-  borderBottom: '1px solid #eee',
-  padding: '0.5rem 1rem',
-  marginBottom: '.5rem',
-  cursor: 'move',
-  width: '100%',
+  borderBottom: "1px solid #eee",
+  padding: "0.5rem 1rem",
+  marginBottom: ".5rem",
+  cursor: "move",
+  width: "100%",
 };
 export const CourseItem = memo(function CourseItem({
   id,
@@ -63,7 +63,7 @@ export const CourseItem = memo(function CourseItem({
                 &nbsp;&nbsp;{text}
               </Text>
             ) : (
-              <Text strong style={{ margin: 0, fontSize: '12px', marginLeft: '15px' }} key={itemId}>
+              <Text strong style={{ margin: 0, fontSize: "12px", marginLeft: "15px" }} key={itemId}>
                 &nbsp;&nbsp;{text}
               </Text>
             )}
@@ -91,7 +91,7 @@ export const CourseItem = memo(function CourseItem({
                   <Button
                     shape='circle'
                     size='small'
-                    style={{ marginLeft: '73px' }}
+                    style={{ marginLeft: "73px" }}
                     onClick={() => {
                       handleClick(id);
                     }}

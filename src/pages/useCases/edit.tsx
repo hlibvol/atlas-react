@@ -1,4 +1,4 @@
-import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
+import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 
 import {
   Edit,
@@ -10,11 +10,11 @@ import {
   Typography,
   useSelect,
   Select,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
 const { Text } = Typography;
 
-import { IUseCase } from 'interfaces';
+import { IUseCase } from "interfaces";
 
 export const UseCaseEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -33,7 +33,7 @@ export const UseCaseEdit: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={20} wrap>
           <Col xs={24} lg={12}>
             <Form.Item
-              label={t('use-cases.fields.title')}
+              label={t("use-cases.fields.title")}
               name='name'
               rules={[
                 {
@@ -44,7 +44,7 @@ export const UseCaseEdit: React.FC<IResourceComponentsProps> = () => {
               <Input />
             </Form.Item>
 
-            <Form.Item label={t('use-cases.fields.description')} name='description'>
+            <Form.Item label={t("use-cases.fields.description")} name='description'>
               <Input.TextArea />
             </Form.Item>
           </Col>

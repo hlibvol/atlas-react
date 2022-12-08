@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
-import { useApiUrl, useCustom, useTranslate } from '@pankod/refine-core';
-import { Typography } from '@pankod/refine-antd';
+import { useMemo } from "react";
+import { useApiUrl, useCustom, useTranslate } from "@pankod/refine-core";
+import { Typography } from "@pankod/refine-antd";
 
-import { IUser } from 'interfaces';
-import './style.less';
+import { IUser } from "interfaces";
+import "./style.less";
 
 export const TotalUsers: React.FC = () => {
   const t = useTranslate();
@@ -14,7 +14,7 @@ export const TotalUsers: React.FC = () => {
     data: IUser[];
     total: number;
     trend: number;
-  }>({ url, method: 'get' });
+  }>({ url, method: "get" });
 
   const { Text, Title } = Typography;
 
@@ -22,7 +22,7 @@ export const TotalUsers: React.FC = () => {
     <div className='new-customers-wrapper'>
       <div className='header'>
         <Title level={3} className='header__title'>
-          {t('dashboard.users.title')}
+          {t("dashboard.users.title")}
         </Title>
 
         <div className='header__numbers'>

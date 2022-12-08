@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import grapesjs from 'grapesjs';
-import gjsPresetWebpage from 'grapesjs-preset-webpage';
-import gjsBlockBasic from 'grapesjs-blocks-basic';
-import 'grapesjs-blocks-flexbox';
-import grapesjsPluginForms from 'grapesjs-plugin-forms';
-import 'grapesjs/dist/css/grapes.min.css';
+import { useEffect, useState } from "react";
+import grapesjs from "grapesjs";
+import gjsPresetWebpage from "grapesjs-preset-webpage";
+import gjsBlockBasic from "grapesjs-blocks-basic";
+import "grapesjs-blocks-flexbox";
+import grapesjsPluginForms from "grapesjs-plugin-forms";
+import "grapesjs/dist/css/grapes.min.css";
 
-import './styles.scss';
-import { Config } from '../../../services/config';
-import { TOKEN_KEY } from '../../../services/constants';
+import "./styles.scss";
+import { Config } from "../../../services/config";
+import { TOKEN_KEY } from "../../../services/constants";
 
 interface IfirstChildProps {
   source: string;
@@ -23,17 +23,17 @@ export const Editor: React.FC<IfirstChildProps> = ({ source, source_id }) => {
 
   useEffect(() => {
     const editor = grapesjs.init({
-      container: '#editor',
-      width: 'auto',
-      plugins: [gjsPresetWebpage, gjsBlockBasic, 'gjs-blocks-flexbox', grapesjsPluginForms],
+      container: "#editor",
+      width: "auto",
+      plugins: [gjsPresetWebpage, gjsBlockBasic, "gjs-blocks-flexbox", grapesjsPluginForms],
       pluginsOpts: {
         gjsPresetWebpage: {},
         gjsBlockBasic,
-        'gjs-blocks-flexbox': {},
+        "gjs-blocks-flexbox": {},
         grapesjsPluginForms,
       },
       storageManager: {
-        type: 'remote',
+        type: "remote",
         autosave: true,
         autoload: true,
         stepsBeforeSave: 1,
@@ -43,7 +43,7 @@ export const Editor: React.FC<IfirstChildProps> = ({ source, source_id }) => {
             urlLoad: designEndpoint,
             urlStore: designEndpoint,
 
-            fetchOptions: (opts: any) => (opts.method === 'POST' ? { method: 'PUT' } : {}),
+            fetchOptions: (opts: any) => (opts.method === "POST" ? { method: "PUT" } : {}),
 
             onStore: (data) => ({
               id: source_id,

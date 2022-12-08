@@ -1,11 +1,11 @@
-import update from 'immutability-helper';
-import { memo, useCallback, useEffect, useState } from 'react';
-import { useDrop } from 'react-dnd';
-import { CourseItem } from './courseItem';
-import { ItemTypes } from './ItemTypes';
-import { Col, Input, message, Row, Typography } from '@pankod/refine-antd';
-import { useShow, useUpdate } from '@pankod/refine-core';
-import { ICourse } from 'interfaces';
+import update from "immutability-helper";
+import { memo, useCallback, useEffect, useState } from "react";
+import { useDrop } from "react-dnd";
+import { CourseItem } from "./courseItem";
+import { ItemTypes } from "./ItemTypes";
+import { Col, Input, message, Row, Typography } from "@pankod/refine-antd";
+import { useShow, useUpdate } from "@pankod/refine-core";
+import { ICourse } from "interfaces";
 const { Text, Title } = Typography;
 
 const style = {
@@ -51,8 +51,8 @@ export const Container: React.FC = memo(function Container() {
   );
 
   const [inputData, setInputData] = useState({
-    name: '',
-    type: '',
+    name: "",
+    type: "",
   }) as Array<any>;
 
   const { name, type } = inputData;
@@ -60,19 +60,19 @@ export const Container: React.FC = memo(function Container() {
   const updateCourse = (items: any, message: any | undefined) => {
     mutate(
       {
-        resource: 'courses',
-        id: course?.id || '',
+        resource: "courses",
+        id: course?.id || "",
         values: { items: items },
-        mutationMode: 'optimistic',
+        mutationMode: "optimistic",
       },
       {
         onError: (error, variables, context) => {
-          console.log('data error', data);
+          console.log("data error", data);
         },
         onSuccess: (data, variables, error) => {
           setCourseItems(data.data.items);
           message;
-          setInputData('');
+          setInputData("");
         },
       }
     );
@@ -86,11 +86,11 @@ export const Container: React.FC = memo(function Container() {
       if (e.keyCode == 13) {
         courseItems.push({
           item_title: name,
-          item_type: e.shiftKey ? 'SECTION' : 'LESSON',
+          item_type: e.shiftKey ? "SECTION" : "LESSON",
           item_id: 0,
           item_order: courseItems.length,
         });
-        message.success('Item Added');
+        message.success("Item Added");
         updateCourse(courseItems, message);
       }
     }
@@ -99,7 +99,7 @@ export const Container: React.FC = memo(function Container() {
   const removeItemOnClick = (id: any) => {
     const itemsid = parseInt(id);
     const removedItemData = courseItems.filter((item: any) => item.id !== itemsid);
-    message.success('Item Removed');
+    message.success("Item Removed");
     updateCourse(removedItemData, message);
   };
 
@@ -124,7 +124,7 @@ export const Container: React.FC = memo(function Container() {
           <Input
             placeholder='Add new Lesson or Quiz...'
             name='name'
-            value={name || ''}
+            value={name || ""}
             onChange={(e) => {
               handledOnchangeLesson(e);
             }}

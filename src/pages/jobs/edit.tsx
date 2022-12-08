@@ -1,4 +1,4 @@
-import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
+import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 
 import {
   Edit,
@@ -11,27 +11,27 @@ import {
   useSelect,
   Select,
   Checkbox,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
 const { Text } = Typography;
 
-import { IAppUrl, IJob, IRole } from 'interfaces';
-import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+import { IAppUrl, IJob, IRole } from "interfaces";
+import type { CheckboxChangeEvent } from "antd/es/checkbox";
 
 export const JobEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { formProps, saveButtonProps, queryResult } = useForm<IJob>();
 
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
-    resource: 'application-urls',
-    optionLabel: 'name',
-    optionValue: 'id',
+    resource: "application-urls",
+    optionLabel: "name",
+    optionValue: "id",
   });
 
   const { selectProps: roleSelectProps } = useSelect<IRole>({
-    resource: 'roles',
-    optionLabel: 'name',
-    optionValue: 'id',
+    resource: "roles",
+    optionLabel: "name",
+    optionValue: "id",
   });
 
   const onChange = (e: CheckboxChangeEvent) => {};
@@ -49,7 +49,7 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={[64, 0]} wrap>
           <Col xs={24} lg={12}>
             <Form.Item
-              label={t('jobs.fields.title')}
+              label={t("jobs.fields.title")}
               name='name'
               rules={[
                 {
@@ -59,11 +59,11 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Input />
             </Form.Item>
-            <Form.Item label={t('jobs.fields.discription')} name='description'>
+            <Form.Item label={t("jobs.fields.discription")} name='description'>
               <Input.TextArea />
             </Form.Item>
             <Form.Item
-              label={t('jobs.fields.application-url-id')}
+              label={t("jobs.fields.application-url-id")}
               name='application_url_id'
               rules={[
                 {
@@ -73,12 +73,12 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Select {...urlSelectProps} />
             </Form.Item>
-            <Form.Item label={t('jobs.fields.process-role')} name='role_ids'>
+            <Form.Item label={t("jobs.fields.process-role")} name='role_ids'>
               <Select {...roleSelectProps} mode='multiple' />
             </Form.Item>
             <Form.Item name='is_template' valuePropName='checked'>
               <Checkbox onChange={onChange}>
-                <Text strong>{t('jobs.fields.is-template.label')}</Text>{' '}
+                <Text strong>{t("jobs.fields.is-template.label")}</Text>{" "}
               </Checkbox>
             </Form.Item>
           </Col>

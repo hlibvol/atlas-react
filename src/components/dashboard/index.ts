@@ -1,3 +1,3 @@
-export * from './totalUsers';
-export * from './totalJobs';
-export * from './totalRoles';
+export * from "./totalUsers";
+export * from "./totalJobs";
+export * from "./totalRoles";

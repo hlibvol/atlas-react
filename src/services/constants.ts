@@ -1,1 +1,1 @@
-export const TOKEN_KEY = 'atlas-beacon-auth';
+export const TOKEN_KEY = "atlas-beacon-auth";

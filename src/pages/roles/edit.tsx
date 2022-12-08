@@ -1,15 +1,15 @@
-import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
+import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 
-import { Edit, Form, Input, useForm, Row, Col, Typography } from '@pankod/refine-antd';
+import { Edit, Form, Input, useForm, Row, Col, Typography } from "@pankod/refine-antd";
 
 const { Text } = Typography;
 
-import { IRole } from 'interfaces';
+import { IRole } from "interfaces";
 
 export const RoleEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { formProps, saveButtonProps, queryResult } = useForm<IRole>({
-    metaData: { httpMethod: 'PUT' },
+    metaData: { httpMethod: "PUT" },
   });
 
   return (
@@ -25,7 +25,7 @@ export const RoleEdit: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={[64, 0]} wrap>
           <Col xs={24} lg={8}>
             <Form.Item
-              label={t('roles.fields.title')}
+              label={t("roles.fields.title")}
               name='name'
               rules={[
                 {

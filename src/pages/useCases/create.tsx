@@ -1,4 +1,4 @@
-import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
+import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 
 import {
   Create,
@@ -10,13 +10,13 @@ import {
   Typography,
   Select,
   useSelect,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
-import InputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
 
 const { Text } = Typography;
 
-import { IUseCase } from 'interfaces';
+import { IUseCase } from "interfaces";
 
 export const UseCaseCreate: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -34,7 +34,7 @@ export const UseCaseCreate: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={20} wrap>
           <Col xs={24} lg={12}>
             <Form.Item
-              label={t('use-cases.fields.title')}
+              label={t("use-cases.fields.title")}
               name='name'
               rules={[
                 {
@@ -45,7 +45,7 @@ export const UseCaseCreate: React.FC<IResourceComponentsProps> = () => {
               <Input placeholder='Enter Name' />
             </Form.Item>
 
-            <Form.Item label={t('use-cases.fields.description')} name='description'>
+            <Form.Item label={t("use-cases.fields.description")} name='description'>
               <Input.TextArea placeholder='Enter Description' />
             </Form.Item>
           </Col>

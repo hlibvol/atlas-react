@@ -1,6 +1,6 @@
-import SimpleDataProvider from '@pankod/refine-simple-rest';
-import apiProvider from './apiProvider';
-import { Config } from '../config';
+import SimpleDataProvider from "@pankod/refine-simple-rest";
+import apiProvider from "./apiProvider";
+import { Config } from "../config";
 
 export const dataProvider = {
   ...SimpleDataProvider(`${Config.apiEndpoint}/v1`, apiProvider),

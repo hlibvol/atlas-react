@@ -1,4 +1,4 @@
-import { useTranslate, IResourceComponentsProps } from '@pankod/refine-core';
+import { useTranslate, IResourceComponentsProps } from "@pankod/refine-core";
 
 import {
   List,
@@ -10,11 +10,11 @@ import {
   EditButton,
   Space,
   DeleteButton,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
 const { FormOutlined } = Icons;
 
-import { ICourse } from 'interfaces';
+import { ICourse } from "interfaces";
 
 export const CourseList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable<ICourse>();
@@ -24,9 +24,9 @@ export const CourseList: React.FC<IResourceComponentsProps> = () => {
     <>
       <List>
         <Table {...tableProps} rowKey='id'>
-          <Table.Column dataIndex='name' title={t('courses.fields.title')} />
+          <Table.Column dataIndex='name' title={t("courses.fields.title")} />
           <Table.Column<ICourse>
-            title={t('table.actions')}
+            title={t("table.actions")}
             dataIndex='actions'
             render={(_, record) => (
               <Space>

@@ -1,7 +1,7 @@
-import { Button, Col, Icons, message, Modal, Select, Typography } from '@pankod/refine-antd';
-import { useEffect, useState } from 'react';
-import { useList, useShow, useTranslate, useUpdate } from '@pankod/refine-core';
-import { ICourse, ILesson } from 'interfaces';
+import { Button, Col, Icons, message, Modal, Select, Typography } from "@pankod/refine-antd";
+import { useEffect, useState } from "react";
+import { useList, useShow, useTranslate, useUpdate } from "@pankod/refine-core";
+import { ICourse, ILesson } from "interfaces";
 const { Text, Title } = Typography;
 
 interface IUpdateLessonProps {
@@ -28,12 +28,12 @@ export const LessonModal: React.FC<IUpdateLessonProps> = ({ updateLesson }: any)
   }, [course?.items]);
 
   const lessonListQueryResult = useList<ILesson>({
-    resource: 'lessons',
+    resource: "lessons",
     config: {
       filters: [
         {
-          field: 'is_template',
-          operator: 'eq',
+          field: "is_template",
+          operator: "eq",
           value: true,
         },
       ],
@@ -66,13 +66,13 @@ export const LessonModal: React.FC<IUpdateLessonProps> = ({ updateLesson }: any)
       let dataTitle = lessonValue;
       courseItems.push({
         item_title: dataTitle,
-        item_type: 'LESSON',
+        item_type: "LESSON",
         item_id: 0,
         item_order: courseItems.length,
       });
     });
 
-    message.success('Lesson Added');
+    message.success("Lesson Added");
     updateLesson(courseItems, message);
     setIsModalVisible(false);
   };
@@ -90,7 +90,7 @@ export const LessonModal: React.FC<IUpdateLessonProps> = ({ updateLesson }: any)
       </Col>
       <Col span={3} offset={3}>
         <Modal
-          title={t('lessons.lessons')}
+          title={t("lessons.lessons")}
           visible={isModalVisible}
           footer={[
             <Button key='cancel' onClick={() => setIsModalVisible(false)}>
@@ -103,7 +103,7 @@ export const LessonModal: React.FC<IUpdateLessonProps> = ({ updateLesson }: any)
         >
           <Select
             mode='multiple'
-            style={{ width: '100%' }}
+            style={{ width: "100%" }}
             placeholder='Please select'
             onChange={(e) => handleChange(e)}
             options={options}

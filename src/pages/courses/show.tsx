@@ -1,9 +1,9 @@
-import { useShow, useTranslate } from '@pankod/refine-core';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Container } from './show/container';
-import { Col, Row, Show } from '@pankod/refine-antd';
-import { ICourse } from 'interfaces';
+import { useShow, useTranslate } from "@pankod/refine-core";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { Container } from "./show/container";
+import { Col, Row, Show } from "@pankod/refine-antd";
+import { ICourse } from "interfaces";
 
 export const CourseShow: React.FC = () => {
   const t = useTranslate();

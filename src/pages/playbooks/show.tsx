@@ -6,7 +6,7 @@ import {
   HttpError,
   useList,
   useMany,
-} from '@pankod/refine-core';
+} from "@pankod/refine-core";
 
 import {
   Card,
@@ -21,9 +21,9 @@ import {
   Show,
   Title,
   Tag,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
-import { IRole, IPlayBook } from 'interfaces';
+import { IRole, IPlayBook } from "interfaces";
 
 const { useBreakpoint } = Grid;
 
@@ -47,7 +47,7 @@ export const PlayBookShow: React.FC<IResourceComponentsProps> = () => {
       </Text>
 
       <Title level={5}>Process Role</Title>
-      <Text>{playbook?.roles.map((role) => role.name).join(', ')}</Text>
+      <Text>{playbook?.roles.map((role) => role.name).join(", ")}</Text>
     </Show>
   );
 };

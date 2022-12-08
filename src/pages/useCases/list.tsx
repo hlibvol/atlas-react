@@ -1,4 +1,4 @@
-import { useTranslate, IResourceComponentsProps } from '@pankod/refine-core';
+import { useTranslate, IResourceComponentsProps } from "@pankod/refine-core";
 
 import {
   List,
@@ -10,11 +10,11 @@ import {
   EditButton,
   Space,
   DeleteButton,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
 const { FormOutlined } = Icons;
 
-import { IUseCase } from 'interfaces';
+import { IUseCase } from "interfaces";
 
 export const UseCaseList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable<IUseCase>();
@@ -24,10 +24,10 @@ export const UseCaseList: React.FC<IResourceComponentsProps> = () => {
     <>
       <List>
         <Table {...tableProps} rowKey='id'>
-          <Table.Column dataIndex='name' title={t('use-cases.fields.title')} />
+          <Table.Column dataIndex='name' title={t("use-cases.fields.title")} />
           <Table.Column
-            dataIndex={'roles'}
-            title={t('use-cases.fields.use-case-role')}
+            dataIndex={"roles"}
+            title={t("use-cases.fields.use-case-role")}
             render={(value) => {
               return value.map((item: any) => {
                 return <TagField color='blue' value={item.name} />;
@@ -35,8 +35,8 @@ export const UseCaseList: React.FC<IResourceComponentsProps> = () => {
             }}
           />
           <Table.Column
-            dataIndex={'jobs'}
-            title={t('use-cases.fields.use-case-job')}
+            dataIndex={"jobs"}
+            title={t("use-cases.fields.use-case-job")}
             render={(value) => {
               return value.map((item: any) => {
                 return <TagField color='blue' value={item.name} />;
@@ -44,7 +44,7 @@ export const UseCaseList: React.FC<IResourceComponentsProps> = () => {
             }}
           />
           <Table.Column<IUseCase>
-            title={t('table.actions')}
+            title={t("table.actions")}
             dataIndex='actions'
             render={(_, record) => (
               <Space>

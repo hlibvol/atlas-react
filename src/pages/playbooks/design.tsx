@@ -1,4 +1,4 @@
-import { IResourceComponentsProps, useShow, useTranslate } from '@pankod/refine-core';
+import { IResourceComponentsProps, useShow, useTranslate } from "@pankod/refine-core";
 
 import {
   Edit,
@@ -11,12 +11,12 @@ import {
   Button,
   SaveButton,
   Show,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
 const { Text } = Typography;
 
-import { IPlayBook } from 'interfaces';
-import { Editor } from 'components/designer/editor';
+import { IPlayBook } from "interfaces";
+import { Editor } from "components/designer/editor";
 
 export const PlayBookDesign: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -28,7 +28,7 @@ export const PlayBookDesign: React.FC<IResourceComponentsProps> = () => {
     <Show title={playbook?.name} headerButtons={() => <></>}>
       <Row gutter={20} wrap>
         <Col xs={24} lg={24}>
-          <Card style={{ height: '100%' }}>
+          <Card style={{ height: "100%" }}>
             {source_id ? <Editor source='playbooks' source_id={source_id} /> : null}
           </Card>
         </Col>

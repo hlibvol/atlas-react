@@ -1,4 +1,4 @@
-import { Icon } from '@pankod/refine-antd';
+import { Icon } from "@pankod/refine-antd";
 
 const PizzaIconSVG: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg

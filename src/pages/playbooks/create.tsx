@@ -1,4 +1,4 @@
-import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
+import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 
 import {
   Create,
@@ -10,22 +10,22 @@ import {
   Typography,
   Select,
   useSelect,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
-import InputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
 
 const { Text } = Typography;
 
-import { IPlayBook, IRole } from 'interfaces';
+import { IPlayBook, IRole } from "interfaces";
 
 export const PlayBookCreate: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { formProps, saveButtonProps, queryResult } = useForm<IPlayBook>();
 
   const { selectProps: roleSelectProps } = useSelect<IRole>({
-    resource: 'roles',
-    optionLabel: 'name',
-    optionValue: 'id',
+    resource: "roles",
+    optionLabel: "name",
+    optionValue: "id",
   });
 
   return (
@@ -40,7 +40,7 @@ export const PlayBookCreate: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={20} wrap>
           <Col xs={24} lg={12}>
             <Form.Item
-              label={t('playbooks.fields.title')}
+              label={t("playbooks.fields.title")}
               name='name'
               rules={[
                 {
@@ -51,10 +51,10 @@ export const PlayBookCreate: React.FC<IResourceComponentsProps> = () => {
               <Input placeholder='Enter Name' />
             </Form.Item>
 
-            <Form.Item label={t('playbooks.fields.process-role')} name='role_ids'>
+            <Form.Item label={t("playbooks.fields.process-role")} name='role_ids'>
               <Select {...roleSelectProps} mode='multiple' placeholder='Select Process Role' />
             </Form.Item>
-            <Form.Item label={t('playbooks.fields.description')} name='description'>
+            <Form.Item label={t("playbooks.fields.description")} name='description'>
               <Input.TextArea placeholder='Enter Description' />
             </Form.Item>
           </Col>

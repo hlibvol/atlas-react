@@ -4,13 +4,13 @@ function getConfig() {
   if (isLocal) {
     return {
       development: true,
-      apiEndpoint: 'http://integration.atlasbeacon.com:8000/api',
+      apiEndpoint: "http://integration.atlasbeacon.com:8000/api",
       // apiEndpoint: 'http://localhost:8000/api',
     };
   } else {
     return {
       development: false,
-      apiEndpoint: '/api',
+      apiEndpoint: "/api",
     };
   }
 }

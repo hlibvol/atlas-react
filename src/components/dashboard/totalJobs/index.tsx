@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react';
-import { useApiUrl, useCustom, useTranslate } from '@pankod/refine-core';
-import { Typography, DatePicker, NumberField } from '@pankod/refine-antd';
+import { useMemo, useState } from "react";
+import { useApiUrl, useCustom, useTranslate } from "@pankod/refine-core";
+import { Typography, DatePicker, NumberField } from "@pankod/refine-antd";
 
-import { IJob } from 'interfaces';
-import './style.less';
+import { IJob } from "interfaces";
+import "./style.less";
 
 export const TotalJobs: React.FC = () => {
   const t = useTranslate();
@@ -16,13 +16,13 @@ export const TotalJobs: React.FC = () => {
     trend: number;
   }>({
     url,
-    method: 'get',
+    method: "get",
   });
 
   return (
     <div className='daily-revenue-wrapper'>
       <div className='title-area'>
-        <Typography.Title level={3}>{t('dashboard.totalJobs.title')}</Typography.Title>
+        <Typography.Title level={3}>{t("dashboard.totalJobs.title")}</Typography.Title>
         <div className='title-area__number'>
           <Typography.Text strong>{data?.data.total ?? 0} </Typography.Text>
         </div>

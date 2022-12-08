@@ -1,9 +1,9 @@
-import { IResourceComponentsProps, useShow, useGetIdentity } from '@pankod/refine-core';
+import { IResourceComponentsProps, useShow, useGetIdentity } from "@pankod/refine-core";
 
-import { Typography, TagField, Show, UrlField, Tag } from '@pankod/refine-antd';
-import { PlayCircleOutlined, AntDesignOutlined } from '@ant-design/icons';
+import { Typography, TagField, Show, UrlField, Tag } from "@pankod/refine-antd";
+import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
 
-import { IJob } from 'interfaces';
+import { IJob } from "interfaces";
 
 export const JobShow: React.FC<IResourceComponentsProps> = () => {
   const { queryResult: jobQueryResult } = useShow<IJob>();

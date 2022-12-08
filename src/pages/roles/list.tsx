@@ -3,7 +3,7 @@ import {
   IResourceComponentsProps,
   useNavigation,
   useShow,
-} from '@pankod/refine-core';
+} from "@pankod/refine-core";
 
 import {
   List,
@@ -14,11 +14,11 @@ import {
   DeleteButton,
   EditButton,
   Space,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
 const { FormOutlined } = Icons;
 
-import { IRole } from 'interfaces';
+import { IRole } from "interfaces";
 
 export const RoleList: React.FC<IResourceComponentsProps> = () => {
   const { tableProps } = useTable<IRole>();
@@ -36,9 +36,9 @@ export const RoleList: React.FC<IResourceComponentsProps> = () => {
     <>
       <List>
         <Table {...tableProps} rowKey='id'>
-          <Table.Column dataIndex='name' title={t('roles.fields.title')} />
+          <Table.Column dataIndex='name' title={t("roles.fields.title")} />
           <Table.Column<IRole>
-            title={t('table.actions')}
+            title={t("table.actions")}
             dataIndex='actions'
             render={(_, record) => (
               <Space>

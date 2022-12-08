@@ -19,7 +19,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "spaced-comment": "error",
-    "quotes": ["error", "single"],
+    "quotes": ["error", "double"],
     "no-duplicate-imports": "error",
     "react/jsx-key": "off"
   },

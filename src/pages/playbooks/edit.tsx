@@ -1,4 +1,4 @@
-import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
+import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 
 import {
   Edit,
@@ -10,20 +10,20 @@ import {
   Typography,
   useSelect,
   Select,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
 const { Text } = Typography;
 
-import { IPlayBook, IRole } from 'interfaces';
+import { IPlayBook, IRole } from "interfaces";
 
 export const PlayBookEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { formProps, saveButtonProps, queryResult } = useForm<IPlayBook>();
 
   const { selectProps: roleSelectProps } = useSelect<IRole>({
-    resource: 'roles',
-    optionLabel: 'name',
-    optionValue: 'id',
+    resource: "roles",
+    optionLabel: "name",
+    optionValue: "id",
   });
 
   return (
@@ -39,7 +39,7 @@ export const PlayBookEdit: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={20} wrap>
           <Col xs={24} lg={12}>
             <Form.Item
-              label={t('playbooks.fields.title')}
+              label={t("playbooks.fields.title")}
               name='name'
               rules={[
                 {
@@ -49,10 +49,10 @@ export const PlayBookEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Input />
             </Form.Item>
-            <Form.Item label={t('playbooks.fields.process-role')} name='role_ids'>
+            <Form.Item label={t("playbooks.fields.process-role")} name='role_ids'>
               <Select {...roleSelectProps} mode='multiple' />
             </Form.Item>
-            <Form.Item label={t('playbooks.fields.description')} name='description'>
+            <Form.Item label={t("playbooks.fields.description")} name='description'>
               <Input.TextArea />
             </Form.Item>
           </Col>

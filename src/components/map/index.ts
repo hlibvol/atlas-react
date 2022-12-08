@@ -1,1 +1,1 @@
-export { MapMarker } from './marker';
+export { MapMarker } from "./marker";

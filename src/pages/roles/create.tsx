@@ -1,4 +1,4 @@
-import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
+import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 
 import {
   Create,
@@ -12,13 +12,13 @@ import {
   Space,
   Radio,
   InputProps,
-} from '@pankod/refine-antd';
+} from "@pankod/refine-antd";
 
-import InputMask from 'react-input-mask';
+import InputMask from "react-input-mask";
 
 const { Text } = Typography;
 
-import { IRole } from 'interfaces';
+import { IRole } from "interfaces";
 
 export const RoleCreate: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -36,7 +36,7 @@ export const RoleCreate: React.FC<IResourceComponentsProps> = () => {
         <Row gutter={[64, 0]} wrap>
           <Col xs={24} lg={8}>
             <Form.Item
-              label={t('roles.fields.title')}
+              label={t("roles.fields.title")}
               name='name'
               rules={[
                 {
