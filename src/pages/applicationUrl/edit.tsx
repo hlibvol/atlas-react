@@ -1,14 +1,6 @@
 import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
 
-import {
-  Edit,
-  Form,
-  Input,
-  useForm,
-  Row,
-  Col,
-  Typography,
-} from '@pankod/refine-antd';
+import { Edit, Form, Input, useForm, Row, Col, Typography } from '@pankod/refine-antd';
 
 const { Text } = Typography;
 
@@ -22,7 +14,7 @@ export const ApplicationURLEdit: React.FC<IResourceComponentsProps> = () => {
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
           ...formProps.initialValues,
@@ -32,7 +24,7 @@ export const ApplicationURLEdit: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={8}>
             <Form.Item
               label={t('application-urls.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
@@ -43,7 +35,7 @@ export const ApplicationURLEdit: React.FC<IResourceComponentsProps> = () => {
             </Form.Item>
             <Form.Item
               label={t('application-urls.fields.url')}
-              name="url"
+              name='url'
               rules={[
                 {
                   required: true,

@@ -98,9 +98,7 @@ export const Container: React.FC = memo(function Container() {
 
   const removeItemOnClick = (id: any) => {
     const itemsid = parseInt(id);
-    const removedItemData = courseItems.filter(
-      (item: any) => item.id !== itemsid
-    );
+    const removedItemData = courseItems.filter((item: any) => item.id !== itemsid);
     message.success('Item Removed');
     updateCourse(removedItemData, message);
   };
@@ -124,8 +122,8 @@ export const Container: React.FC = memo(function Container() {
       <Row>
         <Col span={11} xs={6} lg={18} style={{ marginTop: 10 }}>
           <Input
-            placeholder="Add new Lesson or Quiz..."
-            name="name"
+            placeholder='Add new Lesson or Quiz...'
+            name='name'
             value={name || ''}
             onChange={(e) => {
               handledOnchangeLesson(e);
@@ -136,7 +134,7 @@ export const Container: React.FC = memo(function Container() {
           />
         </Col>
         <Col span={10} offset={13}>
-          <Text type="secondary">Shift + Enter to add as a section</Text>
+          <Text type='secondary'>Shift + Enter to add as a section</Text>
         </Col>
       </Row>
     </div>

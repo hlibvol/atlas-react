@@ -38,11 +38,7 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
   const { show, edit } = useNavigation();
   const t = useTranslate();
 
-  const { tableProps, searchFormProps } = useTable<
-    IUser,
-    HttpError,
-    IUserFilterVariables
-  >({
+  const { tableProps, searchFormProps } = useTable<IUser, HttpError, IUserFilterVariables>({
     initialSorter: [
       {
         field: 'id',
@@ -89,22 +85,22 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
       </Col>
       <Col xl={18} xs={24}>
         <List>
-          <Table {...tableProps} rowKey="id">
+          <Table {...tableProps} rowKey='id'>
             <Table.Column
-              align="center"
-              key="avatar"
+              align='center'
+              key='avatar'
               dataIndex={['avatar']}
               title={t('users.fields.avatar.label')}
-              render={(value) => <Avatar src="user_default_img.png" />}
+              render={(value) => <Avatar src='user_default_img.png' />}
             />
             <Table.Column
-              key="first_name"
-              dataIndex="first_name"
+              key='first_name'
+              dataIndex='first_name'
               title={t('users.fields.first_name')}
             />
             <Table.Column
-              key="last_name"
-              dataIndex="last_name"
+              key='last_name'
+              dataIndex='last_name'
               title={t('users.fields.last_name')}
             />
             <Table.Column
@@ -112,24 +108,20 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
               title={t('users.fields.role')}
               render={(value) => {
                 if (isLoading) {
-                  return <TextField value="Loading..." />;
+                  return <TextField value='Loading...' />;
                 }
                 return (
                   <TagField
-                    color="green"
+                    color='green'
                     value={roles?.data.find((item) => item.id === value)?.name}
                   />
                 );
               }}
             />
+            <Table.Column key='email' dataIndex='email' title={t('users.fields.email')} />
             <Table.Column
-              key="email"
-              dataIndex="email"
-              title={t('users.fields.email')}
-            />
-            <Table.Column
-              key="is_active"
-              dataIndex="is_active"
+              key='is_active'
+              dataIndex='is_active'
               title={t('users.fields.is_active.label')}
               render={(value) => <BooleanField value={value} />}
             />
@@ -137,13 +129,9 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
               title={t('table.actions')}
               render={(_, record) => (
                 <Space>
-                  <EditButton hideText size="small" recordItemId={record.id} />
-                  <ShowButton hideText size="small" recordItemId={record.id} />
-                  <DeleteButton
-                    hideText
-                    size="small"
-                    recordItemId={record.id}
-                  />
+                  <EditButton hideText size='small' recordItemId={record.id} />
+                  <ShowButton hideText size='small' recordItemId={record.id} />
+                  <DeleteButton hideText size='small' recordItemId={record.id} />
                 </Space>
               )}
             />
@@ -158,10 +146,10 @@ const Filter: React.FC<{ formProps: FormProps }> = (props) => {
   const t = useTranslate();
 
   return (
-    <Form layout="vertical" {...props.formProps}>
-      <Row gutter={[10, 0]} align="bottom">
+    <Form layout='vertical' {...props.formProps}>
+      <Row gutter={[10, 0]} align='bottom'>
         <Col xs={24} xl={24} md={12}>
-          <Form.Item label={t('users.filter.search.label')} name="q">
+          <Form.Item label={t('users.filter.search.label')} name='q'>
             <Input
               placeholder={t('users.filter.search.placeholder')}
               prefix={<Icons.SearchOutlined />}
@@ -169,7 +157,7 @@ const Filter: React.FC<{ formProps: FormProps }> = (props) => {
           </Form.Item>
         </Col>
         <Col xs={24} xl={24} md={8}>
-          <Form.Item label={t('users.filter.is_active.label')} name="isActive">
+          <Form.Item label={t('users.filter.is_active.label')} name='isActive'>
             <Select
               allowClear
               placeholder={t('users.filter.is_active.placeholder')}
@@ -188,7 +176,7 @@ const Filter: React.FC<{ formProps: FormProps }> = (props) => {
         </Col>
         <Col xs={24} xl={24} md={8}>
           <Form.Item>
-            <Button style={{ width: '100%' }} htmlType="submit" type="primary">
+            <Button style={{ width: '100%' }} htmlType='submit' type='primary'>
               {t('users.filter.submit')}
             </Button>
           </Form.Item>

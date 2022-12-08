@@ -1,15 +1,6 @@
 import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
 
-import {
-  Edit,
-  Form,
-  Input,
-  useForm,
-  Row,
-  Col,
-  Typography,
-  Checkbox,
-} from '@pankod/refine-antd';
+import { Edit, Form, Input, useForm, Row, Col, Typography, Checkbox } from '@pankod/refine-antd';
 
 const { Text } = Typography;
 
@@ -26,7 +17,7 @@ export const LessonEdit: React.FC<IResourceComponentsProps> = () => {
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
           ...formProps.initialValues,
@@ -36,7 +27,7 @@ export const LessonEdit: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={12}>
             <Form.Item
               label={t('lessons.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
@@ -46,17 +37,14 @@ export const LessonEdit: React.FC<IResourceComponentsProps> = () => {
               <Input />
             </Form.Item>
 
-            <Form.Item
-              label={t('lessons.fields.description')}
-              name="description"
-            >
+            <Form.Item label={t('lessons.fields.description')} name='description'>
               <Input.TextArea />
             </Form.Item>
-            <Form.Item label={t('lessons.fields.duration')} name="duration">
+            <Form.Item label={t('lessons.fields.duration')} name='duration'>
               <Input />
             </Form.Item>
 
-            <Form.Item name="is_template" valuePropName="checked">
+            <Form.Item name='is_template' valuePropName='checked'>
               <Checkbox onChange={onChange}>
                 <Text strong>{t('lessons.fields.is-template.label')}</Text>
               </Checkbox>

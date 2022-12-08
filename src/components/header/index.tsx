@@ -56,7 +56,7 @@ export const Header: React.FC = () => {
   const currentLocale = locale();
 
   const renderTitle = (title: string) => (
-    <div className="header-title">
+    <div className='header-title'>
       <Text style={{ fontSize: '16px' }}>{title}</Text>
       <Link to={`/${title.toLowerCase()}`}>{t('search.more')}</Link>
     </div>
@@ -84,11 +84,7 @@ export const Header: React.FC = () => {
       enabled: false,
       onSuccess: (data) => {
         const orderOptionGroup = data.data.map((item) =>
-          renderItem(
-            `${item.first_name}`,
-            '/images/user-default-img.png',
-            `/users/show/${item.id}`
-          )
+          renderItem(`${item.first_name}`, '/images/user-default-img.png', `/users/show/${item.id}`)
         );
         if (orderOptionGroup.length > 0) {
           setOptions((prevOptions) => [
@@ -112,11 +108,7 @@ export const Header: React.FC = () => {
       enabled: false,
       onSuccess: (data) => {
         const storeOptionGroup = data.data.map((item) =>
-          renderItem(
-            item.name,
-            '/images/default-store-img.png',
-            `/roles/edit/${item.id}`
-          )
+          renderItem(item.name, '/images/default-store-img.png', `/roles/edit/${item.id}`)
         );
         if (storeOptionGroup.length > 0) {
           setOptions((prevOptions) => [
@@ -192,34 +184,24 @@ export const Header: React.FC = () => {
         backgroundColor: '#FFF',
       }}
     >
-      <Row align="middle" justify={screens.sm ? 'space-between' : 'end'}>
+      <Row align='middle' justify={screens.sm ? 'space-between' : 'end'}>
         <Col xs={0} sm={12}>
           <AutoComplete
-            dropdownClassName="header-search"
+            dropdownClassName='header-search'
             style={{ width: '100%', maxWidth: '550px' }}
             options={options}
             filterOption={false}
             onSearch={debounce((value: string) => setValue(value), 300)}
           >
-            <Input
-              size="large"
-              placeholder={t('search.placeholder')}
-              suffix={<SearchOutlined />}
-            />
+            <Input size='large' placeholder={t('search.placeholder')} suffix={<SearchOutlined />} />
           </AutoComplete>
         </Col>
         <Col>
-          <Space size="middle">
+          <Space size='middle'>
             <Dropdown overlay={menu}>
-              <a
-                style={{ color: 'inherit' }}
-                onClick={(e) => e.preventDefault()}
-              >
+              <a style={{ color: 'inherit' }} onClick={(e) => e.preventDefault()}>
                 <Space>
-                  <Avatar
-                    size={16}
-                    src={`/images/flags/${currentLocale}.svg`}
-                  />
+                  <Avatar size={16} src={`/images/flags/${currentLocale}.svg`} />
                   <div
                     style={{
                       display: screens.lg ? 'block' : 'none',
@@ -239,7 +221,7 @@ export const Header: React.FC = () => {
             <Text ellipsis strong>
               {user?.name}
             </Text>
-            <Avatar size="large" src={user?.avatar} alt={user?.name} />
+            <Avatar size='large' src={user?.avatar} alt={user?.name} />
           </Space>
         </Col>
       </Row>

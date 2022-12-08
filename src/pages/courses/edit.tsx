@@ -1,14 +1,6 @@
 import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
 
-import {
-  Edit,
-  Form,
-  Input,
-  useForm,
-  Row,
-  Col,
-  Typography,
-} from '@pankod/refine-antd';
+import { Edit, Form, Input, useForm, Row, Col, Typography } from '@pankod/refine-antd';
 
 const { Text } = Typography;
 
@@ -22,7 +14,7 @@ export const CourseEdit: React.FC<IResourceComponentsProps> = () => {
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
           ...formProps.initialValues,
@@ -32,7 +24,7 @@ export const CourseEdit: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={12}>
             <Form.Item
               label={t('courses.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
@@ -41,10 +33,7 @@ export const CourseEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Input />
             </Form.Item>
-            <Form.Item
-              label={t('courses.fields.description')}
-              name="description"
-            >
+            <Form.Item label={t('courses.fields.description')} name='description'>
               <Input.TextArea />
             </Form.Item>
           </Col>

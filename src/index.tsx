@@ -9,7 +9,7 @@ const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <React.Suspense fallback="loading">
+    <React.Suspense fallback='loading'>
       <App />
     </React.Suspense>
   </React.StrictMode>

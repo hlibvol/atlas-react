@@ -1,12 +1,4 @@
-import {
-  Button,
-  Col,
-  Icons,
-  Row,
-  Space,
-  Tooltip,
-  Typography,
-} from '@pankod/refine-antd';
+import { Button, Col, Icons, Row, Space, Tooltip, Typography } from '@pankod/refine-antd';
 import { memo } from 'react';
 import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd';
 import { ItemTypes } from './ItemTypes';
@@ -71,11 +63,7 @@ export const CourseItem = memo(function CourseItem({
                 &nbsp;&nbsp;{text}
               </Text>
             ) : (
-              <Text
-                strong
-                style={{ margin: 0, fontSize: '12px', marginLeft: '15px' }}
-                key={itemId}
-              >
+              <Text strong style={{ margin: 0, fontSize: '12px', marginLeft: '15px' }} key={itemId}>
                 &nbsp;&nbsp;{text}
               </Text>
             )}
@@ -84,13 +72,13 @@ export const CourseItem = memo(function CourseItem({
             <Space>
               {itemId ? (
                 <>
-                  <Button type="primary" size="small">
+                  <Button type='primary' size='small'>
                     <a href={`../../lessons/show/${itemId}`}>Design</a>
                   </Button>
-                  <Tooltip title="Remove">
+                  <Tooltip title='Remove'>
                     <Button
-                      shape="circle"
-                      size="small"
+                      shape='circle'
+                      size='small'
                       onClick={() => {
                         handleClick(id);
                       }}
@@ -99,10 +87,10 @@ export const CourseItem = memo(function CourseItem({
                   </Tooltip>
                 </>
               ) : (
-                <Tooltip title="Remove">
+                <Tooltip title='Remove'>
                   <Button
-                    shape="circle"
-                    size="small"
+                    shape='circle'
+                    size='small'
                     style={{ marginLeft: '73px' }}
                     onClick={() => {
                       handleClick(id);

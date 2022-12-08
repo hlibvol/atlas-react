@@ -20,8 +20,8 @@ const renderAuthContent = (content: React.ReactNode) => {
         margin: 'auto',
       }}
     >
-      <Link to="/">
-        <h3 className="login-title" style={{ marginBottom: 26 }}>
+      <Link to='/'>
+        <h3 className='login-title' style={{ marginBottom: 26 }}>
           ATLAS BEACON
         </h3>
       </Link>
@@ -34,10 +34,6 @@ export const AuthPage: React.FC<{
   type?: 'login' | 'register' | 'resetPassword' | 'updatePassword';
 }> = ({ type }) => {
   return (
-    <AntdAuthPage
-      type={type}
-      wrapperProps={authWrapperProps}
-      renderContent={renderAuthContent}
-    />
+    <AntdAuthPage type={type} wrapperProps={authWrapperProps} renderContent={renderAuthContent} />
   );
 };

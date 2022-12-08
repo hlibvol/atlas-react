@@ -19,13 +19,13 @@ export const TotalUsers: React.FC = () => {
   const { Text, Title } = Typography;
 
   return (
-    <div className="new-customers-wrapper">
-      <div className="header">
-        <Title level={3} className="header__title">
+    <div className='new-customers-wrapper'>
+      <div className='header'>
+        <Title level={3} className='header__title'>
           {t('dashboard.users.title')}
         </Title>
 
-        <div className="header__numbers">
+        <div className='header__numbers'>
           <Text strong>{data?.data.total ?? 0}</Text>
         </div>
       </div>

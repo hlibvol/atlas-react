@@ -76,9 +76,7 @@ export const authProvider = (): AuthProvider => {
       const decodedToken: any = decodeJwt(token);
       return Promise.resolve({
         ...decodedToken.user,
-        name: `${decodedToken?.user?.first_name || ''} ${
-          decodedToken?.user?.last_name || ''
-        }`,
+        name: `${decodedToken?.user?.first_name || ''} ${decodedToken?.user?.last_name || ''}`,
         avatar: 'https://i.pravatar.cc/150',
       });
     },

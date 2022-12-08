@@ -25,12 +25,7 @@ export const Editor: React.FC<IfirstChildProps> = ({ source, source_id }) => {
     const editor = grapesjs.init({
       container: '#editor',
       width: 'auto',
-      plugins: [
-        gjsPresetWebpage,
-        gjsBlockBasic,
-        'gjs-blocks-flexbox',
-        grapesjsPluginForms,
-      ],
+      plugins: [gjsPresetWebpage, gjsBlockBasic, 'gjs-blocks-flexbox', grapesjsPluginForms],
       pluginsOpts: {
         gjsPresetWebpage: {},
         gjsBlockBasic,
@@ -48,15 +43,13 @@ export const Editor: React.FC<IfirstChildProps> = ({ source, source_id }) => {
             urlLoad: designEndpoint,
             urlStore: designEndpoint,
 
-            fetchOptions: (opts: any) =>
-              opts.method === 'POST' ? { method: 'PUT' } : {},
+            fetchOptions: (opts: any) => (opts.method === 'POST' ? { method: 'PUT' } : {}),
 
             onStore: (data) => ({
               id: source_id,
               page_content: JSON.stringify(data),
             }),
-            onLoad: (result) =>
-              result.page_content ? JSON.parse(result.page_content) : {},
+            onLoad: (result) => (result.page_content ? JSON.parse(result.page_content) : {}),
           },
         },
       },
@@ -66,8 +59,8 @@ export const Editor: React.FC<IfirstChildProps> = ({ source, source_id }) => {
   }, []);
   return (
     <div>
-      <div className="main-content">
-        <div id="editor"></div>
+      <div className='main-content'>
+        <div id='editor'></div>
       </div>
     </div>
   );

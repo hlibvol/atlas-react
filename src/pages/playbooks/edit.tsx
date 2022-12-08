@@ -30,7 +30,7 @@ export const PlayBookEdit: React.FC<IResourceComponentsProps> = () => {
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
           ...formProps.initialValues,
@@ -40,7 +40,7 @@ export const PlayBookEdit: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={12}>
             <Form.Item
               label={t('playbooks.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
@@ -49,16 +49,10 @@ export const PlayBookEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Input />
             </Form.Item>
-            <Form.Item
-              label={t('playbooks.fields.process-role')}
-              name="role_ids"
-            >
-              <Select {...roleSelectProps} mode="multiple" />
+            <Form.Item label={t('playbooks.fields.process-role')} name='role_ids'>
+              <Select {...roleSelectProps} mode='multiple' />
             </Form.Item>
-            <Form.Item
-              label={t('playbooks.fields.description')}
-              name="description"
-            >
+            <Form.Item label={t('playbooks.fields.description')} name='description'>
               <Input.TextArea />
             </Form.Item>
           </Col>

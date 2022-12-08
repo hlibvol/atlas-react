@@ -1,8 +1,4 @@
-import {
-  IResourceComponentsProps,
-  useShow,
-  useTranslate,
-} from '@pankod/refine-core';
+import { IResourceComponentsProps, useShow, useTranslate } from '@pankod/refine-core';
 
 import { Row, Col, Typography, Card, Show } from '@pankod/refine-antd';
 
@@ -22,9 +18,7 @@ export const LessonDesign: React.FC<IResourceComponentsProps> = () => {
       <Row gutter={20} wrap>
         <Col xs={24} lg={24}>
           <Card style={{ height: '100%' }}>
-            {source_id ? (
-              <Editor source="lessons" source_id={source_id} />
-            ) : null}
+            {source_id ? <Editor source='lessons' source_id={source_id} /> : null}
           </Card>
         </Col>
       </Row>

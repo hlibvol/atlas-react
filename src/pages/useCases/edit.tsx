@@ -24,7 +24,7 @@ export const UseCaseEdit: React.FC<IResourceComponentsProps> = () => {
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
           ...formProps.initialValues,
@@ -34,7 +34,7 @@ export const UseCaseEdit: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={12}>
             <Form.Item
               label={t('use-cases.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
@@ -44,10 +44,7 @@ export const UseCaseEdit: React.FC<IResourceComponentsProps> = () => {
               <Input />
             </Form.Item>
 
-            <Form.Item
-              label={t('use-cases.fields.description')}
-              name="description"
-            >
+            <Form.Item label={t('use-cases.fields.description')} name='description'>
               <Input.TextArea />
             </Form.Item>
           </Col>

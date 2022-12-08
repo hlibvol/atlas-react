@@ -23,13 +23,10 @@ export const UseCaseCreate: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, queryResult } = useForm<IUseCase>();
 
   return (
-    <Create
-      isLoading={queryResult?.isFetching}
-      saveButtonProps={saveButtonProps}
-    >
+    <Create isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
         }}
@@ -38,21 +35,18 @@ export const UseCaseCreate: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={12}>
             <Form.Item
               label={t('use-cases.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
-              <Input placeholder="Enter Name" />
+              <Input placeholder='Enter Name' />
             </Form.Item>
 
-            <Form.Item
-              label={t('use-cases.fields.description')}
-              name="description"
-            >
-              <Input.TextArea placeholder="Enter Description" />
+            <Form.Item label={t('use-cases.fields.description')} name='description'>
+              <Input.TextArea placeholder='Enter Description' />
             </Form.Item>
           </Col>
         </Row>

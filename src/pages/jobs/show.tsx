@@ -1,8 +1,4 @@
-import {
-  IResourceComponentsProps,
-  useShow,
-  useGetIdentity,
-} from '@pankod/refine-core';
+import { IResourceComponentsProps, useShow, useGetIdentity } from '@pankod/refine-core';
 
 import { Typography, TagField, Show, UrlField, Tag } from '@pankod/refine-antd';
 import { PlayCircleOutlined, AntDesignOutlined } from '@ant-design/icons';
@@ -34,19 +30,15 @@ export const JobShow: React.FC<IResourceComponentsProps> = () => {
           <Title level={5}>Process Role</Title>
           <Text>
             {job?.roles.map((item, idx) => {
-              return (
-                <TagField key={idx} color="blue" value={item.name}></TagField>
-              );
+              return <TagField key={idx} color='blue' value={item.name}></TagField>;
             })}
           </Text>
           <Title level={5}>More options</Title>
           <Text>
             <Tag>
               <UrlField
-                target="_blank"
-                value={`ab:job/executor/${user?.id}/${job?.id}/${(
-                  Math.random() + 1
-                )
+                target='_blank'
+                value={`ab:job/executor/${user?.id}/${job?.id}/${(Math.random() + 1)
                   .toString(36)
                   .substring(2)}`}
               >
@@ -57,10 +49,8 @@ export const JobShow: React.FC<IResourceComponentsProps> = () => {
             {user.is_designer ? (
               <Tag>
                 <UrlField
-                  target="_blank"
-                  value={`ab:job/designer/${user?.id}/${job?.id}/${(
-                    Math.random() + 1
-                  )
+                  target='_blank'
+                  value={`ab:job/designer/${user?.id}/${job?.id}/${(Math.random() + 1)
                     .toString(36)
                     .substring(2)}`}
                 >

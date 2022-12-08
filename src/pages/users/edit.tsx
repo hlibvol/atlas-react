@@ -1,8 +1,4 @@
-import {
-  IResourceComponentsProps,
-  useTranslate,
-  useApiUrl,
-} from '@pankod/refine-core';
+import { IResourceComponentsProps, useTranslate, useApiUrl } from '@pankod/refine-core';
 
 import {
   Form,
@@ -30,14 +26,8 @@ import { IRole, IUser } from 'interfaces';
 
 export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const {
-    current,
-    gotoStep,
-    stepsProps,
-    formProps,
-    saveButtonProps,
-    queryResult,
-  } = useStepsForm<IUser>();
+  const { current, gotoStep, stepsProps, formProps, saveButtonProps, queryResult } =
+    useStepsForm<IUser>();
   const userData = queryResult?.data?.data;
   // console.log("data", userData);
   const apiUrl = useApiUrl();
@@ -55,15 +45,15 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
         <Col xs={24} lg={8}>
           <Form.Item>
             <Form.Item
-              name="avatar"
-              valuePropName="fileList"
+              name='avatar'
+              valuePropName='fileList'
               getValueFromEvent={getValueFromEvent}
               noStyle
             >
               <Upload.Dragger
-                name="file"
+                name='file'
                 action={`${apiUrl}/media/upload`}
-                listType="picture"
+                listType='picture'
                 maxCount={1}
                 multiple
                 style={{
@@ -72,15 +62,15 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
                   background: 'none',
                 }}
               >
-                <Space direction="vertical" size={2}>
+                <Space direction='vertical' size={2}>
                   <Avatar
                     style={{
                       width: '100%',
                       height: '100%',
                       maxWidth: '200px',
                     }}
-                    src="/images/user-default-img.png"
-                    alt="Store Location"
+                    src='/images/user-default-img.png'
+                    alt='Store Location'
                   />
                   <Text
                     style={{
@@ -91,9 +81,7 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
                   >
                     {t('couriers.fields.images.description')}
                   </Text>
-                  <Text style={{ fontSize: '12px' }}>
-                    {t('couriers.fields.images.validation')}
-                  </Text>
+                  <Text style={{ fontSize: '12px' }}>{t('couriers.fields.images.validation')}</Text>
                 </Space>
               </Upload.Dragger>
             </Form.Item>
@@ -102,17 +90,17 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
         <Col xs={24} lg={16}>
           <Row gutter={10}>
             <Col xs={24} lg={12}>
-              <Form.Item label={t('users.fields.first_name')} name="first_name">
+              <Form.Item label={t('users.fields.first_name')} name='first_name'>
                 <Input />
               </Form.Item>
-              <Form.Item label={t('users.fields.last_name')} name="last_name">
+              <Form.Item label={t('users.fields.last_name')} name='last_name'>
                 <Input />
               </Form.Item>
             </Col>
             <Col xs={24} lg={12}>
               <Form.Item
                 label={t('users.fields.email')}
-                name="email"
+                name='email'
                 rules={[
                   {
                     required: true,
@@ -124,7 +112,7 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
               </Form.Item>
               <Form.Item
                 label={t('users.fields.role')}
-                name="role_id"
+                name='role_id'
                 rules={[
                   {
                     required: true,
@@ -138,11 +126,11 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
         </Col>
       </Row>
     </>,
-    <Row key="relations" gutter={20}>
+    <Row key='relations' gutter={20}>
       <Col xs={12} lg={8}>
         <Form.Item
           label={t('users.fields.is_superuser.label')}
-          name="is_superuser"
+          name='is_superuser'
           rules={[
             {
               required: true,
@@ -166,7 +154,7 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
       <Col xs={12} lg={8}>
         <Form.Item
           label={t('users.fields.is_designer.label')}
-          name="is_designer"
+          name='is_designer'
           rules={[
             {
               required: true,
@@ -188,7 +176,7 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
         </Form.Item>
       </Col>
       <Col xs={12} lg={8}>
-        <Form.Item label={t('users.addresses.address')} name="address">
+        <Form.Item label={t('users.addresses.address')} name='address'>
           <Input.TextArea />
         </Form.Item>
       </Col>
@@ -233,7 +221,7 @@ export const UsersEdit: React.FC<IResourceComponentsProps> = () => {
         <Form
           {...formProps}
           style={{ marginTop: 30 }}
-          layout="vertical"
+          layout='vertical'
           initialValues={{
             isActive: true,
             ...formProps.initialValues,

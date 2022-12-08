@@ -23,14 +23,14 @@ export const UseCaseList: React.FC<IResourceComponentsProps> = () => {
   return (
     <>
       <List>
-        <Table {...tableProps} rowKey="id">
-          <Table.Column dataIndex="name" title={t('use-cases.fields.title')} />
+        <Table {...tableProps} rowKey='id'>
+          <Table.Column dataIndex='name' title={t('use-cases.fields.title')} />
           <Table.Column
             dataIndex={'roles'}
             title={t('use-cases.fields.use-case-role')}
             render={(value) => {
               return value.map((item: any) => {
-                return <TagField color="blue" value={item.name} />;
+                return <TagField color='blue' value={item.name} />;
               });
             }}
           />
@@ -39,18 +39,18 @@ export const UseCaseList: React.FC<IResourceComponentsProps> = () => {
             title={t('use-cases.fields.use-case-job')}
             render={(value) => {
               return value.map((item: any) => {
-                return <TagField color="blue" value={item.name} />;
+                return <TagField color='blue' value={item.name} />;
               });
             }}
           />
           <Table.Column<IUseCase>
             title={t('table.actions')}
-            dataIndex="actions"
+            dataIndex='actions'
             render={(_, record) => (
               <Space>
-                <EditButton hideText size="small" recordItemId={record.id} />
+                <EditButton hideText size='small' recordItemId={record.id} />
                 {/* <ShowButton hideText size="small" recordItemId={record.id} /> */}
-                <DeleteButton hideText size="small" recordItemId={record.id} />
+                <DeleteButton hideText size='small' recordItemId={record.id} />
               </Space>
             )}
           />

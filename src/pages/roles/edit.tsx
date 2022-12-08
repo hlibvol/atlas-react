@@ -1,14 +1,6 @@
 import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
 
-import {
-  Edit,
-  Form,
-  Input,
-  useForm,
-  Row,
-  Col,
-  Typography,
-} from '@pankod/refine-antd';
+import { Edit, Form, Input, useForm, Row, Col, Typography } from '@pankod/refine-antd';
 
 const { Text } = Typography;
 
@@ -24,7 +16,7 @@ export const RoleEdit: React.FC<IResourceComponentsProps> = () => {
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
           ...formProps.initialValues,
@@ -34,7 +26,7 @@ export const RoleEdit: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={8}>
             <Form.Item
               label={t('roles.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,

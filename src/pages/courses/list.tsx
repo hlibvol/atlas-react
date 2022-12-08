@@ -23,16 +23,16 @@ export const CourseList: React.FC<IResourceComponentsProps> = () => {
   return (
     <>
       <List>
-        <Table {...tableProps} rowKey="id">
-          <Table.Column dataIndex="name" title={t('courses.fields.title')} />
+        <Table {...tableProps} rowKey='id'>
+          <Table.Column dataIndex='name' title={t('courses.fields.title')} />
           <Table.Column<ICourse>
             title={t('table.actions')}
-            dataIndex="actions"
+            dataIndex='actions'
             render={(_, record) => (
               <Space>
-                <EditButton hideText size="small" recordItemId={record.id} />
-                <ShowButton hideText size="small" recordItemId={record.id} />
-                <DeleteButton hideText size="small" recordItemId={record.id} />
+                <EditButton hideText size='small' recordItemId={record.id} />
+                <ShowButton hideText size='small' recordItemId={record.id} />
+                <DeleteButton hideText size='small' recordItemId={record.id} />
               </Space>
             )}
           />

@@ -27,25 +27,10 @@ import {
   ApplicationURLList,
 } from './pages/applicationUrl';
 import { JobCreate, JobList, JobEdit, JobShow } from './pages/jobs';
-import {
-  PlayBookCreate,
-  PlayBookDesign,
-  PlayBookEdit,
-  PlayBookList,
-} from './pages/playbooks';
-import {
-  CourseCreate,
-  CourseEdit,
-  CourseList,
-  CourseShow,
-} from 'pages/courses';
+import { PlayBookCreate, PlayBookDesign, PlayBookEdit, PlayBookList } from './pages/playbooks';
+import { CourseCreate, CourseEdit, CourseList, CourseShow } from 'pages/courses';
 
-import {
-  LessonCreate,
-  LessonDesign,
-  LessonEdit,
-  LessonList,
-} from './pages/lessons';
+import { LessonCreate, LessonDesign, LessonEdit, LessonList } from './pages/lessons';
 import { UseCaseCreate, UseCaseEdit, UseCaseList } from './pages/useCases';
 
 const App: React.FC = () => {
@@ -66,19 +51,19 @@ const App: React.FC = () => {
             routes: [
               {
                 path: '/register',
-                element: <AuthPage type="register" />,
+                element: <AuthPage type='register' />,
               },
               {
                 path: '/reset-password',
-                element: <AuthPage type="resetPassword" />,
+                element: <AuthPage type='resetPassword' />,
               },
               {
                 path: '/update-password',
-                element: <AuthPage type="updatePassword" />,
+                element: <AuthPage type='updatePassword' />,
               },
               {
                 path: '/design-page',
-                element: <AuthPage type="updatePassword" />,
+                element: <AuthPage type='updatePassword' />,
               },
             ],
           }}
@@ -86,7 +71,7 @@ const App: React.FC = () => {
           authProvider={authProvider()}
           i18nProvider={i18nProvider}
           DashboardPage={DashboardPage}
-          LoginPage={() => <AuthPage type="login" />}
+          LoginPage={() => <AuthPage type='login' />}
           Title={Title}
           Header={Header}
           Layout={Layout}

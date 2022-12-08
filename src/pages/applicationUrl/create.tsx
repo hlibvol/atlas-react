@@ -1,14 +1,6 @@
 import { IResourceComponentsProps, useTranslate } from '@pankod/refine-core';
 
-import {
-  Create,
-  Form,
-  Input,
-  useForm,
-  Row,
-  Col,
-  Typography,
-} from '@pankod/refine-antd';
+import { Create, Form, Input, useForm, Row, Col, Typography } from '@pankod/refine-antd';
 
 import InputMask from 'react-input-mask';
 
@@ -21,13 +13,10 @@ export const ApplicationURLCreate: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, queryResult } = useForm<IAppUrl>();
 
   return (
-    <Create
-      isLoading={queryResult?.isFetching}
-      saveButtonProps={saveButtonProps}
-    >
+    <Create isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
         }}
@@ -36,7 +25,7 @@ export const ApplicationURLCreate: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={8}>
             <Form.Item
               label={t('application-urls.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
@@ -47,7 +36,7 @@ export const ApplicationURLCreate: React.FC<IResourceComponentsProps> = () => {
             </Form.Item>
             <Form.Item
               label={t('application-urls.fields.url')}
-              name="url"
+              name='url'
               rules={[
                 {
                   required: true,

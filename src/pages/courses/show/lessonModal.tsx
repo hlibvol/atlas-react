@@ -1,12 +1,4 @@
-import {
-  Button,
-  Col,
-  Icons,
-  message,
-  Modal,
-  Select,
-  Typography,
-} from '@pankod/refine-antd';
+import { Button, Col, Icons, message, Modal, Select, Typography } from '@pankod/refine-antd';
 import { useEffect, useState } from 'react';
 import { useList, useShow, useTranslate, useUpdate } from '@pankod/refine-core';
 import { ICourse, ILesson } from 'interfaces';
@@ -16,17 +8,13 @@ interface IUpdateLessonProps {
   updateLesson: any;
 }
 
-export const LessonModal: React.FC<IUpdateLessonProps> = ({
-  updateLesson,
-}: any) => {
+export const LessonModal: React.FC<IUpdateLessonProps> = ({ updateLesson }: any) => {
   const { mutate } = useUpdate();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { queryResult } = useShow<ICourse>();
   const { data, isLoading } = queryResult;
   const course = data?.data;
-  const [courseItems, setCourseItems] = useState(
-    course?.items || []
-  ) as Array<any>;
+  const [courseItems, setCourseItems] = useState(course?.items || []) as Array<any>;
   const [selectLessons, setSelectLessons] = useState([]);
   const t = useTranslate();
   const showCreateModal = () => {
@@ -93,8 +81,8 @@ export const LessonModal: React.FC<IUpdateLessonProps> = ({
     <>
       <Col span={3} offset={1}>
         <Button
-          shape="circle"
-          size="large"
+          shape='circle'
+          size='large'
           onClick={() => showCreateModal()}
           icon={<Icons.PlusCircleFilled />}
           style={{ marginTop: 5 }}
@@ -105,18 +93,18 @@ export const LessonModal: React.FC<IUpdateLessonProps> = ({
           title={t('lessons.lessons')}
           visible={isModalVisible}
           footer={[
-            <Button key="cancel" onClick={() => setIsModalVisible(false)}>
+            <Button key='cancel' onClick={() => setIsModalVisible(false)}>
               Cancel
             </Button>,
-            <Button type="primary" onClick={handleSubmit}>
+            <Button type='primary' onClick={handleSubmit}>
               Save
             </Button>,
           ]}
         >
           <Select
-            mode="multiple"
+            mode='multiple'
             style={{ width: '100%' }}
-            placeholder="Please select"
+            placeholder='Please select'
             onChange={(e) => handleChange(e)}
             options={options}
           />

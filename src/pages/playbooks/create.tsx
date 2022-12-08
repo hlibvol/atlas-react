@@ -29,13 +29,10 @@ export const PlayBookCreate: React.FC<IResourceComponentsProps> = () => {
   });
 
   return (
-    <Create
-      isLoading={queryResult?.isFetching}
-      saveButtonProps={saveButtonProps}
-    >
+    <Create isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
         }}
@@ -44,31 +41,21 @@ export const PlayBookCreate: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={12}>
             <Form.Item
               label={t('playbooks.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
-              <Input placeholder="Enter Name" />
+              <Input placeholder='Enter Name' />
             </Form.Item>
 
-            <Form.Item
-              label={t('playbooks.fields.process-role')}
-              name="role_ids"
-            >
-              <Select
-                {...roleSelectProps}
-                mode="multiple"
-                placeholder="Select Process Role"
-              />
+            <Form.Item label={t('playbooks.fields.process-role')} name='role_ids'>
+              <Select {...roleSelectProps} mode='multiple' placeholder='Select Process Role' />
             </Form.Item>
-            <Form.Item
-              label={t('playbooks.fields.description')}
-              name="description"
-            >
-              <Input.TextArea placeholder="Enter Description" />
+            <Form.Item label={t('playbooks.fields.description')} name='description'>
+              <Input.TextArea placeholder='Enter Description' />
             </Form.Item>
           </Col>
         </Row>

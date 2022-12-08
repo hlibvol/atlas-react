@@ -25,13 +25,10 @@ export const RoleCreate: React.FC<IResourceComponentsProps> = () => {
   const { formProps, saveButtonProps, queryResult } = useForm<IRole>();
 
   return (
-    <Create
-      isLoading={queryResult?.isFetching}
-      saveButtonProps={saveButtonProps}
-    >
+    <Create isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
         }}
@@ -40,7 +37,7 @@ export const RoleCreate: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={8}>
             <Form.Item
               label={t('roles.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,

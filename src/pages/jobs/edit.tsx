@@ -40,7 +40,7 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
     <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
           ...formProps.initialValues,
@@ -50,7 +50,7 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={12}>
             <Form.Item
               label={t('jobs.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
@@ -59,12 +59,12 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Input />
             </Form.Item>
-            <Form.Item label={t('jobs.fields.discription')} name="description">
+            <Form.Item label={t('jobs.fields.discription')} name='description'>
               <Input.TextArea />
             </Form.Item>
             <Form.Item
               label={t('jobs.fields.application-url-id')}
-              name="application_url_id"
+              name='application_url_id'
               rules={[
                 {
                   required: true,
@@ -73,10 +73,10 @@ export const JobEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Select {...urlSelectProps} />
             </Form.Item>
-            <Form.Item label={t('jobs.fields.process-role')} name="role_ids">
-              <Select {...roleSelectProps} mode="multiple" />
+            <Form.Item label={t('jobs.fields.process-role')} name='role_ids'>
+              <Select {...roleSelectProps} mode='multiple' />
             </Form.Item>
-            <Form.Item name="is_template" valuePropName="checked">
+            <Form.Item name='is_template' valuePropName='checked'>
               <Checkbox onChange={onChange}>
                 <Text strong>{t('jobs.fields.is-template.label')}</Text>{' '}
               </Checkbox>

@@ -39,13 +39,10 @@ export const JobCreate: React.FC<IResourceComponentsProps> = () => {
   const onChange = (e: CheckboxChangeEvent) => {};
 
   return (
-    <Create
-      isLoading={queryResult?.isFetching}
-      saveButtonProps={saveButtonProps}
-    >
+    <Create isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
       <Form
         {...formProps}
-        layout="vertical"
+        layout='vertical'
         initialValues={{
           isActive: true,
         }}
@@ -54,41 +51,34 @@ export const JobCreate: React.FC<IResourceComponentsProps> = () => {
           <Col xs={24} lg={12}>
             <Form.Item
               label={t('jobs.fields.title')}
-              name="name"
+              name='name'
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
-              <Input placeholder="Enter Name" />
+              <Input placeholder='Enter Name' />
             </Form.Item>
-            <Form.Item label={t('jobs.fields.discription')} name="description">
-              <Input.TextArea placeholder="Enter Description" />
+            <Form.Item label={t('jobs.fields.discription')} name='description'>
+              <Input.TextArea placeholder='Enter Description' />
             </Form.Item>
 
             <Form.Item
               label={t('jobs.fields.application-url-id')}
-              name="application_url_id"
+              name='application_url_id'
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
-              <Select
-                {...urlSelectProps}
-                placeholder="Select Application URL"
-              />
+              <Select {...urlSelectProps} placeholder='Select Application URL' />
             </Form.Item>
-            <Form.Item label={t('jobs.fields.process-role')} name="role_ids">
-              <Select
-                {...roleSelectProps}
-                mode="multiple"
-                placeholder="Select Process Role"
-              />
+            <Form.Item label={t('jobs.fields.process-role')} name='role_ids'>
+              <Select {...roleSelectProps} mode='multiple' placeholder='Select Process Role' />
             </Form.Item>
-            <Form.Item name="is_template" valuePropName="checked">
+            <Form.Item name='is_template' valuePropName='checked'>
               <Checkbox onChange={onChange}>
                 <Text strong>{t('jobs.fields.is-template.label')}</Text>{' '}
               </Checkbox>

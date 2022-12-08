@@ -42,23 +42,17 @@ export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
   return (
     <>
       <List>
-        <Table {...tableProps} rowKey="id">
-          <Table.Column
-            dataIndex="name"
-            title={t('application-urls.fields.title')}
-          />
-          <Table.Column
-            dataIndex="url"
-            title={t('application-urls.fields.url')}
-          />
+        <Table {...tableProps} rowKey='id'>
+          <Table.Column dataIndex='name' title={t('application-urls.fields.title')} />
+          <Table.Column dataIndex='url' title={t('application-urls.fields.url')} />
 
           <Table.Column<IAppUrl>
             title={t('table.actions')}
-            dataIndex="actions"
+            dataIndex='actions'
             render={(_, record) => (
               <Space>
-                <EditButton hideText size="small" recordItemId={record.id} />
-                <DeleteButton hideText size="small" recordItemId={record.id} />
+                <EditButton hideText size='small' recordItemId={record.id} />
+                <DeleteButton hideText size='small' recordItemId={record.id} />
               </Space>
             )}
           />
