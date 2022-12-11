@@ -1,55 +1,27 @@
 import { useTranslate, IResourceComponentsProps } from "@pankod/refine-core";
-
-import {
-  List,
-  Table,
-  useTable,
-  Icons,
-  ShowButton,
-  EditButton,
-  Space,
-  DeleteButton,
-  TagField,
-} from "@pankod/refine-antd";
-
-const { FormOutlined } = Icons;
-
+import { List, Table } from "@pankod/refine-antd";
+import { useTableProps, useTableActionProps } from "hooks/table";
+import { Resource } from "services/enums";
 import { ILesson } from "interfaces";
 
 export const LessonList: React.FC<IResourceComponentsProps> = () => {
-  const { tableProps } = useTable<ILesson>();
   const t = useTranslate();
+  const tableProps = useTableProps({ resource: Resource.LESSON });
+  const tableActionProps = useTableActionProps({ hideShow: true });
+  const lessonTemplates = tableProps.dataSource?.filter((item) => item.is_template === true) || [];
 
   return (
-    <>
-      <List>
-        <Table {...tableProps} rowKey='id'>
-          <Table.Column dataIndex='name' title={t("lessons.fields.title")} />
-          <Table.Column
-            key='is_template'
-            dataIndex='is_template'
-            title={t("lessons.fields.is-template.label")}
-            render={(value) =>
-              value ? (
-                <TagField color='green' value={t("lessons.fields.is-template.true")} />
-              ) : (
-                <TagField color='red' value={t("lessons.fields.is-template.false")} />
-              )
-            }
-          />
-          <Table.Column<ILesson>
-            title={t("table.actions")}
-            dataIndex='actions'
-            render={(_, record) => (
-              <Space>
-                <EditButton hideText size='small' recordItemId={record.id} />
-                <ShowButton hideText size='small' recordItemId={record.id} />
-                <DeleteButton hideText size='small' recordItemId={record.id} />
-              </Space>
-            )}
-          />
-        </Table>
-      </List>
-    </>
+    <List breadcrumb={false}>
+      <Table
+        {...{
+          ...tableProps,
+          dataSource: lessonTemplates,
+        }}
+      >
+        <Table.Column dataIndex='name' title={t("lessons.fields.title")} />
+        <Table.Column dataIndex='description' title={t("lessons.fields.description")} />
+        <Table.Column<ILesson> {...tableActionProps} />
+      </Table>
+    </List>
   );
 };

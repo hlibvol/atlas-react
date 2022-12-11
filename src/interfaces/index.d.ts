@@ -1,3 +1,8 @@
+export interface IBaseResource {
+  id: number;
+  name: string;
+}
+
 export interface IUser {
   id: number;
   email: string;
@@ -61,12 +66,20 @@ export interface IPlayBook {
   page_content: string;
 }
 
+export interface ICourseItem {
+  id: number;
+  item_id: number;
+  item_order: number;
+  item_title: string;
+  item_type: string;
+}
+
 export interface ICourse {
   id: number;
   name: string;
   description: string;
   duration: string;
-  items: ILesson[];
+  items: ICourseItem[];
   enroll_required: boolean;
   passing_percentage: number;
 }

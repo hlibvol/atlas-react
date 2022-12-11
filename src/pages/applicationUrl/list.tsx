@@ -1,61 +1,44 @@
-import {
-  useTranslate,
-  IResourceComponentsProps,
-  useNavigation,
-  useShow,
-  useDelete,
-} from "@pankod/refine-core";
+import { useTranslate, IResourceComponentsProps, useList } from "@pankod/refine-core";
+import { List, Table, UrlField } from "@pankod/refine-antd";
 
-import {
-  List,
-  Table,
-  useTable,
-  DateField,
-  Dropdown,
-  BooleanField,
-  Menu,
-  Icons,
-  Avatar,
-  useModal,
-  Space,
-  EditButton,
-  ShowButton,
-  DeleteButton,
-} from "@pankod/refine-antd";
-
-const { FormOutlined } = Icons;
-
-import { IAppUrl } from "interfaces";
+import { IAppUrl, IJob } from "interfaces";
+import { useTableProps, useTableActionProps } from "hooks/table";
+import { Resource } from "services/enums";
+import { ABPopOverList } from "components/popover";
 
 export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
-  const { tableProps } = useTable<IAppUrl>();
-  const { edit } = useNavigation();
-  const { modalProps, show } = useModal();
-
   const t = useTranslate();
+  const tableProps = useTableProps({ resource: Resource.APPLICATION_URL });
+  const tableActionProps = useTableActionProps({ hideShow: true });
+  const { data: jobs } = useList<IJob>({
+    resource: Resource.JOB,
+  });
 
-  const { queryResult, setShowId } = useShow<IAppUrl>();
-
-  const { data: showQueryResult } = queryResult;
-  const record = showQueryResult?.data;
+  const renderAssociatedJobs = (applicationUrlId: number, record: IAppUrl) => {
+    const associatedJobs = jobs
+      ? jobs.data.filter((item) => item.application_url_id === applicationUrlId)
+      : [];
+    return (
+      <ABPopOverList
+        resource={Resource.JOB}
+        records={associatedJobs}
+        title={`Associated jobs for application url: ${record.name}`}
+      />
+    );
+  };
 
   return (
     <>
-      <List>
-        <Table {...tableProps} rowKey='id'>
+      <List breadcrumb={false}>
+        <Table {...tableProps}>
           <Table.Column dataIndex='name' title={t("application-urls.fields.title")} />
-          <Table.Column dataIndex='url' title={t("application-urls.fields.url")} />
-
-          <Table.Column<IAppUrl>
-            title={t("table.actions")}
-            dataIndex='actions'
-            render={(_, record) => (
-              <Space>
-                <EditButton hideText size='small' recordItemId={record.id} />
-                <DeleteButton hideText size='small' recordItemId={record.id} />
-              </Space>
-            )}
+          <Table.Column
+            dataIndex='url'
+            title={t("application-urls.fields.url")}
+            render={(value: string) => <UrlField value={value} />}
           />
+          <Table.Column dataIndex={["id"]} title={"Associate jobs"} render={renderAssociatedJobs} />
+          <Table.Column<IAppUrl> {...tableActionProps} />
         </Table>
       </List>
     </>

@@ -8,9 +8,9 @@
 // https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
 
 // font
-@font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+@font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+  Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+  "Noto Color Emoji";
 
 // base variables
 @border-radius-base: 6px;
@@ -38,51 +38,65 @@
 .ant-menu-inline,
 .ant-menu-vertical,
 .ant-menu-vertical-left {
-    border-right: 0px;
+  border-right: 0px;
 }
 
 .ant-form-item-label > label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .ant-page-header {
-    border-radius: @border-radius-base;
+  border-radius: @border-radius-base;
 }
 
 .header-search .ant-select-item-group,
 .header-search .ant-select-item-option-grouped {
-    box-shadow: 0px -1px 0px #f2f2f2, 0px 1px 0px #f2f2f2;
+  box-shadow: 0px -1px 0px #f2f2f2, 0px 1px 0px #f2f2f2;
 }
 
 .header-search .ant-select-item-option-grouped {
-    padding: 10px;
+  padding: 10px;
 }
 
 .header-search .ant-select-item-group {
-    padding: 16px;
+  padding: 16px;
 }
 
 .header-search .ant-select-item-option-content {
-    white-space: unset;
+  white-space: unset;
 }
 
 #stock-number .ant-input-number-handler-wrap {
-    opacity: 1;
+  opacity: 1;
 }
 
 // TODO: Make the below settings dynamic
 .ant-menu-sub.ant-menu-inline {
-    background-color: @layout-sider-background;
+  background-color: @layout-sider-background;
 }
 
 .ant-menu-inline.ant-menu-root .ant-menu-submenu-title > .ant-menu-title-content {
-    text-transform: @text-transform-capitalize;
+  text-transform: @text-transform-capitalize;
 }
 
 .ant-layout-sider-dark {
-    min-width: 220px !important;
+  min-width: 220px !important;
 }
 
 .ant-menu.ant-menu-sub.ant-menu-vertical {
-    background-color: @layout-sider-background !important; 
+  background-color: @layout-sider-background !important;
+}
+
+/* AB Custom */
+.ant-tag-blue a.ant-typography {
+  color: #096dd9;
+}
+
+/* AB Custom Table */
+.ab-custom-table .ant-table-thead > tr > th {
+  white-space: nowrap;
+}
+.ab-custom-table .ant-table-content {
+  max-height: calc(100vh - 250px);
+  overflow: auto !important;
 }

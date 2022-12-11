@@ -1694,14 +1694,14 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@pankod/refine-antd@^3.43.0":
-  version "3.44.0"
-  resolved "https://registry.npmjs.org/@pankod/refine-antd/-/refine-antd-3.44.0.tgz"
-  integrity sha512-3aQ4DYldODi36A08gh2pNevpaYgeT9Z28KG5kNrULhBif07iig484D0TJa0pbjnr1ti0xEAP6y/UpDf7IFnmpQ==
+"@pankod/refine-antd@^3.66.0":
+  version "3.66.0"
+  resolved "https://registry.yarnpkg.com/@pankod/refine-antd/-/refine-antd-3.66.0.tgz#b5b56e6e72d05a1937d6ce7c9d2eec4ae581445e"
+  integrity sha512-XMgfiPs0IXg7ch4Tv0fAYRzyxf0b2DnT6YVywBQsdm6t6R9OQslTwcOxcWzh0z79Nf8i4r7HNEinC7IzNfX7rw==
   dependencies:
     "@ant-design/icons" "^4.5.0"
-    "@pankod/refine-ui-types" "^0.7.0"
-    "@tanstack/react-query" "^4.0.10"
+    "@pankod/refine-ui-types" "^0.14.0"
+    "@tanstack/react-query" "^4.10.1"
     antd "4.21.7"
     dayjs "^1.10.7"
     react-markdown "^6.0.1"
@@ -1709,13 +1709,13 @@
     sunflower-antd "1.0.0-beta.3"
     tslib "^2.3.1"
 
-"@pankod/refine-core@^3.69.7", "@pankod/refine-core@^3.69.9":
-  version "3.69.9"
-  resolved "https://registry.npmjs.org/@pankod/refine-core/-/refine-core-3.69.9.tgz"
-  integrity sha512-8Pf26ErZBbeHU4C1clQATNleQNfDzNbG9i2Pj+Fl36/7MSklByhGz3mropyc7ZyVeF+FDaPM8j5eqNweofRW4g==
+"@pankod/refine-core@^3.86.2", "@pankod/refine-core@^3.90.4":
+  version "3.90.4"
+  resolved "https://registry.yarnpkg.com/@pankod/refine-core/-/refine-core-3.90.4.tgz#2d6a3dda7d8101cf312c3b1f0406c8af5f49b46e"
+  integrity sha512-6wB0PvVmYSvnSsdZrs2KQ9L/zLH9iTNTQLVS2KEMDo3nKL2zWUb+nLRFFj8uMSxp6ULNijZDAa/jN4yFxDlC4w==
   dependencies:
-    "@tanstack/react-query" "^4.0.10"
-    "@tanstack/react-query-devtools" "^4.0.10"
+    "@tanstack/react-query" "^4.10.1"
+    "@tanstack/react-query-devtools" "^4.10.1"
     export-to-csv-fix-source-map "^0.2.1"
     lodash "^4.17.21"
     lodash-es "^4.17.21"
@@ -1725,10 +1725,10 @@
     tslib "^2.3.1"
     warn-once "^0.1.0"
 
-"@pankod/refine-kbar@0.10.0":
-  version "0.10.0"
-  resolved "https://registry.npmjs.org/@pankod/refine-kbar/-/refine-kbar-0.10.0.tgz"
-  integrity sha512-FHEW9ZPPW7qPF0OsT6RGuphdF/xgDq0bUFbeNe/gPCPbo3vjC8oHE2GQ79cbO/spdELSBzA4BDrPwMbrAPJd5g==
+"@pankod/refine-kbar@^0.10.2":
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/@pankod/refine-kbar/-/refine-kbar-0.10.2.tgz#20478e2bb2b6c53f0fb176303c400b8a7e285522"
+  integrity sha512-P2KsVlN3AAcC2CwAe8GCt+THpogJo4iyMU5uMxU7YRqJYcW6zyXL46yD4Ui4BfnTERHTSfs4mBNoANQBQx6LqA==
   dependencies:
     kbar "^0.1.0-beta.36"
 
@@ -1739,27 +1739,27 @@
   dependencies:
     react-hook-form "^7.30.0"
 
-"@pankod/refine-react-router-v6@^3.33.0":
-  version "3.33.2"
-  resolved "https://registry.npmjs.org/@pankod/refine-react-router-v6/-/refine-react-router-v6-3.33.2.tgz"
-  integrity sha512-SI+d+T7VKHJGAmACJBZ0T7SLrYFiFYU9+TlvWdSWE6yR3BeLyr8BVNQAKfnFHohgQtyyBRmV9h9uJ9Yfj+9+cw==
+"@pankod/refine-react-router-v6@^3.38.0":
+  version "3.38.0"
+  resolved "https://registry.yarnpkg.com/@pankod/refine-react-router-v6/-/refine-react-router-v6-3.38.0.tgz#f988f6e63bd3e4f5489feccb2fd26337c1b1ac75"
+  integrity sha512-xYx1zVBW6UnGYiMO18ak0qnsSFEJvcJXMrxxwCZsu6Oum9sAM66HcI4KAsrEN8bIg29jiXIKKDx85nwSKsMc9Q==
   dependencies:
     react-router-dom "6.3.0"
 
-"@pankod/refine-simple-rest@^3.31.0":
-  version "3.31.0"
-  resolved "https://registry.npmjs.org/@pankod/refine-simple-rest/-/refine-simple-rest-3.31.0.tgz"
-  integrity sha512-P7Ac4iuaFTJR3UjyhmnOvQyqako1yXgyAzIIuCkhtb+jkTg/Aitgp3OViwqte66M4A/lxTkw3DL2RDrPf8bh/A==
+"@pankod/refine-simple-rest@^3.37.4":
+  version "3.37.4"
+  resolved "https://registry.yarnpkg.com/@pankod/refine-simple-rest/-/refine-simple-rest-3.37.4.tgz#e033860ea6578bdc588bdb9ddbb853d5df5b0948"
+  integrity sha512-Ypo/JTQawQ3VIYaANOgSyeLbPwV3urNiChj9uTLiFvhEAcxszX/KRBtGYQOZSTXd/wCP/LYle0kKCQzo2C31tQ==
   dependencies:
     axios "^0.26.1"
     query-string "^7.1.1"
 
-"@pankod/refine-ui-types@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.npmjs.org/@pankod/refine-ui-types/-/refine-ui-types-0.7.0.tgz"
-  integrity sha512-A//VZVqFM5ojsMlqeP/HNRi8O9rbFVehJRh8yztDDqPqBrK4wJZwQoPDyRtE2XehSY/MQ6xQKpHY0mPF8LElHQ==
+"@pankod/refine-ui-types@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@pankod/refine-ui-types/-/refine-ui-types-0.14.0.tgz#fd97458a1bedbc3ac58ebea688cfeff2354cc74d"
+  integrity sha512-ejbohvR+wDZWu16zyABzHGz1L/54y/rWGhxhETGsk9DkcULSohVfSiVdA5zKd6wyUsYSzJYMrgdfKMyGkbysPQ==
   dependencies:
-    "@pankod/refine-core" "^3.69.9"
+    "@pankod/refine-core" "^3.86.2"
     dayjs "^1.10.7"
     tslib "^2.3.1"
 
@@ -1989,32 +1989,33 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
-"@tanstack/match-sorter-utils@^8.1.1":
-  version "8.1.1"
-  resolved "https://registry.npmjs.org/@tanstack/match-sorter-utils/-/match-sorter-utils-8.1.1.tgz"
-  integrity sha512-IdmEekEYxQsoLOR0XQyw3jD1GujBpRRYaGJYQUw1eOT1eUugWxdc7jomh1VQ1EKHcdwDLpLaCz/8y4KraU4T9A==
+"@tanstack/match-sorter-utils@^8.7.0":
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/match-sorter-utils/-/match-sorter-utils-8.7.0.tgz#60b09a6d3d7974d5f86f1318053c1bd5a85fb0be"
+  integrity sha512-OgfIPMHTfuw9JGcXCCoEHWFP/eSP2eyhCYwkrFnWBM3NbUPAgOlFP11DbM7cozDRVB0XbPr1tD4pLAtWKlVUVg==
   dependencies:
     remove-accents "0.4.2"
 
-"@tanstack/query-core@4.3.4":
-  version "4.3.4"
-  resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.3.4.tgz"
-  integrity sha512-NLAe3j5Vk1yYEtoPP5fPGPjRzkZPx67KUM3f14L3InziJZJ0wVecCh7uKfgYkbRKJSeq6PlbND7iuCGdTplN6Q==
+"@tanstack/query-core@4.19.1":
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.19.1.tgz#2e92d9e8a50884eb231c5beb4386e131ebe34306"
+  integrity sha512-Zp0aIose5C8skBzqbVFGk9HJsPtUhRVDVNWIqVzFbGQQgYSeLZMd3Sdb4+EnA5wl1J7X+bre2PJGnQg9x/zHOA==
 
-"@tanstack/react-query-devtools@^4.0.10":
-  version "4.3.5"
-  resolved "https://registry.npmjs.org/@tanstack/react-query-devtools/-/react-query-devtools-4.3.5.tgz"
-  integrity sha512-Jb3HywQmvQDmyixNOzjv8xjksngguG9WjmJlBWjSBCcUFIm3GQGpeJYm62EnJmJ+lHMgDNWDr61UV7Fya8TVTA==
+"@tanstack/react-query-devtools@^4.10.1":
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-4.19.1.tgz#850058df8dba932362838c17f566bd717044449b"
+  integrity sha512-U63A+ly9JLPJj7ryR9omdXT3n+gS7jlExrHty4klsd/6xdUhC38CKZyZ0Gi3vctaVYRGTU8/vI+uKzBYdFqLaA==
   dependencies:
-    "@tanstack/match-sorter-utils" "^8.1.1"
+    "@tanstack/match-sorter-utils" "^8.7.0"
+    superjson "^1.10.0"
     use-sync-external-store "^1.2.0"
 
-"@tanstack/react-query@^4.0.10":
-  version "4.3.4"
-  resolved "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.3.4.tgz"
-  integrity sha512-IiAo+B8bxphEpO7xwLQaCptd2rY4Ef3pW1q9J3pT66G+J/st4QpGQ+cSm9iESp9ccRy1YNUk3klk/hQtWewl6g==
+"@tanstack/react-query@^4.10.1":
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.19.1.tgz#43356dd537127e76d75f5a2769eb23dafd9a3690"
+  integrity sha512-5dvHvmc0vrWI03AJugzvKfirxCyCLe+qawrWFCXdu8t7dklIhJ7D5ZhgTypv7mMtIpdHPcECtCiT/+V74wCn2A==
   dependencies:
-    "@tanstack/query-core" "4.3.4"
+    "@tanstack/query-core" "4.19.1"
     use-sync-external-store "^1.2.0"
 
 "@testing-library/dom@^8.5.0":
@@ -3983,6 +3984,13 @@ copy-anything@^2.0.1:
   integrity sha512-1j20GZTsvKNkc4BY3NpMOM8tt///wY3FpIzozTOFO2ffuZcV61nojHXVKIy3WM+7ADCy5FVhdZYHYDdgTU0yJw==
   dependencies:
     is-what "^3.14.1"
+
+copy-anything@^3.0.2:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/copy-anything/-/copy-anything-3.0.3.tgz#206767156f08da0e02efd392f71abcdf79643559"
+  integrity sha512-fpW2W/BqEzqPp29QS+MwwfisHCQZtiduTe/m8idFo0xbti9fIZ2WVhAsCv4ggFVH3AgCkVdpoOCtQC6gBrdhjw==
+  dependencies:
+    is-what "^4.1.8"
 
 copy-to-clipboard@^3.2.0:
   version "3.3.2"
@@ -6478,6 +6486,11 @@ is-what@^3.14.1:
   version "3.14.1"
   resolved "https://registry.npmjs.org/is-what/-/is-what-3.14.1.tgz"
   integrity sha512-sNxgpk9793nzSs7bA6JQJGeIuRBQhAaNGG77kzYQgMkrID+lS6SlK07K5LaptscDlSaIgH+GPFzf+d75FVxozA==
+
+is-what@^4.1.8:
+  version "4.1.8"
+  resolved "https://registry.yarnpkg.com/is-what/-/is-what-4.1.8.tgz#0e2a8807fda30980ddb2571c79db3d209b14cbe4"
+  integrity sha512-yq8gMao5upkPoGEU9LsB2P+K3Kt8Q3fQFCGyNCWOAnJAMzEXVV9drYb0TXr42TTliLLhKIBvulgAXgtLLnwzGA==
 
 is-wsl@^2.2.0:
   version "2.2.0"
@@ -10946,6 +10959,13 @@ sunflower-antd@1.0.0-beta.3:
   version "1.0.0-beta.3"
   resolved "https://registry.npmjs.org/sunflower-antd/-/sunflower-antd-1.0.0-beta.3.tgz"
   integrity sha512-SAdjHgNemTFNxUF/QJ2KdC0x6wWpY1EsMJMo+F5KIHCDRsUUahjAIldoK+ejH00rPgUoCOhAHQ/ob/J7eyZ5qg==
+
+superjson@^1.10.0:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/superjson/-/superjson-1.12.0.tgz#7b314b982bfebc5b8e56054b8528813fdda8fc7a"
+  integrity sha512-B4tefmFqj8KDShHi2br2rz0kBlUJuQHtxMCydEuHvooL+6EscROTNWRfOLMDxW1dS/daK2zZr3C3N9DU+jXATQ==
+  dependencies:
+    copy-anything "^3.0.2"
 
 supports-color@^5.3.0:
   version "5.5.0"

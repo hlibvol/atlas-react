@@ -285,7 +285,7 @@
     "fields": {
       "id": " Job ID",
       "title": "Name",
-      "discription": "Description",
+      "description": "Description",
       "application-url-id": "Application URL",
       "process-role": "Process Role",
       "is-template": {
@@ -337,7 +337,7 @@
     "titles": {
       "create": "Create Lesson",
       "edit": "Edit Lesson",
-      "list": "Lessons"
+      "list": "Lessons Templates"
     },
     "fields": {
       "id": " Lesson ID",

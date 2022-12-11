@@ -8,6 +8,7 @@
         "grapesjs",
         "kbar",
         "languagedetector",
-        "pankod"
+        "pankod",
+        "Usergroup"
     ]
 }

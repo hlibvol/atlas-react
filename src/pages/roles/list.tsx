@@ -1,54 +1,42 @@
-import {
-  useTranslate,
-  IResourceComponentsProps,
-  useNavigation,
-  useShow,
-} from "@pankod/refine-core";
-
-import {
-  List,
-  Table,
-  useTable,
-  Icons,
-  useModal,
-  DeleteButton,
-  EditButton,
-  Space,
-} from "@pankod/refine-antd";
-
-const { FormOutlined } = Icons;
-
-import { IRole } from "interfaces";
+import { useTranslate, IResourceComponentsProps, useList } from "@pankod/refine-core";
+import { List, Table } from "@pankod/refine-antd";
+import { useTableProps, useTableActionProps } from "hooks/table";
+import { Resource } from "services/enums";
+import { IRole, IJob } from "interfaces";
+import { ABPopOverList } from "components/popover";
 
 export const RoleList: React.FC<IResourceComponentsProps> = () => {
-  const { tableProps } = useTable<IRole>();
-  const { edit } = useNavigation();
-  const { modalProps, show } = useModal();
-
   const t = useTranslate();
+  const tableProps = useTableProps({ resource: Resource.ROLE });
+  const { data: jobs } = useList<IJob>({
+    resource: Resource.JOB,
+  });
+  const tableActionProps = useTableActionProps({
+    hideShow: true,
+    disabledDelete:
+      jobs && jobs?.data.length
+        ? "Cannot delete this role as it is already assigned to a job."
+        : false,
+  });
 
-  const { queryResult, setShowId } = useShow<IRole>();
-
-  const { data: showQueryResult } = queryResult;
-  const record = showQueryResult?.data;
+  const renderAssociatedJobs = (roleId: number, record: IRole) => {
+    const associatedJobs = jobs ? jobs.data.filter((item) => item.role_ids.includes(roleId)) : [];
+    return (
+      <ABPopOverList
+        resource={Resource.JOB}
+        records={associatedJobs}
+        title={`Associated jobs for role ${record.name}`}
+      />
+    );
+  };
 
   return (
-    <>
-      <List>
-        <Table {...tableProps} rowKey='id'>
-          <Table.Column dataIndex='name' title={t("roles.fields.title")} />
-          <Table.Column<IRole>
-            title={t("table.actions")}
-            dataIndex='actions'
-            render={(_, record) => (
-              <Space>
-                <EditButton hideText size='middle' recordItemId={record.id} />
-                <DeleteButton hideText size='middle' recordItemId={record.id} />
-              </Space>
-            )}
-          />
-        </Table>
-      </List>
-    </>
+    <List breadcrumb={false}>
+      <Table {...tableProps}>
+        <Table.Column dataIndex='name' title={t("roles.fields.title")} />
+        <Table.Column dataIndex={["id"]} title={"Associate jobs"} render={renderAssociatedJobs} />
+        <Table.Column<IRole> {...tableActionProps} />
+      </Table>
+    </List>
   );
 };

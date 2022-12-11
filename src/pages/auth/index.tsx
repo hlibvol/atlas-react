@@ -30,10 +30,17 @@ const renderAuthContent = (content: React.ReactNode) => {
   );
 };
 
-export const AuthPage: React.FC<{
-  type?: "login" | "register" | "resetPassword" | "updatePassword";
-}> = ({ type }) => {
+type AuthPageProps = {
+  type?: "login" | "register" | "forgotPassword" | "updatePassword";
+};
+
+export const AuthPage: React.FC<AuthPageProps> = ({ type }: AuthPageProps) => {
   return (
-    <AntdAuthPage type={type} wrapperProps={authWrapperProps} renderContent={renderAuthContent} />
+    <AntdAuthPage
+      type={type}
+      wrapperProps={authWrapperProps}
+      renderContent={renderAuthContent}
+      registerLink={false}
+    />
   );
 };

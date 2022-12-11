@@ -42,7 +42,7 @@ export const authProvider = (): AuthProvider => {
       });
       return Promise.resolve();
     },
-    resetPassword: async ({ email }) => {
+    forgotPassword: async ({ email }) => {
       notification.success({
         message: "Reset Password",
         description: `Reset password link sent to "${email}"`,
