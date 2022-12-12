@@ -2,7 +2,7 @@ import { Icons } from "@pankod/refine-antd";
 
 import { ApplicationURLCreate, ApplicationURLEdit, ApplicationURLList } from "pages/applicationUrl";
 import { JobCreate, JobList, JobEdit, JobShow } from "pages/jobs";
-import { PlayBookCreate, PlayBookDesign, PlayBookEdit, PlayBookList } from "pages/playbooks";
+import { PlayBookDesign, PlayBookForm, PlayBookList } from "pages/playbooks";
 import { CourseCreate, CourseEdit, CourseList, CourseShow } from "pages/courses";
 
 import { LessonCreate, LessonDesign, LessonEdit, LessonList } from "pages/lessons";
@@ -72,8 +72,8 @@ export const useResources = () => {
       name: Resource.PLAYBOOK,
       parentName: "play-design",
       list: PlayBookList,
-      create: PlayBookCreate,
-      edit: PlayBookEdit,
+      create: PlayBookForm,
+      edit: PlayBookForm,
       show: PlayBookDesign,
       options: { route: Resource.PLAYBOOK },
     },
