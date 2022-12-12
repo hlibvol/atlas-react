@@ -29,7 +29,7 @@ export const PlayBookDesign: React.FC<IResourceComponentsProps> = () => {
       <Row gutter={20} wrap>
         <Col xs={24} lg={24}>
           <Card style={{ height: "100%" }}>
-            {source_id ? <Editor source='playbooks' source_id={source_id} /> : null}
+            {source_id ? <Editor resource='playbooks' id={source_id} /> : null}
           </Card>
         </Col>
       </Row>

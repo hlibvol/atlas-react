@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^14.1.1",
+    "@uiw/react-md-editor": "^3.19.8",
     "grapesjs": "^0.20.1",
     "grapesjs-blocks-basic": "^1.0.1",
     "grapesjs-blocks-flexbox": "^0.1.1",

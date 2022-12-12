@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import grapesjs from "grapesjs";
 import gjsPresetWebpage from "grapesjs-preset-webpage";
 import gjsBlockBasic from "grapesjs-blocks-basic";
@@ -10,19 +10,17 @@ import "./styles.scss";
 import { Config } from "../../../services/config";
 import { TOKEN_KEY } from "../../../services/constants";
 
-interface IfirstChildProps {
-  source: string;
-  source_id?: number;
+import { BaseKey } from "@pankod/refine-core";
+
+interface IEditorProps {
+  resource: string;
+  id: BaseKey;
 }
-export const Editor: React.FC<IfirstChildProps> = ({ source, source_id }) => {
-  const [editor, setEditor] = useState<any>(null);
-
-  const designEndpoint = `${Config.apiEndpoint}/v1/${source}/${source_id}`;
-
+export const Editor: React.FC<IEditorProps> = ({ resource, id }: IEditorProps) => {
+  const designEndpoint = `${Config.apiEndpoint}/v1/${resource}/${id}`;
   const token = localStorage.getItem(TOKEN_KEY);
-
   useEffect(() => {
-    const editor = grapesjs.init({
+    grapesjs.init({
       container: "#editor",
       width: "auto",
       plugins: [gjsPresetWebpage, gjsBlockBasic, "gjs-blocks-flexbox", grapesjsPluginForms],
@@ -42,11 +40,10 @@ export const Editor: React.FC<IfirstChildProps> = ({ source, source_id }) => {
             headers: { Authorization: `Bearer ${token}` },
             urlLoad: designEndpoint,
             urlStore: designEndpoint,
-
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             fetchOptions: (opts: any) => (opts.method === "POST" ? { method: "PUT" } : {}),
-
             onStore: (data) => ({
-              id: source_id,
+              id: id,
               page_content: JSON.stringify(data),
             }),
             onLoad: (result) => (result.page_content ? JSON.parse(result.page_content) : {}),
@@ -54,8 +51,6 @@ export const Editor: React.FC<IfirstChildProps> = ({ source, source_id }) => {
         },
       },
     });
-
-    setEditor(editor);
   }, []);
   return (
     <div>

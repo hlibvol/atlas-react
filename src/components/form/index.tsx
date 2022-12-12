@@ -15,14 +15,16 @@ export const CreateOrEditForm: React.FC<ICreateOrEditProps> = ({ children }) => 
       {children}
     </Form>
   );
+  const defaultProps = {
+    breadcrumb: false,
+    isLoading: queryResult?.isFetching,
+    saveButtonProps,
+    ...(isEdit ? { title: queryResult?.data?.data.name } : {}),
+  };
 
   return isEdit ? (
-    <Edit isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps} breadcrumb={false}>
-      {getForm()}
-    </Edit>
+    <Edit {...defaultProps}>{getForm()}</Edit>
   ) : (
-    <Create isLoading={queryResult?.isFetching} saveButtonProps={saveButtonProps}>
-      {getForm()}
-    </Create>
+    <Create {...defaultProps}>{getForm()}</Create>
   );
 };
