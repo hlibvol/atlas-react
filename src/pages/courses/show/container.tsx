@@ -57,7 +57,7 @@ export const Container: React.FC = memo(function Container() {
 
   const { name, type } = inputData;
 
-  const updateCourse = (items: any, message: any | undefined) => {
+  const updateCourse = (items: any) => {
     mutate(
       {
         resource: "courses",
@@ -91,7 +91,7 @@ export const Container: React.FC = memo(function Container() {
           item_order: courseItems.length,
         });
         message.success("Item Added");
-        updateCourse(courseItems, message);
+        updateCourse(courseItems);
       }
     }
   };
@@ -100,7 +100,7 @@ export const Container: React.FC = memo(function Container() {
     const itemsid = parseInt(id);
     const removedItemData = courseItems.filter((item: any) => item.id !== itemsid);
     message.success("Item Removed");
-    updateCourse(removedItemData, message);
+    updateCourse(removedItemData);
   };
 
   const [, drop] = useDrop(() => ({ accept: ItemTypes.COURSEITEM }));
@@ -110,9 +110,9 @@ export const Container: React.FC = memo(function Container() {
         <CourseItem
           key={courseItem.id}
           id={`${courseItem.id}`}
-          text={courseItem.item_title}
+          itemTitle={courseItem.item_title}
           itemId={courseItem.item_id}
-          index={index}
+          courseType={courseItem.item_type}
           moveCourseItem={moveCourseItem}
           findCourseItem={findCourseItem}
           handleClick={removeItemOnClick}

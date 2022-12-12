@@ -93,7 +93,11 @@
     "reject": "Reject",
     "rejectAll": "Reject All",
     "nextStep": "Next",
-    "previousStep": "Previous"
+    "previousStep": "Previous",
+    "design": "Design",
+    "blank-lesson": "Blank Lesson",
+    "blank-quiz": "Blank Quiz",
+    "add-content": "Add Content"
   },
   "loading": "Loading",
   "tags": {
@@ -333,11 +337,11 @@
     "all": "All"
   },
   "lessons": {
-    "lessons": "Lessons",
+    "lessons": "Lesson Templates",
     "titles": {
-      "create": "Create Lesson",
-      "edit": "Edit Lesson",
-      "list": "Lessons Templates"
+      "create": "Create Lesson Template",
+      "edit": "Edit Lesson Template",
+      "list": "Lesson Templates"
     },
     "fields": {
       "id": " Lesson ID",

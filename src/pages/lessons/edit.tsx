@@ -19,7 +19,7 @@ export const LessonEdit: React.FC<IResourceComponentsProps> = () => {
         {...formProps}
         layout='vertical'
         initialValues={{
-          isActive: true,
+          is_template: true,
           ...formProps.initialValues,
         }}
       >
@@ -36,18 +36,12 @@ export const LessonEdit: React.FC<IResourceComponentsProps> = () => {
             >
               <Input />
             </Form.Item>
-
+            <Form.Item name='is_template' hidden />
             <Form.Item label={t("lessons.fields.description")} name='description'>
               <Input.TextArea />
             </Form.Item>
             <Form.Item label={t("lessons.fields.duration")} name='duration'>
               <Input />
-            </Form.Item>
-
-            <Form.Item name='is_template' valuePropName='checked'>
-              <Checkbox onChange={onChange}>
-                <Text strong>{t("lessons.fields.is-template.label")}</Text>
-              </Checkbox>
             </Form.Item>
           </Col>
         </Row>

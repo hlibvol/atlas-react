@@ -112,3 +112,10 @@ export interface ICourseItems {
   item_id: number;
   item_order: number;
 }
+
+export interface TableParams {
+  pagination?: TablePaginationConfig;
+  sortField?: string;
+  sortOrder?: string;
+  filters?: Record<string, FilterValue>;
+}

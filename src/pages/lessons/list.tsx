@@ -9,7 +9,6 @@ export const LessonList: React.FC<IResourceComponentsProps> = () => {
   const tableProps = useTableProps({ resource: Resource.LESSON });
   const tableActionProps = useTableActionProps({ hideShow: true });
   const lessonTemplates = tableProps.dataSource?.filter((item) => item.is_template === true) || [];
-
   return (
     <List breadcrumb={false}>
       <Table
