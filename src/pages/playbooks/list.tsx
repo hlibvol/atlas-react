@@ -8,11 +8,17 @@ export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const tableProps = useTableProps({ resource: Resource.PLAYBOOK });
   const tableActionProps = useTableActionProps();
-  const { editUrl } = useNavigation();
+  const { editUrl, showUrl } = useNavigation();
   return (
     <List breadcrumb={false}>
       <Table {...tableProps}>
-        <Table.Column dataIndex='name' title={t("playbooks.fields.title")} />
+        <Table.Column
+          dataIndex='name'
+          title={t("playbooks.fields.title")}
+          render={(name: string, playbook: IPlayBook) => (
+            <UrlField value={showUrl(Resource.PLAYBOOK, playbook.id)}>{name}</UrlField>
+          )}
+        />
         <Table.Column
           dataIndex={"roles"}
           title={t("playbooks.fields.process-role")}

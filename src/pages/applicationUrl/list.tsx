@@ -9,7 +9,7 @@ import { ABPopOverList } from "components/popover";
 export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const tableProps = useTableProps({ resource: Resource.APPLICATION_URL });
-  const tableActionProps = useTableActionProps({ hideShow: true });
+  const tableActionProps = useTableActionProps();
   const { data: jobs } = useList<IJob>({
     resource: Resource.JOB,
   });

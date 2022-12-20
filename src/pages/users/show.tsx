@@ -1,10 +1,4 @@
-import {
-  useTranslate,
-  IResourceComponentsProps,
-  useShow,
-  useNavigation,
-  useList,
-} from "@pankod/refine-core";
+import { useTranslate, IResourceComponentsProps, useShow } from "@pankod/refine-core";
 
 import { Card, Icons, Space, Row, Col, Grid, Typography, Avatar, Badge } from "@pankod/refine-antd";
 
@@ -18,7 +12,6 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
   const user = userQueryResult.data?.data;
 
   const t = useTranslate();
-  const { show } = useNavigation();
 
   return (
     <Row gutter={[16, 16]}>

@@ -11,9 +11,9 @@ import { IUser, IRole } from "interfaces";
 
 export const UsersList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const { editUrl } = useNavigation();
+  const { editUrl, showUrl } = useNavigation();
   const tableProps = useTableProps({ resource: Resource.USER });
-  const tableActionProps = useTableActionProps({ hideShow: true });
+  const tableActionProps = useTableActionProps();
   const { data: roles } = useList<IRole>({ resource: Resource.ROLE });
 
   return (
@@ -30,6 +30,9 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
           key='first_name'
           dataIndex='first_name'
           title={t("users.fields.first_name")}
+          render={(value: string, record: IUser) => (
+            <UrlField value={showUrl(Resource.USER, record.id)}>{value}</UrlField>
+          )}
         />
         <Table.Column key='last_name' dataIndex='last_name' title={t("users.fields.last_name")} />
         <Table.Column

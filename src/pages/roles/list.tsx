@@ -12,7 +12,6 @@ export const RoleList: React.FC<IResourceComponentsProps> = () => {
     resource: Resource.JOB,
   });
   const tableActionProps = useTableActionProps({
-    hideShow: true,
     disabledDelete:
       jobs && jobs?.data.length
         ? "Cannot delete this role as it is already assigned to a job."

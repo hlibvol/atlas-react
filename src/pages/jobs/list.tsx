@@ -8,11 +8,17 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const tableProps = useTableProps({ resource: Resource.JOB });
   const tableActionProps = useTableActionProps();
-  const { editUrl } = useNavigation();
+  const { editUrl, showUrl } = useNavigation();
   return (
     <List breadcrumb={false}>
       <Table {...tableProps}>
-        <Table.Column dataIndex='name' title={t("jobs.fields.title")} />
+        <Table.Column
+          dataIndex='name'
+          title={t("jobs.fields.title")}
+          render={(name: string, job: IJob) => (
+            <UrlField value={showUrl(Resource.JOB, job.id)}>{name}</UrlField>
+          )}
+        />
         <Table.Column
           dataIndex={["application_url"]}
           title={t("jobs.fields.application-url-id")}

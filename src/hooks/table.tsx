@@ -40,20 +40,18 @@ export const useTableProps = (props: unknown) => {
 };
 
 type TableActionProps = {
-  hideShow?: boolean;
   disabledEdit?: string | boolean;
   disabledDelete?: string | boolean;
 };
 
 export const useTableActionProps = (
   props: TableActionProps = {
-    hideShow: false,
     disabledEdit: false,
     disabledDelete: false,
   }
 ) => {
   const t = useTranslate();
-  const { hideShow, disabledEdit, disabledDelete } = props;
+  const { disabledEdit, disabledDelete } = props;
   const buttonProps = (id: BaseKey | undefined, disabled: boolean | string | undefined) => {
     return {
       hideText: true,
@@ -77,7 +75,6 @@ export const useTableActionProps = (
     render: (_: unknown, record: BaseRecord) => (
       <Space>
         <EditButton {...buttonProps(record.id, disabledEdit)} />
-        {!hideShow && <ShowButton hideText size='small' recordItemId={record.id} />}
         <DeleteButton {...buttonProps(record.id, disabledDelete)} />
       </Space>
     ),
