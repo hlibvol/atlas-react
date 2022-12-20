@@ -120,7 +120,7 @@ export const Container: React.FC = memo(function Container() {
         />
       ))}
       <Row>
-        <Col span={11} xs={6} lg={18} style={{ marginTop: 10 }}>
+        <Col span={11} xs={6} lg={18} style={{ marginTop: 10, marginLeft: 18 }}>
           <Input
             placeholder='Add new Lesson or Quiz...'
             name='name'

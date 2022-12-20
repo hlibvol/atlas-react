@@ -24,7 +24,7 @@ const columns: ColumnsType<ILesson> = [
     dataIndex: "type",
     render: (type) => (
       <>
-        <Tag color='geekblue'>{type.toUpperCase()}</Tag>
+        <Tag color='geekblue'>{type.toUpperCase() + " TEMPLATE"}</Tag>
       </>
     ),
     filters: [
@@ -182,6 +182,7 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
               pagination={{ pageSize: 50 }}
               scroll={{ y: 240 }}
               onChange={() => handleTableChange}
+              size='small'
             />
           </div>
         </Modal>
