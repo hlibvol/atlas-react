@@ -8,3 +8,17 @@ export const usePanelHeader = (title: string, description = "") => {
     </Text>
   );
 };
+
+const generateCss = (css: string) => `<style>${css}</style>`;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const renderPagesHtml = (pagesHtml: any) => {
+  return pagesHtml
+    ? pagesHtml.map((page: { html: string; css: string }) => (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: generateCss(page.css) + page.html.replace("<body>", "").replace("</body>", ""),
+          }}
+        />
+      ))
+    : null;
+};

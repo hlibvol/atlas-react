@@ -1,4 +1,3 @@
 export * from "./list";
-export * from "./create";
-export * from "./edit";
-export * from "./design";
+export * from "./form";
+export * from "./show";

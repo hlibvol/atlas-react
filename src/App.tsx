@@ -52,6 +52,11 @@ const App: React.FC = () => {
             syncWithLocation: true,
             warnWhenUnsavedChanges: true,
             reactQuery: { devtoolConfig: false },
+            breadcrumb: false,
+            redirect: {
+              afterCreate: "edit",
+              afterEdit: false,
+            },
           }}
           resources={useResources()}
           notificationProvider={notificationProvider}

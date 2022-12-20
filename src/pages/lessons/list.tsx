@@ -7,7 +7,7 @@ import { ILesson } from "interfaces";
 export const LessonList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const tableProps = useTableProps({ resource: Resource.LESSON });
-  const tableActionProps = useTableActionProps({ hideShow: true });
+  const tableActionProps = useTableActionProps();
   const lessonTemplates = tableProps.dataSource?.filter((item) => item.is_template === true) || [];
   return (
     <List breadcrumb={false}>

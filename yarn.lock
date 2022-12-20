@@ -5911,10 +5911,10 @@ grapesjs-style-filter@^1.0.1:
   resolved "https://registry.npmjs.org/grapesjs-style-filter/-/grapesjs-style-filter-1.0.1.tgz"
   integrity sha512-Yhx1F+DplgQGTK4lVtOdyYxw0lzmyG2Aa005Hi7dADqgBUyhz7q8ibVH3ti6FNDEb0TZ7CH3/SXtetQbnRfUHg==
 
-grapesjs@^0.20.1:
-  version "0.20.1"
-  resolved "https://registry.npmjs.org/grapesjs/-/grapesjs-0.20.1.tgz"
-  integrity sha512-uUMsgu6z7uUYHQdc9YEAvktTbfUc9WmxfhJHH54Qcwb3KheYsV/HUB6VhjeCU0mvY+gahTR5boS2iX5APHh0ng==
+grapesjs@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/grapesjs/-/grapesjs-0.20.2.tgz#57cfbe3c06d8a4b8bbb3b49a091807b808099199"
+  integrity sha512-SEVWC0e/ngXXef4Ru4DmpY9MmKWa85uCwPCEcYByUA/YO85ydPS/Sg8oaTP38ZMitBMUAxCLxeiq3WCzf+vkUA==
   dependencies:
     backbone "1.4.1"
     backbone-undo "^0.2.5"

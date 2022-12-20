@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import grapesjs from "grapesjs";
 import gjsPresetWebpage from "grapesjs-preset-webpage";
@@ -40,13 +41,27 @@ export const Editor: React.FC<IEditorProps> = ({ resource, id }: IEditorProps) =
             headers: { Authorization: `Bearer ${token}` },
             urlLoad: designEndpoint,
             urlStore: designEndpoint,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             fetchOptions: (opts: any) => (opts.method === "POST" ? { method: "PUT" } : {}),
-            onStore: (data) => ({
-              id: id,
-              page_content: JSON.stringify(data),
-            }),
-            onLoad: (result) => (result.page_content ? JSON.parse(result.page_content) : {}),
+            // @ts-ignore
+            onStore: (data: any, editor: any) => {
+              // @ts-ignore
+              const pagesHtml = editor.Pages.getAll().map((page) => {
+                const component = page.getMainComponent();
+                return {
+                  html: editor.getHtml({ component }),
+                  css: editor.getCss({ component }),
+                };
+              });
+              return { id: id, page_content: JSON.stringify({ data, pagesHtml }) };
+            },
+            onLoad: (result) => {
+              try {
+                const data = JSON.parse(result.page_content).data;
+                return data || {};
+              } catch (error) {
+                return {};
+              }
+            },
           },
         },
       },

@@ -1,30 +1,20 @@
 import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { Form, Input, useSelect, Select, Collapse } from "@pankod/refine-antd";
+import { Form, Input, Collapse } from "@pankod/refine-antd";
 import { CreateOrEditForm } from "components/form";
-import { Editor } from "components/designer/editor";
-import { IRole } from "interfaces";
-
-import MDEditor from "@uiw/react-md-editor";
 import { usePanelHeader } from "hooks/common";
 import { useParams } from "react-router-dom";
 import { Resource } from "services/enums";
+import { Editor } from "components/designer/editor";
 
-export const PlayBookForm: React.FC<IResourceComponentsProps> = () => {
+export const LessonForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const { selectProps: roleSelectProps } = useSelect<IRole>({
-    resource: "roles",
-    optionLabel: "name",
-    optionValue: "id",
-  });
   const { Panel } = Collapse;
   const { action, id } = useParams();
-  const isEdit = action === "edit";
-
   return (
     <CreateOrEditForm>
       <Panel key='1' header={usePanelHeader("Details", "Name, Description and Roles")}>
         <Form.Item
-          label={t("playbooks.fields.title")}
+          label={t("lessons.fields.title")}
           name='name'
           rules={[
             {
@@ -34,16 +24,17 @@ export const PlayBookForm: React.FC<IResourceComponentsProps> = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item label={t("playbooks.fields.description")} name='description'>
-          <MDEditor data-color-mode='light' />
+        <Form.Item name='is_template' hidden />
+        <Form.Item label={t("lessons.fields.description")} name='description'>
+          <Input.TextArea />
         </Form.Item>
-        <Form.Item label={t("playbooks.fields.process-role")} name='role_ids'>
-          <Select {...roleSelectProps} mode='multiple' />
+        <Form.Item label={t("lessons.fields.duration")} name='duration'>
+          <Input />
         </Form.Item>
       </Panel>
-      {isEdit && (
+      {action === "edit" && (
         <Panel header={usePanelHeader("Designer", "Page content")} key='2' style={{ padding: "0" }}>
-          {id ? <Editor resource={Resource.PLAYBOOK} id={id} /> : null}
+          {id ? <Editor resource={Resource.LESSON} id={id} /> : null}
         </Panel>
       )}
     </CreateOrEditForm>

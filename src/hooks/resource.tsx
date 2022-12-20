@@ -1,15 +1,15 @@
 import { Icons } from "@pankod/refine-antd";
 
-import { ApplicationURLCreate, ApplicationURLEdit, ApplicationURLList } from "pages/applicationUrl";
-import { JobCreate, JobList, JobEdit, JobShow } from "pages/jobs";
-import { PlayBookDesign, PlayBookForm, PlayBookList } from "pages/playbooks";
-import { CourseCreate, CourseEdit, CourseList, CourseShow } from "pages/courses";
+import { ApplicationURLForm, ApplicationURLList } from "pages/applicationUrl";
+import { JobForm, JobList, JobShow } from "pages/jobs";
+import { PlayBookShow, PlayBookForm, PlayBookList } from "pages/playbooks";
+import { CourseForm, CourseList } from "pages/courses";
 
-import { LessonCreate, LessonDesign, LessonEdit, LessonList } from "pages/lessons";
-import { UseCaseCreate, UseCaseEdit, UseCaseList } from "pages/useCases";
+import { LessonForm, LessonList, LessonShow } from "pages/lessons";
+import { UseCaseForm, UseCaseList } from "pages/useCases";
 
 import { UsersList, UserShow, UsersCreate, UsersEdit } from "pages/users";
-import { RoleCreate, RoleList, RoleEdit } from "pages/roles";
+import { RoleForm, RoleList } from "pages/roles";
 import { Resource } from "services/enums";
 
 export const useResources = () => {
@@ -38,8 +38,8 @@ export const useResources = () => {
       name: Resource.ROLE,
       parentName: "user-management",
       list: RoleList,
-      create: RoleCreate,
-      edit: RoleEdit,
+      create: RoleForm,
+      edit: RoleForm,
       options: { route: Resource.ROLE },
     },
     {
@@ -55,16 +55,16 @@ export const useResources = () => {
       name: Resource.APPLICATION_URL,
       parentName: "jobs-design",
       list: ApplicationURLList,
-      create: ApplicationURLCreate,
-      edit: ApplicationURLEdit,
+      create: ApplicationURLForm,
+      edit: ApplicationURLForm,
       options: { route: Resource.APPLICATION_URL },
     },
     {
       name: Resource.JOB,
       parentName: "jobs-design",
       list: JobList,
-      create: JobCreate,
-      edit: JobEdit,
+      create: JobForm,
+      edit: JobForm,
       show: JobShow,
       options: { route: Resource.JOB },
     },
@@ -74,32 +74,31 @@ export const useResources = () => {
       list: PlayBookList,
       create: PlayBookForm,
       edit: PlayBookForm,
-      show: PlayBookDesign,
+      show: PlayBookShow,
       options: { route: Resource.PLAYBOOK },
     },
     {
       name: Resource.COURSE,
       parentName: "learning-design",
       list: CourseList,
-      create: CourseCreate,
-      edit: CourseEdit,
+      create: CourseForm,
+      edit: CourseForm,
       options: { route: Resource.COURSE },
-      show: CourseShow,
     },
     {
       name: Resource.LESSON,
       parentName: "learning-design",
       list: LessonList,
-      create: LessonCreate,
-      edit: LessonEdit,
-      show: LessonDesign,
+      create: LessonForm,
+      edit: LessonForm,
+      show: LessonShow,
       options: { label: "Lesson Templates", route: Resource.LESSON },
     },
     {
       name: Resource.USE_CASE,
       list: UseCaseList,
-      create: UseCaseCreate,
-      edit: UseCaseEdit,
+      create: UseCaseForm,
+      edit: UseCaseForm,
       icon: <Icons.ReadOutlined />,
     },
   ];
