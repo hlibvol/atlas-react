@@ -3,9 +3,11 @@ import { memo, useEffect, useState } from "react";
 import { DropTargetMonitor, useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 import { AddContentModal } from "./addContentModal";
-import { useOne } from "@pankod/refine-core";
+import { useOne, useTranslate } from "@pankod/refine-core";
 import { ILesson } from "interfaces";
-import { DesignerButton } from "components/designer/designerButton";
+import { useEdit } from "hooks/common";
+import { Resource } from "services/enums";
+
 const { Text } = Typography;
 const style = {
   borderBottom: "1px solid #eee",
@@ -25,6 +27,7 @@ export const CourseItem = memo(function CourseItem({
 }: any) {
   const originalIndex = findCourseItem(id).index;
   const [pagecontent, setPageContent] = useState([]) as Array<any>;
+  const t = useTranslate();
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: ItemTypes.COURSEITEM,
@@ -64,6 +67,8 @@ export const CourseItem = memo(function CourseItem({
     id: itemId,
   });
 
+  const { editUrl } = useEdit(Resource.LESSON, itemId, 2);
+
   useEffect(() => {
     setPageContent(lessonData.data?.data.page_content);
   }, [lessonData.data?.data.page_content]);
@@ -90,7 +95,9 @@ export const CourseItem = memo(function CourseItem({
                 <>
                   <div>
                     {pagecontent ? (
-                      <DesignerButton itemId={itemId} />
+                      <Button type='primary' size='small' style={{ width: "105px" }}>
+                        <a href={editUrl}>{t("buttons.design")}</a>
+                      </Button>
                     ) : (
                       <AddContentModal
                         courseType={courseType}

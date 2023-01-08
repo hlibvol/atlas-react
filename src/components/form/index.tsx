@@ -1,20 +1,21 @@
 import React from "react";
 import { Create, Edit, Form, useForm, Collapse } from "@pankod/refine-antd";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { CaretRightOutlined } from "@ant-design/icons";
-
 type ICreateOrEditProps = {
   children: React.ReactNode;
 };
 
 export const CreateOrEditForm: React.FC<ICreateOrEditProps> = ({ children }) => {
   const { action, id } = useParams();
+  const [searchParams] = useSearchParams();
+  const activeKey = searchParams.get("key");
   const isEdit = action === "edit";
   const { formProps, saveButtonProps, queryResult } = useForm({ id: id });
   const getForm = () => (
     <Form {...formProps} layout='vertical'>
       <Collapse
-        defaultActiveKey={["1"]}
+        defaultActiveKey={activeKey ? [activeKey] : ["1"]}
         style={{ gap: "8px" }}
         expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
       >

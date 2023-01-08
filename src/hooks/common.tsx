@@ -1,4 +1,6 @@
 import { Typography } from "@pankod/refine-antd";
+import { useNavigation, BaseKey } from "@pankod/refine-core";
+import { useNavigate } from "react-router-dom";
 
 export const usePanelHeader = (title: string, description = "") => {
   const { Text } = Typography;
@@ -21,4 +23,13 @@ export const renderPagesHtml = (pagesHtml: any) => {
         />
       ))
     : null;
+};
+
+export const useEdit = (resource: string, id: BaseKey, activeCollapseKey: number) => {
+  const navigate = useNavigate();
+  const { editUrl } = useNavigation();
+  const newEditUrl = `${editUrl(resource, id)}${
+    activeCollapseKey ? `?key=${activeCollapseKey}` : ""
+  }`;
+  return { edit: () => navigate(newEditUrl), editUrl: newEditUrl };
 };

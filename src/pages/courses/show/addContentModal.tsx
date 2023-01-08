@@ -1,10 +1,10 @@
-import { Avatar, Button, Col, Divider, Modal, Space, Table, Tag } from "@pankod/refine-antd";
+import { Avatar, Button, Col, Row, Divider, Modal, Space, Table, Tag } from "@pankod/refine-antd";
 import { useEffect, useState } from "react";
-import { useList, useShow, useTranslate, useUpdate } from "@pankod/refine-core";
-import { ICourse, ILesson, TableParams } from "interfaces";
+import { BaseKey, useList, useShow, useTranslate, useUpdate } from "@pankod/refine-core";
+import { ICourse, ILesson } from "interfaces";
 import type { ColumnsType } from "antd/es/table";
-import type { FilterValue, SorterResult } from "antd/es/table/interface";
-import { useNavigate } from "react-router-dom";
+import { useEdit } from "hooks/common";
+import { Resource } from "services/enums";
 
 // Interface for props from courseItem component
 interface IUpdateLessonProps {
@@ -13,8 +13,10 @@ interface IUpdateLessonProps {
   itemTitle: any;
 }
 
+type ILessonData = Partial<ILesson> & { key: BaseKey; type: any };
+
 // column data when popup open on design button click
-const columns: ColumnsType<ILesson> = [
+const columns: ColumnsType<ILessonData> = [
   {
     title: "Name",
     dataIndex: "name",
@@ -35,9 +37,9 @@ const columns: ColumnsType<ILesson> = [
 ];
 
 // rowSelection object indicates the need for row selection radio button
-let selectedLessonData = Array();
+let selectedLessonData = [] as Array<ILessonData>;
 const rowSelection = {
-  onChange: (selectedRowKeys: React.Key[], selectedRows: ILesson[]) => {
+  onChange: (selectedRowKeys: React.Key[], selectedRows: ILessonData[]) => {
     selectedLessonData = selectedRows;
   },
 };
@@ -50,35 +52,14 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
   const { mutate } = useUpdate();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { queryResult } = useShow<ICourse>();
-  const { data, isLoading } = queryResult;
+  const { data } = queryResult;
   const course = data?.data;
   const [courseItems, setCourseItems] = useState(course?.items || []) as Array<any>;
   const t = useTranslate();
 
-  // For type filter
-  const [tableParams, setTableParams] = useState<TableParams>({
-    pagination: {
-      current: 1,
-      pageSize: 10,
-    },
-  });
-
-  const handleTableChange = (
-    filters: Record<string, FilterValue>,
-    sorter: SorterResult<ILesson>
-  ) => {
-    setTableParams({
-      filters,
-      ...sorter,
-    });
-  };
-
-  // Show modal
   const showCreateModal = () => {
     setIsModalVisible(true);
   };
-
-  // Course Item data comes from Icourses Interface
 
   useEffect(() => {
     if (course && course.items != courseItems) {
@@ -87,11 +68,11 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
   }, [course?.items]);
 
   // Lesson data comes from ILesson Interface
-  const lessonListQueryResult = useList<ILesson>({
-    resource: "lessons",
+  const lessonListQueryResult = useList<ILessonData>({
+    resource: Resource.LESSON,
   });
   // comapre and get unique data from both API
-  const options = Array();
+  const options = [] as Array<ILessonData>;
 
   // get data after filter array
   lessonListQueryResult.data?.data.map((ele: any) => {
@@ -107,24 +88,23 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
   });
 
   // handle code when paage_content updated from one lesson to another
-  const [selectionType, setSelectionType] = useState<"radio">("radio");
+  const [selectionType] = useState<"radio">("radio");
+  const { edit, editUrl } = useEdit(Resource.LESSON, itemId, 2);
 
-  const navigate = useNavigate();
   const handleSubmit = async (id: any) => {
     mutate(
       {
-        resource: "lessons",
+        resource: Resource.LESSON,
         id: id || "",
         values: { page_content: selectedLessonData[0]?.page_content },
-        mutationMode: "optimistic",
+        mutationMode: "pessimistic",
       },
       {
         onError: (error, variables, context) => {
           console.log("data error", data);
         },
         onSuccess: (data, variables, error) => {
-          // setIsModalVisible(false);
-          navigate(`/lessons/show/${itemId}`);
+          edit();
         },
       }
     );
@@ -155,16 +135,18 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
             </Space>,
           ]}
         >
-          <Col xs={0} sm={12} lg={18}>
-            <Space size={[30, 40]} wrap>
-              <Button color='geekblue' size='middle'>
-                <a href={`../../lessons/show/${itemId}`}>{t("buttons.blank-lesson")}</a>
+          <Row justify='space-between'>
+            <Col>
+              <Button size='middle'>
+                <a href={editUrl}>{t("buttons.blank-lesson")}</a>
               </Button>
-              <Button color='geekblue' size='middle'>
+            </Col>
+            <Col>
+              <Button size='middle'>
                 <a href='#'>{t("buttons.blank-quiz")}</a>
               </Button>
-            </Space>
-          </Col>
+            </Col>
+          </Row>
           <Divider plain>
             <Avatar style={{ backgroundColor: "#87d068", verticalAlign: "middle" }} gap={4}>
               OR
@@ -181,7 +163,6 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
               dataSource={options}
               pagination={{ pageSize: 50 }}
               scroll={{ y: 240 }}
-              onChange={() => handleTableChange}
               size='small'
             />
           </div>
