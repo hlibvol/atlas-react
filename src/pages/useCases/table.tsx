@@ -7,10 +7,11 @@ import { Select, useSelect } from "@pankod/refine-antd";
 
 import { Col, Row, SelectProps } from "antd";
 import { IUseCase, IRole, IJob } from "interfaces";
-import { useShow, useUpdate } from "@pankod/refine-core";
+import { useMany, useOne, useShow, useUpdate } from "@pankod/refine-core";
 interface IfirstChildProps {
   colHeader: any;
   rowHeader: any;
+  useCaseTableConfig: any;
 }
 
 const defaultColDef = {
@@ -21,16 +22,21 @@ const defaultColDef = {
   resizable: true,
 };
 
-export const UseCaseTable: React.FC<IfirstChildProps> = ({ colHeader, rowHeader }) => {
+export const UseCaseTable: React.FC<IfirstChildProps> = ({
+  colHeader,
+  rowHeader,
+  useCaseTableConfig,
+}) => {
   const { mutate } = useUpdate();
-  const [rowHeaderData, setRowHeaderData] = useState([]) as Array<any>;
-  const [columnData, setColumnData] = useState([]) as Array<any>;
+  const [rowHeaderData, setRowHeaderData] = useState(rowHeader) as Array<any>;
+  const [columnData, setColumnData] = useState(colHeader) as Array<any>;
+  const [columnHeaderData, setColumnHeaderData] = useState([]) as Array<any>;
+  const [rowNameHeaderData, setRowNameHeaderData] = useState([]) as Array<any>;
   const { queryResult: userQueryResult } = useShow<IUseCase>();
   const useCase = userQueryResult.data?.data;
-
   useEffect(() => {
-    setColumnData(colHeader);
-    setRowHeaderData(rowHeader);
+    setColumnHeaderData(colHeader);
+    setRowNameHeaderData(rowHeader);
   }, [colHeader, rowHeader]);
 
   const { selectProps: roleSelectProps } = useSelect<IRole>({
@@ -46,11 +52,12 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({ colHeader, rowHeader 
   });
 
   const updateMatrixData = (roleId: any, jobId: any) => {
+    const configData = JSON.stringify({ roles: roleId, jobs: jobId });
     mutate(
       {
         resource: "use-cases",
         id: useCase?.id || "",
-        values: { role_ids: roleId, job_ids: jobId },
+        values: { table_config: configData },
         mutationMode: "optimistic",
       },
       {
@@ -58,49 +65,41 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({ colHeader, rowHeader 
           console.log("data error", error);
         },
         onSuccess: (data, variables, error) => {
-          setColumnData(data.data.roles);
+          // setColumnHeaderData(data.data.roles);
+          // setRowHeaderData(rowHeaderData);
+          // console.log("update", rowHeader);
         },
       }
     );
   };
-  const handleChange = (value: string[]) => {
-    const jobId = useCase?.job_ids;
-    const roleId = useCase?.role_ids;
-    roleId?.push(Number(value));
-    updateMatrixData(roleId, jobId);
+  const handleChange = (value: string) => {
+    const roleData = useCaseTableConfig?.roles;
+    const jobData = useCaseTableConfig?.jobs;
+    roleData.push({
+      Id: value,
+      width: 120,
+      order: roleData?.length,
+    });
+
+    updateMatrixData(roleData, jobData);
   };
 
-  const rowHandleChange = (value: string[]) => {
-    const jobId = useCase?.job_ids;
-    const roleId = useCase?.role_ids;
-    jobId?.push(Number(value));
-    updateMatrixData(roleId, jobId);
+  const rowHandleChange = (value: string) => {
+    const roleData = useCaseTableConfig?.roles;
+    const jobData = useCaseTableConfig?.jobs;
+    jobData.push({
+      Id: value,
+      order: jobData?.length,
+    });
+
+    updateMatrixData(roleData, jobData);
   };
 
-  const mapping = [
-    {
-      id: [1, 6, 1, true],
-    },
-    {
-      id: [1, 7, 1, false],
-    },
-    {
-      id: [1, 8, 1, true],
-    },
-    {
-      id: [1, 7, 3, false],
-    },
-    {
-      id: [1, 8, 3, true],
-    },
-    {
-      id: [1, 6, 3, false],
-    },
-  ];
-
+  let mapping = Array();
+  let status = false;
   const checkboxRendererComponent = (param: any) => {
-    const deafultMapping = [1, param.node.data.id, param.colDef.id];
-    mapping.map((key, index) => {
+    const deafultMapping = [useCase?.id, param.node.data.id, param.colDef.id];
+    mapping?.map((key: any, index: any) => {
       if (
         param.customCheck === undefined &&
         deafultMapping[0] === key.id[0] &&
@@ -110,12 +109,48 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({ colHeader, rowHeader 
         param.setValue(key.id[3]);
       }
     });
-    const checkedHandler = (e: any) => {
-      let checked = e.target.checked;
-      let colId = param.column.colId;
-      param.setValue(checked);
+
+    const checkUncheckedFunctionality = (roleId: any) => {
+      mutate(
+        {
+          resource: "jobs",
+          id: param.data.id || "",
+          values: { role_ids: roleId },
+          mutationMode: "optimistic",
+        },
+        {
+          onError: (error, variables, context) => {
+            console.log("data error", error);
+          },
+          onSuccess: (data, variables, error) => {
+            console.log("value", data.data);
+            param.setValue(param.value);
+            // setColumnData(data.data.roles);
+          },
+        }
+      );
     };
 
+    const jobData = useOne({ resource: "jobs", id: param.data.id });
+
+    const checkedHandler = (e: any) => {
+      const roleDataId = jobData.data?.data.role_ids;
+      const checkedValue: any[] = param.colDef.id;
+      let checked = e.target.checked;
+      let colId = param.column.colId;
+      if (param.value === false) {
+        roleDataId?.push(checkedValue);
+        console.log("add", roleDataId);
+        checkUncheckedFunctionality(roleDataId);
+        param.setValue(checked);
+      }
+      if (param.value === true) {
+        const removedRoleId = roleDataId.filter((roleId: any) => roleId !== param.colDef.id);
+        console.log("remove", removedRoleId);
+        checkUncheckedFunctionality(removedRoleId);
+        param.setValue(checked);
+      }
+    };
     return (
       <>
         <input type='checkbox' onChange={checkedHandler} checked={param.value} />
@@ -131,7 +166,23 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({ colHeader, rowHeader 
 
   const columnDropEnd = (event: any) => {};
 
-  const onGridReady = useCallback((params: any) => {}, []);
+  const onGridReady = useCallback((params: any) => {
+    rowHeaderData?.map((item: any, index: any) => {
+      columnData?.map((coldata: any, i: any) => {
+        if (coldata.id != undefined) {
+          if (item?.role_ids.includes(coldata?.id)) {
+            status = true;
+          } else {
+            status = false;
+          }
+          const jobVariable = {
+            id: [useCase?.id, item?.id, coldata?.id, status],
+          };
+          mapping.push(jobVariable);
+        }
+      });
+    });
+  }, []);
 
   const roleOptionsFun = () => {
     const roleOptionsArray = Array();
@@ -164,14 +215,14 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({ colHeader, rowHeader 
       <div className='App'>
         <Row>
           <Col span={8}>
-            <div className='ant-page-header-heading-left'>
-              <span className='ant-page-header-heading-title'>Usecase Job Role Mapping</span>
+            <div className='ant-col ant-form-item-label'>
+              <label className='ant-page-header-heading-title'>Usecase Job Role Mapping</label>
             </div>
           </Col>
           <Col span={8} offset={8}>
             <Select
               showSearch
-              style={{ float: "right" }}
+              style={{ float: "right", bottom: "4px" }}
               placeholder='Search to Select'
               optionFilterProp='children'
               onChange={handleChange}
@@ -192,8 +243,8 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({ colHeader, rowHeader 
             rowDragManaged={true}
             suppressMoveWhenRowDragging={true}
             animateRows={true}
-            rowData={rowHeaderData}
-            columnDefs={[...columnData]}
+            rowData={rowNameHeaderData}
+            columnDefs={[...columnHeaderData]}
             onGridReady={onGridReady}
             onRowDragEnd={(event) => dropEnd(event)}
             onColumnMoved={(event) => columnDropEnd(event)}
@@ -206,19 +257,21 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({ colHeader, rowHeader 
             // pinnedBottomRowData= {[inputRow]}
             // pinnedBottomRowData= {createData(1, 'Bottom')}
             frameworkComponents={frameworkComponents}
-          ></AgGridReact>
+          />
+          <Select
+            style={{ width: "100%", float: "right" }}
+            placeholder='Please Select Jobs'
+            optionFilterProp='children'
+            filterOption={(input, option) => (option?.label ?? "").includes(input)}
+            filterSort={(optionA, optionB) =>
+              (optionA?.label ?? "")
+                .toLowerCase()
+                .localeCompare((optionB?.label ?? "").toLowerCase())
+            }
+            onChange={rowHandleChange}
+            options={jobOptionsFun()}
+          />
         </div>
-        <Select
-          style={{ width: "100%", float: "right" }}
-          placeholder='Please Select Jobs'
-          optionFilterProp='children'
-          filterOption={(input, option) => (option?.label ?? "").includes(input)}
-          filterSort={(optionA, optionB) =>
-            (optionA?.label ?? "").toLowerCase().localeCompare((optionB?.label ?? "").toLowerCase())
-          }
-          onChange={rowHandleChange}
-          options={jobOptionsFun()}
-        />
       </div>
     </>
   );

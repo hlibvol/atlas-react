@@ -99,7 +99,7 @@ export interface IUseCase {
   description: string;
   roles: IRole[];
   role_ids: number[];
-  table_config: string;
+  table_config: any;
   jobs: IJob[];
   job_ids: number[];
 }
