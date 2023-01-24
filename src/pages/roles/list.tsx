@@ -33,6 +33,13 @@ export const RoleList: React.FC<IResourceComponentsProps> = () => {
     <List breadcrumb={false}>
       <Table {...tableProps}>
         <Table.Column dataIndex='name' title={t("roles.fields.title")} />
+        <Table.Column
+          dataIndex='description'
+          title={t("roles.fields.description")}
+          render={(description: string) => (
+            <div dangerouslySetInnerHTML={{ __html: description }} />
+          )}
+        />
         <Table.Column dataIndex={["id"]} title={"Associate jobs"} render={renderAssociatedJobs} />
         <Table.Column<IRole> {...tableActionProps} />
       </Table>

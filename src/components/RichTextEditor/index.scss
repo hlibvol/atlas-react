@@ -1,0 +1,22 @@
+@import "../../styles/variables.scss";
+
+.quill-editor {
+  border: 1px solid $borderColor;
+  border-radius: 6px;
+  .ql-toolbar {
+    color: $textColor;
+  }
+  .ql-toolbar.ql-snow,
+  .ql-container.ql-snow {
+    border: 0;
+  }
+  .ql-toolbar.ql-snow {
+    border-bottom: 1px solid $borderColor;
+  }
+  .ql-editor {
+    height: 200px;
+  }
+  &:has(.ql-editor:focus) {
+    border: 1px solid $primaryColor;
+  }
+}
