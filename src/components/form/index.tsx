@@ -12,7 +12,11 @@ export const CreateOrEditForm: React.FC<ICreateOrEditProps> = ({ children }) => 
   const [searchParams] = useSearchParams();
   const activeKey = searchParams.get("key");
   const isEdit = action === "edit";
-  const { formProps, queryResult, onFinish, form } = useForm({ id: id });
+  const { formProps, queryResult, onFinish, form } = useForm({
+    id: id,
+    successNotification: false,
+    ...(isEdit ? { mutationMode: "optimistic" } : {}),
+  });
   const [lastValues, setLastValues] = React.useState<any>();
   const getForm = () => (
     <Form {...formProps} layout='vertical' onBlur={handleChanges}>

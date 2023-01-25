@@ -1,19 +1,14 @@
 import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import {
-  Form,
-  Input,
-  useSelect,
-  Select,
-  Collapse,
-  Checkbox,
-  Typography,
-} from "@pankod/refine-antd";
+import { Form, useSelect, Select, Collapse, Checkbox, Typography } from "@pankod/refine-antd";
 import { CreateOrEditForm } from "components/form";
 import { IRole, IAppUrl } from "interfaces";
 import { usePanelHeader } from "hooks/common";
+import { useDefaultFormItems } from "hooks/table";
+import { Resource } from "services/enums";
 
 export const JobForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
+  const defaultFormItems = useDefaultFormItems(Resource.JOB);
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
     resource: "application-urls",
     optionLabel: "name",
@@ -34,20 +29,7 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
         key='1'
         header={usePanelHeader("Details", "Name, Description, Application URL and Roles")}
       >
-        <Form.Item
-          label={t("jobs.fields.title")}
-          name='name'
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item label={t("jobs.fields.description")} name='description'>
-          <Input.TextArea />
-        </Form.Item>
+        {defaultFormItems}
         <Form.Item
           label={t("jobs.fields.application-url-id")}
           name='application_url_id'

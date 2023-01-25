@@ -49,7 +49,6 @@ const App: React.FC = () => {
           Header={Header}
           Layout={Layout}
           options={{
-            syncWithLocation: true,
             warnWhenUnsavedChanges: true,
             reactQuery: { devtoolConfig: false },
             breadcrumb: false,

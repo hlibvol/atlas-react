@@ -1,13 +1,19 @@
-import { useTranslate, IResourceComponentsProps, useList } from "@pankod/refine-core";
+import { IResourceComponentsProps, useList } from "@pankod/refine-core";
 import { List, Table } from "@pankod/refine-antd";
-import { useTableProps, useTableActionProps } from "hooks/table";
+import {
+  useTableProps,
+  useTableActionProps,
+  useDefaultColumns,
+  defaultColumnProps,
+} from "hooks/table";
 import { Resource } from "services/enums";
 import { IRole, IJob } from "interfaces";
-import { ABPopOverList } from "components/popover";
+import { TagList } from "components/core";
+import type { ColumnsType } from "antd/es/table";
 
 export const RoleList: React.FC<IResourceComponentsProps> = () => {
-  const t = useTranslate();
   const tableProps = useTableProps({ resource: Resource.ROLE });
+  const defaultColumns = useDefaultColumns(Resource.ROLE);
   const { data: jobs } = useList<IJob>({
     resource: Resource.JOB,
   });
@@ -18,31 +24,28 @@ export const RoleList: React.FC<IResourceComponentsProps> = () => {
         : false,
   });
 
-  const renderAssociatedJobs = (roleId: number, record: IRole) => {
+  const renderAssociatedJobs = (roleId: number) => {
     const associatedJobs = jobs ? jobs.data.filter((item) => item.role_ids.includes(roleId)) : [];
-    return (
-      <ABPopOverList
-        resource={Resource.JOB}
-        records={associatedJobs}
-        title={`Associated jobs for role ${record.name}`}
-      />
-    );
+    return <TagList resource={Resource.JOB} records={associatedJobs} />;
   };
+
+  const columns: ColumnsType<IRole> = [
+    ...defaultColumns,
+    {
+      dataIndex: "id",
+      title: "Associate jobs",
+      render: renderAssociatedJobs,
+    },
+    tableActionProps,
+  ];
 
   return (
     <List breadcrumb={false}>
-      <Table {...tableProps}>
-        <Table.Column dataIndex='name' title={t("roles.fields.title")} />
-        <Table.Column
-          dataIndex='description'
-          title={t("roles.fields.description")}
-          render={(description: string) => (
-            <div dangerouslySetInnerHTML={{ __html: description }} />
-          )}
-        />
-        <Table.Column dataIndex={["id"]} title={"Associate jobs"} render={renderAssociatedJobs} />
-        <Table.Column<IRole> {...tableActionProps} />
-      </Table>
+      <Table
+        {...tableProps}
+        // @ts-ignore
+        columns={columns.map((item) => ({ ...item, ...defaultColumnProps }))}
+      ></Table>
     </List>
   );
 };

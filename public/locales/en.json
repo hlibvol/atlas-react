@@ -259,7 +259,7 @@
     },
     "fields": {
       "id": "Role ID",
-      "title": "Title",
+      "title": "Role Name",
       "description": "Description"
     },
     "tagFilterDescription": "Use tags to filter your search",

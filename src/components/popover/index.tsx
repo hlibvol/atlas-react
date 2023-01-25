@@ -15,7 +15,11 @@ export const ABPopOverList: React.FC<ABPopOverListProps> = (props) => {
 
   const content = records.length ? (
     records.map((item: IBaseResource) => (
-      <Tag style={{ display: "flex", marginBottom: "6px" }} color='blue'>
+      <Tag
+        key={`popover-${resource}-${item.id}`}
+        style={{ display: "flex", marginBottom: "6px" }}
+        color='blue'
+      >
         <UrlField value={showUrl(resource, item.id)} target='_blank'>
           {item.name}
         </UrlField>

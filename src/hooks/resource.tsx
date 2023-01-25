@@ -9,7 +9,7 @@ import { LessonForm, LessonList, LessonShow } from "pages/lessons";
 import { UseCaseForm, UseCaseList } from "pages/useCases";
 
 import { UsersList, UserShow, UsersCreate, UsersEdit } from "pages/users";
-import { RoleForm, RoleList } from "pages/roles";
+import { RoleForm, RoleList, RoleShow } from "pages/roles";
 import { Resource } from "services/enums";
 
 export const useResources = () => {
@@ -40,6 +40,7 @@ export const useResources = () => {
       list: RoleList,
       create: RoleForm,
       edit: RoleForm,
+      show: RoleShow,
       options: { route: Resource.ROLE },
     },
     {

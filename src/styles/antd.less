@@ -114,12 +114,19 @@
   white-space: nowrap;
 }
 .ab-custom-table .ant-table-content {
-  max-height: calc(100vh - 250px);
+  height: calc(100vh - 250px);
   overflow: auto !important;
 }
-tr>td>a.ant-typography:hover {
+tr > td > a.ant-typography:hover {
   text-decoration: underline;
 }
-.ab-custom-table .ant-table-cell p{
+.ab-custom-table .ant-table-cell p {
   margin-bottom: 0px;
+}
+.ab-custom-table table {
+  width: 100% !important;
+}
+.ab-custom-table .ant-table-cell {
+  overflow: hidden;
+  white-space: nowrap;
 }
