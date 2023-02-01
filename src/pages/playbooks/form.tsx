@@ -1,16 +1,17 @@
 import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { Form, Input, useSelect, Select, Collapse } from "@pankod/refine-antd";
+import { Form, useSelect, Select, Collapse } from "@pankod/refine-antd";
 import { CreateOrEditForm } from "components/form";
 import { Editor } from "components/designer/editor";
 import { IRole } from "interfaces";
 
-import MDEditor from "@uiw/react-md-editor";
 import { usePanelHeader } from "hooks/common";
 import { useParams } from "react-router-dom";
 import { Resource } from "services/enums";
+import { useDefaultFormItems } from "hooks/table";
 
 export const PlayBookForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
+  const defaultFormItems = useDefaultFormItems(Resource.PLAYBOOK);
   const { selectProps: roleSelectProps } = useSelect<IRole>({
     resource: "roles",
     optionLabel: "name",
@@ -23,22 +24,15 @@ export const PlayBookForm: React.FC<IResourceComponentsProps> = () => {
   return (
     <CreateOrEditForm>
       <Panel key='1' header={usePanelHeader("Details", "Name, Description and Roles")}>
-        <Form.Item
-          label={t("playbooks.fields.title")}
-          name='name'
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item label={t("playbooks.fields.description")} name='description'>
-          <MDEditor data-color-mode='light' />
-        </Form.Item>
+        {defaultFormItems}
         <Form.Item label={t("playbooks.fields.process-role")} name='role_ids'>
-          <Select {...roleSelectProps} mode='multiple' />
+          <Select
+            {...roleSelectProps}
+            // @ts-ignore
+            filterOption={(input, option) => (option?.label ?? "").includes(input)}
+            placeholder='Select roles'
+            mode='multiple'
+          />
         </Form.Item>
       </Panel>
       {isEdit && (

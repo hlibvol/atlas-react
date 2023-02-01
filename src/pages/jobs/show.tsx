@@ -5,16 +5,7 @@ import {
   useTranslate,
 } from "@pankod/refine-core";
 
-import {
-  Typography,
-  Show,
-  Space,
-  Button,
-  Badge,
-  Card,
-  Switch,
-  UrlField,
-} from "@pankod/refine-antd";
+import { Show, Space, Button, UrlField } from "@pankod/refine-antd";
 import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
 
 import { ABDivider, HTMLContent, TagList } from "components/core";

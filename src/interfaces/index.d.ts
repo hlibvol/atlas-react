@@ -12,7 +12,7 @@ export interface IUser {
   is_designer: boolean;
   is_active: boolean;
   is_superuser: boolean;
-  role_id: IRole;
+  role_id: number;
   avatar: IFile[];
   address: string;
 }

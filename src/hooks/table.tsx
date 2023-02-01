@@ -60,11 +60,11 @@ export const useDefaultFormItems = (resource: string) => {
           },
         ]}
       >
-        <Input />
+        <Input placeholder={`Enter ${t(`${resource}.fields.title`)}`} />
       </Form.Item>
       <Form.Item label={t(`${resource}.fields.description`)} name='description'>
         {/* @ts-ignore */}
-        <RichTextEditor />
+        <RichTextEditor placeholder={`Enter ${t(`${resource}.fields.description`)}..`} />
       </Form.Item>
     </>
   );
@@ -75,6 +75,7 @@ export const useTableProps = (props: unknown) => {
     // @ts-ignore
     ...props,
     initialPageSize: 25,
+    hasPagination: false,
   });
   return {
     ...tableProps,

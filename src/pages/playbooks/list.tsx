@@ -1,37 +1,42 @@
-import { useTranslate, IResourceComponentsProps, useNavigation } from "@pankod/refine-core";
-import { List, Table, UrlField, Tag } from "@pankod/refine-antd";
-import { useTableProps, useTableActionProps } from "hooks/table";
+import { useTranslate, IResourceComponentsProps } from "@pankod/refine-core";
+import { List, Table } from "@pankod/refine-antd";
+import {
+  useTableProps,
+  useTableActionProps,
+  useDefaultColumns,
+  usePageSize,
+  defaultColumnProps,
+} from "hooks/table";
 import { Resource } from "services/enums";
-import { IPlayBook, IRole } from "interfaces";
+import { IRole } from "interfaces";
+import type { ColumnsType } from "antd/es/table";
+import { TagList } from "components/core";
 
 export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const tableProps = useTableProps({ resource: Resource.PLAYBOOK });
+  const defaultColumns = useDefaultColumns(Resource.PLAYBOOK);
   const tableActionProps = useTableActionProps();
-  const { editUrl, showUrl } = useNavigation();
+  const pageSize = usePageSize();
+
+  const columns: ColumnsType<IRole> = [
+    ...defaultColumns,
+    {
+      dataIndex: "roles",
+      title: t("playbooks.fields.process-role"),
+      render: (roles: IRole[]) => <TagList resource={Resource.ROLE} records={roles} />,
+    },
+    tableActionProps,
+  ];
+
   return (
     <List breadcrumb={false}>
-      <Table {...tableProps}>
-        <Table.Column
-          dataIndex='name'
-          title={t("playbooks.fields.title")}
-          render={(name: string, playbook: IPlayBook) => (
-            <UrlField value={showUrl(Resource.PLAYBOOK, playbook.id)}>{name}</UrlField>
-          )}
-        />
-        <Table.Column
-          dataIndex={"roles"}
-          title={t("playbooks.fields.process-role")}
-          render={(roles) =>
-            roles.map((item: IRole) => (
-              <Tag key={item.id} color='blue'>
-                <UrlField value={editUrl(Resource.ROLE, item.id)}>{item.name}</UrlField>
-              </Tag>
-            ))
-          }
-        />
-        <Table.Column<IPlayBook> {...tableActionProps} />
-      </Table>
+      <Table
+        {...tableProps}
+        {...(pageSize && { pagination: { ...tableProps.pagination, pageSize } })}
+        // @ts-ignore
+        columns={columns.map((item) => ({ ...item, ...defaultColumnProps }))}
+      ></Table>
     </List>
   );
 };

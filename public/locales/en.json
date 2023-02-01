@@ -314,7 +314,7 @@
       "title": "Name",
       "description": "Description",
       "page-content": "Page Content",
-      "process-role": "Process Role"
+      "process-role": "Process Roles"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"

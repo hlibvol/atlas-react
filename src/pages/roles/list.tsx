@@ -5,6 +5,7 @@ import {
   useTableActionProps,
   useDefaultColumns,
   defaultColumnProps,
+  usePageSize,
 } from "hooks/table";
 import { Resource } from "services/enums";
 import { IRole, IJob } from "interfaces";
@@ -23,6 +24,7 @@ export const RoleList: React.FC<IResourceComponentsProps> = () => {
         ? "Cannot delete this role as it is already assigned to a job."
         : false,
   });
+  const pageSize = usePageSize();
 
   const renderAssociatedJobs = (roleId: number) => {
     const associatedJobs = jobs ? jobs.data.filter((item) => item.role_ids.includes(roleId)) : [];
@@ -43,6 +45,7 @@ export const RoleList: React.FC<IResourceComponentsProps> = () => {
     <List breadcrumb={false}>
       <Table
         {...tableProps}
+        {...(pageSize && { pagination: { ...tableProps.pagination, pageSize } })}
         // @ts-ignore
         columns={columns.map((item) => ({ ...item, ...defaultColumnProps }))}
       ></Table>

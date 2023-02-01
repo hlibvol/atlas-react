@@ -1,8 +1,10 @@
-import { useTranslate, IResourceComponentsProps, useShow } from "@pankod/refine-core";
+import { useTranslate, IResourceComponentsProps, useShow, useList } from "@pankod/refine-core";
 
 import { Card, Icons, Space, Row, Col, Grid, Typography, Avatar, Badge } from "@pankod/refine-antd";
 
-import { IUser } from "interfaces";
+import { IRole, IUser } from "interfaces";
+import { ABDivider, TagList } from "components/core";
+import { Resource } from "services/enums";
 
 const { useBreakpoint } = Grid;
 
@@ -10,6 +12,10 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
   const { xl } = useBreakpoint();
   const { queryResult: userQueryResult } = useShow<IUser>();
   const user = userQueryResult.data?.data;
+  const { data: roles } = useList<IRole>({
+    resource: Resource.ROLE,
+  });
+  const role = roles?.data.find((role) => role.id === user?.role_id);
 
   const t = useTranslate();
 
@@ -35,9 +41,7 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
                 <Icons.MailOutlined /> {user?.email}
               </Typography.Text>
               <Typography.Text>
-                <Icons.HomeOutlined /> {user?.is_active}
-              </Typography.Text>
-              <Typography.Text>
+                {"Active: "}
                 <Icons.CheckOutlined />{" "}
                 <Badge className='site-badge-count-109' style={{ backgroundColor: "#52c41a" }}>
                   {user?.is_active
@@ -83,6 +87,8 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
                   </Badge.Ribbon>
                 )}
               </Typography.Text>
+              <ABDivider>Associated Jobs</ABDivider>
+              {role && <TagList resource={Resource.ROLE} records={[role]} />}
             </Space>
           </Space>
         </Card>
