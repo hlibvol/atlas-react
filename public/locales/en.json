@@ -275,6 +275,7 @@
     "fields": {
       "id": " App URL ID",
       "title": "Name",
+      "description": "Description",
       "url": "Application URL"
     },
     "tagFilterDescription": "Use tags to filter your search",

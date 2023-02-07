@@ -1,27 +1,18 @@
-import { useTranslate, IResourceComponentsProps, useList } from "@pankod/refine-core";
-import { List, Table, UrlField } from "@pankod/refine-antd";
+import React from "react";
 
+import { BaseRecord, IResourceComponentsProps, useList, useTranslate } from "@pankod/refine-core";
+import { Form, Input, UrlField } from "@pankod/refine-antd";
+
+import { ABDivider, HTMLContent, TagList } from "components/core";
+import ABResource from "components/resource";
 import { IAppUrl, IJob } from "interfaces";
-import {
-  useTableProps,
-  useTableActionProps,
-  defaultColumnProps,
-  useDefaultColumns,
-  usePageSize,
-} from "hooks/table";
 import { Resource } from "services/enums";
-import { TagList } from "components/core";
-import type { ColumnsType } from "antd/es/table";
 
 export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const tableProps = useTableProps({ resource: Resource.APPLICATION_URL });
-  const defaultColumns = useDefaultColumns(Resource.APPLICATION_URL);
-  const tableActionProps = useTableActionProps();
   const { data: jobs } = useList<IJob>({
     resource: Resource.JOB,
   });
-  const pageSize = usePageSize();
 
   const renderAssociatedJobs = (applicationUrlId: number) => {
     const associatedJobs = jobs
@@ -30,8 +21,7 @@ export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
     return <TagList resource={Resource.JOB} records={associatedJobs} />;
   };
 
-  const columns: ColumnsType<IAppUrl> = [
-    ...defaultColumns,
+  const columns = [
     {
       dataIndex: "url",
       title: t("application-urls.fields.url"),
@@ -42,17 +32,40 @@ export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
       title: "Associate jobs",
       render: renderAssociatedJobs,
     },
-    tableActionProps,
   ];
 
+  const renderFields = (applicationUrl: IAppUrl | BaseRecord) => (
+    <Form.Item
+      label={t("application-urls.fields.url")}
+      name='url'
+      rules={[
+        {
+          required: true,
+        },
+      ]}
+    >
+      <Input />
+    </Form.Item>
+  );
+
+  const renderShow = (applicationUrl: IAppUrl | BaseRecord) => (
+    <>
+      <ABDivider>{t("application-urls.fields.url")}</ABDivider>
+      <UrlField value={applicationUrl.url} />
+      <ABDivider>{t("application-urls.fields.description")}</ABDivider>
+      {applicationUrl.description && <HTMLContent>{applicationUrl.description}</HTMLContent>}
+
+      <ABDivider>Associated Jobs</ABDivider>
+      {renderAssociatedJobs(applicationUrl.id as number)}
+    </>
+  );
+
   return (
-    <List breadcrumb={false}>
-      <Table
-        {...tableProps}
-        {...(pageSize && { pagination: { ...tableProps.pagination, pageSize } })}
-        // @ts-ignore
-        columns={columns.map((item) => ({ ...item, ...defaultColumnProps }))}
-      ></Table>
-    </List>
+    <ABResource
+      columns={columns}
+      resource={Resource.APPLICATION_URL}
+      renderShow={renderShow}
+      renderFields={renderFields}
+    />
   );
 };

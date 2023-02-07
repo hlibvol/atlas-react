@@ -1,8 +1,8 @@
 import { Icons } from "@pankod/refine-antd";
 
-import { ApplicationURLForm, ApplicationURLList } from "pages/applicationUrl";
+import { ApplicationURLList } from "pages/applicationUrl";
 import { JobForm, JobList, JobShow } from "pages/jobs";
-import { PlayBookShow, PlayBookForm, PlayBookList } from "pages/playbooks";
+import { PlayBookList } from "pages/playbooks";
 import { CourseForm, CourseList } from "pages/courses";
 
 import { LessonForm, LessonList, LessonShow } from "pages/lessons";
@@ -56,8 +56,8 @@ export const useResources = () => {
       name: Resource.APPLICATION_URL,
       parentName: "jobs-design",
       list: ApplicationURLList,
-      create: ApplicationURLForm,
-      edit: ApplicationURLForm,
+      // create: ApplicationURLForm,
+      // edit: ApplicationURLForm,
       options: { route: Resource.APPLICATION_URL },
     },
     {
@@ -73,9 +73,9 @@ export const useResources = () => {
       name: Resource.PLAYBOOK,
       parentName: "play-design",
       list: PlayBookList,
-      create: PlayBookForm,
-      edit: PlayBookForm,
-      show: PlayBookShow,
+      // create: PlayBookForm,
+      // edit: PlayBookForm,
+      // show: PlayBookShow,
       options: { route: Resource.PLAYBOOK },
     },
     {

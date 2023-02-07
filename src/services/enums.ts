@@ -9,6 +9,12 @@ export enum Resource {
   APPLICATION_URL = "application-urls",
 }
 
+export enum Action {
+  VIEW = "view",
+  EDIT = "edit",
+  CREATE = "create",
+}
+
 export enum CourseType {
   LESSON = "LESSON",
   QUIZ = "QUIZ",

@@ -40,6 +40,7 @@ export interface IRole {
 export interface IAppUrl {
   id: number;
   name: string;
+  description: string;
   url: string;
 }
 export interface IJob {
