@@ -7,6 +7,8 @@ interface IDrawerProps {
   action: Action | undefined;
   itemId: number | undefined;
   title: string | undefined;
+  footer: JSX.Element | undefined;
+  activeField: string | undefined;
 }
 
 const initialState: IDrawerProps = {
@@ -14,6 +16,8 @@ const initialState: IDrawerProps = {
   action: undefined,
   itemId: undefined,
   title: undefined,
+  footer: undefined,
+  activeField: undefined,
 };
 
 export const drawerSlice = createSlice({
@@ -31,9 +35,13 @@ export const drawerSlice = createSlice({
       const currState = current(state);
       return { ...currState, title: action.payload };
     },
+    setDrawerFooter: (state, action) => {
+      const currState = current(state);
+      return { ...currState, footer: action.payload };
+    },
   },
 });
 
-export const { openDrawer, closeDrawer, setDrawerTitle } = drawerSlice.actions;
+export const { openDrawer, closeDrawer, setDrawerTitle, setDrawerFooter } = drawerSlice.actions;
 
 export default drawerSlice.reducer;

@@ -6,6 +6,7 @@ import {
   Input,
   Space,
   TableProps,
+  Typography,
   useTable,
 } from "@pankod/refine-antd";
 import {
@@ -20,9 +21,10 @@ import { FixedType } from "rc-table/lib/interface";
 import { useEffect, useState } from "react";
 import { extractContent } from "services/utils";
 
-import { openDrawer, closeDrawer } from "redux/slices/drawerSlice";
+import { openDrawer } from "redux/slices/drawerSlice";
 import { Resource, Action } from "services/enums";
-import { useAppDispatch } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { UserOutlined } from "@ant-design/icons";
 
 export const defaultColumnProps = {
   ellipsis: true,
@@ -32,12 +34,19 @@ type TablePropsType = TableProps<BaseRecord> & {
   sorter: CrudSorting | undefined;
 };
 
-export const useTableProps = (props: unknown) => {
+export const useTableProps = (props: unknown = {}) => {
   const { tableProps, sorter } = useTable({
     // @ts-ignore
     ...props,
     initialPageSize: 25,
     hasPagination: false,
+    syncWithLocation: false,
+    initialSorter: [
+      {
+        field: "name",
+        order: "asc",
+      },
+    ],
   });
   return {
     ...tableProps,
@@ -84,13 +93,33 @@ export const useDefaultColumns = (props: defaultColumnProps) => {
     {
       title: t(`${resource}.fields.description`),
       dataIndex: "description",
-      render: (description: string) => extractContent(description),
+      render: (description: string, record: BaseRecord) => (
+        <div
+          onDoubleClick={() => {
+            dispatch(
+              openDrawer({
+                resource: resource,
+                action: Action.EDIT,
+                itemId: record.id,
+                activeField: "description",
+              })
+            );
+          }}
+        >
+          {extractContent(description) || (
+            <Typography.Text type='secondary' italic>
+              No description
+            </Typography.Text>
+          )}
+        </div>
+      ),
     },
   ];
 };
 
 type TableActionProps = {
   resource: Resource;
+  hasRoles: boolean;
   disabledEdit?: boolean;
   disabledDelete?: boolean;
 };
@@ -98,7 +127,7 @@ type TableActionProps = {
 export const useTableActionProps = (props: TableActionProps) => {
   const t = useTranslate();
   const dispatch = useAppDispatch();
-  const { disabledEdit, disabledDelete, resource } = props;
+  const { disabledEdit, disabledDelete, resource, hasRoles } = props;
   const buttonProps = (id: BaseKey | undefined, disabled: boolean | string | undefined) => {
     return {
       hideText: true,
@@ -121,6 +150,24 @@ export const useTableActionProps = (props: TableActionProps) => {
     dataIndex: "actions",
     render: (_: unknown, record: BaseRecord) => (
       <Space>
+        {hasRoles && (
+          <Button
+            icon={<UserOutlined />}
+            size='small'
+            type='primary'
+            ghost
+            onClick={() => {
+              dispatch(
+                openDrawer({
+                  resource: resource,
+                  action: Action.EDIT,
+                  itemId: record.id,
+                  activeField: "role_ids",
+                })
+              );
+            }}
+          />
+        )}
         <EditButton
           {...buttonProps(record.id, disabledEdit)}
           onClick={() =>
@@ -136,7 +183,7 @@ export const useTableActionProps = (props: TableActionProps) => {
         <DeleteButton {...buttonProps(record.id, disabledDelete)} />
       </Space>
     ),
-    width: 120,
+    width: 135,
     fixed: "right" as FixedType,
   };
 };
@@ -145,7 +192,7 @@ export const usePageSize = () => {
   const [pageSize, setPageSize] = useState<number | null>(null);
   const tableHeight = document.getElementsByClassName("ab-custom-table")[0]?.clientHeight;
 
-  const rowHeight = 41;
+  const rowHeight = 49;
   const headerHeight = 39;
   const footerHeight = 25;
 
@@ -172,6 +219,7 @@ export const usePageSize = () => {
 };
 
 export const useDefaultFormItems = (resource: string) => {
+  const { activeField } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
   return (
     <>
@@ -184,18 +232,39 @@ export const useDefaultFormItems = (resource: string) => {
           },
         ]}
       >
-        <Input placeholder={`Enter ${t(`${resource}.fields.title`)}`} />
+        <Input
+          placeholder={`Enter ${t(`${resource}.fields.title`)}`}
+          autoFocus={activeField === "name"}
+        />
       </Form.Item>
       <Form.Item label={t(`${resource}.fields.description`)} name='description'>
         {/* @ts-ignore */}
-        <RichTextEditor placeholder={`Enter ${t(`${resource}.fields.description`)}..`} />
+        <RichTextEditor
+          placeholder={`Enter ${t(`${resource}.fields.description`)}..`}
+          autoFocus={activeField === "description"}
+        />
       </Form.Item>
     </>
   );
 };
 
-export const useDrawerName = (resource: string) => {
-  const t = useTranslate();
+type ListProps = {
+  resource: Resource;
+  hasRoles: boolean;
+  tableProps?: TablePropsType;
+  tableActionProps?: TableActionProps;
+};
 
-  return t(`${resource}.drawer`);
+export const useListProps = (props: ListProps) => {
+  const {
+    resource,
+    tableProps: _tableProps,
+    tableActionProps: _tableActionProps,
+    hasRoles,
+  } = props;
+  const tableProps = useTableProps(_tableProps);
+  const pageSize = usePageSize();
+  const tableActionProps = useTableActionProps({ ..._tableActionProps, resource, hasRoles });
+  const defaultColumns = useDefaultColumns({ resource });
+  return { tableProps, pageSize, tableActionProps, defaultColumns };
 };

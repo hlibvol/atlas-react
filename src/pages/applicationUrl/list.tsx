@@ -1,12 +1,13 @@
 import React from "react";
 
-import { BaseRecord, IResourceComponentsProps, useList, useTranslate } from "@pankod/refine-core";
-import { Form, Input, UrlField } from "@pankod/refine-antd";
+import { IResourceComponentsProps, useList, useTranslate } from "@pankod/refine-core";
+import { UrlField } from "@pankod/refine-antd";
 
-import { ABDivider, HTMLContent, TagList } from "components/core";
-import ABResource from "components/resource";
-import { IAppUrl, IJob } from "interfaces";
+import { TagList } from "components/core";
+import { IJob } from "interfaces";
 import { Resource } from "services/enums";
+import List from "components/resource/list";
+import Drawer from "components/resource/drawer";
 
 export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -34,38 +35,10 @@ export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
     },
   ];
 
-  const renderFields = (applicationUrl: IAppUrl | BaseRecord) => (
-    <Form.Item
-      label={t("application-urls.fields.url")}
-      name='url'
-      rules={[
-        {
-          required: true,
-        },
-      ]}
-    >
-      <Input />
-    </Form.Item>
-  );
-
-  const renderShow = (applicationUrl: IAppUrl | BaseRecord) => (
-    <>
-      <ABDivider>{t("application-urls.fields.url")}</ABDivider>
-      <UrlField value={applicationUrl.url} />
-      <ABDivider>{t("application-urls.fields.description")}</ABDivider>
-      {applicationUrl.description && <HTMLContent>{applicationUrl.description}</HTMLContent>}
-
-      <ABDivider>Associated Jobs</ABDivider>
-      {renderAssociatedJobs(applicationUrl.id as number)}
-    </>
-  );
-
   return (
-    <ABResource
-      columns={columns}
-      resource={Resource.APPLICATION_URL}
-      renderShow={renderShow}
-      renderFields={renderFields}
-    />
+    <>
+      <List columns={columns} resource={Resource.APPLICATION_URL} />
+      <Drawer />
+    </>
   );
 };

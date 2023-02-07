@@ -8,17 +8,13 @@ import grapesjsPluginForms from "grapesjs-plugin-forms";
 import "grapesjs/dist/css/grapes.min.css";
 
 import "./styles.scss";
-import { Config } from "../../../services/config";
-import { TOKEN_KEY } from "../../../services/constants";
+import { Config } from "services/config";
+import { TOKEN_KEY } from "services/constants";
+import { useParams } from "react-router-dom";
 
-import { BaseKey } from "@pankod/refine-core";
-
-interface IEditorProps {
-  resource: string;
-  id: BaseKey;
-}
-export const Editor: React.FC<IEditorProps> = ({ resource, id }: IEditorProps) => {
-  const designEndpoint = `${Config.apiEndpoint}/v1/${resource}/${id}`;
+export const Editor: React.FC = () => {
+  const { resource, itemId } = useParams<{ resource: string; itemId: string }>();
+  const designEndpoint = `${Config.apiEndpoint}/v1/${resource}/${itemId}`;
   const token = localStorage.getItem(TOKEN_KEY);
   useEffect(() => {
     grapesjs.init({
@@ -52,7 +48,7 @@ export const Editor: React.FC<IEditorProps> = ({ resource, id }: IEditorProps) =
                   css: editor.getCss({ component }),
                 };
               });
-              return { id: id, page_content: JSON.stringify({ data, pagesHtml }) };
+              return { id: itemId, page_content: JSON.stringify({ data, pagesHtml }) };
             },
             onLoad: (result) => {
               try {

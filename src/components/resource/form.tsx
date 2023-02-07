@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import _ from "lodash";
-import { Form, useForm, Spin } from "@pankod/refine-antd";
+import { Form, useForm, Spin, SaveButton } from "@pankod/refine-antd";
 import { Action, Resource } from "services/enums";
-import { BaseRecord, useShow } from "@pankod/refine-core";
-import { useDefaultFormItems } from "./hooks";
-import { setDrawerTitle } from "redux/slices/drawerSlice";
+import { BaseRecord, GetOneResponse, useShow } from "@pankod/refine-core";
+import { useDefaultFormItems } from "../../hooks/list";
+import { openDrawer, setDrawerTitle } from "redux/slices/drawerSlice";
 import { useAppDispatch } from "redux/hooks";
 
 type EditFormProps = {
@@ -50,10 +50,12 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
   };
 
   return (
-    <Form {...formProps} layout='vertical' onBlur={handleChanges}>
-      {hasDefaultColumns && defaultFormItems}
-      {record && renderFields(record)}
-    </Form>
+    <Spin spinning={!record}>
+      <Form {...formProps} layout='vertical' onBlur={handleChanges}>
+        {hasDefaultColumns && defaultFormItems}
+        {record && renderFields(record)}
+      </Form>
+    </Spin>
   );
 };
 
@@ -66,11 +68,23 @@ type CreateFormProps = {
 export const CreateForm: React.FC<CreateFormProps> = (props) => {
   const { resource, renderFields, hasDefaultColumns } = props;
   const defaultFormItems = useDefaultFormItems(resource);
-  const { formProps } = useForm({ resource, action: Action.CREATE });
+  const dispatch = useAppDispatch();
+
+  const onSuccess = (data: GetOneResponse) => {
+    const { id } = data.data;
+    dispatch(openDrawer({ resource, action: Action.EDIT, itemId: id }));
+  };
+
+  const { formProps, saveButtonProps } = useForm({
+    resource,
+    action: Action.CREATE,
+    onMutationSuccess: onSuccess,
+  });
   return (
     <Form {...formProps} layout='vertical'>
       {hasDefaultColumns && defaultFormItems}
       {renderFields({})}
+      <SaveButton {...saveButtonProps}>Save</SaveButton>
     </Form>
   );
 };

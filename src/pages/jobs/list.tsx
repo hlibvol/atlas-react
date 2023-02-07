@@ -24,7 +24,7 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
     {
       dataIndex: ["application_url"],
       title: t("jobs.fields.application-url-id"),
-      render: (appUrl: IAppUrl) => <UrlField value={appUrl.url}>{appUrl.name}</UrlField>,
+      render: (appUrl: IAppUrl) => <UrlField value={appUrl?.url}>{appUrl?.name}</UrlField>,
     },
     {
       dataIndex: "roles",

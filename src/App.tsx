@@ -13,6 +13,7 @@ import { AuthPage } from "./pages/auth";
 import { useTranslation } from "react-i18next";
 import { Header, Title } from "components";
 import { useResources } from "hooks/resource";
+import { Editor } from "components/Editor-New";
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -37,6 +38,10 @@ const App: React.FC = () => {
               {
                 path: "/update-password",
                 element: <AuthPage type='updatePassword' />,
+              },
+              {
+                path: "/editor/:resource/:itemId",
+                element: <Editor />,
               },
             ],
           }}

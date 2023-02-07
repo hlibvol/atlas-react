@@ -4,7 +4,7 @@ import { CreateOrEditForm } from "components/form";
 import { usePanelHeader } from "hooks/common";
 import { useParams } from "react-router-dom";
 import { Resource } from "services/enums";
-import { Editor } from "components/designer/editor";
+import { Editor } from "components/Editor";
 
 export const LessonForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
