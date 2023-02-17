@@ -11,14 +11,14 @@ import { defaultColumnProps, useListProps } from "../../hooks/list";
 
 type ABListProps = {
   resource: Resource;
-  columns: ColumnsType<BaseRecord>;
+  columns?: ColumnsType<BaseRecord>;
   hasDefaultColumns?: boolean;
   hasRoles?: boolean;
 };
 
 const List: React.FC<ABListProps> = (props) => {
-  const { resource, columns, hasDefaultColumns = true, hasRoles = false } = props;
-  const { tableProps, pageSize, tableActionProps, defaultColumns } = useListProps({
+  const { resource, columns = [], hasDefaultColumns = true, hasRoles = false } = props;
+  const { tableProps, tableActionProps, defaultColumns } = useListProps({
     resource,
     hasRoles,
   });
@@ -27,7 +27,7 @@ const List: React.FC<ABListProps> = (props) => {
   const _columns: ColumnsType<BaseRecord> = [
     ...(hasDefaultColumns ? defaultColumns : []),
     ...columns,
-    tableActionProps,
+    ...tableActionProps,
   ];
 
   return (
@@ -42,8 +42,12 @@ const List: React.FC<ABListProps> = (props) => {
       <Table
         rowKey='id'
         {...tableProps}
-        {...(pageSize && { pagination: { ...tableProps.pagination, pageSize } })}
-        columns={_columns.map((item) => ({ ...item, ...defaultColumnProps }))}
+        scroll={{ y: "calc(100vh - 290px)" }}
+        // {...(pageSize && { pagination: { ...tableProps.pagination, pageSize } })}
+        columns={_columns.map((item) =>
+          // @ts-ignore
+          item.dataIndex !== "actions" ? { ...item, ...defaultColumnProps } : item
+        )}
       ></Table>
     </AntDList>
   );

@@ -21,13 +21,15 @@ import { FixedType } from "rc-table/lib/interface";
 import { useEffect, useState } from "react";
 import { extractContent } from "services/utils";
 
-import { openDrawer } from "redux/slices/drawerSlice";
+import { openDrawer, removeActiveField } from "redux/slices/drawerSlice";
 import { Resource, Action } from "services/enums";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { UserOutlined } from "@ant-design/icons";
+import moment from "moment";
 
 export const defaultColumnProps = {
   ellipsis: true,
+  sorter: true,
 };
 
 type TablePropsType = TableProps<BaseRecord> & {
@@ -38,22 +40,23 @@ export const useTableProps = (props: unknown = {}) => {
   const { tableProps, sorter } = useTable({
     // @ts-ignore
     ...props,
-    initialPageSize: 25,
-    hasPagination: false,
+    initialPageSize: 1000,
+    hasPagination: true,
     syncWithLocation: false,
-    initialSorter: [
-      {
-        field: "name",
-        order: "asc",
-      },
-    ],
+    // initialSorter: [
+    //   {
+    //     field: "created_at",
+    //     order: "desc",
+    //   },
+    // ],
   });
   return {
     ...tableProps,
     rowKey: "id",
     pagination: {
       ...tableProps.pagination,
-      showTotal: (total, range) => `Showing ${range[0]} to ${range[1]} of ${total} items`,
+      showTotal: (total, range) => `Total ${total} items`,
+      // showTotal: (total, range) => `Showing ${range[0]} to ${range[1]} of ${total} items`,
     },
     size: "small",
     className: "ab-custom-table",
@@ -80,8 +83,9 @@ export const useDefaultColumns = (props: defaultColumnProps) => {
             dispatch(
               openDrawer({
                 resource: resource,
-                action: Action.VIEW,
+                action: Action.EDIT,
                 itemId: record.id,
+                activeField: "name",
               })
             );
           }}
@@ -145,47 +149,71 @@ export const useTableActionProps = (props: TableActionProps) => {
           }),
     };
   };
-  return {
-    title: t("table.actions"),
-    dataIndex: "actions",
-    render: (_: unknown, record: BaseRecord) => (
-      <Space>
-        {hasRoles && (
-          <Button
-            icon={<UserOutlined />}
-            size='small'
-            type='primary'
-            ghost
-            onClick={() => {
+
+  return [
+    {
+      title: "Created",
+      dataIndex: "created_at",
+      render: (created_at: string) =>
+        created_at ? (
+          <Typography.Text type='secondary' italic>
+            {moment(moment.utc(created_at).toDate()).local().fromNow()}
+          </Typography.Text>
+        ) : null,
+    },
+    {
+      title: "Updated",
+      dataIndex: "updated_at",
+      render: (updated_at: string, record: BaseRecord) =>
+        updated_at && updated_at !== record?.created_at ? (
+          <Typography.Text type='secondary' italic>
+            {moment(moment.utc(updated_at).toDate()).local().fromNow()}
+          </Typography.Text>
+        ) : null,
+    },
+    {
+      title: t("table.actions"),
+      dataIndex: "actions",
+      render: (_: unknown, record: BaseRecord) => (
+        <Space>
+          {hasRoles && (
+            <Button
+              icon={<UserOutlined />}
+              size='small'
+              type='primary'
+              ghost
+              onClick={() => {
+                dispatch(
+                  openDrawer({
+                    resource: resource,
+                    action: Action.EDIT,
+                    itemId: record.id,
+                    activeField: "role_ids",
+                  })
+                );
+              }}
+            />
+          )}
+          <EditButton
+            {...buttonProps(record.id, disabledEdit)}
+            onClick={() =>
               dispatch(
                 openDrawer({
                   resource: resource,
                   action: Action.EDIT,
                   itemId: record.id,
-                  activeField: "role_ids",
+                  activeField: "name",
                 })
-              );
-            }}
+              )
+            }
           />
-        )}
-        <EditButton
-          {...buttonProps(record.id, disabledEdit)}
-          onClick={() =>
-            dispatch(
-              openDrawer({
-                resource: resource,
-                action: Action.EDIT,
-                itemId: record.id,
-              })
-            )
-          }
-        />
-        <DeleteButton {...buttonProps(record.id, disabledDelete)} />
-      </Space>
-    ),
-    width: 135,
-    fixed: "right" as FixedType,
-  };
+          <DeleteButton {...buttonProps(record.id, disabledDelete)} />
+        </Space>
+      ),
+      width: 135,
+      fixed: "right" as FixedType,
+    },
+  ];
 };
 
 export const usePageSize = () => {
@@ -235,6 +263,7 @@ export const useDefaultFormItems = (resource: string) => {
         <Input
           placeholder={`Enter ${t(`${resource}.fields.title`)}`}
           autoFocus={activeField === "name"}
+          tabIndex={1}
         />
       </Form.Item>
       <Form.Item label={t(`${resource}.fields.description`)} name='description'>
@@ -242,6 +271,7 @@ export const useDefaultFormItems = (resource: string) => {
         <RichTextEditor
           placeholder={`Enter ${t(`${resource}.fields.description`)}..`}
           autoFocus={activeField === "description"}
+          tabIndex={2}
         />
       </Form.Item>
     </>
@@ -263,8 +293,8 @@ export const useListProps = (props: ListProps) => {
     hasRoles,
   } = props;
   const tableProps = useTableProps(_tableProps);
-  const pageSize = usePageSize();
+  // const pageSize = usePageSize();
   const tableActionProps = useTableActionProps({ ..._tableActionProps, resource, hasRoles });
   const defaultColumns = useDefaultColumns({ resource });
-  return { tableProps, pageSize, tableActionProps, defaultColumns };
+  return { tableProps, tableActionProps, defaultColumns };
 };

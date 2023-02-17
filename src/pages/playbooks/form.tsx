@@ -3,8 +3,7 @@ import React, { useEffect } from "react";
 import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 import { Button, Form, Select, useSelect } from "@pankod/refine-antd";
 
-import { ABDivider, HTMLContent, TagList } from "components/core";
-import { CreateForm, EditForm, ShowForm } from "components/resource/form";
+import { CreateForm, EditForm } from "components/resource/form";
 import { IPlayBook, IRole } from "interfaces";
 import { Action, Resource } from "services/enums";
 import { useAppSelector, useAppDispatch } from "redux/hooks";
@@ -30,22 +29,13 @@ export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
         placeholder='Select roles'
         mode='multiple'
         autoFocus={activeField === "role_ids"}
+        tabIndex={3}
       />
     </Form.Item>
   );
 
-  const renderShow = (playbook: IPlayBook | BaseRecord) => (
-    <>
-      <ABDivider>{t("playbooks.fields.description")}</ABDivider>
-      {playbook?.description && <HTMLContent>{playbook.description}</HTMLContent>}
-
-      <ABDivider>Associated Roles</ABDivider>
-      {playbook?.roles && <TagList resource={Resource.ROLE} records={playbook.roles} />}
-    </>
-  );
-
   useEffect(() => {
-    if (itemId && (action === Action.EDIT || Action.VIEW)) {
+    if (itemId && action === Action.EDIT) {
       const footer = (
         <Button href={`/editor/${resource}/${itemId}`} target='_blank' type='primary'>
           Open Designer
@@ -68,10 +58,6 @@ export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
           renderFields={renderFields}
           hasDefaultColumns
         />
-      )}
-
-      {action === Action.VIEW && (
-        <ShowForm itemId={itemId as number} resource={resource} renderShow={renderShow} />
       )}
     </>
   );

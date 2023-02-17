@@ -40,6 +40,7 @@ type Props = {
   placeholder: string;
   autoFocus?: boolean;
   onChange: OnChangeHandler;
+  tabIndex?: number;
 };
 
 export const useFocusAndSetRef = (ref: any) => {
@@ -57,7 +58,7 @@ export const useFocusAndSetRef = (ref: any) => {
   return ref;
 };
 
-const RichTextEditor: React.FC<Props> = ({ value, onChange, placeholder, autoFocus }) => {
+const RichTextEditor: React.FC<Props> = ({ value, onChange, placeholder, autoFocus, tabIndex }) => {
   let editorRef;
   // eslint-disable-next-line prefer-const
   editorRef = useFocusAndSetRef(editorRef);
@@ -71,6 +72,7 @@ const RichTextEditor: React.FC<Props> = ({ value, onChange, placeholder, autoFoc
       placeholder={placeholder}
       className='quill-editor'
       ref={autoFocus ? editorRef : null}
+      tabIndex={tabIndex || -1}
     />
   );
 };

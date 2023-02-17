@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, DeleteButton, Drawer as AntDDrawer, EditButton, Space } from "@pankod/refine-antd";
+import { DeleteButton, Drawer as AntDDrawer, Space } from "@pankod/refine-antd";
 import { Action } from "services/enums";
 
 import { useAppSelector, useAppDispatch } from "redux/hooks";
-import { openDrawer, closeDrawer } from "redux/slices/drawerSlice";
+import { closeDrawer } from "redux/slices/drawerSlice";
 import { useTranslate } from "@pankod/refine-core";
 
 import { useResources } from "hooks/resource";
@@ -23,31 +23,25 @@ const Drawer: React.FC = () => {
       title={action === Action.CREATE ? t(`${resource}.titles.create`) : title}
       width='40%'
       onClose={onClose}
-      visible={action === Action.CREATE || action === Action.EDIT || action === Action.VIEW}
+      visible={action === Action.CREATE || action === Action.EDIT}
       bodyStyle={{ paddingBottom: 80 }}
-      extra={
-        <Space>
-          {action === Action.VIEW && (
-            <EditButton
-              resourceNameOrRouteName={resource}
-              recordItemId={itemId}
-              hideText
-              onClick={() => dispatch(openDrawer({ resource, action: Action.EDIT, itemId }))}
-            />
-          )}
+      extra={<Space></Space>}
+      footer={
+        <>
+          {footer}{" "}
           {action !== Action.CREATE && (
             <DeleteButton
               resourceNameOrRouteName={resource}
               recordItemId={itemId}
-              hideText
               confirmOkText='Yes'
               confirmCancelText='No'
               onSuccess={onClose}
+              type='default'
+              style={{ float: "right", color: "#626262", borderColor: "#d9d9d9" }}
             />
           )}
-        </Space>
+        </>
       }
-      footer={footer}
     >
       {formElement}
     </AntDDrawer>

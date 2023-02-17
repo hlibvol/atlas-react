@@ -10,7 +10,6 @@ export enum Resource {
 }
 
 export enum Action {
-  VIEW = "view",
   EDIT = "edit",
   CREATE = "create",
 }

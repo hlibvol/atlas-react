@@ -39,9 +39,14 @@ export const drawerSlice = createSlice({
       const currState = current(state);
       return { ...currState, footer: action.payload };
     },
+    removeActiveField: (state) => {
+      const currState = current(state);
+      return { ...currState, activeField: undefined };
+    },
   },
 });
 
-export const { openDrawer, closeDrawer, setDrawerTitle, setDrawerFooter } = drawerSlice.actions;
+export const { openDrawer, closeDrawer, setDrawerTitle, setDrawerFooter, removeActiveField } =
+  drawerSlice.actions;
 
 export default drawerSlice.reducer;

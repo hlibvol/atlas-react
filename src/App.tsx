@@ -54,7 +54,18 @@ const App: React.FC = () => {
           Header={Header}
           Layout={Layout}
           options={{
-            reactQuery: { devtoolConfig: false },
+            reactQuery: {
+              devtoolConfig: false,
+              clientConfig: {
+                defaultOptions: {
+                  queries: {
+                    refetchOnWindowFocus: false,
+                    refetchOnReconnect: false,
+                    retry: false,
+                  },
+                },
+              },
+            },
             breadcrumb: false,
             redirect: {
               afterCreate: "edit",
