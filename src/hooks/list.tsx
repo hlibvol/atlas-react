@@ -16,7 +16,6 @@ import {
   OpenNotificationParams,
   useTranslate,
 } from "@pankod/refine-core";
-import RichTextEditor from "components/RichTextEditor";
 import { FixedType } from "rc-table/lib/interface";
 import { useEffect, useState } from "react";
 import { extractContent } from "services/utils";
@@ -152,22 +151,14 @@ export const useTableActionProps = (props: TableActionProps) => {
 
   return [
     {
-      title: "Created",
-      dataIndex: "created_at",
-      render: (created_at: string) =>
-        created_at ? (
-          <Typography.Text type='secondary' italic>
-            {moment(moment.utc(created_at).toDate()).local().fromNow()}
-          </Typography.Text>
-        ) : null,
-    },
-    {
       title: "Updated",
       dataIndex: "updated_at",
       render: (updated_at: string, record: BaseRecord) =>
-        updated_at && updated_at !== record?.created_at ? (
+        updated_at || record?.created_at ? (
           <Typography.Text type='secondary' italic>
-            {moment(moment.utc(updated_at).toDate()).local().fromNow()}
+            {moment(moment.utc(updated_at || record?.created_at).toDate())
+              .local()
+              .fromNow()}
           </Typography.Text>
         ) : null,
     },
@@ -244,38 +235,6 @@ export const usePageSize = () => {
   // }, []);
 
   return pageSize;
-};
-
-export const useDefaultFormItems = (resource: string) => {
-  const { activeField } = useAppSelector((state) => state.drawer);
-  const t = useTranslate();
-  return (
-    <>
-      <Form.Item
-        label={t(`${resource}.fields.title`)}
-        name='name'
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input
-          placeholder={`Enter ${t(`${resource}.fields.title`)}`}
-          autoFocus={activeField === "name"}
-          tabIndex={1}
-        />
-      </Form.Item>
-      <Form.Item label={t(`${resource}.fields.description`)} name='description'>
-        {/* @ts-ignore */}
-        <RichTextEditor
-          placeholder={`Enter ${t(`${resource}.fields.description`)}..`}
-          autoFocus={activeField === "description"}
-          tabIndex={2}
-        />
-      </Form.Item>
-    </>
-  );
 };
 
 type ListProps = {

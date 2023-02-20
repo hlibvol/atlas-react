@@ -4,7 +4,7 @@ import { BaseRecord, IResourceComponentsProps, useList, useTranslate } from "@pa
 import { Form, Input, UrlField } from "@pankod/refine-antd";
 
 import { ABDivider, HTMLContent, TagList } from "components/core";
-import { CreateForm, EditForm } from "components/resource/form";
+import { DrawerForm } from "components/resource/form";
 import { IAppUrl, IJob } from "interfaces";
 import { Action, Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
@@ -50,20 +50,5 @@ export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
     </>
   );
 
-  return (
-    <>
-      {action === Action.CREATE && (
-        <CreateForm resource={resource} renderFields={renderFields} hasDefaultColumns />
-      )}
-
-      {action === Action.EDIT && (
-        <EditForm
-          itemId={itemId as number}
-          resource={resource}
-          renderFields={renderFields}
-          hasDefaultColumns
-        />
-      )}
-    </>
-  );
+  return <DrawerForm resource={resource} renderFields={renderFields} hasDefaultColumns />;
 };

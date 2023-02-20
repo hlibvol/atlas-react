@@ -1,5 +1,5 @@
 import React from "react";
-import { DeleteButton, Drawer as AntDDrawer, Space } from "@pankod/refine-antd";
+import { Drawer as AntDDrawer, Space } from "@pankod/refine-antd";
 import { Action } from "services/enums";
 
 import { useAppSelector, useAppDispatch } from "redux/hooks";
@@ -9,7 +9,7 @@ import { useTranslate } from "@pankod/refine-core";
 import { useResources } from "hooks/resource";
 
 const Drawer: React.FC = () => {
-  const { action, title, resource, itemId, footer } = useAppSelector((state) => state.drawer);
+  const { action, title, resource, footer } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
   const dispatch = useAppDispatch();
   const onClose = () => {
@@ -26,22 +26,7 @@ const Drawer: React.FC = () => {
       visible={action === Action.CREATE || action === Action.EDIT}
       bodyStyle={{ paddingBottom: 80 }}
       extra={<Space></Space>}
-      footer={
-        <>
-          {footer}{" "}
-          {action !== Action.CREATE && (
-            <DeleteButton
-              resourceNameOrRouteName={resource}
-              recordItemId={itemId}
-              confirmOkText='Yes'
-              confirmCancelText='No'
-              onSuccess={onClose}
-              type='default'
-              style={{ float: "right", color: "#626262", borderColor: "#d9d9d9" }}
-            />
-          )}
-        </>
-      }
+      footer={footer}
     >
       {formElement}
     </AntDDrawer>

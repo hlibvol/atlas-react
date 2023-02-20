@@ -11,6 +11,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Prettify code
-        uses: creyD/prettier_action@v4.0
+        # https://github.com/creyD/prettier_action/issues/113
+        uses: creyD/prettier_action@master
         with:
           prettier_options: --write **/*.{ts,tsx,md}

@@ -1,18 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 import { Button, Form, Select, useSelect } from "@pankod/refine-antd";
 
-import { CreateForm, EditForm } from "components/resource/form";
+import { DrawerForm } from "components/resource/form";
 import { IPlayBook, IRole } from "interfaces";
 import { Action, Resource } from "services/enums";
-import { useAppSelector, useAppDispatch } from "redux/hooks";
-
-import { setDrawerFooter } from "redux/slices/drawerSlice";
+import { useAppSelector } from "redux/hooks";
 
 export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
   const { action, itemId, activeField } = useAppSelector((state) => state.drawer);
-  const dispatch = useAppDispatch();
   const resource = Resource.PLAYBOOK;
   const { selectProps: roleSelectProps } = useSelect<IRole>({
     resource: Resource.ROLE,
@@ -34,31 +31,14 @@ export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
     </Form.Item>
   );
 
-  useEffect(() => {
-    if (itemId && action === Action.EDIT) {
-      const footer = (
-        <Button href={`/editor/${resource}/${itemId}`} target='_blank' type='primary'>
-          Open Designer
-        </Button>
-      );
-      dispatch(setDrawerFooter(footer));
-    }
-  }, [itemId]);
+  const footer =
+    itemId && action === Action.EDIT ? (
+      <Button href={`/editor/${resource}/${itemId}`} target='_blank'>
+        Open Designer
+      </Button>
+    ) : null;
 
   return (
-    <>
-      {action === Action.CREATE && (
-        <CreateForm resource={resource} renderFields={renderFields} hasDefaultColumns />
-      )}
-
-      {action === Action.EDIT && (
-        <EditForm
-          itemId={itemId as number}
-          resource={resource}
-          renderFields={renderFields}
-          hasDefaultColumns
-        />
-      )}
-    </>
+    <DrawerForm resource={resource} renderFields={renderFields} footer={footer} hasDefaultColumns />
   );
 };
