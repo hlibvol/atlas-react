@@ -41,21 +41,21 @@ export const useTableProps = (props: unknown = {}) => {
     initialPageSize: 1000,
     hasPagination: true,
     syncWithLocation: false,
-    // initialSorter: [
-    //   {
-    //     field: "created_at",
-    //     order: "desc",
-    //   },
-    // ],
+    initialSorter: [
+      {
+        field: "updated_at",
+        order: "desc",
+      },
+    ],
   });
   return {
     ...tableProps,
     rowKey: "id",
-    pagination: {
-      ...tableProps.pagination,
-      showTotal: (total, range) => `Total ${total} items`,
-      // showTotal: (total, range) => `Showing ${range[0]} to ${range[1]} of ${total} items`,
-    },
+    pagination: false,
+    // pagination: {
+    //   ...tableProps.pagination,
+    //   showTotal: (total, range) => `Showing ${range[0]} to ${range[1]} of ${total} items`,
+    // },
     size: "small",
     className: "ab-custom-table",
     sorter,

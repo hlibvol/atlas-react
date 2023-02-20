@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Input, List as AntDList, Table } from "@pankod/refine-antd";
+import React from "react";
+import { Input, List as AntDList, Table, Typography } from "@pankod/refine-antd";
 
 import type { ColumnsType } from "antd/es/table";
 import { Action, Resource } from "services/enums";
@@ -8,9 +8,10 @@ import { useAppDispatch } from "redux/hooks";
 import { openDrawer } from "redux/slices/drawerSlice";
 import { BaseRecord } from "@pankod/refine-core";
 import { defaultColumnProps, useListProps } from "../../hooks/list";
-import { getObjectValuesAsArray } from "services/utils";
+import { capitalizeFirstLetter, getObjectValuesAsArray } from "services/utils";
 
 const { Search } = Input;
+const { Text } = Typography;
 
 type ABListProps = {
   resource: Resource;
@@ -39,6 +40,14 @@ const List: React.FC<ABListProps> = (props) => {
   return (
     <AntDList
       canCreate
+      title={
+        <>
+          {capitalizeFirstLetter(resource)}{" "}
+          <Text type='secondary' style={{ fontSize: "12px" }}>
+            {dataSource?.length ?? 0} items{" "}
+          </Text>
+        </>
+      }
       headerButtons={({ defaultButtons }) => (
         <>
           <Search
@@ -60,8 +69,7 @@ const List: React.FC<ABListProps> = (props) => {
         rowKey='id'
         {...tableProps}
         dataSource={dataSource}
-        scroll={{ y: "calc(100vh - 290px)" }}
-        // {...(pageSize && { pagination: { ...tableProps.pagination, pageSize } })}
+        scroll={{ y: "calc(100vh - 230px)" }}
         columns={_columns.map((item) =>
           // @ts-ignore
           item.dataIndex !== "actions" ? { ...item, ...defaultColumnProps } : item

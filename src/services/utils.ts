@@ -16,3 +16,7 @@ export const getObjectValuesAsArray = (obj) => {
   }
   return keywords as string[];
 };
+
+export const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
