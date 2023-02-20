@@ -60,6 +60,8 @@ export const useResources = () => {
       // create: ApplicationURLForm,
       // edit: ApplicationURLForm,
       options: { route: Resource.APPLICATION_URL },
+      hasDefaultFields: true,
+      hasRoles: true,
     },
     {
       name: Resource.JOB,
@@ -75,10 +77,9 @@ export const useResources = () => {
       parentName: "play-design",
       list: PlayBookList,
       form: <PlaybookForm />,
-      // create: PlayBookForm,
-      // edit: PlayBookForm,
-      // show: PlayBookShow,
       options: { route: Resource.PLAYBOOK },
+      hasDefaultFields: true,
+      hasRoles: true,
     },
     {
       name: Resource.COURSE,

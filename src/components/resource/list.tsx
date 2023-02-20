@@ -1,5 +1,5 @@
-import React from "react";
-import { List as AntDList, Table } from "@pankod/refine-antd";
+import React, { useEffect } from "react";
+import { Input, List as AntDList, Table } from "@pankod/refine-antd";
 
 import type { ColumnsType } from "antd/es/table";
 import { Action, Resource } from "services/enums";
@@ -8,31 +8,48 @@ import { useAppDispatch } from "redux/hooks";
 import { openDrawer } from "redux/slices/drawerSlice";
 import { BaseRecord } from "@pankod/refine-core";
 import { defaultColumnProps, useListProps } from "../../hooks/list";
+import { getObjectValuesAsArray } from "services/utils";
+
+const { Search } = Input;
 
 type ABListProps = {
   resource: Resource;
   columns?: ColumnsType<BaseRecord>;
-  hasDefaultColumns?: boolean;
-  hasRoles?: boolean;
 };
 
 const List: React.FC<ABListProps> = (props) => {
-  const { resource, columns = [], hasDefaultColumns = true, hasRoles = false } = props;
+  const { resource, columns = [] } = props;
   const { tableProps, tableActionProps, defaultColumns } = useListProps({
     resource,
-    hasRoles,
   });
   const dispatch = useAppDispatch();
+  const [searchQuery, setSearchQuery] = React.useState<string>("");
+  const dataSource = searchQuery
+    ? tableProps.dataSource?.filter(
+        (record) =>
+          getObjectValuesAsArray(record)
+            .join(" ")
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ?? []
+      )
+    : tableProps.dataSource;
 
-  const _columns: ColumnsType<BaseRecord> = [
-    ...(hasDefaultColumns ? defaultColumns : []),
-    ...columns,
-    ...tableActionProps,
-  ];
+  const _columns: ColumnsType<BaseRecord> = [...defaultColumns, ...columns, ...tableActionProps];
 
   return (
     <AntDList
       canCreate
+      headerButtons={({ defaultButtons }) => (
+        <>
+          <Search
+            placeholder='Search..'
+            allowClear
+            onChange={(value) => setSearchQuery(value.target.value)}
+            style={{ width: 300 }}
+          />
+          {defaultButtons}
+        </>
+      )}
       createButtonProps={{
         onClick: () => {
           dispatch(openDrawer({ resource, action: Action.CREATE }));
@@ -42,6 +59,7 @@ const List: React.FC<ABListProps> = (props) => {
       <Table
         rowKey='id'
         {...tableProps}
+        dataSource={dataSource}
         scroll={{ y: "calc(100vh - 290px)" }}
         // {...(pageSize && { pagination: { ...tableProps.pagination, pageSize } })}
         columns={_columns.map((item) =>

@@ -8,7 +8,7 @@ import Drawer from "components/resource/drawer";
 export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
   return (
     <>
-      <List resource={Resource.PLAYBOOK} hasRoles />
+      <List resource={Resource.PLAYBOOK} />
       <Drawer />
     </>
   );

@@ -3,3 +3,16 @@ export const extractContent = (htmlString: string) => {
   span.innerHTML = htmlString ?? "";
   return span.textContent || span.innerText;
 };
+
+// @ts-ignore
+export const getObjectValuesAsArray = (obj) => {
+  const keywords = [];
+  for (const key in obj) {
+    if (typeof obj[key] === "object") {
+      keywords.push(getObjectValuesAsArray(obj[key]));
+    } else {
+      keywords.push(obj[key]);
+    }
+  }
+  return keywords as string[];
+};

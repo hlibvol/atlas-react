@@ -2,8 +2,6 @@ import {
   Button,
   DeleteButton,
   EditButton,
-  Form,
-  Input,
   Space,
   TableProps,
   Typography,
@@ -25,6 +23,7 @@ import { Resource, Action } from "services/enums";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { UserOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { useResources } from "hooks/resource";
 
 export const defaultColumnProps = {
   ellipsis: true,
@@ -122,7 +121,7 @@ export const useDefaultColumns = (props: defaultColumnProps) => {
 
 type TableActionProps = {
   resource: Resource;
-  hasRoles: boolean;
+  hasRoles: boolean | undefined;
   disabledEdit?: boolean;
   disabledDelete?: boolean;
 };
@@ -239,21 +238,18 @@ export const usePageSize = () => {
 
 type ListProps = {
   resource: Resource;
-  hasRoles: boolean;
   tableProps?: TablePropsType;
   tableActionProps?: TableActionProps;
 };
 
 export const useListProps = (props: ListProps) => {
-  const {
-    resource,
-    tableProps: _tableProps,
-    tableActionProps: _tableActionProps,
-    hasRoles,
-  } = props;
+  const { resource, tableProps: _tableProps, tableActionProps: _tableActionProps } = props;
   const tableProps = useTableProps(_tableProps);
   // const pageSize = usePageSize();
+
+  const resources = useResources();
+  const { hasDefaultFields, hasRoles } = resources.find((r) => r.name === resource) ?? {};
   const tableActionProps = useTableActionProps({ ..._tableActionProps, resource, hasRoles });
-  const defaultColumns = useDefaultColumns({ resource });
+  const defaultColumns = hasDefaultFields ? useDefaultColumns({ resource }) : [];
   return { tableProps, tableActionProps, defaultColumns };
 };

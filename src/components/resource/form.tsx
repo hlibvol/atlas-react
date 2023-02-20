@@ -1,6 +1,15 @@
 import React, { useEffect } from "react";
 import _ from "lodash";
-import { Form, useForm, Spin, SaveButton, Input, Button } from "@pankod/refine-antd";
+import {
+  Form,
+  useForm,
+  Spin,
+  SaveButton,
+  Input,
+  Button,
+  useSelect,
+  Select,
+} from "@pankod/refine-antd";
 import { Action, Resource } from "services/enums";
 import { BaseRecord, GetOneResponse, useShow, useTranslate } from "@pankod/refine-core";
 import {
@@ -11,6 +20,8 @@ import {
 } from "redux/slices/drawerSlice";
 import { useAppSelector, useAppDispatch } from "redux/hooks";
 import RichTextEditor from "components/RichTextEditor";
+import { useResources } from "hooks/resource";
+import { IRole } from "interfaces";
 
 /* Implicit save */
 /*
@@ -108,20 +119,50 @@ export const useDefaultFormItems = (resource: string) => {
   );
 };
 
+export const useRoleItem = () => {
+  const { activeField } = useAppSelector((state) => state.drawer);
+  const t = useTranslate();
+  const { selectProps: roleSelectProps } = useSelect<IRole>({
+    resource: Resource.ROLE,
+    optionLabel: "name",
+    optionValue: "id",
+  });
+  return (
+    <>
+      <Form.Item label={t("playbooks.fields.process-role")} name='role_ids'>
+        <Select
+          {...roleSelectProps}
+          // @ts-ignore
+          filterOption={(input, option) => (option?.label ?? "").includes(input)}
+          placeholder='Select roles'
+          mode='multiple'
+          autoFocus={activeField === "role_ids"}
+          tabIndex={3}
+        />
+      </Form.Item>
+    </>
+  );
+};
+
 type DrawerFormProps = {
   resource: Resource;
-  renderFields: (record: BaseRecord) => JSX.Element;
-  hasDefaultColumns?: boolean;
+  renderFields?: (record: BaseRecord) => JSX.Element;
   footer?: JSX.Element | null;
 };
 
 export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
   const { action, itemId } = useAppSelector((state) => state.drawer);
-  const { resource, renderFields, hasDefaultColumns, footer } = props;
-  const defaultFormItems = useDefaultFormItems(resource);
+  const { resource, renderFields = () => null, footer } = props;
+
+  const resources = useResources();
+  const { hasDefaultFields, hasRoles } = resources.find((r) => r.name === resource) ?? {};
+
+  const defaultFormItems = hasDefaultFields ? useDefaultFormItems(resource) : null;
+  const roleFormItem = hasRoles ? useRoleItem() : null;
+
   const dispatch = useAppDispatch();
 
-  const { formProps, formLoading, queryResult, onFinish } = useForm({
+  const { formProps, formLoading, queryResult, onFinish, form } = useForm({
     id: itemId,
     resource,
     action: action,
@@ -142,18 +183,33 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
       setDrawerFooter(
         <>
           {footer}
-          <Button onClick={() => onFinish()} type='primary' style={{ float: "right" }}>
+          <Button
+            loading={formLoading}
+            onClick={() => {
+              form
+                .validateFields()
+                .then(() => {
+                  onFinish(); // or form.submit()
+                })
+                .catch((errorInfo) => {
+                  console.log(errorInfo);
+                });
+            }}
+            type='primary'
+            style={{ float: "right" }}
+          >
             Save
           </Button>
         </>
       )
     );
-  }, []);
+  }, [formLoading]);
 
   return (
     <Spin spinning={formLoading}>
       <Form {...formProps} layout='vertical'>
-        {hasDefaultColumns && defaultFormItems}
+        {defaultFormItems}
+        {roleFormItem}
         {renderFields({})}
         {/* <SaveButton {...saveButtonProps}>Save</SaveButton> */}
       </Form>
