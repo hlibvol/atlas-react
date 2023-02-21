@@ -39,8 +39,7 @@ export const useTableProps = (props: unknown = {}) => {
     // @ts-ignore
     ...props,
     initialPageSize: 1000,
-    hasPagination: true,
-    syncWithLocation: false,
+    hasPagination: false,
     initialSorter: [
       {
         field: "updated_at",
