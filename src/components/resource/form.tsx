@@ -181,20 +181,20 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
     if (record) dispatch(setDrawerTitle(record.name));
   }, [record]);
 
+  const defaultOnClose = () => {
+    dispatch(closeDrawer());
+  };
+
   formProps.onValuesChange = () => {
     const drawerOnClose = form.isFieldsTouched()
       ? () => {
           Modal.confirm({
             title: "Unsaved changes",
             content: "Are you sure you want to leave? You have unsaved changes.",
-            onOk: () => {
-              dispatch(closeDrawer());
-            },
+            onOk: defaultOnClose,
           });
         }
-      : () => {
-          dispatch(closeDrawer());
-        };
+      : defaultOnClose;
     dispatch(setDrawerOnClose(drawerOnClose));
   };
 
@@ -223,6 +223,7 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
         </>
       )
     );
+    dispatch(setDrawerOnClose(defaultOnClose));
   }, [formLoading]);
 
   return (
