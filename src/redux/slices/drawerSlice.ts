@@ -8,6 +8,7 @@ interface IDrawerProps {
   itemId: number | undefined;
   title: string | undefined;
   footer: JSX.Element | undefined;
+  onClose: (() => void) | undefined;
   activeField: string | undefined;
 }
 
@@ -17,6 +18,7 @@ const initialState: IDrawerProps = {
   itemId: undefined,
   title: undefined,
   footer: undefined,
+  onClose: undefined,
   activeField: undefined,
 };
 
@@ -43,10 +45,20 @@ export const drawerSlice = createSlice({
       const currState = current(state);
       return { ...currState, activeField: undefined };
     },
+    setDrawerOnClose: (state, action) => {
+      const currState = current(state);
+      return { ...currState, onClose: action.payload };
+    },
   },
 });
 
-export const { openDrawer, closeDrawer, setDrawerTitle, setDrawerFooter, removeActiveField } =
-  drawerSlice.actions;
+export const {
+  openDrawer,
+  closeDrawer,
+  setDrawerTitle,
+  setDrawerFooter,
+  removeActiveField,
+  setDrawerOnClose,
+} = drawerSlice.actions;
 
 export default drawerSlice.reducer;

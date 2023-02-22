@@ -9,13 +9,16 @@ import {
   Button,
   useSelect,
   Select,
+  Modal,
 } from "@pankod/refine-antd";
 import { Action, Resource } from "services/enums";
 import { BaseRecord, GetOneResponse, useShow, useTranslate } from "@pankod/refine-core";
 import {
+  closeDrawer,
   openDrawer,
   removeActiveField,
   setDrawerFooter,
+  setDrawerOnClose,
   setDrawerTitle,
 } from "redux/slices/drawerSlice";
 import { useAppSelector, useAppDispatch } from "redux/hooks";
@@ -170,13 +173,30 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
       const { id } = data.data;
       dispatch(openDrawer({ resource, action: Action.EDIT, itemId: id }));
     },
-    submitOnEnter: true,
+    warnWhenUnsavedChanges: true,
   });
   const record = queryResult?.data?.data;
 
   useEffect(() => {
     if (record) dispatch(setDrawerTitle(record.name));
   }, [record]);
+
+  formProps.onValuesChange = () => {
+    const drawerOnClose = form.isFieldsTouched()
+      ? () => {
+          Modal.confirm({
+            title: "Unsaved changes",
+            content: "Are you sure you want to leave? You have unsaved changes.",
+            onOk: () => {
+              dispatch(closeDrawer());
+            },
+          });
+        }
+      : () => {
+          dispatch(closeDrawer());
+        };
+    dispatch(setDrawerOnClose(drawerOnClose));
+  };
 
   useEffect(() => {
     dispatch(

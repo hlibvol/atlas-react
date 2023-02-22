@@ -2,19 +2,13 @@ import React from "react";
 import { Drawer as AntDDrawer, Space } from "@pankod/refine-antd";
 import { Action } from "services/enums";
 
-import { useAppSelector, useAppDispatch } from "redux/hooks";
-import { closeDrawer } from "redux/slices/drawerSlice";
+import { useAppSelector } from "redux/hooks";
 import { useTranslate } from "@pankod/refine-core";
-
 import { useResources } from "hooks/resource";
 
 const Drawer: React.FC = () => {
-  const { action, title, resource, footer } = useAppSelector((state) => state.drawer);
+  const { action, title, resource, footer, onClose } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
-  const dispatch = useAppDispatch();
-  const onClose = () => {
-    dispatch(closeDrawer());
-  };
   const resources = useResources();
   const formElement = resources.find((r) => r.name === resource)?.form;
 
