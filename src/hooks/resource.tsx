@@ -11,6 +11,7 @@ import { UseCaseForm, UseCaseList } from "pages/useCases";
 import { UsersList, UserShow, UsersCreate, UsersEdit } from "pages/users";
 import { RoleForm, RoleList, RoleShow } from "pages/roles";
 import { Resource } from "services/enums";
+import { ScreenForm, ScreenList } from "pages/screens";
 
 export const useResources = () => {
   return [
@@ -104,6 +105,14 @@ export const useResources = () => {
       create: UseCaseForm,
       edit: UseCaseForm,
       icon: <Icons.ReadOutlined />,
+    },
+    {
+      name: Resource.SCREENS,
+      list: ScreenList,
+      form: <ScreenForm />,
+      options: { route: Resource.SCREENS,label: "Screens" },
+      hasDefaultFields: true,
+      icon: <Icons.FundProjectionScreenOutlined />,
     },
   ];
 };

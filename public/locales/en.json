@@ -320,6 +320,23 @@
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
   },
+  "screens": {
+    "screens": "Screens",
+    "titles": {
+      "create": "Create Screen",
+      "edit": "Edit Screen",
+      "list": "Screens"
+    },
+    "fields": {
+      "id": " Screen ID",
+      "title": "Name",
+      "description": "Description",
+      "page-content": "Page Content",
+      "process-role": "Process Roles"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
   "courses": {
     "courses": "Courses",
     "titles": {
