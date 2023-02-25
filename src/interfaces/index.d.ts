@@ -122,7 +122,6 @@ export interface TableParams {
   filters?: Record<string, FilterValue>;
 }
 
-
 export interface IScreens {
   id: number;
   name: string;

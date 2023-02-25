@@ -110,7 +110,7 @@ export const useResources = () => {
       name: Resource.SCREENS,
       list: ScreenList,
       form: <ScreenForm />,
-      options: { route: Resource.SCREENS,label: "Screens" },
+      options: { route: Resource.SCREENS, label: "Screens" },
       hasDefaultFields: true,
       icon: <Icons.FundProjectionScreenOutlined />,
     },

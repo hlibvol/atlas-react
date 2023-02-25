@@ -10,5 +10,5 @@ import { useAppSelector } from "redux/hooks";
 export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
   const { action, itemId } = useAppSelector((state) => state.drawer);
   const resource = Resource.SCREENS;
-  return <DrawerForm resource={resource}  />;
+  return <DrawerForm resource={resource} />;
 };
