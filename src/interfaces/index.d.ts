@@ -121,3 +121,9 @@ export interface TableParams {
   sortOrder?: string;
   filters?: Record<string, FilterValue>;
 }
+
+export interface IScreens {
+  id: number;
+  name: string;
+  description: string;
+}
