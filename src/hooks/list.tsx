@@ -243,7 +243,9 @@ type ListProps = {
 
 export const useListProps = (props: ListProps) => {
   const { resource, tableProps: _tableProps, tableActionProps: _tableActionProps } = props;
+  
   const tableProps = useTableProps(_tableProps);
+  console.log({tableProps});
   // const pageSize = usePageSize();
 
   const resources = useResources();

@@ -1,6 +1,7 @@
-import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
+import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 import { Form, useSelect, Select, Collapse, Checkbox, Typography } from "@pankod/refine-antd";
 import { CreateOrEditForm } from "components/form";
+import { DrawerForm } from "components/resource/form";
 import { IRole, IAppUrl } from "interfaces";
 import { usePanelHeader } from "hooks/common";
 import { useDefaultFormItems } from "hooks/table";
@@ -22,34 +23,65 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
   });
   const { Panel } = Collapse;
   const { Text } = Typography;
+  const resource = Resource.JOB;
+  const renderFields = (jobRole: IRole | BaseRecord) => (
 
-  return (
-    <CreateOrEditForm>
-      <Panel
-        key='1'
-        header={usePanelHeader("Details", "Name, Description, Application URL and Roles")}
+    <>
+      <Form.Item
+        label={t("jobs.fields.application-url-id")}
+        name='application_url_id'
+        rules={[
+          {
+            required: true,
+          },
+        ]}
       >
-        {defaultFormItems}
-        <Form.Item
-          label={t("jobs.fields.application-url-id")}
-          name='application_url_id'
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Select {...urlSelectProps} />
-        </Form.Item>
-        <Form.Item label={t("jobs.fields.process-role")} name='role_ids'>
-          <Select {...roleSelectProps} mode='multiple' />
-        </Form.Item>
-        <Form.Item name='is_template' valuePropName='checked'>
-          <Checkbox>
-            <Text strong>{t("jobs.fields.is-template.label")}</Text>{" "}
-          </Checkbox>
-        </Form.Item>
-      </Panel>
-    </CreateOrEditForm>
+        <Select {...urlSelectProps} />
+      </Form.Item>
+      <Form.Item label={t("jobs.fields.process-role")} name='role_ids'>
+        <Select {...roleSelectProps} mode='multiple' />
+      </Form.Item>
+      <Form.Item name='is_template' valuePropName='checked'>
+        <Checkbox>
+          <Text strong>{t("jobs.fields.is-template.label")}</Text>{" "}
+        </Checkbox>
+      </Form.Item>
+    </>
   );
+  return <DrawerForm resource={resource} renderFields={renderFields} />;
+
+
+  // return (
+  //   <CreateOrEditForm>
+  //     <Panel
+  //       key='1'
+  //       header={usePanelHeader("Details", "Name, Description, Application URL and Roles")}
+  //     >
+  //       {defaultFormItems}
+  //       <Form.Item
+  //         label={t("jobs.fields.application-url-id")}
+  //         name='application_url_id'
+  //         rules={[
+  //           {
+  //             required: true,
+  //           },
+  //         ]}
+  //       >
+  //         <Select {...urlSelectProps} />
+  //       </Form.Item>
+  //       <Form.Item label={t("jobs.fields.process-role")} name='role_ids'>
+  //         <Select {...roleSelectProps} mode='multiple' />
+  //       </Form.Item>
+  //       <Form.Item name='is_template' valuePropName='checked'>
+  //         <Checkbox>
+  //           <Text strong>{t("jobs.fields.is-template.label")}</Text>{" "}
+  //         </Checkbox>
+  //       </Form.Item>
+  //     </Panel>
+  //   </CreateOrEditForm>
+  // );
+
+
+
+
 };
