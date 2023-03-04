@@ -1,4 +1,4 @@
-import { IResourceComponentsProps, useTranslate , BaseRecord} from "@pankod/refine-core";
+import { IResourceComponentsProps, useTranslate, BaseRecord } from "@pankod/refine-core";
 import { Form, Input, Collapse } from "@pankod/refine-antd";
 import { CreateOrEditForm } from "components/form";
 import { usePanelHeader } from "hooks/common";
@@ -18,15 +18,8 @@ export const CourseForm: React.FC<IResourceComponentsProps> = () => {
   //const { action } = useParams();
   const { action, itemId } = useAppSelector((state) => state.drawer);
   const resource = Resource.COURSE;
-  const renderFields = (course: ICourse | BaseRecord) => (
-
-    <>
- 
-    </>
-  );
+  const renderFields = (course: ICourse | BaseRecord) => <></>;
   return <DrawerForm resource={resource} />;
-
-
 
   // return (
   //   <CreateOrEditForm>

@@ -38,6 +38,4 @@ export const LessonList: React.FC<IResourceComponentsProps> = () => {
       <Drawer />
     </>
   );
-
-
 };

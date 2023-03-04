@@ -25,7 +25,6 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
   const { Text } = Typography;
   const resource = Resource.JOB;
   const renderFields = (jobRole: IRole | BaseRecord) => (
-
     <>
       <Form.Item
         label={t("jobs.fields.application-url-id")}
@@ -49,7 +48,6 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
     </>
   );
   return <DrawerForm resource={resource} renderFields={renderFields} />;
-
 
   // return (
   //   <CreateOrEditForm>
@@ -80,8 +78,4 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
   //     </Panel>
   //   </CreateOrEditForm>
   // );
-
-
-
-
 };

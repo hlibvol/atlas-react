@@ -1,9 +1,9 @@
 import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { Form, Input, Collapse,Button } from "@pankod/refine-antd";
+import { Form, Input, Collapse, Button } from "@pankod/refine-antd";
 import { CreateOrEditForm } from "components/form";
 import { usePanelHeader } from "hooks/common";
 import { useParams } from "react-router-dom";
-import {Action, Resource } from "services/enums";
+import { Action, Resource } from "services/enums";
 import { Editor } from "components/Editor";
 import { DrawerForm } from "components/resource/form";
 import { ILesson } from "interfaces";
@@ -17,15 +17,11 @@ export const LessonForm: React.FC<IResourceComponentsProps> = () => {
   const { action, itemId } = useAppSelector((state) => state.drawer);
   console.log({ action, itemId });
   const renderFields = (lesson: ILesson | BaseRecord) => (
-    
     <>
-      
-        <Form.Item name='is_template' hidden />
-        <Form.Item label={t("lessons.fields.duration")} name='duration'>
-          <Input />
-        </Form.Item>
-       
-    
+      <Form.Item name='is_template' hidden />
+      <Form.Item label={t("lessons.fields.duration")} name='duration'>
+        <Input />
+      </Form.Item>
     </>
   );
 

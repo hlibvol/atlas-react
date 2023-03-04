@@ -71,7 +71,7 @@ export const useResources = () => {
       // create: JobForm,
       // edit: JobForm,
       // show: JobShow,
-      form: <JobForm/>,
+      form: <JobForm />,
       options: { route: Resource.JOB },
       hasDefaultFields: true,
     },
