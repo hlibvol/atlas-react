@@ -108,9 +108,12 @@ export const useResources = () => {
     {
       name: Resource.USE_CASE,
       list: UseCaseList,
-      create: UseCaseForm,
-      edit: UseCaseForm,
+      // create: UseCaseForm,
+      // edit: UseCaseForm,
+      form: <UseCaseForm />,
       icon: <Icons.ReadOutlined />,
+      options: { route: Resource.USE_CASE },
+      hasDefaultFields: true,
     },
     {
       name: Resource.SCREENS,

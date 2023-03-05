@@ -35,7 +35,7 @@ export const CourseList: React.FC<IResourceComponentsProps> = () => {
 
   return (
     <>
-      <List columns={columns} resource={Resource.COURSE} />
+      <List resource={Resource.COURSE} />
       <Drawer />
     </>
   );
