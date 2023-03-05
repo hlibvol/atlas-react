@@ -8,21 +8,32 @@ import { Editor } from "components/Editor";
 import { DrawerForm } from "components/resource/form";
 import { ILesson } from "interfaces";
 import { useAppSelector } from "redux/hooks";
+import { setDrawerWidth,setHideItems } from "redux/slices/drawerSlice";
+import { useAppDispatch } from "redux/hooks";
+import React, { useState } from "react";
 
 export const LessonForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { Panel } = Collapse;
   //const { action, id } = useParams();
   const resource = Resource.LESSON;
-  const { action, itemId } = useAppSelector((state) => state.drawer);
-  console.log({ action, itemId });
+  const { action, itemId, width, hideAll } = useAppSelector((state) => state.drawer);
+  const dispatch = useAppDispatch();
+  console.log({ action, itemId,width });
+  const [renderpageContent, setRenderpageContent] = React.useState<boolean>(false);
   const renderFields = (lesson: ILesson | BaseRecord) => (
-    <>
+    
+      <>
       <Form.Item name='is_template' hidden />
-      <Form.Item label={t("lessons.fields.duration")} name='duration'>
+      <Form.Item label={t("lessons.fields.duration")} name='duration' hidden={hideAll}>
         <Input />
       </Form.Item>
-    </>
+      {renderpageContent? 
+      <Form.Item label={"Page Content"} name='page_content' hidden={!hideAll}>
+      {itemId ? <Editor resource={Resource.LESSON} id={itemId} /> : null}
+      </Form.Item>
+      :null}
+      </>
   );
 
   // return (
@@ -54,11 +65,23 @@ export const LessonForm: React.FC<IResourceComponentsProps> = () => {
   //     )}
   //   </CreateOrEditForm>
   // );
+  const expandDrawer = ()=>{
+    console.log("expand drawer");
+    setRenderpageContent(true);
+    dispatch(setDrawerWidth('84%'));
+    dispatch(setHideItems(true));
+  }
   const footer =
     itemId && action === Action.EDIT ? (
       <Button href={`/editor/${resource}/${itemId}`} target='_blank'>
         Open Designer
       </Button>
     ) : null;
+    // const footer =
+    // itemId && action === Action.EDIT ? (
+    //   <Button onClick={expandDrawer}>
+    //     Open Designer
+    //   </Button>
+    // ) : null;    
   return <DrawerForm resource={resource} renderFields={renderFields} footer={footer} />;
 };

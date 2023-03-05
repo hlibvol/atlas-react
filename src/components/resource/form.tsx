@@ -10,6 +10,7 @@ import {
   useSelect,
   Select,
   Modal,
+  Collapse
 } from "@pankod/refine-antd";
 import { Action, Resource } from "services/enums";
 import { BaseRecord, GetOneResponse, useShow, useTranslate } from "@pankod/refine-core";
@@ -20,6 +21,7 @@ import {
   setDrawerFooter,
   setDrawerOnClose,
   setDrawerTitle,
+  setDrawerWidth
 } from "redux/slices/drawerSlice";
 import { useAppSelector, useAppDispatch } from "redux/hooks";
 import RichTextEditor from "components/RichTextEditor";
@@ -91,7 +93,8 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
 */
 
 export const useDefaultFormItems = (resource: string) => {
-  const { activeField } = useAppSelector((state) => state.drawer);
+  const { activeField, hideAll } = useAppSelector((state) => state.drawer);
+  
   const t = useTranslate();
   return (
     <>
@@ -103,6 +106,7 @@ export const useDefaultFormItems = (resource: string) => {
             required: true,
           },
         ]}
+        hidden = {hideAll}
       >
         <Input
           placeholder={`Enter ${t(`${resource}.fields.title`)}`}
@@ -110,7 +114,9 @@ export const useDefaultFormItems = (resource: string) => {
           tabIndex={1}
         />
       </Form.Item>
-      <Form.Item label={t(`${resource}.fields.description`)} name='description'>
+      <Form.Item label={t(`${resource}.fields.description`)} name='description' 
+      hidden = {hideAll}
+      >
         {/* @ts-ignore */}
         <RichTextEditor
           placeholder={`Enter ${t(`${resource}.fields.description`)}..`}
@@ -154,7 +160,7 @@ type DrawerFormProps = {
 };
 
 export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
-  const { action, itemId } = useAppSelector((state) => state.drawer);
+  const { action, itemId,hideAll } = useAppSelector((state) => state.drawer);
   const { resource, renderFields = () => null, footer } = props;
 
   const resources = useResources();
@@ -176,6 +182,7 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
     warnWhenUnsavedChanges: true,
   });
   const record = queryResult?.data?.data;
+  
 
   useEffect(() => {
     if (record) dispatch(setDrawerTitle(record.name));
@@ -217,6 +224,7 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
             }}
             type='primary'
             style={{ float: "right" }}
+            disabled={hideAll}
           >
             Save
           </Button>
@@ -224,16 +232,21 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
       )
     );
     dispatch(setDrawerOnClose(defaultOnClose));
-  }, [formLoading]);
+  }, [formLoading,hideAll]);
+
+  const { Panel } = Collapse;
 
   return (
     <Spin spinning={formLoading}>
+      
+      
       <Form {...formProps} layout='vertical'>
         {defaultFormItems}
         {roleFormItem}
         {renderFields({})}
         {/* <SaveButton {...saveButtonProps}>Save</SaveButton> */}
       </Form>
+      
     </Spin>
   );
 };
