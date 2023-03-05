@@ -1,5 +1,10 @@
-import { useTranslate, IResourceComponentsProps, useNavigation ,BaseRecord} from "@pankod/refine-core";
-import {  Table, UrlField, Tag } from "@pankod/refine-antd";
+import {
+  useTranslate,
+  IResourceComponentsProps,
+  useNavigation,
+  BaseRecord,
+} from "@pankod/refine-core";
+import { Table, UrlField, Tag } from "@pankod/refine-antd";
 import { useTableProps, useTableActionProps } from "hooks/table";
 import { Resource } from "services/enums";
 import { IJob, IRole, IUseCase } from "interfaces";
@@ -13,25 +18,23 @@ export const UseCaseList: React.FC<IResourceComponentsProps> = () => {
     {
       dataIndex: ["roles"],
       title: t("use-cases.fields.use-case-role"),
-      render: (id:number,useCase: BaseRecord) => {
-          return useCase.roles?.map((role: IRole) => (
-                     <Tag color='blue'>
-                       <UrlField value={editUrl(Resource.ROLE, role.id)}>{role.name}</UrlField>
-                     </Tag>
-                   ))
-      
+      render: (id: number, useCase: BaseRecord) => {
+        return useCase.roles?.map((role: IRole) => (
+          <Tag color='blue'>
+            <UrlField value={editUrl(Resource.ROLE, role.id)}>{role.name}</UrlField>
+          </Tag>
+        ));
       },
     },
     {
       dataIndex: ["jobs"],
       title: t("use-cases.fields.use-case-job"),
-      render: (id:number,useCase: BaseRecord) => {
-          return useCase?.jobs.map((job: IJob) => (
-                <Tag color='blue'>
-                  <UrlField value={editUrl(Resource.JOB, job.id)}>{job.name}</UrlField>
-                </Tag>
-              ))
-      
+      render: (id: number, useCase: BaseRecord) => {
+        return useCase?.jobs.map((job: IJob) => (
+          <Tag color='blue'>
+            <UrlField value={editUrl(Resource.JOB, job.id)}>{job.name}</UrlField>
+          </Tag>
+        ));
       },
     },
   ];
