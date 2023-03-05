@@ -66,13 +66,16 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
     {
       dataIndex: ["application_url.name"],
       title: t("jobs.fields.application-url-id"),
-      render: (id:number,job: BaseRecord) => <UrlField value={job.application_url?.url}>{job.application_url?.name}</UrlField>,
-      
+      render: (id: number, job: BaseRecord) => (
+        <UrlField value={job.application_url?.url}>{job.application_url?.name}</UrlField>
+      ),
     },
     {
       dataIndex: "roles.name",
       title: t("jobs.fields.process-role"),
-      render: (id:number, job: BaseRecord) => <TagList resource={Resource.ROLE} records={job.roles} />,
+      render: (id: number, job: BaseRecord) => (
+        <TagList resource={Resource.ROLE} records={job.roles} />
+      ),
     },
     {
       key: "is_template",
@@ -93,6 +96,4 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
       <Drawer />
     </>
   );
-
-
 };
