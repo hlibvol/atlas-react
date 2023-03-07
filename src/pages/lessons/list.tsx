@@ -6,7 +6,6 @@ import { ILesson } from "interfaces";
 import Drawer from "components/resource/drawer";
 import List from "components/resource/list";
 export const LessonList: React.FC<IResourceComponentsProps> = () => {
-
   return (
     <>
       <List resource={Resource.LESSON} />

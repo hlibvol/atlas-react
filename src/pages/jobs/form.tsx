@@ -9,7 +9,7 @@ import { Resource } from "services/enums";
 
 export const JobForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  
+
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
     resource: "application-urls",
     optionLabel: "name",
