@@ -9,7 +9,7 @@ import { Resource } from "services/enums";
 
 export const JobForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const defaultFormItems = useDefaultFormItems(Resource.JOB);
+  
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
     resource: "application-urls",
     optionLabel: "name",
@@ -48,34 +48,4 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
     </>
   );
   return <DrawerForm resource={resource} renderFields={renderFields} />;
-
-  // return (
-  //   <CreateOrEditForm>
-  //     <Panel
-  //       key='1'
-  //       header={usePanelHeader("Details", "Name, Description, Application URL and Roles")}
-  //     >
-  //       {defaultFormItems}
-  //       <Form.Item
-  //         label={t("jobs.fields.application-url-id")}
-  //         name='application_url_id'
-  //         rules={[
-  //           {
-  //             required: true,
-  //           },
-  //         ]}
-  //       >
-  //         <Select {...urlSelectProps} />
-  //       </Form.Item>
-  //       <Form.Item label={t("jobs.fields.process-role")} name='role_ids'>
-  //         <Select {...roleSelectProps} mode='multiple' />
-  //       </Form.Item>
-  //       <Form.Item name='is_template' valuePropName='checked'>
-  //         <Checkbox>
-  //           <Text strong>{t("jobs.fields.is-template.label")}</Text>{" "}
-  //         </Checkbox>
-  //       </Form.Item>
-  //     </Panel>
-  //   </CreateOrEditForm>
-  // );
 };

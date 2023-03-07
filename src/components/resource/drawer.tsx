@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Drawer as AntDDrawer, Space, Button } from "@pankod/refine-antd";
 import { Action } from "services/enums";
-import type { DrawerProps } from "antd/es/drawer";
 import { useAppSelector } from "redux/hooks";
 import { useTranslate } from "@pankod/refine-core";
 import { useResources } from "hooks/resource";
-import { ExpandOutlined } from "@ant-design/icons";
 
 const Drawer: React.FC = () => {
   const { action, title, resource, footer, onClose, extra, width } = useAppSelector(

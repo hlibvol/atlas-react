@@ -10,7 +10,6 @@ import {
   useSelect,
   Select,
   Modal,
-  Collapse,
 } from "@pankod/refine-antd";
 import { Action, Resource } from "services/enums";
 import { BaseRecord, GetOneResponse, useShow, useTranslate } from "@pankod/refine-core";
@@ -230,8 +229,6 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
     );
     dispatch(setDrawerOnClose(defaultOnClose));
   }, [formLoading, hideAll]);
-
-  const { Panel } = Collapse;
 
   return (
     <Spin spinning={formLoading}>
