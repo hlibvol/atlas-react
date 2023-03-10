@@ -7,6 +7,8 @@ import { usePanelHeader } from "hooks/common";
 import { useParams } from "react-router-dom";
 import { IJob, IRole, IUseCase } from "interfaces";
 import { useEffect, useState } from "react";
+import { DrawerForm } from "components/resource/form";
+import { Resource } from "services/enums";
 
 export const UseCaseForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -19,7 +21,7 @@ export const UseCaseForm: React.FC<IResourceComponentsProps> = () => {
   const [useCaseTableData, setUseCaseTableData] = useState([]) as Array<any>;
 
   const useCaseConfig = useCase?.table_config;
-
+  const resource = Resource.USE_CASE;
   useEffect(() => {
     const tableData = setTimeout(() => setUseCaseTableData(JSON.parse(useCaseConfig)), 1000);
     return () => clearTimeout(tableData);
@@ -96,37 +98,37 @@ export const UseCaseForm: React.FC<IResourceComponentsProps> = () => {
   });
 
   // checked and unchecked data functionality
+  return <DrawerForm resource={resource} />;
+  // return (
+  //   <CreateOrEditForm>
+  //     <Panel key='1' header={usePanelHeader("Details", "Name, Description and Roles")}>
+  //       <Form.Item
+  //         label={t("use-cases.fields.title")}
+  //         name='name'
+  //         rules={[
+  //           {
+  //             required: true,
+  //           },
+  //         ]}
+  //       >
+  //         <Input placeholder='Enter Name' />
+  //       </Form.Item>
 
-  return (
-    <CreateOrEditForm>
-      <Panel key='1' header={usePanelHeader("Details", "Name, Description and Roles")}>
-        <Form.Item
-          label={t("use-cases.fields.title")}
-          name='name'
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input placeholder='Enter Name' />
-        </Form.Item>
-
-        <Form.Item label={t("use-cases.fields.description")} name='description'>
-          <Input.TextArea placeholder='Enter Description' />
-        </Form.Item>
-      </Panel>
-      {isEdit && (
-        <Panel header={usePanelHeader("Designer", "Page content")} key='2' style={{ padding: "0" }}>
-          {id ? (
-            <UseCaseTable
-              colHeader={columns}
-              rowHeader={rowData}
-              useCaseTableConfig={useCaseTableData}
-            />
-          ) : null}
-        </Panel>
-      )}
-    </CreateOrEditForm>
-  );
+  //       <Form.Item label={t("use-cases.fields.description")} name='description'>
+  //         <Input.TextArea placeholder='Enter Description' />
+  //       </Form.Item>
+  //     </Panel>
+  //     {isEdit && (
+  //       <Panel header={usePanelHeader("Designer", "Page content")} key='2' style={{ padding: "0" }}>
+  //         {id ? (
+  //           <UseCaseTable
+  //             colHeader={columns}
+  //             rowHeader={rowData}
+  //             useCaseTableConfig={useCaseTableData}
+  //           />
+  //         ) : null}
+  //       </Panel>
+  //     )}
+  //   </CreateOrEditForm>
+  // );
 };
