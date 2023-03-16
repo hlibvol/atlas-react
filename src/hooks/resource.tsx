@@ -8,7 +8,7 @@ import { CourseForm, CourseList } from "pages/courses";
 import { LessonForm, LessonList, LessonShow } from "pages/lessons";
 import { UseCaseForm, UseCaseList } from "pages/useCases";
 
-import { UsersList, UserShow, UsersCreate, UsersEdit } from "pages/users";
+import { UsersList, UserShow, UsersCreate, UsersEdit, UserForm } from "pages/users";
 import { RoleForm, RoleList, RoleShow } from "pages/roles";
 import { Resource } from "services/enums";
 import { ScreenForm, ScreenList } from "pages/screens";
@@ -39,18 +39,23 @@ export const useResources = () => {
       name: Resource.ROLE,
       parentName: "user-management",
       list: RoleList,
-      create: RoleForm,
-      edit: RoleForm,
-      show: RoleShow,
+      // create: RoleForm,
+      // edit: RoleForm,
+      // show: RoleShow,
+      form: <RoleForm />,
+      hasDefaultFields: true,
       options: { route: Resource.ROLE },
     },
     {
       name: Resource.USER,
       parentName: "user-management",
       list: UsersList,
-      show: UserShow,
-      create: UsersCreate,
-      edit: UsersEdit,
+      // show: UserShow,
+      // create: UsersCreate,
+      // edit: UsersEdit,
+      form: <UserForm />,
+
+      hasDefaultFields: false,
       options: { route: Resource.USER },
     },
     {

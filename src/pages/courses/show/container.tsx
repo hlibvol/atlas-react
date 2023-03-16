@@ -6,6 +6,7 @@ import { ItemTypes } from "./ItemTypes";
 import { Col, Input, message, Row, Typography } from "@pankod/refine-antd";
 import { useShow, useUpdate } from "@pankod/refine-core";
 import { ICourse } from "interfaces";
+import { useParams } from "react-router";
 const { Text, Title } = Typography;
 
 const style = {
@@ -13,8 +14,9 @@ const style = {
 };
 
 export const Container: React.FC = memo(function Container() {
+  const { itemId } = useParams();
   const { mutate } = useUpdate();
-  const { queryResult } = useShow<ICourse>();
+  const { queryResult } = useShow<ICourse>({ id: itemId });
   const { data, isLoading } = queryResult;
   const course = data?.data;
   const [courseItems, setCourseItems] = useState([]) as Array<any>;

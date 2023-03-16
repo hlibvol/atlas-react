@@ -1,11 +1,30 @@
-import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { Form, useSelect, Select, Collapse, Checkbox, Typography } from "@pankod/refine-antd";
+import {
+  BaseRecord,
+  IResourceComponentsProps,
+  useTranslate,
+  useGetIdentity,
+  useShow,
+} from "@pankod/refine-core";
+import {
+  Show,
+  Space,
+  Form,
+  useSelect,
+  Select,
+  Collapse,
+  Checkbox,
+  Typography,
+  Button,
+} from "@pankod/refine-antd";
+import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
+import { ABDivider, HTMLContent, TagList } from "components/core";
 import { CreateOrEditForm } from "components/form";
 import { DrawerForm } from "components/resource/form";
-import { IRole, IAppUrl } from "interfaces";
+import { IRole, IAppUrl, IJob } from "interfaces";
 import { usePanelHeader } from "hooks/common";
 import { useDefaultFormItems } from "hooks/table";
-import { Resource } from "services/enums";
+import { Resource, Action } from "services/enums";
+import { useAppSelector } from "redux/hooks";
 
 export const JobForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -24,6 +43,41 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
   const { Panel } = Collapse;
   const { Text } = Typography;
   const resource = Resource.JOB;
+  const { action, itemId } = useAppSelector((state) => state.drawer);
+  console.log(itemId);
+
+  const { data: user } = useGetIdentity();
+
+  const urlSuffix = `${user?.id}/${itemId}/${(Math.random() + 1).toString(36).substring(2)}`;
+  console.log({ urlSuffix });
+  const footer =
+    itemId && action === Action.EDIT ? (
+      <>
+        <Space wrap>
+          <Button
+            type='primary'
+            size='small'
+            icon={<PlayCircleOutlined />}
+            target='_blank'
+            href={`ab:job/executor/${urlSuffix}`}
+          >
+            Execute Job
+          </Button>
+          {user.is_designer && (
+            <Button
+              type='primary'
+              size='small'
+              icon={<AntDesignOutlined />}
+              target='_blank'
+              href={`ab:job/designer/${urlSuffix}`}
+            >
+              Open Designer
+            </Button>
+          )}
+        </Space>
+      </>
+    ) : null;
+
   const renderFields = (jobRole: IRole | BaseRecord) => (
     <>
       <Form.Item
@@ -47,5 +101,5 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
       </Form.Item>
     </>
   );
-  return <DrawerForm resource={resource} renderFields={renderFields} />;
+  return <DrawerForm resource={resource} renderFields={renderFields} footer={footer} />;
 };

@@ -67,7 +67,8 @@ export const CourseItem = memo(function CourseItem({
     id: itemId,
   });
 
-  const { editUrl } = useEdit(Resource.LESSON, itemId, 2);
+  // const { editUrl } = useEdit(Resource.LESSON, itemId, 2);
+  const editUrl = `/editor/${Resource.LESSON}/${itemId}`;
 
   useEffect(() => {
     setPageContent(lessonData.data?.data.page_content);
@@ -96,7 +97,9 @@ export const CourseItem = memo(function CourseItem({
                   <div>
                     {pagecontent ? (
                       <Button type='primary' size='small' style={{ width: "105px" }}>
-                        <a href={editUrl}>{t("buttons.design")}</a>
+                        <a href={editUrl} target='_blank'>
+                          {t("buttons.design")}
+                        </a>
                       </Button>
                     ) : (
                       <AddContentModal

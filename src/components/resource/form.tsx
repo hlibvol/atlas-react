@@ -180,9 +180,10 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
   });
   const record = queryResult?.data?.data;
 
-  useEffect(() => {
-    if (record) dispatch(setDrawerTitle(record.name));
-  }, [record]);
+  //[2022-03-13] Shouldn't need this. once we test it is fine we can remove it
+  // useEffect(() => {
+  //   if (record) dispatch(setDrawerTitle(record.name));
+  // }, [record]);
 
   const defaultOnClose = () => {
     dispatch(closeDrawer());

@@ -2,7 +2,13 @@ import React from "react";
 import { Refine } from "@pankod/refine-core";
 import { RefineKbarProvider } from "@pankod/refine-kbar";
 import routerProvider from "@pankod/refine-react-router-v6";
-import { ConfigProvider, notificationProvider, Layout, ErrorComponent } from "@pankod/refine-antd";
+import {
+  ConfigProvider,
+  notificationProvider,
+  Layout,
+  ErrorComponent,
+  Collapse,
+} from "@pankod/refine-antd";
 import de_DE from "antd/lib/locale/de_DE";
 import { authProvider, dataProvider } from "./services/providers";
 
@@ -14,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import { Header, Title } from "components";
 import { useResources } from "hooks/resource";
 import { Editor } from "components/Editor-New";
+import { CourseContent } from "components/course-content";
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -42,6 +49,10 @@ const App: React.FC = () => {
               {
                 path: "/editor/:resource/:itemId",
                 element: <Editor />,
+              },
+              {
+                path: "/courses/:itemId",
+                element: <CourseContent />,
               },
             ],
           }}
