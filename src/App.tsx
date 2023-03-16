@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import { Header, Title } from "components";
 import { useResources } from "hooks/resource";
 import { Editor } from "components/Editor-New";
+import { UseCaseDesign } from "pages/useCases/designer";
 import { CourseContent } from "components/course-content";
 
 const App: React.FC = () => {
@@ -49,6 +50,10 @@ const App: React.FC = () => {
               {
                 path: "/editor/:resource/:itemId",
                 element: <Editor />,
+              },
+              {
+                path: "/designer/:resource/:itemId",
+                element: <UseCaseDesign />,
               },
               {
                 path: "/courses/:itemId",
