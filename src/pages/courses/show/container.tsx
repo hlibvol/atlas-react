@@ -23,7 +23,10 @@ export const Container: React.FC = memo(function Container() {
 
   useEffect(() => {
     if (course && course.items != courseItems) {
-      setCourseItems(course.items);
+      const sortedArray = course.items.sort((a: any, b: any) => {
+        return a.item_order - b.item_order;
+      });
+      setCourseItems(sortedArray);
     }
   }, [course?.items]);
 
@@ -85,10 +88,11 @@ export const Container: React.FC = memo(function Container() {
   };
   const handledOnKeyDownLesson = (e: any) => {
     if (name) {
+      const valueType = e.target.value.toLowerCase();
       if (e.keyCode == 13) {
         courseItems.push({
           item_title: name,
-          item_type: e.shiftKey ? "SECTION" : "LESSON",
+          item_type: valueType.includes("section") ? "SECTION" : "LESSON",
           item_id: 0,
           item_order: courseItems.length,
         });
@@ -105,7 +109,23 @@ export const Container: React.FC = memo(function Container() {
     updateCourse(removedItemData);
   };
 
-  const [, drop] = useDrop(() => ({ accept: ItemTypes.COURSEITEM }));
+  const [, drop] = useDrop({
+    accept: ItemTypes.COURSEITEM,
+    drop: (item, monitor) => {
+      const dropItem = JSON.parse(JSON.stringify(item));
+      const id = Number(dropItem["id"]);
+      const originalIndex = Number(dropItem["originalIndex"]);
+      const dropIndex = courseItems.findIndex((obj: any) => obj.id === id);
+      const newArray = courseItems.map((item: any, index: any) => ({ ...item, item_order: index }));
+      if (dropIndex === originalIndex) {
+        return;
+      } else {
+        moveCourseItem(String(id), dropIndex);
+        updateCourse(newArray);
+      }
+    },
+  });
+
   return (
     <div ref={drop} style={style}>
       {courseItems.map((courseItem: any, index: number) => (

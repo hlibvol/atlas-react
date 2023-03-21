@@ -180,6 +180,7 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
   });
   const record = queryResult?.data?.data;
 
+  //[Nikunj] Why do we need this?
   //[2022-03-13] Shouldn't need this. once we test it is fine we can remove it
   // useEffect(() => {
   //   if (record) dispatch(setDrawerTitle(record.name));
