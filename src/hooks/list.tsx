@@ -21,7 +21,7 @@ import { extractContent } from "services/utils";
 import { openDrawer, removeActiveField } from "redux/slices/drawerSlice";
 import { Resource, Action } from "services/enums";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, LinkOutlined, SettingOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { useResources } from "hooks/resource";
 
@@ -122,6 +122,8 @@ export const useDefaultColumns = (props: defaultColumnProps) => {
 type TableActionProps = {
   resource: Resource;
   hasRoles: boolean | undefined;
+  hasJobs: boolean | undefined;
+  roleJobsMatrix: boolean | undefined;
   disabledEdit?: boolean;
   disabledDelete?: boolean;
 };
@@ -129,7 +131,7 @@ type TableActionProps = {
 export const useTableActionProps = (props: TableActionProps) => {
   const t = useTranslate();
   const dispatch = useAppDispatch();
-  const { disabledEdit, disabledDelete, resource, hasRoles } = props;
+  const { disabledEdit, disabledDelete, resource, hasRoles, hasJobs, roleJobsMatrix } = props;
   const buttonProps = (id: BaseKey | undefined, disabled: boolean | string | undefined) => {
     return {
       hideText: true,
@@ -182,6 +184,36 @@ export const useTableActionProps = (props: TableActionProps) => {
                   })
                 );
               }}
+            />
+          )}
+          {hasJobs && (
+            <Button
+              icon={<LinkOutlined />}
+              size='small'
+              type='primary'
+              title='Associated Jobs'
+              ghost
+              onClick={() => {
+                dispatch(
+                  openDrawer({
+                    resource: resource,
+                    action: Action.EDIT,
+                    itemId: record.id,
+                    activeField: "job_ids",
+                  })
+                );
+              }}
+            />
+          )}
+          {roleJobsMatrix && (
+            <Button
+              icon={<SettingOutlined />}
+              size='small'
+              type='primary'
+              title='Role-Job Matrix'
+              ghost
+              href={`/use-cases/${record.id}`}
+              target='_blank'
             />
           )}
           <EditButton
@@ -250,8 +282,15 @@ export const useListProps = (props: ListProps) => {
   // const pageSize = usePageSize();
 
   const resources = useResources();
-  const { hasDefaultFields, hasRoles } = resources.find((r) => r.name === resource) ?? {};
-  const tableActionProps = useTableActionProps({ ..._tableActionProps, resource, hasRoles });
+  const { hasDefaultFields, hasRoles, hasJobs, roleJobsMatrix } =
+    resources.find((r) => r.name === resource) ?? {};
+  const tableActionProps = useTableActionProps({
+    ..._tableActionProps,
+    resource,
+    hasRoles,
+    hasJobs,
+    roleJobsMatrix,
+  });
   const defaultColumns = hasDefaultFields ? useDefaultColumns({ resource }) : [];
   return { tableProps, tableActionProps, defaultColumns };
 };

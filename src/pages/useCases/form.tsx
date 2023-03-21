@@ -12,8 +12,8 @@ export const UseCaseForm: React.FC<IResourceComponentsProps> = () => {
 
   const footer =
     itemId && action === Action.EDIT ? (
-      <Button href={`/designer/${resource}/${itemId}`} target='_blank'>
-        Open Page Content
+      <Button href={`/editor/${resource}/${itemId}`} target='_blank'>
+        Design Use Case
       </Button>
     ) : null;
 

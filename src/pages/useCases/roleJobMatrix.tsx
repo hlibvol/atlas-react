@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { IResourceComponentsProps, useTranslate, useShow, useList } from "@pankod/refine-core";
 import { Collapse } from "@pankod/refine-antd";
@@ -15,16 +15,16 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
 
   const { itemId } = useParams();
 
-  const { queryResult } = useShow<IUseCase>();
+  const { queryResult } = useShow<IUseCase>({ id: itemId });
   const useCase = queryResult.data?.data;
   const [useCaseTableData, setUseCaseTableData] = useState([]) as Array<any>;
 
   const useCaseConfig = useCase?.table_config;
 
-  // useEffect(() => {
-  //   const tableData = setTimeout(() => setUseCaseTableData(JSON.parse(useCaseConfig)), 1000);
-  //   return () => clearTimeout(tableData);
-  // }, [useCaseConfig]);
+  useEffect(() => {
+    const tableData = setTimeout(() => setUseCaseTableData(JSON.parse(useCaseConfig)), 1000);
+    return () => clearTimeout(tableData);
+  }, [useCaseConfig]);
 
   // role value for column data in matrix table
   let roleIDs = Array();

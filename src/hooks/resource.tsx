@@ -45,6 +45,7 @@ export const useResources = () => {
       form: <RoleForm />,
       hasDefaultFields: true,
       options: { route: Resource.ROLE },
+      hasJobs: true,
     },
     {
       name: Resource.USER,
@@ -119,6 +120,7 @@ export const useResources = () => {
       icon: <Icons.ReadOutlined />,
       options: { route: Resource.USE_CASE },
       hasDefaultFields: true,
+      roleJobsMatrix: true,
     },
     {
       name: Resource.SCREENS,
