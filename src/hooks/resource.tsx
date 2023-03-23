@@ -1,4 +1,4 @@
-import { Icons } from "@pankod/refine-antd";
+import { Button, Icons } from "@pankod/refine-antd";
 
 import { ApplicationURLForm, ApplicationURLList } from "pages/applicationUrl";
 import { JobForm, JobList, JobShow } from "pages/jobs";
@@ -89,6 +89,8 @@ export const useResources = () => {
       options: { route: Resource.PLAYBOOK },
       hasDefaultFields: true,
       hasRoles: true,
+      previewButton: true,
+      designerButton: true,
     },
     {
       name: Resource.COURSE,

@@ -12,6 +12,7 @@ import {
   BaseRecord,
   CrudSorting,
   OpenNotificationParams,
+  useNavigation,
   useTranslate,
 } from "@pankod/refine-core";
 import { FixedType } from "rc-table/lib/interface";
@@ -21,7 +22,13 @@ import { extractContent } from "services/utils";
 import { openDrawer, removeActiveField } from "redux/slices/drawerSlice";
 import { Resource, Action } from "services/enums";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { UserOutlined, LinkOutlined, SettingOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  EyeOutlined,
+  PlayCircleOutlined,
+  LinkOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 import moment from "moment";
 import { useResources } from "hooks/resource";
 
@@ -122,6 +129,8 @@ export const useDefaultColumns = (props: defaultColumnProps) => {
 type TableActionProps = {
   resource: Resource;
   hasRoles: boolean | undefined;
+  previewButton: boolean | undefined;
+  designerButton: boolean | undefined;
   hasJobs: boolean | undefined;
   roleJobsMatrix: boolean | undefined;
   disabledEdit?: boolean;
@@ -131,7 +140,17 @@ type TableActionProps = {
 export const useTableActionProps = (props: TableActionProps) => {
   const t = useTranslate();
   const dispatch = useAppDispatch();
-  const { disabledEdit, disabledDelete, resource, hasRoles, hasJobs, roleJobsMatrix } = props;
+  const { showUrl } = useNavigation();
+  const {
+    disabledEdit,
+    disabledDelete,
+    resource,
+    hasRoles,
+    hasJobs,
+    roleJobsMatrix,
+    previewButton,
+    designerButton,
+  } = props;
   const buttonProps = (id: BaseKey | undefined, disabled: boolean | string | undefined) => {
     return {
       hideText: true,
@@ -186,6 +205,30 @@ export const useTableActionProps = (props: TableActionProps) => {
               }}
             />
           )}
+          {previewButton && (
+            <Button
+              icon={<EyeOutlined />}
+              size='small'
+              type='primary'
+              ghost
+              href={showUrl(resource, record.id ? record.id : "")}
+              target='_blank'
+              title={`Preview ${resource}`}
+              style={{ color: "#1890ff", border: "1px solid #1890ff" }}
+            />
+          )}
+          {designerButton && (
+            <Button
+              icon={<PlayCircleOutlined />}
+              size='small'
+              type='primary'
+              ghost
+              href={`/editor/${resource}/${record.id}`}
+              target='_blank'
+              title={`Design ${resource}`}
+              style={{ color: "#22075e", border: "1px solid #22075e" }}
+            />
+          )}
           {hasJobs && (
             <Button
               icon={<LinkOutlined />}
@@ -233,7 +276,7 @@ export const useTableActionProps = (props: TableActionProps) => {
           <DeleteButton {...buttonProps(record.id, disabledDelete)} />
         </Space>
       ),
-      width: 135,
+      width: 160,
       fixed: "right" as FixedType,
     },
   ];
@@ -282,12 +325,14 @@ export const useListProps = (props: ListProps) => {
   // const pageSize = usePageSize();
 
   const resources = useResources();
-  const { hasDefaultFields, hasRoles, hasJobs, roleJobsMatrix } =
+  const { hasDefaultFields, hasRoles, hasJobs, roleJobsMatrix, previewButton, designerButton } =
     resources.find((r) => r.name === resource) ?? {};
   const tableActionProps = useTableActionProps({
     ..._tableActionProps,
     resource,
     hasRoles,
+    previewButton,
+    designerButton,
     hasJobs,
     roleJobsMatrix,
   });
