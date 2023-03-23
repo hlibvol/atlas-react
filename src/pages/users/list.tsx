@@ -17,11 +17,11 @@ import { openDrawer, setDrawerTitle } from "redux/slices/drawerSlice";
 
 export const UsersList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  // const { editUrl, showUrl } = useNavigation();
+  const { editUrl, showUrl } = useNavigation();
   // const tableProps = useTableProps({ resource: Resource.USER });
   // const tableActionProps = useTableActionProps();
   // const pageSize = usePageSize();
-  // const { data: roles } = useList<IRole>({ resource: Resource.ROLE });
+  const { data: roles } = useList<IRole>({ resource: Resource.ROLE });
 
   // const columns: ColumnsType<IUser> = [
   //   {
@@ -40,18 +40,6 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
   //   {
   //     dataIndex: "last_name",
   //     title: t("users.fields.last_name"),
-  //   },
-  //   {
-  //     dataIndex: ["role_id"],
-  //     title: t("users.fields.role"),
-  //     render: (roleId) => {
-  //       const role = roles?.data.find((item) => item.id === roleId);
-  //       return (
-  //         <Tag color='green'>
-  //           {role ? <UrlField value={editUrl(Resource.ROLE, role.id)}>{role.name}</UrlField> : null}
-  //         </Tag>
-  //       );
-  //     },
   //   },
   //   {
   //     dataIndex: "email",
@@ -122,6 +110,18 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
     {
       dataIndex: "email",
       title: t("users.fields.email"),
+    },
+    {
+      dataIndex: ["role_id"],
+      title: t("users.fields.role"),
+      render: (roleId: number) => {
+        const role = roles?.data.find((item) => item.id === roleId);
+        return (
+          <Tag color='green'>
+            {role ? <UrlField value={editUrl(Resource.ROLE, role.id)}>{role.name}</UrlField> : null}
+          </Tag>
+        );
+      },
     },
     {
       dataIndex: "is_designer",

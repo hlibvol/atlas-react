@@ -209,7 +209,7 @@
       "last_name": "Last Name",
       "email": "Email Id",
       "password": "Password",
-      "role": "Process Role",
+      "role": "Associated Role",
       "is_active": {
         "label": "Is Active",
         "true": "Yes",
@@ -260,7 +260,8 @@
     "fields": {
       "id": "Role ID",
       "title": "Role Name",
-      "description": "Description"
+      "description": "Description",
+      "associatedJob": "Associated Jobs"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
