@@ -5,24 +5,10 @@ import {
   useGetIdentity,
   useShow,
 } from "@pankod/refine-core";
-import {
-  Show,
-  Space,
-  Form,
-  useSelect,
-  Select,
-  Collapse,
-  Checkbox,
-  Typography,
-  Button,
-} from "@pankod/refine-antd";
+import { Space, Form, useSelect, Select, Checkbox, Typography, Button } from "@pankod/refine-antd";
 import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
-import { ABDivider, HTMLContent, TagList } from "components/core";
-import { CreateOrEditForm } from "components/form";
 import { DrawerForm } from "components/resource/form";
 import { IRole, IAppUrl, IJob } from "interfaces";
-import { usePanelHeader } from "hooks/common";
-import { useDefaultFormItems } from "hooks/table";
 import { Resource, Action } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 
@@ -40,11 +26,10 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
     optionLabel: "name",
     optionValue: "id",
   });
-  const { Panel } = Collapse;
+
   const { Text } = Typography;
   const resource = Resource.JOB;
-  const { action, itemId } = useAppSelector((state) => state.drawer);
-  console.log(itemId);
+  const { action, itemId, activeField } = useAppSelector((state) => state.drawer);
 
   const { data: user } = useGetIdentity();
 
@@ -54,15 +39,6 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
     itemId && action === Action.EDIT ? (
       <>
         <Space wrap>
-          <Button
-            type='primary'
-            size='small'
-            icon={<PlayCircleOutlined />}
-            target='_blank'
-            href={`ab:job/executor/${urlSuffix}`}
-          >
-            Execute Job
-          </Button>
           {user.is_designer && (
             <Button
               type='primary'
@@ -71,9 +47,18 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
               target='_blank'
               href={`ab:job/designer/${urlSuffix}`}
             >
-              Open Designer
+              {t("buttons.design-job")}
             </Button>
           )}
+          <Button
+            type='primary'
+            size='small'
+            icon={<PlayCircleOutlined />}
+            target='_blank'
+            href={`ab:job/executor/${urlSuffix}`}
+          >
+            {t("buttons.execute-job")}
+          </Button>
         </Space>
       </>
     ) : null;
@@ -92,7 +77,7 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
         <Select {...urlSelectProps} />
       </Form.Item>
       <Form.Item label={t("jobs.fields.process-role")} name='role_ids'>
-        <Select {...roleSelectProps} mode='multiple' />
+        <Select {...roleSelectProps} autoFocus={activeField === "role_ids"} mode='multiple' />
       </Form.Item>
       <Form.Item name='is_template' valuePropName='checked'>
         <Checkbox>

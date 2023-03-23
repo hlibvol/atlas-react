@@ -97,7 +97,10 @@
     "design": "Design",
     "blank-lesson": "Blank Lesson",
     "blank-quiz": "Blank Quiz",
-    "add-content": "Add Content"
+    "add-content": "Add Content",
+    "design-job": "Design Job",
+    "execute-job": "Execute Job",
+    "design-use-case": "Design Use Case"
   },
   "loading": "Loading",
   "tags": {

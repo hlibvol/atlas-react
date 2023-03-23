@@ -25,13 +25,6 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
       ),
     },
     {
-      dataIndex: "roles.name",
-      title: t("jobs.fields.process-role"),
-      render: (id: number, job: BaseRecord) => (
-        <TagList resource={Resource.ROLE} records={job.roles} />
-      ),
-    },
-    {
       key: "is_template",
       dataIndex: "is_template",
       title: t("jobs.fields.is-template.label"),

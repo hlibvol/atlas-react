@@ -68,6 +68,7 @@ export const useResources = () => {
       form: <JobForm />,
       options: { route: Resource.JOB },
       hasDefaultFields: true,
+      hasRoles: true,
     },
     {
       name: Resource.PLAYBOOK,
