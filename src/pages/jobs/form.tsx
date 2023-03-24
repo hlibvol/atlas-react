@@ -8,7 +8,7 @@ import {
 import { Space, Form, useSelect, Select, Checkbox, Typography, Button } from "@pankod/refine-antd";
 import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
 import { DrawerForm } from "components/resource/form";
-import { IRole, IAppUrl, IJob } from "interfaces";
+import { IRole, IAppUrl, IJob, IUseCase } from "interfaces";
 import { Resource, Action } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 
@@ -23,6 +23,11 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
 
   const { selectProps: roleSelectProps } = useSelect<IRole>({
     resource: "roles",
+    optionLabel: "name",
+    optionValue: "id",
+  });
+  const { selectProps: useCasesSelectProps } = useSelect<IUseCase>({
+    resource: "use-cases",
     optionLabel: "name",
     optionValue: "id",
   });
@@ -78,6 +83,13 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
       </Form.Item>
       <Form.Item label={t("jobs.fields.process-role")} name='role_ids'>
         <Select {...roleSelectProps} autoFocus={activeField === "role_ids"} mode='multiple' />
+      </Form.Item>
+      <Form.Item label={t("jobs.fields.associatedUseCases")} name='use_case_ids'>
+        <Select
+          {...useCasesSelectProps}
+          autoFocus={activeField === "use_case_ids"}
+          mode='multiple'
+        />
       </Form.Item>
       <Form.Item name='is_template' valuePropName='checked'>
         <Checkbox>

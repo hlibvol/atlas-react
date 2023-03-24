@@ -300,6 +300,7 @@
       "description": "Description",
       "application-url-id": "Application URL",
       "process-role": "Process Role",
+      "associatedUseCases": "Associated Use Cases",
       "is-template": {
         "label": "Is Template",
         "true": "Yes",

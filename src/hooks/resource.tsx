@@ -71,6 +71,7 @@ export const useResources = () => {
       options: { route: Resource.JOB },
       hasDefaultFields: true,
       hasRoles: true,
+      hasUseCases: true,
     },
     {
       name: Resource.PLAYBOOK,
@@ -107,8 +108,6 @@ export const useResources = () => {
     {
       name: Resource.USE_CASE,
       list: UseCaseList,
-      // create: UseCaseForm,
-      // edit: UseCaseForm,
       form: <UseCaseForm />,
       icon: <Icons.ReadOutlined />,
       options: { route: Resource.USE_CASE },
