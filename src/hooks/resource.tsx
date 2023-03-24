@@ -43,6 +43,8 @@ export const useResources = () => {
       hasDefaultFields: true,
       options: { route: Resource.ROLE },
       hasJobs: true,
+      hasUseCases: true,
+      hasPlaybook: true,
     },
     {
       name: Resource.USER,

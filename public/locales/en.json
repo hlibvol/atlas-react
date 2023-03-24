@@ -264,7 +264,9 @@
       "id": "Role ID",
       "title": "Role Name",
       "description": "Description",
-      "associatedJob": "Associated Jobs"
+      "associatedJob": "Associated Jobs",
+      "associatedUseCases": "Associated Use Cases",
+      "associatedPlayBook": "Associated Playbook"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"

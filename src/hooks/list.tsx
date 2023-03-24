@@ -132,6 +132,8 @@ type TableActionProps = {
   previewButton: boolean | undefined;
   designerButton: boolean | undefined;
   hasJobs: boolean | undefined;
+  hasUseCases: boolean | undefined;
+  hasPlaybook: boolean | undefined;
   roleJobsMatrix: boolean | undefined;
   disabledEdit?: boolean;
   disabledDelete?: boolean;
@@ -147,6 +149,8 @@ export const useTableActionProps = (props: TableActionProps) => {
     resource,
     hasRoles,
     hasJobs,
+    hasUseCases,
+    hasPlaybook,
     roleJobsMatrix,
     previewButton,
     designerButton,
@@ -248,6 +252,47 @@ export const useTableActionProps = (props: TableActionProps) => {
               }}
             />
           )}
+          {hasUseCases && (
+            <Button
+              size='small'
+              type='primary'
+              title='Associated Use Cases'
+              style={{ color: "#1890ff", border: "1px solid #1890ff" }}
+              ghost
+              onClick={() => {
+                dispatch(
+                  openDrawer({
+                    resource: resource,
+                    action: Action.EDIT,
+                    itemId: record.id,
+                    activeField: "use_case_ids",
+                  })
+                );
+              }}
+            >
+              U
+            </Button>
+          )}
+          {hasPlaybook && (
+            <Button
+              size='small'
+              type='primary'
+              title='Associated Playbook'
+              ghost
+              onClick={() => {
+                dispatch(
+                  openDrawer({
+                    resource: resource,
+                    action: Action.EDIT,
+                    itemId: record.id,
+                    activeField: "playbook_ids",
+                  })
+                );
+              }}
+            >
+              P
+            </Button>
+          )}
           {roleJobsMatrix && (
             <Button
               icon={<SettingOutlined />}
@@ -276,7 +321,7 @@ export const useTableActionProps = (props: TableActionProps) => {
           <DeleteButton {...buttonProps(record.id, disabledDelete)} />
         </Space>
       ),
-      width: 160,
+      width: 165,
       fixed: "right" as FixedType,
     },
   ];
@@ -325,8 +370,16 @@ export const useListProps = (props: ListProps) => {
   // const pageSize = usePageSize();
 
   const resources = useResources();
-  const { hasDefaultFields, hasRoles, hasJobs, roleJobsMatrix, previewButton, designerButton } =
-    resources.find((r) => r.name === resource) ?? {};
+  const {
+    hasDefaultFields,
+    hasRoles,
+    hasJobs,
+    hasUseCases,
+    hasPlaybook,
+    roleJobsMatrix,
+    previewButton,
+    designerButton,
+  } = resources.find((r) => r.name === resource) ?? {};
   const tableActionProps = useTableActionProps({
     ..._tableActionProps,
     resource,
@@ -334,6 +387,8 @@ export const useListProps = (props: ListProps) => {
     previewButton,
     designerButton,
     hasJobs,
+    hasUseCases,
+    hasPlaybook,
     roleJobsMatrix,
   });
   const defaultColumns = hasDefaultFields ? useDefaultColumns({ resource }) : [];
