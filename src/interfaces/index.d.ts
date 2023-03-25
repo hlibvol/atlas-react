@@ -36,6 +36,7 @@ export interface IRole {
   id: number;
   name: string;
   description: string;
+  job_ids: number[];
 }
 export interface IAppUrl {
   id: number;

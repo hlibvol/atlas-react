@@ -121,6 +121,7 @@ export const useResources = () => {
       options: { route: Resource.SCREENS, label: "Screens" },
       hasDefaultFields: true,
       icon: <Icons.FundProjectionScreenOutlined />,
+      hasJobs: true,
     },
   ];
 };

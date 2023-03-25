@@ -81,9 +81,6 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
       >
         <Select {...urlSelectProps} />
       </Form.Item>
-      <Form.Item label={t("jobs.fields.process-role")} name='role_ids'>
-        <Select {...roleSelectProps} autoFocus={activeField === "role_ids"} mode='multiple' />
-      </Form.Item>
       <Form.Item label={t("jobs.fields.associatedUseCases")} name='use_case_ids'>
         <Select
           {...useCasesSelectProps}

@@ -339,7 +339,8 @@
       "title": "Name",
       "description": "Description",
       "page-content": "Page Content",
-      "process-role": "Process Roles"
+      "process-role": "Process Roles",
+      "associatedJob": "Associated Jobs"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"

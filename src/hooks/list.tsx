@@ -235,7 +235,6 @@ export const useTableActionProps = (props: TableActionProps) => {
           )}
           {hasJobs && (
             <Button
-              icon={<LinkOutlined />}
               size='small'
               type='primary'
               title='Associated Jobs'
@@ -250,7 +249,9 @@ export const useTableActionProps = (props: TableActionProps) => {
                   })
                 );
               }}
-            />
+            >
+              J
+            </Button>
           )}
           {hasUseCases && (
             <Button

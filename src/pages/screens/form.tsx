@@ -1,14 +1,33 @@
 import React from "react";
 
-import { IResourceComponentsProps } from "@pankod/refine-core";
-import { Button } from "@pankod/refine-antd";
-
+import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
+import { Button, Form, Select, useSelect } from "@pankod/refine-antd";
 import { DrawerForm } from "components/resource/form";
 import { Action, Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
+import { IJob, IScreens } from "interfaces";
 
 export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
-  const { action, itemId } = useAppSelector((state) => state.drawer);
+  const { action, itemId, activeField } = useAppSelector((state) => state.drawer);
+  const t = useTranslate();
   const resource = Resource.SCREENS;
-  return <DrawerForm resource={resource} />;
+  const { selectProps: jobSelectProps } = useSelect<IJob>({
+    resource: Resource.JOB,
+    optionLabel: "name",
+    optionValue: "id",
+  });
+
+  const renderFields = (screenJob: IScreens | BaseRecord) => (
+    <>
+      <Form.Item label={t("screens.fields.associatedJob")} name='job_ids'>
+        <Select
+          {...jobSelectProps}
+          autoFocus={activeField === "job_ids"}
+          placeholder='Select Jobs'
+          mode='multiple'
+        />
+      </Form.Item>
+    </>
+  );
+  return <DrawerForm resource={resource} renderFields={renderFields} />;
 };
