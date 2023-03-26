@@ -134,6 +134,7 @@ type TableActionProps = {
   hasJobs: boolean | undefined;
   hasUseCases: boolean | undefined;
   hasPlaybook: boolean | undefined;
+  hasScreen: boolean | undefined;
   roleJobsMatrix: boolean | undefined;
   disabledEdit?: boolean;
   disabledDelete?: boolean;
@@ -151,6 +152,7 @@ export const useTableActionProps = (props: TableActionProps) => {
     hasJobs,
     hasUseCases,
     hasPlaybook,
+    hasScreen,
     roleJobsMatrix,
     previewButton,
     designerButton,
@@ -294,6 +296,26 @@ export const useTableActionProps = (props: TableActionProps) => {
               P
             </Button>
           )}
+          {hasScreen && (
+            <Button
+              size='small'
+              type='primary'
+              title='Associated Screen'
+              ghost
+              onClick={() => {
+                dispatch(
+                  openDrawer({
+                    resource: resource,
+                    action: Action.EDIT,
+                    itemId: record.id,
+                    activeField: "screen_ids",
+                  })
+                );
+              }}
+            >
+              S
+            </Button>
+          )}
           {roleJobsMatrix && (
             <Button
               icon={<SettingOutlined />}
@@ -377,6 +399,7 @@ export const useListProps = (props: ListProps) => {
     hasJobs,
     hasUseCases,
     hasPlaybook,
+    hasScreen,
     roleJobsMatrix,
     previewButton,
     designerButton,
@@ -390,6 +413,7 @@ export const useListProps = (props: ListProps) => {
     hasJobs,
     hasUseCases,
     hasPlaybook,
+    hasScreen,
     roleJobsMatrix,
   });
   const defaultColumns = hasDefaultFields ? useDefaultColumns({ resource }) : [];

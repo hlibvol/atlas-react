@@ -8,7 +8,7 @@ import {
 import { Space, Form, useSelect, Select, Checkbox, Typography, Button } from "@pankod/refine-antd";
 import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
 import { DrawerForm } from "components/resource/form";
-import { IRole, IAppUrl, IJob, IUseCase } from "interfaces";
+import { IRole, IAppUrl, IJob, IUseCase, IScreens } from "interfaces";
 import { Resource, Action } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 
@@ -16,18 +16,18 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
 
   const { selectProps: urlSelectProps } = useSelect<IAppUrl>({
-    resource: "application-urls",
+    resource: Resource.APPLICATION_URL,
     optionLabel: "name",
     optionValue: "id",
   });
 
-  const { selectProps: roleSelectProps } = useSelect<IRole>({
-    resource: "roles",
+  const { selectProps: screenSelectProps } = useSelect<IScreens>({
+    resource: Resource.SCREENS,
     optionLabel: "name",
     optionValue: "id",
   });
   const { selectProps: useCasesSelectProps } = useSelect<IUseCase>({
-    resource: "use-cases",
+    resource: Resource.USE_CASE,
     optionLabel: "name",
     optionValue: "id",
   });
@@ -79,12 +79,21 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
           },
         ]}
       >
-        <Select {...urlSelectProps} />
+        <Select {...urlSelectProps} placeholder='Select Application URL' />
       </Form.Item>
       <Form.Item label={t("jobs.fields.associatedUseCases")} name='use_case_ids'>
         <Select
           {...useCasesSelectProps}
           autoFocus={activeField === "use_case_ids"}
+          placeholder='Select Use Cases'
+          mode='multiple'
+        />
+      </Form.Item>
+      <Form.Item label={t("jobs.fields.associatedScreen")} name='screen_ids'>
+        <Select
+          {...screenSelectProps}
+          autoFocus={activeField === "screen_ids"}
+          placeholder='Select Screen'
           mode='multiple'
         />
       </Form.Item>
