@@ -1,14 +1,14 @@
-import { Button, Icons } from "@pankod/refine-antd";
+import { Icons } from "@pankod/refine-antd";
 
 import { ApplicationURLForm, ApplicationURLList } from "pages/applicationUrl";
 import { JobForm, JobList, JobShow } from "pages/jobs";
-import { PlayBookList, PlaybookForm } from "pages/playbooks";
+import { PlayBookList, PlaybookForm, PlayBookShow } from "pages/playbooks";
 import { CourseForm, CourseList } from "pages/courses";
 
 import { LessonForm, LessonList, LessonShow } from "pages/lessons";
 import { UseCaseForm, UseCaseList } from "pages/useCases";
 
-import { UsersList, UserShow, UsersCreate, UsersEdit, UserForm } from "pages/users";
+import { UsersList, UserShow, UserForm } from "pages/users";
 import { RoleForm, RoleList, RoleShow } from "pages/roles";
 import { Resource } from "services/enums";
 import { ScreenForm, ScreenList } from "pages/screens";
@@ -78,6 +78,7 @@ export const useResources = () => {
       parentName: "play-design",
       list: PlayBookList,
       form: <PlaybookForm />,
+      show: PlayBookShow,
       options: { route: Resource.PLAYBOOK },
       hasDefaultFields: true,
       hasRoles: true,
