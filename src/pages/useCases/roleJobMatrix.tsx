@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { IResourceComponentsProps, useTranslate, useShow, useList } from "@pankod/refine-core";
-import { Collapse } from "@pankod/refine-antd";
+import { Icons, Show } from "@pankod/refine-antd";
 
 import { DrawerForm } from "components/resource/form";
 import { Resource } from "services/enums";
@@ -22,7 +22,10 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
   const useCaseConfig = useCase?.table_config;
 
   useEffect(() => {
-    const tableData = setTimeout(() => setUseCaseTableData(JSON.parse(useCaseConfig)), 1000);
+    const tableData = setTimeout(
+      () => useCaseConfig && setUseCaseTableData(JSON.parse(useCaseConfig)),
+      1000
+    );
     return () => clearTimeout(tableData);
   }, [useCaseConfig]);
 
@@ -44,7 +47,9 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
     }
   });
 
-  const columns: any = [{ headerName: "Job Name", field: "job", rowDrag: true, editable: false }];
+  const columns: any = [
+    { headerName: "Job Name", field: "job", rowDrag: true, editable: false, sortable: false },
+  ];
   roleOptionsArray.map(function (values: any, index: any) {
     const val = values[0];
     const obj = {
@@ -53,6 +58,7 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
       // checkboxSelection: true,
       cellRenderer: "checkboxRenderer",
       id: val.id,
+      sortable: false,
       cellRendererParams: (param: any) => {
         return {
           customCheck: param.value !== undefined ? true : undefined,
@@ -95,16 +101,18 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
       (obj.id = val.id), rowData.push(obj);
     }
   });
-
+  console.log(useCase);
   return (
-    <CreateOrEditForm>
-      {itemId ? (
-        <UseCaseTable
-          colHeader={columns}
-          rowHeader={rowData}
-          useCaseTableConfig={useCaseTableData}
-        />
-      ) : null}
-    </CreateOrEditForm>
+    <Show
+      title={useCase && useCase.name ? useCase.name : "Use case"}
+      isLoading={queryResult.isLoading}
+      canEdit
+      goBack={<Icons.SmileOutlined />}
+      headerProps={{
+        subTitle: "(Job - Role Matrix)",
+      }}
+    >
+      <UseCaseTable colHeader={columns} rowHeader={rowData} useCaseTableConfig={useCaseTableData} />
+    </Show>
   );
 };

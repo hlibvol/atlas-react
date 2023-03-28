@@ -3,11 +3,12 @@ import { AgGridReact, AgGridColumn } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { Select, useSelect } from "@pankod/refine-antd";
+import { Form, Select, useSelect } from "@pankod/refine-antd";
 
 import { Col, Row, SelectProps } from "antd";
 import { IUseCase, IRole, IJob } from "interfaces";
 import { useMany, useOne, useShow, useUpdate } from "@pankod/refine-core";
+import { useLocation } from "@pankod/refine-react-router-v6";
 interface IfirstChildProps {
   colHeader: any;
   rowHeader: any;
@@ -33,7 +34,10 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
   const [columnHeaderData, setColumnHeaderData] = useState([]) as Array<any>;
   const [rowNameHeaderData, setRowNameHeaderData] = useState([]) as Array<any>;
   const { queryResult: userQueryResult } = useShow<IUseCase>();
+  const location = useLocation();
+  const id = location.pathname.split("/")?.[2] || "";
   const useCase = userQueryResult.data?.data;
+
   useEffect(() => {
     setColumnHeaderData(colHeader);
     setRowNameHeaderData(rowHeader);
@@ -56,9 +60,10 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
     mutate(
       {
         resource: "use-cases",
-        id: useCase?.id || "",
+        id,
         values: { table_config: configData },
         mutationMode: "optimistic",
+        successNotification: false,
       },
       {
         onError: (error, variables, context) => {
@@ -72,26 +77,41 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
       }
     );
   };
-  const handleChange = (value: string) => {
-    const roleData = useCaseTableConfig?.roles;
-    const jobData = useCaseTableConfig?.jobs;
-    roleData.push({
-      Id: value,
-      width: 120,
-      order: roleData?.length,
-    });
-
-    updateMatrixData(roleData, jobData);
+  let roleData = useCaseTableConfig?.roles || [];
+  let jobData = useCaseTableConfig?.jobs || [];
+  const handleChange = (value: any) => {
+    if (value.length > roleData.length) {
+      value.map((v: any) => {
+        roleData?.filter(({ Id }: any) => v == Id)?.[0] ||
+          roleData.push({
+            Id: v,
+            width: 120,
+            order: roleData?.length,
+          });
+      });
+      updateMatrixData(roleData, jobData);
+    }
   };
 
-  const rowHandleChange = (value: string) => {
-    const roleData = useCaseTableConfig?.roles;
-    const jobData = useCaseTableConfig?.jobs;
-    jobData.push({
-      Id: value,
-      order: jobData?.length,
-    });
+  const rowHandleChange = (value: any) => {
+    if (value.length > jobData.length) {
+      value.map((v: any) => {
+        jobData?.filter(({ Id }: any) => v == Id)?.[0] ||
+          jobData.push({
+            Id: v,
+            order: jobData?.length,
+          });
+      });
+      updateMatrixData(roleData, jobData);
+    }
+  };
 
+  const handleDeselectRole = (value: any) => {
+    roleData = roleData?.filter(({ Id }: any) => value !== Id);
+    updateMatrixData(roleData, jobData);
+  };
+  const handleDeselectJob = (value: any) => {
+    jobData = jobData?.filter(({ Id }: any) => value !== Id);
     updateMatrixData(roleData, jobData);
   };
 
@@ -123,7 +143,6 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
             console.log("data error", error);
           },
           onSuccess: (data, variables, error) => {
-            console.log("value", data.data);
             param.setValue(param.value);
             // setColumnData(data.data.roles);
           },
@@ -137,7 +156,9 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
       const roleDataId = jobData.data?.data.role_ids;
       const checkedValue: any[] = param.colDef.id;
       let checked = e.target.checked;
+
       let colId = param.column.colId;
+
       if (param.value === false) {
         roleDataId?.push(checkedValue);
         console.log("add", roleDataId);
@@ -209,34 +230,57 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
     });
     return jobOptionsArray;
   };
+  const JobSelect = () => (
+    <Select
+      mode='multiple'
+      placeholder='Please Select Jobs'
+      optionFilterProp='children'
+      filterOption={(input, option) => (option?.label ?? "").includes(input)}
+      // filterSort={(optionA, optionB) =>
+      //   (optionA?.label ?? "")
+      //     .toLowerCase()
+      //     .localeCompare((optionB?.label ?? "").toLowerCase())
+      // }
+      onChange={rowHandleChange}
+      options={jobOptionsFun()}
+      defaultValue={jobData.map((j: any) => j?.Id)}
+      onDeselect={handleDeselectJob}
+    />
+  );
+
+  const RoleSelect = () => (
+    <Select
+      mode='multiple'
+      showSearch
+      placeholder='Search to Select'
+      optionFilterProp='children'
+      onChange={handleChange}
+      filterOption={(input, option) => (option?.label ?? "").includes(input)}
+      filterSort={(optionA, optionB) =>
+        (optionA?.label ?? "").toLowerCase().localeCompare((optionB?.label ?? "").toLowerCase())
+      }
+      options={roleOptionsFun()}
+      defaultValue={roleData.map((j: any) => j?.Id)}
+      onDeselect={handleDeselectRole}
+    />
+  );
 
   return (
     <>
-      <div className='App'>
-        <Row>
-          <Col span={8}>
-            <div className='ant-col ant-form-item-label'>
-              <label className='ant-page-header-heading-title'>Usecase Job Role Mapping</label>
-            </div>
-          </Col>
-          <Col span={8} offset={8}>
-            <Select
-              showSearch
-              style={{ float: "right", bottom: "4px" }}
-              placeholder='Search to Select'
-              optionFilterProp='children'
-              onChange={handleChange}
-              filterOption={(input, option) => (option?.label ?? "").includes(input)}
-              filterSort={(optionA, optionB) =>
-                (optionA?.label ?? "")
-                  .toLowerCase()
-                  .localeCompare((optionB?.label ?? "").toLowerCase())
-              }
-              options={roleOptionsFun()}
-            />
-          </Col>
-        </Row>
+      <Row justify={"space-between"}>
+        <Col>
+          <Form.Item label='Jobs'>
+            <JobSelect />
+          </Form.Item>
+        </Col>
+        <Col>
+          <Form.Item label='Roles'>
+            <RoleSelect />
+          </Form.Item>
+        </Col>
+      </Row>
 
+      <Row>
         <div className='ag-theme-alpine ag-style inner-col'>
           <AgGridReact
             defaultColDef={defaultColDef}
@@ -258,21 +302,8 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
             // pinnedBottomRowData= {createData(1, 'Bottom')}
             frameworkComponents={frameworkComponents}
           />
-          <Select
-            style={{ width: "100%", float: "right" }}
-            placeholder='Please Select Jobs'
-            optionFilterProp='children'
-            filterOption={(input, option) => (option?.label ?? "").includes(input)}
-            filterSort={(optionA, optionB) =>
-              (optionA?.label ?? "")
-                .toLowerCase()
-                .localeCompare((optionB?.label ?? "").toLowerCase())
-            }
-            onChange={rowHandleChange}
-            options={jobOptionsFun()}
-          />
         </div>
-      </div>
+      </Row>
     </>
   );
 };

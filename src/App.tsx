@@ -54,6 +54,7 @@ const App: React.FC = () => {
               {
                 path: "/use-cases/:itemId",
                 element: <UseCaseDesign />,
+                layout: true,
               },
             ],
           }}

@@ -72,7 +72,7 @@ const List: React.FC<ABListProps> = (props) => {
         scroll={{ y: "calc(100vh - 230px)" }}
         columns={_columns.map((item) =>
           // @ts-ignore
-          item.dataIndex !== "actions" ? { ...item, ...defaultColumnProps } : item
+          item.dataIndex !== "actions" ? { ...defaultColumnProps, ...item } : item
         )}
       ></Table>
     </AntDList>

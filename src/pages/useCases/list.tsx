@@ -1,12 +1,5 @@
-import {
-  useTranslate,
-  IResourceComponentsProps,
-  useNavigation,
-  BaseRecord,
-} from "@pankod/refine-core";
-import { UrlField, Tag } from "@pankod/refine-antd";
+import { IResourceComponentsProps } from "@pankod/refine-core";
 import { Resource } from "services/enums";
-import { IJob, IRole, IUseCase } from "interfaces";
 import Drawer from "components/resource/drawer";
 import List from "components/resource/list";
 

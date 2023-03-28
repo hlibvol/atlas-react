@@ -5,9 +5,13 @@ import { CaretRightOutlined } from "@ant-design/icons";
 import _ from "lodash";
 type ICreateOrEditProps = {
   children: React.ReactNode;
+  isHandleChanges?: boolean;
 };
 
-export const CreateOrEditForm: React.FC<ICreateOrEditProps> = ({ children }) => {
+export const CreateOrEditForm: React.FC<ICreateOrEditProps> = ({
+  children,
+  isHandleChanges = true,
+}) => {
   const { action, id } = useParams();
   const [searchParams] = useSearchParams();
   const activeKey = searchParams.get("key");
@@ -19,7 +23,7 @@ export const CreateOrEditForm: React.FC<ICreateOrEditProps> = ({ children }) => 
   });
   const [lastValues, setLastValues] = React.useState<any>();
   const getForm = () => (
-    <Form {...formProps} layout='vertical' onBlur={handleChanges}>
+    <Form {...formProps} layout='vertical' onBlur={isHandleChanges ? handleChanges : undefined}>
       <Collapse
         defaultActiveKey={activeKey ? [activeKey] : ["1"]}
         style={{ gap: "8px" }}
