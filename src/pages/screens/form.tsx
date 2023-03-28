@@ -1,14 +1,14 @@
 import React from "react";
 
 import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { Button, Form, Select, useSelect } from "@pankod/refine-antd";
+import { Button, Form, Input, Select, useSelect } from "@pankod/refine-antd";
 import { DrawerForm } from "components/resource/form";
 import { Action, Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 import { IJob, IScreens } from "interfaces";
 
 export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
-  const { action, itemId, activeField } = useAppSelector((state) => state.drawer);
+  const { action, itemId, activeField, hideAll } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
   const resource = Resource.SCREENS;
   const { selectProps: jobSelectProps } = useSelect<IJob>({
@@ -25,6 +25,22 @@ export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
           autoFocus={activeField === "job_ids"}
           placeholder='Select Jobs'
           mode='multiple'
+        />
+      </Form.Item>
+      <Form.Item
+        label={t("screens.fields.screenUrl")}
+        name='screenUrl'
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+        hidden={hideAll}
+      >
+        <Input
+          placeholder={`Enter ${t("screens.fields.screenUrl")}`}
+          autoFocus={activeField == "screenUrl"}
+          tabIndex={1}
         />
       </Form.Item>
     </>

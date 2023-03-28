@@ -61,7 +61,6 @@ export const useResources = () => {
       list: ApplicationURLList,
       options: { route: Resource.APPLICATION_URL },
       hasDefaultFields: true,
-      hasRoles: true,
     },
     {
       name: Resource.JOB,

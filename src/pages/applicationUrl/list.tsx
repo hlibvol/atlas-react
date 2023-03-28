@@ -28,11 +28,11 @@ export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
       title: t("application-urls.fields.url"),
       render: (url: string) => <UrlField value={url} />,
     },
-    {
-      dataIndex: "id",
-      title: "Associate jobs",
-      render: renderAssociatedJobs,
-    },
+    // {
+    //   dataIndex: "id",
+    //   title: "Associate jobs",
+    //   render: renderAssociatedJobs,
+    // },
   ];
 
   return (

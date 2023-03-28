@@ -4,13 +4,14 @@ import { CreateOrEditForm } from "components/form";
 import { usePanelHeader } from "hooks/common";
 import { useParams } from "react-router-dom";
 import { Action, Resource } from "services/enums";
-import { Editor } from "components/Editor";
+// import { Editor } from "components/Editor";
 import { DrawerForm } from "components/resource/form";
 import { ILesson } from "interfaces";
 import { useAppSelector } from "redux/hooks";
 import { setDrawerWidth, setHideItems } from "redux/slices/drawerSlice";
 import { useAppDispatch } from "redux/hooks";
 import React, { useState } from "react";
+import { Editor } from "components/Editor";
 
 export const LessonForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -29,7 +30,7 @@ export const LessonForm: React.FC<IResourceComponentsProps> = () => {
       </Form.Item>
       {renderpageContent ? (
         <Form.Item label={"Page Content"} name='page_content' hidden={!hideAll}>
-          {itemId ? <Editor resource={Resource.LESSON} id={itemId} /> : null}
+          {itemId ? <Editor /> : null}
         </Form.Item>
       ) : null}
     </>

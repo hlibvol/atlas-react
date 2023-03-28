@@ -282,7 +282,10 @@
       "id": " App URL ID",
       "title": "Name",
       "description": "Description",
-      "url": "Application URL"
+      "url": "Application URL",
+      "job": "Associated Jobs",
+      "type": "Application Type"
+
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -341,7 +344,9 @@
       "description": "Description",
       "page-content": "Page Content",
       "process-role": "Process Roles",
-      "associatedJob": "Associated Jobs"
+      "associatedJob": "Associated Jobs",
+      "screenUrl": "Screen URL"
+
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"

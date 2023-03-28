@@ -19,7 +19,7 @@ import { AuthPage } from "./pages/auth";
 import { useTranslation } from "react-i18next";
 import { Header, Title } from "components";
 import { useResources } from "hooks/resource";
-import { Editor } from "components/Editor-New";
+import { Editor } from "components/Editor";
 import { UseCaseDesign } from "pages/useCases/roleJobMatrix";
 import { CourseContent } from "components/course-content";
 
@@ -54,10 +54,6 @@ const App: React.FC = () => {
               {
                 path: "/use-cases/:itemId",
                 element: <UseCaseDesign />,
-              },
-              {
-                path: "/courses/:itemId",
-                element: <CourseContent />,
               },
             ],
           }}

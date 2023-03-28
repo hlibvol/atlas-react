@@ -7,14 +7,16 @@ import { Col, Input, message, Row, Typography } from "@pankod/refine-antd";
 import { useShow, useUpdate } from "@pankod/refine-core";
 import { ICourse } from "interfaces";
 import { useParams } from "react-router";
+import { useAppSelector } from "redux/hooks";
 const { Text, Title } = Typography;
 
 const style = {
-  width: 1000,
+  width: "100%",
 };
 
 export const Container: React.FC = memo(function Container() {
-  const { itemId } = useParams();
+  const { action, itemId } = useAppSelector((state) => state.drawer);
+  // const { itemId } = useParams();
   const { mutate } = useUpdate();
   const { queryResult } = useShow<ICourse>({ id: itemId });
   const { data, isLoading } = queryResult;
@@ -142,7 +144,7 @@ export const Container: React.FC = memo(function Container() {
         />
       ))}
       <Row>
-        <Col span={11} xs={6} lg={18} style={{ marginTop: 10, marginLeft: 18 }}>
+        <Col span={24} xs={6} lg={18} style={{ marginTop: 10, marginLeft: 18 }}>
           <Input
             placeholder='Add new Lesson or Quiz...'
             name='name'
@@ -155,7 +157,7 @@ export const Container: React.FC = memo(function Container() {
             }}
           />
         </Col>
-        <Col span={10} offset={13}>
+        <Col span={24} offset={13}>
           <Text type='secondary'>Shift + Enter to add as a section</Text>
         </Col>
       </Row>

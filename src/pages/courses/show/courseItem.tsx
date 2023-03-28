@@ -14,8 +14,9 @@ const style = {
   padding: "0.5rem 1rem",
   marginBottom: ".5rem",
   cursor: "move",
-  width: "100%",
+  // width: "100%",
 };
+
 export const CourseItem = memo(function CourseItem({
   id,
   itemTitle,
@@ -28,6 +29,10 @@ export const CourseItem = memo(function CourseItem({
   const originalIndex = findCourseItem(id).index;
   const [pagecontent, setPageContent] = useState([]) as Array<any>;
   const t = useTranslate();
+  const styleCourse = {
+    display: "flex",
+    justifyContent: "end",
+  };
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: ItemTypes.COURSEITEM,
@@ -78,7 +83,7 @@ export const CourseItem = memo(function CourseItem({
     <>
       <div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
         <Row>
-          <Col span={8}>
+          <Col span={12}>
             {itemId ? (
               <Text style={{ margin: 0 }} key={itemId}>
                 <Icons.UnorderedListOutlined />
@@ -90,7 +95,7 @@ export const CourseItem = memo(function CourseItem({
               </Text>
             )}
           </Col>
-          <Col span={8} offset={8}>
+          <Col span={12} style={styleCourse}>
             <Space>
               {itemId ? (
                 <>

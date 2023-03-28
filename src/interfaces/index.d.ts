@@ -43,6 +43,8 @@ export interface IAppUrl {
   name: string;
   description: string;
   url: string;
+  job_ids: Array[];
+  application_type_id: number;
 }
 export interface IJob {
   id: number;
