@@ -12,7 +12,8 @@ export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
   const { action, itemId, activeField } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
   const resource = Resource.APPLICATION_URL;
-  const { selectProps: jobSelectProps } = useSelect<IAppUrl>({
+
+  const { selectProps: jobSelectProps } = useSelect<IJob>({
     resource: Resource.JOB,
     optionLabel: "name",
     optionValue: "id",

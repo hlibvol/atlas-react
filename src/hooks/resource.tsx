@@ -61,6 +61,7 @@ export const useResources = () => {
       list: ApplicationURLList,
       options: { route: Resource.APPLICATION_URL },
       hasDefaultFields: true,
+      hasJobs: true,
     },
     {
       name: Resource.JOB,
@@ -99,8 +100,11 @@ export const useResources = () => {
       parentName: "learning-design",
       list: LessonList,
       form: <LessonForm />,
+      show: LessonShow,
       hasDefaultFields: true,
       options: { label: "Lesson Templates", route: Resource.LESSON },
+      previewButton: true,
+      designerButton: true,
     },
     {
       name: Resource.USE_CASE,

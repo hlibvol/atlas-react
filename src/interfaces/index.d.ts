@@ -129,4 +129,5 @@ export interface IScreens {
   id: number;
   name: string;
   description: string;
+  screen_url: string;
 }

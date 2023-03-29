@@ -29,7 +29,7 @@ export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
       </Form.Item>
       <Form.Item
         label={t("screens.fields.screenUrl")}
-        name='screenUrl'
+        name='screen_url'
         rules={[
           {
             required: true,
@@ -37,11 +37,7 @@ export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
         ]}
         hidden={hideAll}
       >
-        <Input
-          placeholder={`Enter ${t("screens.fields.screenUrl")}`}
-          autoFocus={activeField == "screenUrl"}
-          tabIndex={1}
-        />
+        <Input placeholder={`Enter ${t("screens.fields.screenUrl")}`} tabIndex={1} />
       </Form.Item>
     </>
   );
