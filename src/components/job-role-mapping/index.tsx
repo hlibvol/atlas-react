@@ -183,7 +183,37 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
     checkboxRenderer: checkboxRendererComponent,
   };
 
-  const dropEnd = (event: any) => {};
+  const dropEnd = (event: any) => {
+    const draggedRowID = event?.node?.data?.id;
+    const newPosition = event?.overIndex + 1;
+
+    const _jobData = jobData.map((j: any, i: any) => {
+      return { ...j, order: i };
+    });
+    const draggedJobData = _jobData?.filter((a: any) => a.Id == draggedRowID);
+
+    const updatedDraggedJobData = draggedJobData?.map((v: any) => {
+      return { ...v, order: newPosition };
+    })?.[0];
+
+    const filteredJobData = _jobData?.filter((a: any) => a.Id !== draggedRowID);
+
+    const updatedOrderJobData = filteredJobData?.map((val: any, index: any) => {
+      if (val.order == newPosition || val.order > newPosition) {
+        return { ...val, order: index + 2 };
+      } else {
+        return { ...val, order: index + 1 };
+      }
+    });
+
+    updatedOrderJobData?.push(updatedDraggedJobData);
+
+    const sortedJobData = updatedOrderJobData.sort((a: any, b: any) => {
+      return a.order - b.order;
+    });
+    console.log(sortedJobData, "yes");
+    updateMatrixData(roleData, sortedJobData);
+  };
 
   const columnDropEnd = (event: any) => {};
 
@@ -230,8 +260,9 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
     });
     return jobOptionsArray;
   };
-  const JobSelect = () => (
+  const JobSelect = ({ minWidth }: any) => (
     <Select
+      style={{ minWidth }}
       mode='multiple'
       placeholder='Please Select Jobs'
       optionFilterProp='children'
@@ -248,8 +279,9 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
     />
   );
 
-  const RoleSelect = () => (
+  const RoleSelect = ({ minWidth }: any) => (
     <Select
+      style={{ minWidth }}
       mode='multiple'
       showSearch
       placeholder='Search to Select'
@@ -270,12 +302,12 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
       <Row justify={"space-between"}>
         <Col>
           <Form.Item label='Jobs'>
-            <JobSelect />
+            <JobSelect minWidth={300} />
           </Form.Item>
         </Col>
         <Col>
           <Form.Item label='Roles'>
-            <RoleSelect />
+            <RoleSelect minWidth={300} />
           </Form.Item>
         </Col>
       </Row>
