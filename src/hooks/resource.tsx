@@ -72,6 +72,7 @@ export const useResources = () => {
       hasRoles: true,
       hasUseCases: true,
       hasScreen: true,
+      hasExcutive: true,
     },
     {
       name: Resource.PLAYBOOK,

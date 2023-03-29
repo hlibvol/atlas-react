@@ -12,6 +12,7 @@ import {
   BaseRecord,
   CrudSorting,
   OpenNotificationParams,
+  useGetIdentity,
   useNavigation,
   useTranslate,
 } from "@pankod/refine-core";
@@ -26,7 +27,7 @@ import {
   UserOutlined,
   EyeOutlined,
   PlayCircleOutlined,
-  LinkOutlined,
+  AntDesignOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
@@ -136,6 +137,7 @@ type TableActionProps = {
   hasPlaybook: boolean | undefined;
   hasScreen: boolean | undefined;
   roleJobsMatrix: boolean | undefined;
+  hasExcutive: boolean | undefined;
   disabledEdit?: boolean;
   disabledDelete?: boolean;
 };
@@ -144,6 +146,7 @@ export const useTableActionProps = (props: TableActionProps) => {
   const t = useTranslate();
   const dispatch = useAppDispatch();
   const { showUrl } = useNavigation();
+  const { data: user } = useGetIdentity();
   const {
     disabledEdit,
     disabledDelete,
@@ -154,6 +157,7 @@ export const useTableActionProps = (props: TableActionProps) => {
     hasPlaybook,
     hasScreen,
     roleJobsMatrix,
+    hasExcutive,
     previewButton,
     designerButton,
   } = props;
@@ -327,6 +331,32 @@ export const useTableActionProps = (props: TableActionProps) => {
               target='_blank'
             />
           )}
+          {hasExcutive && (
+            <Space>
+              {user.is_designer && (
+                <Button
+                  type='primary'
+                  size='small'
+                  icon={<AntDesignOutlined />}
+                  target='_blank'
+                  title={t("buttons.design-job")}
+                  href={`ab:job/designer/${user?.id}/${record.id}/${(Math.random() + 1)
+                    .toString(36)
+                    .substring(2)}`}
+                />
+              )}
+              <Button
+                type='primary'
+                size='small'
+                icon={<PlayCircleOutlined />}
+                target='_blank'
+                title={t("buttons.execute-job")}
+                href={`ab:job/executor/${user?.id}/${record.id}/${(Math.random() + 1)
+                  .toString(36)
+                  .substring(2)}`}
+              />
+            </Space>
+          )}
           <EditButton
             {...buttonProps(record.id, disabledEdit)}
             onClick={() =>
@@ -344,7 +374,7 @@ export const useTableActionProps = (props: TableActionProps) => {
           <DeleteButton {...buttonProps(record.id, disabledDelete)} />
         </Space>
       ),
-      width: 165,
+      width: 230,
       fixed: "right" as FixedType,
     },
   ];
@@ -401,6 +431,7 @@ export const useListProps = (props: ListProps) => {
     hasPlaybook,
     hasScreen,
     roleJobsMatrix,
+    hasExcutive,
     previewButton,
     designerButton,
   } = resources.find((r) => r.name === resource) ?? {};
@@ -415,6 +446,7 @@ export const useListProps = (props: ListProps) => {
     hasPlaybook,
     hasScreen,
     roleJobsMatrix,
+    hasExcutive,
   });
   const defaultColumns = hasDefaultFields ? useDefaultColumns({ resource }) : [];
   return { tableProps, tableActionProps, defaultColumns };
