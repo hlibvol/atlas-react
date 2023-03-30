@@ -48,7 +48,15 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
   });
 
   const columns: any = [
-    { headerName: "Job Name", field: "job", rowDrag: true, editable: false, sortable: false },
+    {
+      headerName: "Job Name",
+      field: "job",
+      rowDrag: true,
+      editable: false,
+      sortable: false,
+      lockPosition: "left",
+      cellClass: "locked-col",
+    },
   ];
   roleOptionsArray.map(function (values: any, index: any) {
     const val = values[0];
@@ -101,7 +109,6 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
       (obj.id = val.id), rowData.push(obj);
     }
   });
-  console.log(useCase);
   return (
     <Show
       title={useCase && useCase.name ? useCase.name : "Use case"}

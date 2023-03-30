@@ -161,13 +161,11 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
 
       if (param.value === false) {
         roleDataId?.push(checkedValue);
-        console.log("add", roleDataId);
         checkUncheckedFunctionality(roleDataId);
         param.setValue(checked);
       }
       if (param.value === true) {
         const removedRoleId = roleDataId.filter((roleId: any) => roleId !== param.colDef.id);
-        console.log("remove", removedRoleId);
         checkUncheckedFunctionality(removedRoleId);
         param.setValue(checked);
       }
@@ -185,7 +183,7 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
 
   const dropEnd = (event: any) => {
     const draggedRowID = event?.node?.data?.id;
-    const newPosition = event?.overIndex + 1;
+    const newPosition = event?.overIndex;
 
     const _jobData = jobData.map((j: any, i: any) => {
       return { ...j, order: i };
@@ -200,22 +198,47 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
 
     const updatedOrderJobData = filteredJobData?.map((val: any, index: any) => {
       if (val.order == newPosition || val.order > newPosition) {
+        return { ...val, order: index + 1 };
+      } else {
+        return { ...val, order: index };
+      }
+    });
+
+    updatedDraggedJobData && updatedOrderJobData?.push(updatedDraggedJobData);
+
+    const sortedJobData = updatedOrderJobData.sort((a: any, b: any) => {
+      return a.order - b.order;
+    });
+    updateMatrixData(roleData, sortedJobData);
+  };
+
+  const columnDropEnd = (event: any) => {
+    const draggedRowID = event.column.colDef.id;
+    const newPosition = event.toIndex;
+    const _roleData = roleData.map((j: any, i: any) => {
+      return { ...j, order: i + 1 };
+    });
+    const draggedRoleData = _roleData?.filter((a: any) => a.Id == draggedRowID);
+
+    const updatedDraggedRoleData = draggedRoleData?.map((v: any) => {
+      return { ...v, order: newPosition };
+    })?.[0];
+    const filteredRoleData = _roleData?.filter((a: any) => a.Id !== draggedRowID);
+    const updatedOrderRoleData = filteredRoleData?.map((val: any, index: any) => {
+      if (val.order == newPosition || val.order > newPosition) {
         return { ...val, order: index + 2 };
       } else {
         return { ...val, order: index + 1 };
       }
     });
 
-    updatedOrderJobData?.push(updatedDraggedJobData);
+    updatedDraggedRoleData && updatedOrderRoleData?.push(updatedDraggedRoleData);
 
-    const sortedJobData = updatedOrderJobData.sort((a: any, b: any) => {
+    const sortedRoleData = updatedOrderRoleData.sort((a: any, b: any) => {
       return a.order - b.order;
     });
-    console.log(sortedJobData, "yes");
-    updateMatrixData(roleData, sortedJobData);
+    updateMatrixData(sortedRoleData, jobData);
   };
-
-  const columnDropEnd = (event: any) => {};
 
   const onGridReady = useCallback((params: any) => {
     rowHeaderData?.map((item: any, index: any) => {
