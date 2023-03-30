@@ -1,10 +1,10 @@
 import React from "react";
 
-import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
+import { BaseRecord, IResourceComponentsProps, useList, useTranslate } from "@pankod/refine-core";
 import { Form, Input, Select, useSelect } from "@pankod/refine-antd";
 
 import { DrawerForm } from "components/resource/form";
-import { IAppUrl, IJob } from "interfaces";
+import { IAppTypes, IAppUrl, IJob } from "interfaces";
 import { Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 
@@ -13,12 +13,17 @@ export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const resource = Resource.APPLICATION_URL;
 
-  const { selectProps: jobSelectProps } = useSelect<IJob>({
+  const { data } = useList<IJob>({
     resource: Resource.JOB,
-    optionLabel: "name",
-    optionValue: "id",
   });
-  const { selectProps: typeSelectProps } = useSelect<IAppUrl>({
+
+  const allJobs = data?.data ?? [];
+
+  const filteredAssociatedJob = allJobs
+    .filter((job) => job.application_url_id === itemId)
+    .map((job) => job.name);
+
+  const { selectProps: typeSelectProps } = useSelect<IAppTypes>({
     resource: Resource.APPLICATION_TYPES,
     optionLabel: "name",
     optionValue: "id",
@@ -39,10 +44,11 @@ export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
       </Form.Item>
       <Form.Item label={t("screens.fields.associatedJob")} name='job_ids'>
         <Select
-          {...jobSelectProps}
-          autoFocus={activeField === "job_ids"}
-          placeholder='Select Jobs'
           mode='multiple'
+          disabled
+          placeholder='No Jobs'
+          autoFocus={activeField === "job_ids"}
+          defaultValue={filteredAssociatedJob}
         />
       </Form.Item>
       <Form.Item

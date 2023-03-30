@@ -131,3 +131,9 @@ export interface IScreens {
   description: string;
   screen_url: string;
 }
+
+export interface IAppTypes {
+  id: number;
+  name: string;
+  description: string;
+}
