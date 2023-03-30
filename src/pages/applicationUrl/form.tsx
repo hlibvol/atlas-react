@@ -19,7 +19,7 @@ export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
     optionValue: "id",
   });
   const { selectProps: typeSelectProps } = useSelect<IAppUrl>({
-    resource: Resource.APPLICATION_URL,
+    resource: Resource.APPLICATION_TYPES,
     optionLabel: "name",
     optionValue: "id",
   });

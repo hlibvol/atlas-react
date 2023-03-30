@@ -7,6 +7,7 @@ export enum Resource {
   LESSON = "lessons",
   USE_CASE = "use-cases",
   APPLICATION_URL = "application-urls",
+  APPLICATION_TYPES = "application-types",
   SCREENS = "screens",
 }
 
