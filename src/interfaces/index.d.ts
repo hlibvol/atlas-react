@@ -54,6 +54,8 @@ export interface IJob {
   role_ids: number[];
   application_url: IAppUrl;
   application_url_id: number;
+  application_type_id: number;
+  application_type: IAppType;
   is_template: boolean;
 }
 export interface IUserFilterVariables {
@@ -109,30 +111,16 @@ export interface IUseCase {
   job_ids: number[];
 }
 
-export interface ICourseItems {
-  id: number;
-  course_id: string;
-  item_title: string;
-  item_type: string;
-  item_id: number;
-  item_order: number;
-}
-
-export interface TableParams {
-  pagination?: TablePaginationConfig;
-  sortField?: string;
-  sortOrder?: string;
-  filters?: Record<string, FilterValue>;
-}
-
-export interface IScreens {
+export interface IScreen {
   id: number;
   name: string;
   description: string;
   screen_url: string;
+  application_type_id: number;
+  application_type: IAppType;
 }
 
-export interface IAppTypes {
+export interface IAppType {
   id: number;
   name: string;
   description: string;

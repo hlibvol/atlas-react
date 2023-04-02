@@ -3,7 +3,6 @@ import {
   IResourceComponentsProps,
   useTranslate,
   useGetIdentity,
-  useOne,
 } from "@pankod/refine-core";
 import {
   Space,
@@ -17,14 +16,13 @@ import {
 } from "@pankod/refine-antd";
 import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
 import { DrawerForm } from "components/resource/form";
-import { IAppUrl, IUseCase, IScreens, IAppTypes, IJob } from "interfaces";
+import { IAppUrl, IUseCase, IScreen, IAppType, IJob } from "interfaces";
 import { Resource, Action } from "services/enums";
 import { useAppSelector } from "redux/hooks";
-import { useEffect, useState } from "react";
 
 export const JobForm: React.FC<IResourceComponentsProps> = () => {
-  const { selectProps: typeSelectProps } = useSelect<IAppTypes>({
-    resource: Resource.APPLICATION_TYPES,
+  const { selectProps: typeSelectProps } = useSelect<IAppType>({
+    resource: Resource.APPLICATION_TYPE,
     optionLabel: "name",
     optionValue: "id",
   });
@@ -35,8 +33,8 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
     optionValue: "id",
   });
 
-  const { selectProps: screenSelectProps } = useSelect<IScreens>({
-    resource: Resource.SCREENS,
+  const { selectProps: screenSelectProps } = useSelect<IScreen>({
+    resource: Resource.SCREEN,
     optionLabel: "name",
     optionValue: "id",
   });
@@ -48,17 +46,6 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
   });
 
   const { action, itemId, activeField } = useAppSelector((state) => state.drawer);
-  const { data: job, isLoading } = useOne<IJob>({ resource: Resource.JOB, id: itemId || "" });
-  const [appTypeId, setAppTypeId] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (!isLoading) {
-      const _appTypeId = job?.data?.application_url.application_type_id;
-      if (_appTypeId) {
-        setAppTypeId(_appTypeId);
-      }
-    }
-  }, [isLoading]);
 
   const t = useTranslate();
   const { Text } = Typography;
@@ -94,15 +81,11 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
     ) : null;
 
   const renderFields = (job: IJob | BaseRecord, form: FormInstance) => {
-    if (appTypeId) {
-      form.setFieldsValue({ application_type_id: appTypeId });
-    }
-
-    const handleAppTypeChange = (value: number) => {
+    const handleAppTypeChange = () => {
       form.setFieldsValue({ application_url_id: null });
-      setAppTypeId(value);
     };
 
+    const appTypeId = form.getFieldValue("application_type_id");
     const appUrlIds = appUrls.data?.data
       .map((url) => {
         if (url.application_type_id === appTypeId) return url.id;

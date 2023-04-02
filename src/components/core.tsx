@@ -1,7 +1,10 @@
 import { IBaseResource } from "interfaces";
-import { useNavigation } from "@pankod/refine-core";
+import { BaseRecord, useNavigation } from "@pankod/refine-core";
 import { UrlField, Tag, Divider } from "@pankod/refine-antd";
 import { useParams } from "react-router-dom";
+import { Action, Resource } from "services/enums";
+import { openDrawer } from "redux/slices/drawerSlice";
+import { useAppDispatch } from "redux/hooks";
 
 export const TagList = ({
   resource,
@@ -28,6 +31,26 @@ export const TagList = ({
           ))
         : null}
     </>
+  );
+};
+
+export const getResourceLink = (resource: Resource, record: BaseRecord) => {
+  const dispatch = useAppDispatch();
+  return (
+    <Tag
+      color='blue'
+      onClick={() => {
+        dispatch(
+          openDrawer({
+            resource: resource,
+            action: Action.EDIT,
+            itemId: record.id,
+          })
+        );
+      }}
+    >
+      {record?.name ? record.name : ""}
+    </Tag>
   );
 };
 

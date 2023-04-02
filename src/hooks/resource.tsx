@@ -116,10 +116,10 @@ export const useResources = () => {
       roleJobsMatrix: true,
     },
     {
-      name: Resource.SCREENS,
+      name: Resource.SCREEN,
       list: ScreenList,
       form: <ScreenForm />,
-      options: { route: Resource.SCREENS, label: "Screens" },
+      options: { route: Resource.SCREEN, label: "Screens" },
       hasDefaultFields: true,
       icon: <Icons.FundProjectionScreenOutlined />,
       hasJobs: true,

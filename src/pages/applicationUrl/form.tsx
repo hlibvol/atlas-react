@@ -4,12 +4,12 @@ import { BaseRecord, IResourceComponentsProps, useList, useTranslate } from "@pa
 import { Form, Input, Select, useSelect } from "@pankod/refine-antd";
 
 import { DrawerForm } from "components/resource/form";
-import { IAppTypes, IAppUrl, IJob } from "interfaces";
+import { IAppType, IAppUrl, IJob } from "interfaces";
 import { Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 
 export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
-  const { action, itemId, activeField } = useAppSelector((state) => state.drawer);
+  const { itemId, activeField } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
   const resource = Resource.APPLICATION_URL;
 
@@ -23,8 +23,8 @@ export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
     .filter((job) => job.application_url_id === itemId)
     .map((job) => job.name);
 
-  const { selectProps: typeSelectProps } = useSelect<IAppTypes>({
-    resource: Resource.APPLICATION_TYPES,
+  const { selectProps: typeSelectProps } = useSelect<IAppType>({
+    resource: Resource.APPLICATION_TYPE,
     optionLabel: "name",
     optionValue: "id",
   });
