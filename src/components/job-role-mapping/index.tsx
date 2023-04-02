@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
@@ -54,6 +54,8 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
     optionLabel: "name",
     optionValue: "id",
   });
+
+  const gridStyle = useMemo(() => ({ height: "400px", width: "100%" }), []);
 
   const updateMatrixData = (roleId: any, jobId: any) => {
     const configData = JSON.stringify({ roles: roleId, jobs: jobId });
@@ -154,21 +156,23 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
 
     const checkedHandler = (e: any) => {
       const roleDataId = jobData.data?.data.role_ids;
-      const checkedValue: any[] = param.colDef.id;
+      const checkedValue: any = param.colDef.id;
       let checked = e.target.checked;
 
       let colId = param.column.colId;
 
-      if (param.value === false) {
-        roleDataId?.push(checkedValue);
-        checkUncheckedFunctionality(roleDataId);
-        param.setValue(checked);
-      }
-      if (param.value === true) {
-        const removedRoleId = roleDataId.filter((roleId: any) => roleId !== param.colDef.id);
-        checkUncheckedFunctionality(removedRoleId);
-        param.setValue(checked);
-      }
+      // if (checked === true) {
+      //   console.log(checkedValue, "check1")
+      //   roleDataId?.push(checkedValue);
+      //   console.log(roleDataId,'yy')
+      //   checkUncheckedFunctionality(roleDataId);
+      //   param.setValue(checked);
+      // }
+      // if (checked === false) {
+      //   const removedRoleId = roleDataId.filter((roleId: any) => roleId !== param.colDef.id);
+      //   checkUncheckedFunctionality(removedRoleId);
+      //   param.setValue(checked);
+      // }
     };
     return (
       <>
@@ -336,7 +340,7 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
       </Row>
 
       <Row>
-        <div className='ag-theme-alpine ag-style inner-col'>
+        <div style={gridStyle} className='ag-theme-alpine ag-style '>
           <AgGridReact
             defaultColDef={defaultColDef}
             rowDragManaged={true}

@@ -56,6 +56,8 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
       sortable: false,
       lockPosition: "left",
       cellClass: "locked-col",
+      pinned: "left",
+      width: 250,
     },
   ];
   roleOptionsArray.map(function (values: any, index: any) {
