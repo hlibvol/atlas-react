@@ -13,7 +13,7 @@ export const UseCaseForm: React.FC<IResourceComponentsProps> = () => {
 
   const footer =
     itemId && action === Action.EDIT ? (
-      <Button href={`/editor/${resource}/${itemId}`} target='_blank'>
+      <Button href={`/${resource}/${itemId}`} target='_blank'>
         {t("buttons.design-use-case")}
       </Button>
     ) : null;

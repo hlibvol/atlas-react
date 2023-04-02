@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import { IResourceComponentsProps, useTranslate, useShow, useList } from "@pankod/refine-core";
+import { IResourceComponentsProps, useShow, useList } from "@pankod/refine-core";
 import { Icons, Show } from "@pankod/refine-antd";
-
-import { DrawerForm } from "components/resource/form";
 import { Resource } from "services/enums";
-import { CreateOrEditForm } from "components/form";
 import { UseCaseTable } from "components/job-role-mapping";
 import { IJob, IRole, IUseCase } from "interfaces";
 import { useParams } from "react-router-dom";

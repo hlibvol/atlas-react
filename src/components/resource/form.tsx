@@ -4,23 +4,20 @@ import {
   Form,
   useForm,
   Spin,
-  SaveButton,
   Input,
   Button,
   useSelect,
   Select,
   Modal,
+  FormInstance,
 } from "@pankod/refine-antd";
 import { Action, Resource } from "services/enums";
-import { BaseRecord, GetOneResponse, useShow, useTranslate } from "@pankod/refine-core";
+import { BaseRecord, GetOneResponse, useTranslate } from "@pankod/refine-core";
 import {
   closeDrawer,
   openDrawer,
-  removeActiveField,
   setDrawerFooter,
   setDrawerOnClose,
-  setDrawerTitle,
-  setDrawerWidth,
 } from "redux/slices/drawerSlice";
 import { useAppSelector, useAppDispatch } from "redux/hooks";
 import RichTextEditor from "components/RichTextEditor";
@@ -92,7 +89,7 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
 */
 
 export const useDefaultFormItems = (resource: string) => {
-  const { activeField, hideAll } = useAppSelector((state) => state.drawer);
+  const { activeField } = useAppSelector((state) => state.drawer);
 
   const t = useTranslate();
   return (
@@ -105,7 +102,6 @@ export const useDefaultFormItems = (resource: string) => {
             required: true,
           },
         ]}
-        hidden={hideAll}
       >
         <Input
           placeholder={`Enter ${t(`${resource}.fields.title`)}`}
@@ -113,7 +109,7 @@ export const useDefaultFormItems = (resource: string) => {
           tabIndex={1}
         />
       </Form.Item>
-      <Form.Item label={t(`${resource}.fields.description`)} name='description' hidden={hideAll}>
+      <Form.Item label={t(`${resource}.fields.description`)} name='description'>
         {/* @ts-ignore */}
         <RichTextEditor
           placeholder={`Enter ${t(`${resource}.fields.description`)}..`}
@@ -152,12 +148,12 @@ export const useRoleItem = () => {
 
 type DrawerFormProps = {
   resource: Resource;
-  renderFields?: (record: BaseRecord) => JSX.Element;
+  renderFields?: (record: BaseRecord, form: FormInstance) => JSX.Element;
   footer?: JSX.Element | null;
 };
 
 export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
-  const { action, itemId, hideAll } = useAppSelector((state) => state.drawer);
+  const { action, itemId } = useAppSelector((state) => state.drawer);
   const { resource, renderFields = () => null, footer } = props;
 
   const resources = useResources();
@@ -178,13 +174,6 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
     },
     warnWhenUnsavedChanges: true,
   });
-  const record = queryResult?.data?.data;
-
-  //[Nikunj] Why do we need this?
-  //[2022-03-13] Shouldn't need this. once we test it is fine we can remove it
-  // useEffect(() => {
-  //   if (record) dispatch(setDrawerTitle(record.name));
-  // }, [record]);
 
   const defaultOnClose = () => {
     dispatch(closeDrawer());
@@ -222,7 +211,6 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
             }}
             type='primary'
             style={{ float: "right" }}
-            disabled={hideAll}
           >
             Save
           </Button>
@@ -230,14 +218,14 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
       )
     );
     dispatch(setDrawerOnClose(defaultOnClose));
-  }, [formLoading, hideAll]);
+  }, [formLoading]);
 
   return (
     <Spin spinning={formLoading}>
       <Form {...formProps} layout='vertical'>
         {defaultFormItems}
         {roleFormItem}
-        {renderFields({})}
+        {renderFields(queryResult?.data?.data ?? {}, form)}
         {/* <SaveButton {...saveButtonProps}>Save</SaveButton> */}
       </Form>
     </Spin>

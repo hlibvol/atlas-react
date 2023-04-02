@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Drawer as AntDDrawer, Space, Button } from "@pankod/refine-antd";
+import React from "react";
+import { Drawer as AntDDrawer } from "@pankod/refine-antd";
 import { Action } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 import { useTranslate } from "@pankod/refine-core";
 import { useResources } from "hooks/resource";
 
 const Drawer: React.FC = () => {
-  const { action, title, resource, footer, onClose, extra, width } = useAppSelector(
+  const { action, title, resource, footer, onClose, extra } = useAppSelector(
     (state) => state.drawer
   );
   const t = useTranslate();
@@ -15,7 +15,7 @@ const Drawer: React.FC = () => {
   return (
     <AntDDrawer
       title={action === Action.CREATE ? t(`${resource}.titles.create`) : title}
-      width={width}
+      width='40%'
       onClose={onClose}
       visible={action === Action.CREATE || action === Action.EDIT}
       bodyStyle={{ paddingBottom: 80 }}

@@ -102,7 +102,7 @@ export const CourseItem = memo(function CourseItem({
                   <div>
                     {pagecontent ? (
                       <Button type='primary' size='small' style={{ width: "105px" }}>
-                        <a href={editUrl} target='_blank'>
+                        <a href={editUrl} target='_blank' rel='noreferrer'>
                           {t("buttons.design")}
                         </a>
                       </Button>
