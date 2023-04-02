@@ -345,7 +345,8 @@
       "page-content": "Page Content",
       "process-role": "Process Roles",
       "associatedJob": "Associated Jobs",
-      "screenUrl": "Screen URL"
+      "screenUrl": "Screen URL",
+      "application-type": "Application Type"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
