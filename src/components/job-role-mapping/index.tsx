@@ -119,8 +119,11 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
 
   let mapping = Array();
   let status = false;
+
   const checkboxRendererComponent = (param: any) => {
-    const deafultMapping = [useCase?.id, param.node.data.id, param.colDef.id];
+    const deafultMapping = [id, param.node.data.id, param.colDef.id];
+    const _param = { ...param };
+    _param.value = param.data?.role_ids.includes(param.colDef?.id);
     mapping?.map((key: any, index: any) => {
       if (
         param.customCheck === undefined &&
@@ -132,52 +135,50 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
       }
     });
 
-    const checkUncheckedFunctionality = (roleId: any) => {
-      mutate(
-        {
-          resource: "jobs",
-          id: param.data.id || "",
-          values: { role_ids: roleId },
-          mutationMode: "optimistic",
-        },
-        {
-          onError: (error, variables, context) => {
-            console.log("data error", error);
-          },
-          onSuccess: (data, variables, error) => {
-            param.setValue(param.value);
-            // setColumnData(data.data.roles);
-          },
-        }
-      );
-    };
-
-    const jobData = useOne({ resource: "jobs", id: param.data.id });
-
-    const checkedHandler = (e: any) => {
-      const roleDataId = jobData.data?.data.role_ids;
-      const checkedValue: any = param.colDef.id;
-      let checked = e.target.checked;
-
-      let colId = param.column.colId;
-
-      // if (checked === true) {
-      //   console.log(checkedValue, "check1")
-      //   roleDataId?.push(checkedValue);
-      //   console.log(roleDataId,'yy')
-      //   checkUncheckedFunctionality(roleDataId);
-      //   param.setValue(checked);
-      // }
-      // if (checked === false) {
-      //   const removedRoleId = roleDataId.filter((roleId: any) => roleId !== param.colDef.id);
-      //   checkUncheckedFunctionality(removedRoleId);
-      //   param.setValue(checked);
-      // }
-    };
     return (
       <>
-        <input type='checkbox' onChange={checkedHandler} checked={param.value} />
+        <input type='checkbox' onChange={(e) => checkedHandler(e, _param)} checked={_param.value} />
       </>
+    );
+  };
+  const checkedHandler = (e: any, param: any) => {
+    // const jobData = useOne({ resource: "jobs", id: param.data.id });
+    const roleDataId = param.data.role_ids;
+    const checkedValue = param.colDef.id;
+    let checked = e.target.checked;
+
+    let colId = param.column.colId;
+
+    if (!param.value) {
+      roleDataId?.push(checkedValue);
+      checkUncheckedFunctionality(roleDataId, param);
+      param.setValue(checked);
+    }
+    if (param.value) {
+      const removedRoleId = roleDataId.filter((roleId: any) => roleId !== param.colDef.id);
+      checkUncheckedFunctionality(removedRoleId, param);
+      param.setValue(checked);
+    }
+  };
+
+  const checkUncheckedFunctionality = (roleId: any, param: any) => {
+    mutate(
+      {
+        resource: "jobs",
+        id: param.data.id || "",
+        values: { role_ids: roleId },
+        successNotification: false,
+        // mutationMode: "optimistic",
+      },
+      {
+        onError: (error, variables, context) => {
+          console.log("data error", error);
+        },
+        onSuccess: (data, variables, error) => {
+          param.setValue(param.value);
+          // setColumnData(data.data.roles);
+        },
+      }
     );
   };
 
