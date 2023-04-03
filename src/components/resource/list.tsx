@@ -1,9 +1,7 @@
 import React from "react";
 import { Input, List as AntDList, Table, Typography } from "@pankod/refine-antd";
-
 import type { ColumnsType } from "antd/es/table";
 import { Action, Resource } from "services/enums";
-
 import { useAppDispatch } from "redux/hooks";
 import { openDrawer } from "redux/slices/drawerSlice";
 import { BaseRecord } from "@pankod/refine-core";
@@ -36,13 +34,14 @@ const List: React.FC<ABListProps> = (props) => {
     : tableProps.dataSource;
 
   const _columns: ColumnsType<BaseRecord> = [...defaultColumns, ...columns, ...tableActionProps];
+  const title = capitalizeFirstLetter(resource.replace("-", " "));
 
   return (
     <AntDList
       canCreate
       title={
         <>
-          {capitalizeFirstLetter(resource)}{" "}
+          {title}{" "}
           <Text type='secondary' style={{ fontSize: "12px" }}>
             {dataSource?.length ?? 0} items{" "}
           </Text>

@@ -14,10 +14,10 @@ export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
   const footer =
     itemId && action === Action.EDIT ? (
       <Space>
-        <Button href={`/editor/${resource}/${itemId}`} target='_blank'>
+        <Button type='primary' href={`/editor/${resource}/${itemId}`} target='_blank'>
           Design Playbook
         </Button>
-        <Button href={showUrl(Resource.PLAYBOOK, itemId)} target='_blank'>
+        <Button type='primary' href={showUrl(Resource.PLAYBOOK, itemId)} target='_blank'>
           Preview Playbook
         </Button>
       </Space>

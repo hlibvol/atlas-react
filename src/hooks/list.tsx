@@ -4,6 +4,7 @@ import {
   EditButton,
   Space,
   TableProps,
+  Tooltip,
   Typography,
   useTable,
 } from "@pankod/refine-antd";
@@ -198,180 +199,195 @@ export const useTableActionProps = (props: TableActionProps) => {
       render: (_: unknown, record: BaseRecord) => (
         <Space>
           {hasRoles && (
-            <Button
-              icon={<UserOutlined />}
-              size='small'
-              type='primary'
-              ghost
-              onClick={() => {
-                dispatch(
-                  openDrawer({
-                    resource: resource,
-                    action: Action.EDIT,
-                    itemId: record.id,
-                    activeField: "role_ids",
-                  })
-                );
-              }}
-            />
+            <Tooltip title='Process Role' color='green'>
+              <Button
+                icon={<UserOutlined />}
+                size='small'
+                type='primary'
+                ghost
+                onClick={() => {
+                  dispatch(
+                    openDrawer({
+                      resource: resource,
+                      action: Action.EDIT,
+                      itemId: record.id,
+                      activeField: "role_ids",
+                    })
+                  );
+                }}
+              />
+            </Tooltip>
           )}
           {previewButton && (
-            <Button
-              icon={<EyeOutlined />}
-              size='small'
-              type='primary'
-              ghost
-              href={showUrl(resource, record.id ? record.id : "")}
-              target='_blank'
-              title={`Preview ${resource}`}
-              style={{ color: "#1890ff", border: "1px solid #1890ff" }}
-            />
+            <Tooltip title={`Preview ${resource}`} color='green'>
+              <Button
+                icon={<EyeOutlined />}
+                size='small'
+                type='primary'
+                ghost
+                href={showUrl(resource, record.id ? record.id : "")}
+                target='_blank'
+                style={{ color: "#4da9ff", border: "1px solid #4da9ff" }}
+              />
+            </Tooltip>
           )}
           {designerButton && (
-            <Button
-              icon={<PlayCircleOutlined />}
-              size='small'
-              type='primary'
-              ghost
-              href={`/editor/${resource}/${record.id}`}
-              target='_blank'
-              title={`Design ${resource}`}
-              style={{ color: "#22075e", border: "1px solid #22075e" }}
-            />
+            <Tooltip title={`Design ${resource}`} color='green'>
+              <Button
+                icon={<PlayCircleOutlined />}
+                size='small'
+                type='primary'
+                ghost
+                href={`/editor/${resource}/${record.id}`}
+                target='_blank'
+                style={{ color: "#9a70f5", border: "1px solid #9a70f5" }}
+              />
+            </Tooltip>
           )}
           {hasJobs && (
-            <Button
-              size='small'
-              type='primary'
-              title='Associated Jobs'
-              ghost
-              onClick={() => {
-                dispatch(
-                  openDrawer({
-                    resource: resource,
-                    action: Action.EDIT,
-                    itemId: record.id,
-                    activeField: "job_ids",
-                  })
-                );
-              }}
-            >
-              J
-            </Button>
+            <Tooltip title='Associated Jobs' color='green'>
+              <Button
+                size='small'
+                type='primary'
+                ghost
+                onClick={() => {
+                  dispatch(
+                    openDrawer({
+                      resource: resource,
+                      action: Action.EDIT,
+                      itemId: record.id,
+                      activeField: "job_ids",
+                    })
+                  );
+                }}
+              >
+                J
+              </Button>
+            </Tooltip>
           )}
           {hasUseCases && (
-            <Button
-              size='small'
-              type='primary'
-              title='Associated Use Cases'
-              style={{ color: "#1890ff", border: "1px solid #1890ff" }}
-              ghost
-              onClick={() => {
-                dispatch(
-                  openDrawer({
-                    resource: resource,
-                    action: Action.EDIT,
-                    itemId: record.id,
-                    activeField: "use_case_ids",
-                  })
-                );
-              }}
-            >
-              U
-            </Button>
+            <Tooltip title='Associated Use Cases' color='green'>
+              <Button
+                size='small'
+                type='primary'
+                style={{ color: "#1890ff", border: "1px solid #1890ff" }}
+                ghost
+                onClick={() => {
+                  dispatch(
+                    openDrawer({
+                      resource: resource,
+                      action: Action.EDIT,
+                      itemId: record.id,
+                      activeField: "use_case_ids",
+                    })
+                  );
+                }}
+              >
+                U
+              </Button>
+            </Tooltip>
           )}
           {hasPlaybook && (
-            <Button
-              size='small'
-              type='primary'
-              title='Associated Playbook'
-              ghost
-              onClick={() => {
-                dispatch(
-                  openDrawer({
-                    resource: resource,
-                    action: Action.EDIT,
-                    itemId: record.id,
-                    activeField: "playbook_ids",
-                  })
-                );
-              }}
-            >
-              P
-            </Button>
+            <Tooltip title='Associated Playbook' color='green'>
+              <Button
+                size='small'
+                type='primary'
+                ghost
+                onClick={() => {
+                  dispatch(
+                    openDrawer({
+                      resource: resource,
+                      action: Action.EDIT,
+                      itemId: record.id,
+                      activeField: "playbook_ids",
+                    })
+                  );
+                }}
+              >
+                P
+              </Button>
+            </Tooltip>
           )}
           {hasScreen && (
-            <Button
-              size='small'
-              type='primary'
-              title='Associated Screen'
-              ghost
-              onClick={() => {
-                dispatch(
-                  openDrawer({
-                    resource: resource,
-                    action: Action.EDIT,
-                    itemId: record.id,
-                    activeField: "screen_ids",
-                  })
-                );
-              }}
-            >
-              S
-            </Button>
+            <Tooltip title='Associated Screen' color='green'>
+              <Button
+                size='small'
+                type='primary'
+                ghost
+                onClick={() => {
+                  dispatch(
+                    openDrawer({
+                      resource: resource,
+                      action: Action.EDIT,
+                      itemId: record.id,
+                      activeField: "screen_ids",
+                    })
+                  );
+                }}
+              >
+                S
+              </Button>
+            </Tooltip>
           )}
           {roleJobsMatrix && (
-            <Button
-              icon={<SettingOutlined />}
-              size='small'
-              type='primary'
-              title='Role-Job Matrix'
-              ghost
-              href={`/use-cases/${record.id}`}
-              target='_blank'
-            />
+            <Tooltip title='Role-Job Matrix' color='green'>
+              <Button
+                icon={<SettingOutlined />}
+                size='small'
+                type='primary'
+                ghost
+                href={`/use-cases/${record.id}`}
+                target='_blank'
+              />
+            </Tooltip>
           )}
           {hasExcutive && (
             <Space>
               {user.is_designer && (
+                <Tooltip title={t("buttons.design-job")} color='green'>
+                  <Button
+                    type='primary'
+                    size='small'
+                    icon={<AntDesignOutlined />}
+                    target='_blank'
+                    href={`ab:job/designer/${user?.id}/${record.id}/${(Math.random() + 1)
+                      .toString(36)
+                      .substring(2)}`}
+                  />
+                </Tooltip>
+              )}
+              <Tooltip title={t("buttons.execute-job")} color='green'>
                 <Button
                   type='primary'
                   size='small'
-                  icon={<AntDesignOutlined />}
+                  icon={<PlayCircleOutlined />}
                   target='_blank'
-                  title={t("buttons.design-job")}
-                  href={`ab:job/designer/${user?.id}/${record.id}/${(Math.random() + 1)
+                  href={`ab:job/executor/${user?.id}/${record.id}/${(Math.random() + 1)
                     .toString(36)
                     .substring(2)}`}
                 />
-              )}
-              <Button
-                type='primary'
-                size='small'
-                icon={<PlayCircleOutlined />}
-                target='_blank'
-                title={t("buttons.execute-job")}
-                href={`ab:job/executor/${user?.id}/${record.id}/${(Math.random() + 1)
-                  .toString(36)
-                  .substring(2)}`}
-              />
+              </Tooltip>
             </Space>
           )}
-          <EditButton
-            {...buttonProps(record.id, disabledEdit)}
-            onClick={() =>
-              dispatch(
-                openDrawer({
-                  resource: resource,
-                  action: Action.EDIT,
-                  itemId: record.id,
-                  activeField: "name",
-                  title: record?.name,
-                })
-              )
-            }
-          />
-          <DeleteButton {...buttonProps(record.id, disabledDelete)} />
+          <Tooltip title={`Edit ${resource}`} color='green'>
+            <EditButton
+              {...buttonProps(record.id, disabledEdit)}
+              onClick={() =>
+                dispatch(
+                  openDrawer({
+                    resource: resource,
+                    action: Action.EDIT,
+                    itemId: record.id,
+                    activeField: "name",
+                    title: record?.name,
+                  })
+                )
+              }
+            />
+          </Tooltip>
+          <Tooltip title={`Delete ${resource}`} color='green'>
+            <DeleteButton {...buttonProps(record.id, disabledDelete)} />
+          </Tooltip>
         </Space>
       ),
       width: 230,
