@@ -1,393 +1,362 @@
 {
   "pages": {
     "login": {
-      "title": "Melden Sie sich bei Ihrem Konto an",
-      "signin": "Einloggen",
-      "signup": "Anmelden",
-      "divider": "oder",
+      "title": "Sign in to your account",
+      "signin": "Sign in",
+      "signup": "Sign up",
+      "divider": "or",
       "fields": {
         "email": "Email",
-        "password": "Passwort"
+        "password": "Password"
       },
       "errors": {
-        "validEmail": "Ungültige E-Mail-Adresse"
+        "validEmail": "Invalid email address"
       },
       "buttons": {
-        "submit": "Anmeldung",
-        "resetPassword": "Passwort vergessen?",
-        "noAccount": "Sie haben kein Konto?",
-        "rememberMe": "Erinnere dich an mich"
+        "submit": "Login",
+        "resetPassword": "Forgot password?",
+        "noAccount": "Don’t have an account?",
+        "rememberMe": "Remember me"
       }
     },
     "resetPassword": {
-      "title": "Haben Sie Ihr Passwort vergessen?",
+      "title": "Forgot your password?",
       "fields": {
         "email": "Email"
       },
       "errors": {
-        "validEmail": "Ungültige E-Mail-Adresse"
+        "validEmail": "Invalid email address"
       },
       "buttons": {
-        "submit": "Anweisungen zum Zurücksetzen senden"
+        "submit": "Send reset instructions"
       }
     },
     "register": {
-      "title": "Registrieren Sie sich für Ihr Konto",
+      "title": "Sign up for your account",
       "fields": {
         "email": "Email",
-        "password": "Passwort"
+        "password": "Password"
       },
       "errors": {
-        "validEmail": "Ungültige E-Mail-Adresse"
+        "validEmail": "Invalid email address"
       },
       "buttons": {
-        "submit": "Registrieren",
-        "haveAccount": "Ein Konto haben?"
+        "submit": "Register",
+        "haveAccount": "Have an account?"
       }
     },
     "updatePassword": {
-      "title": "Kennwort aktualisieren",
+      "title": "Update password",
       "fields": {
-        "password": "Neues Passwort",
-        "confirmPassword": "Bestätige neues Passwort"
+        "password": "New Password",
+        "confirmPassword": "Confirm new password"
       },
       "errors": {
-        "confirmPasswordNotMatch": "Passwörter stimmen nicht überein"
+        "confirmPasswordNotMatch": "Passwords do not match"
       },
       "buttons": {
-        "submit": "Aktualisieren"
+        "submit": "Update"
       }
     },
     "error": {
-      "info": "Sie haben vergessen, {{action}} component zu {{resource}} hinzufügen.",
-      "404": "Leider existiert diese Seite nicht.",
-      "resource404": "Haben Sie die {{resource}} resource erstellt?",
-      "backHome": "Zurück"
+      "info": "You may have forgotten to add the {{action}} component to {{resource}} resource.",
+      "404": "Sorry, the page you visited does not exist.",
+      "resource404": "Are you sure you have created the {{resource}} resource.",
+      "backHome": "Back Home"
     }
   },
   "actions": {
-    "list": "Aufführen",
-    "create": "Erstellen",
-    "edit": "Bearbeiten",
-    "show": "Zeigen"
+    "list": "List",
+    "create": "Create",
+    "edit": "Edit",
+    "show": "Show"
   },
   "buttons": {
-    "create": "Erstellen",
-    "save": "Speichern",
-    "logout": "Abmelden",
-    "delete": "Löschen",
-    "edit": "Bearbeiten",
-    "cancel": "Abbrechen",
-    "confirm": "Sicher?",
+    "add": "Add",
+    "create": "Create",
+    "save": "Save",
+    "logout": "Logout",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "confirm": "Are you sure?",
     "filter": "Filter",
-    "clear": "Löschen",
-    "refresh": "Erneuern",
-    "show": "Zeigen",
+    "clear": "Clear",
+    "refresh": "Refresh",
+    "show": "Show",
     "undo": "Undo",
-    "import": "Importieren",
-    "export": "Exportieren",
-    "clone": "Klonen",
-    "accept": "Akzeptieren",
-    "acceptAll": "Alles akzeptieren",
-    "reject": "Abweisen",
-    "rejectAll": "Alles abweisen",
-    "nextStep": "Vorwärts",
-    "previousStep": "Zurück"
+    "import": "Import",
+    "export": "Export",
+    "clone": "Clone",
+    "accept": "Accept",
+    "acceptAll": "Accept All",
+    "reject": "Reject",
+    "rejectAll": "Reject All",
+    "nextStep": "Next",
+    "previousStep": "Previous",
+    "design": "Design",
+    "blank-lesson": "Blank Lesson",
+    "blank-quiz": "Blank Quiz",
+    "add-content": "Add Content",
+    "design-job": "Design Job",
+    "execute-job": "Execute Job",
+    "design-use-case": "Design Use Case"
   },
-  "loading": "Wird geladen",
+  "loading": "Loading",
   "tags": {
-    "clone": "Klonen"
+    "clone": "Clone"
   },
   "table": {
-    "actions": "Aktionen"
+    "actions": "Actions"
   },
   "search": {
-    "placeholder": "Suchen mit Geschäfts-ID, E-mail oder Stichwort",
-    "more": "Noch mehr"
+    "placeholder": "Search by User, Process Role, Job...",
+    "more": "more"
   },
   "status": {
-    "enable": "Aktiv",
-    "disable": "Passiv"
+    "enable": "Enable",
+    "disable": "Disable"
   },
-  "warnWhenUnsavedChanges": "Nicht gespeicherte Änderungen werden nicht übernommen.",
+  "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
   "notifications": {
-    "success": "Erfolg",
-    "error": "Fehler (status code: {{statusCode}})",
-    "undoable": "Sie haben {{seconds}} Sekunden Zeit für Undo.",
-    "createSuccess": "{{resource}} erfolgreich erstellt.",
-    "createError": "Fehler beim Erstellen {{resource}} (status code: {{statusCode}})",
-    "deleteSuccess": "{{resource}} erfolgreich gelöscht.",
-    "deleteError": "Fehler beim Löschen {{resource}} (status code: {{statusCode}})",
-    "editSuccess": "{{resource}} erfolgreich bearbeitet.",
-    "importProgress": "{{processed}}/{{total}} importiert"
-  },
-  "categories": {
-    "categories": "Kategorien",
-    "titles": {
-      "list": "Kategorien"
-    },
-    "fields": {
-      "id": "ID",
-      "title": "Titel",
-      "isActive": "Aktiv"
-    }
-  },
-  "couriers": {
-    "couriers": "Kuriere",
-    "titles": {
-      "create": "Kurier erstellen",
-      "list": "Kuriere",
-      "edit": "Kurier bearbeiten"
-    },
-    "fields": {
-      "id": "ID",
-      "avatar": {
-        "label": "Avatar",
-        "description": "Ein Foto hochladen."
-      },
-      "name": "Vorname",
-      "surname": "Nachname",
-      "gender": {
-        "label": "Geschlecht",
-        "male": "Mann",
-        "female": "Frau"
-      },
-      "gsm": "Gsm",
-      "createdAt": "Erstellt am",
-      "isActive": "Aktiv",
-      "images": {
-        "label": "Foto",
-        "description": "Ein Foto hochladen.",
-        "validation": "Fotoauflösung: 480x480px"
-      },
-      "store": "Geschäft",
-      "vehicle": "Fahrzeug",
-      "accountNumber": "Kontonummer",
-      "address": "Adresse"
-    },
-    "steps": {
-      "content": "Inhalt",
-      "relations": "Beziehungen"
-    }
+    "success": "Successful",
+    "error": "Error (status code: {{statusCode}})",
+    "undoable": "You have {{seconds}} seconds to undo",
+    "createSuccess": "Successfully created {{resource}}",
+    "createError": "There was an error creating {{resource}} (status code: {{statusCode}})",
+    "deleteSuccess": "Successfully deleted {{resource}}",
+    "deleteError": "Error when deleting {{resource}} (status code: {{statusCode}})",
+    "editSuccess": "Successfully edited {{resource}}",
+    "editError": "Error when editing {{resource}} (status code: {{statusCode}})",
+    "importProgress": "Importing: {{processed}}/{{total}}"
   },
   "dashboard": {
-    "title": "Panel",
-    "deliveryMap": {
-      "title": "Lieferkarte"
+    "title": "Dashboard",
+    "totalJobs": {
+      "title": "Total Jobs"
     },
-    "orders": {
-      "title": "Bestellungen"
+    "totalRoles": {
+      "title": "Total Roles"
     },
-    "totalSales": {
-      "title": "Gesamtumsatz"
-    },
-    "dailyRevenue": {
-      "title": "Tagesumsatz"
-    },
-    "dailyOrders": {
-      "title": "Tägliche Bestellungen"
-    },
-    "newCustomers": {
-      "title": "Neue Kunden"
-    },
-    "timeline": {
-      "title": "Aktualisierung",
-      "orderStatuses": {
-        "pending": "Wird vorbereiten.",
-        "ready": "Bereit",
-        "on the way": "Unterwegs",
-        "delivered": "Geliefert",
-        "cancelled": "Abgesagt"
-      }
-    },
-    "recentOrders": {
-      "title": "Letzte Bestellungen"
-    },
-    "trendingMenus": {
-      "title": "Täglich beliebte Menüs"
+    "users": {
+      "title": "Users"
     }
-  },
-  "enum": {
-    "orderStatuses": {
-      "pending": "Wird vorbereiten.",
-      "ready": "Bereit",
-      "on the way": "Unterwegs",
-      "delivered": "Geliefert",
-      "cancelled": "Abgesagt"
-    }
-  },
-  "orders": {
-    "orders": "Bestellungen",
-    "titles": {
-      "list": "Bestellungen",
-      "show": "Bestellung Info"
-    },
-    "fields": {
-      "orderNumber": "Bestellungsnummer",
-      "orderID": "Bestellung ID",
-      "status": "Bestellung Status",
-      "store": "Geschäfts",
-      "user": "Benutzer",
-      "products": "Produkte",
-      "createdAt": "Erstellt am",
-      "amount": "Betrag",
-      "itemsAmount": "{{amount}} Produkt"
-    },
-    "filter": {
-      "title": "Filter",
-      "search": {
-        "label": "Suche",
-        "placeholder": "Suchen mit Geschäfts-ID, E-mail oder Stichwort"
-      },
-      "status": {
-        "label": "Bestellung Status",
-        "placeholder": "Bestellung Status"
-      },
-      "store": {
-        "label": "Geschäft",
-        "placeholder": "Geschäft Suchen"
-      },
-      "user": {
-        "label": "Benutzer",
-        "placeholder": "Benutzer Suchen"
-      },
-      "createdAt": {
-        "label": "Erstellt am"
-      },
-      "submit": "Filter"
-    },
-    "courier": {
-      "deliveryTime": "Lieferzeit",
-      "phone": "Telefon"
-    },
-    "deliverables": {
-      "deliverables": "Wird geliefert",
-      "fields": {
-        "items": "Produkte",
-        "quantity": "Betrag",
-        "price": "Preis",
-        "total": "Gesamtpreis"
-      },
-      "mainTotal": "Gesamtpreis"
-    }
-  },
-  "products": {
-    "products": "Produkte",
-    "titles": {
-      "list": "Produkte",
-      "create": "Produkt erstellen",
-      "edit": "Prod Düzenle"
-    },
-    "fields": {
-      "id": "ID",
-      "name": "Titel",
-      "description": "Bezeichnung",
-      "isActive": "Aktiv",
-      "price": "Price",
-      "category": "Kategorie",
-      "images": {
-        "label": "Fotos",
-        "description": "Ein Foto hochladen.",
-        "validation": "Fotoauflösung: 1080x1080px."
-      },
-      "createdAt": "Erstellt am"
-    }
-  },
-  "reviews": {
-    "reviews": "Kommentare",
-    "titles": {
-      "list": "Kommentare"
-    },
-    "fields": {
-      "user": "Benutzer",
-      "orderId": "Bestellungsnummer",
-      "review": "Kommentar",
-      "rating": "Bewertung"
-    }
-  },
-  "stores": {
-    "stores": "Geschäfte",
-    "titles": {
-      "create": "Geschäft Erstellen",
-      "edit": "Geschäfts Bearbeiten",
-      "list": "Geschäfte",
-      "show": "Geschäft Zeigen"
-    },
-    "fields": {
-      "id": "Geschäfts-ID",
-      "title": "Titel",
-      "isActive": "Aktiv",
-      "createdAt": "Erstellt am",
-      "address": "Adresse",
-      "email": "Email",
-      "gsm": "Telefon"
-    },
-    "buttons": {
-      "editProducts": "Produkte bearbeiten",
-      "addProduct": "Produkt erstellen",
-      "outOfStock": "Kein Bestand",
-      "edit": "Produkt bearbeiten"
-    },
-    "selectLocation": "Wähle einen Ort",
-    "storeProducts": "Produkte des Geschäftes",
-    "tagFilterDescription": "Filter mit Etiketten",
-    "all": "Alles",
-    "productSearch": "Produkt suchen"
   },
   "users": {
-    "users": "Benutzern",
+    "users": "Users",
     "titles": {
-      "edit": "Benutzer bearbeiten",
-      "list": "Benutzern",
-      "show": "Benutzer Information"
+      "create": "Create User",
+      "edit": "Edit User",
+      "list": "Users",
+      "show": "User Detail"
     },
+
     "fields": {
       "id": "ID",
       "avatar": {
         "label": "Avatar",
-        "description": "Ein Foto hochladen"
+        "description": "Click or drag avatar image to this area to upload."
       },
-      "firstName": "Vorname",
-      "lastName": "Nachname",
-      "gender": {
-        "label": "Geschlecht",
-        "Male": "Mann",
-        "Female": "Frau"
+      "name": "Name",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email Id",
+      "password": "Password",
+      "role": "Associated Role",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
       },
-      "gsm": "GSM",
-      "createdAt": "Erstellt am",
-      "isActive": {
-        "label": "Aktiv",
-        "true": "Ja",
-        "false": "Nein"
+      "is_designer": {
+        "label": "Is Designer",
+        "true": "Yes",
+        "false": "No"
+      },
+      "is_superuser": {
+        "label": "Is Superuser",
+        "true": "Yes",
+        "false": "No"
       }
     },
     "filter": {
-      "title": "Filter",
+      "title": "Filters",
       "search": {
-        "label": "Suche",
-        "placeholder": "Vorname, Nachname, GSM..."
+        "label": "Search",
+        "placeholder": "First Name, Last Name, Email, etc."
       },
-      "createdAt": {
-        "label": "Erstellt am"
-      },
-      "gender": {
-        "label": "Geschlecht",
-        "placeholder": "Geschlecht",
-        "male": "Mann",
-        "female": "Frau"
-      },
-      "isActive": {
-        "label": "Ist aktiv?",
-        "placeholder": "Ist aktiv?",
-        "true": "Ja",
-        "false": "Nein"
+      "is_active": {
+        "label": "Active",
+        "placeholder": "Active status",
+        "true": "Yes",
+        "false": "No"
       },
       "submit": "Filter"
     },
     "addresses": {
-      "addresses": "Adressen",
-      "address": "Adresse"
+      "addresses": "Addresses",
+      "address": "Address"
+    },
+    "steps": {
+      "content": "Identity",
+      "addresses": "Addresses"
     }
+  },
+  "roles": {
+    "roles": "Roles",
+    "titles": {
+      "create": "Create Role",
+      "edit": "Edit Role",
+      "list": "Roles",
+      "show": "Show Role"
+    },
+    "fields": {
+      "id": "Role ID",
+      "title": "Role Name",
+      "description": "Description",
+      "associatedJob": "Associated Jobs",
+      "associatedUseCases": "Associated Use Cases",
+      "associatedPlayBook": "Associated Playbook"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "application-urls": {
+    "application-urls": "Application URLs",
+    "titles": {
+      "create": "Create Application URL",
+      "edit": "Edit Application URL",
+      "list": " Application URL"
+    },
+    "fields": {
+      "id": " App URL ID",
+      "title": "Name",
+      "description": "Description",
+      "url": "Application URL",
+      "job": "Associated Jobs",
+      "type": "Application Type"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "jobs": {
+    "jobs": "Jobs",
+    "titles": {
+      "create": "Create Jobs",
+      "edit": "Edit Jobs",
+      "list": "Jobs"
+    },
+    "fields": {
+      "id": " Job ID",
+      "title": "Name",
+      "description": "Description",
+      "application-type": "Application Type",
+      "application-url-id": "Application URL",
+      "process-role": "Process Role",
+      "associatedScreen": "Associated Screen",
+      "associatedUseCases": "Associated Use Cases",
+      "is-template": {
+        "label": "Is Template",
+        "true": "Yes",
+        "false": "No"
+      }
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "playbooks": {
+    "playbooks": "Playbooks",
+    "titles": {
+      "create": "Create Playbook",
+      "edit": "Edit Playbook",
+      "list": "Playbooks"
+    },
+    "fields": {
+      "id": " Playbook ID",
+      "title": "Name",
+      "description": "Description",
+      "page-content": "Page Content",
+      "process-role": "Process Roles"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "screens": {
+    "screens": "Screens",
+    "titles": {
+      "create": "Create Screen",
+      "edit": "Edit Screen",
+      "list": "Screens"
+    },
+    "fields": {
+      "id": " Screen ID",
+      "title": "Name",
+      "description": "Description",
+      "page-content": "Page Content",
+      "process-role": "Process Roles",
+      "associatedJob": "Associated Jobs",
+      "screenUrl": "Screen URL",
+      "application-type": "Application Type"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "courses": {
+    "courses": "Courses",
+    "titles": {
+      "create": "Create Course",
+      "edit": "Edit Course",
+      "list": "Courses"
+    },
+    "fields": {
+      "id": " Course ID",
+      "title": "Name",
+      "description": "Description",
+      "duration": "Duration",
+      "enroll-required": "Enroll Required",
+      "passing-percentage": "Passing Percentage"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "lessons": {
+    "lessons": "Lesson Templates",
+    "titles": {
+      "create": "Create Lesson Template",
+      "edit": "Edit Lesson Template",
+      "list": "Lesson Templates"
+    },
+    "fields": {
+      "id": " Lesson ID",
+      "title": "Name",
+      "description": "Description",
+      "duration": "Duration",
+      "page-content": "Page Content",
+      "is-template": {
+        "label": "Is Template",
+        "true": "Yes",
+        "false": "No"
+      }
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "use-cases": {
+    "use-cases": "Use Cases",
+    "titles": {
+      "create": "Create Use Cases",
+      "edit": "Edit Use Cases",
+      "list": "Use Cases"
+    },
+    "fields": {
+      "id": "Use Case ID",
+      "title": "Name",
+      "description": "Description",
+      "table-config": "Table Config",
+      "use-case-role": "Use Case Role",
+      "use-case-job": "Use Case Job"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
   }
 }
