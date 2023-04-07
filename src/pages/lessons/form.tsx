@@ -13,7 +13,7 @@ export const LessonForm: React.FC<IResourceComponentsProps> = () => {
 
   const renderFields = (lesson: ILesson | BaseRecord) => (
     <>
-      <Form.Item name='is_template' hidden />
+      <Form.Item name='is_template' hidden initialValue={true} />
       <Form.Item label={t("lessons.fields.duration")} name='duration'>
         <Input />
       </Form.Item>
