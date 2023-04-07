@@ -5,7 +5,6 @@ import { ItemTypes } from "./ItemTypes";
 import { AddContentModal } from "./addContentModal";
 import { useOne, useTranslate } from "@pankod/refine-core";
 import { ILesson } from "interfaces";
-import { useEdit } from "hooks/common";
 import { Resource } from "services/enums";
 
 const { Text } = Typography;
@@ -67,10 +66,12 @@ export const CourseItem = memo(function CourseItem({
   );
   const opacity = isDragging ? 0 : 1;
 
-  const lessonData = useOne<ILesson>({
-    resource: "lessons",
-    id: itemId,
-  });
+  const lessonData =
+    itemId &&
+    useOne<ILesson>({
+      resource: Resource.LESSON,
+      id: itemId,
+    });
 
   // const { editUrl } = useEdit(Resource.LESSON, itemId, 2);
   const editUrl = `/editor/${Resource.LESSON}/${itemId}`;

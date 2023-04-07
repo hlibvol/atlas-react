@@ -25,11 +25,10 @@ export const renderPagesHtml = (pagesHtml: any) => {
     : null;
 };
 
-export const useEdit = (resource: string, id: BaseKey, activeCollapseKey: number) => {
+export const useDesignerEdit = (resource: string, id: BaseKey) => {
   const navigate = useNavigate();
-  const { editUrl } = useNavigation();
-  const newEditUrl = `${editUrl(resource, id)}${
-    activeCollapseKey ? `?key=${activeCollapseKey}` : ""
-  }`;
-  return { edit: () => navigate(newEditUrl), editUrl: newEditUrl };
+  // const { editUrl } = useNavigation();
+  const editUrl = `/editor/${resource}/${id}`;
+
+  return { edit: () => navigate(editUrl), editUrl };
 };

@@ -1,9 +1,9 @@
 import { Avatar, Button, Col, Row, Divider, Modal, Space, Table, Tag } from "@pankod/refine-antd";
-import { useEffect, useState } from "react";
-import { BaseKey, useList, useShow, useTranslate, useUpdate } from "@pankod/refine-core";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { BaseKey, useList, useOne, useShow, useTranslate, useUpdate } from "@pankod/refine-core";
 import { ICourse, ILesson } from "interfaces";
 import type { ColumnsType } from "antd/es/table";
-import { useEdit } from "hooks/common";
+import { useDesignerEdit } from "hooks/common";
 import { Resource } from "services/enums";
 
 // Interface for props from courseItem component
@@ -36,14 +36,6 @@ const columns: ColumnsType<ILessonData> = [
   },
 ];
 
-// rowSelection object indicates the need for row selection radio button
-let selectedLessonData = [] as Array<ILessonData>;
-const rowSelection = {
-  onChange: (selectedRowKeys: React.Key[], selectedRows: ILessonData[]) => {
-    selectedLessonData = selectedRows;
-  },
-};
-
 export const AddContentModal: React.FC<IUpdateLessonProps> = ({
   courseType,
   itemId,
@@ -61,6 +53,19 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
     setIsModalVisible(true);
   };
 
+  // rowSelection object indicates the need for row selection radio button
+  const [selectedLessonData, setSelectedLessonData] = useState([] as Array<ILessonData>);
+  const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: ILessonData[]) => {
+      setSelectedLessonData(selectedRows);
+    },
+  };
+
+  const selectedLessonFullData = useOne<ILesson>({
+    resource: Resource.LESSON,
+    id: selectedLessonData[0]?.key || "",
+  });
+
   useEffect(() => {
     if (course && course.items != courseItems) {
       setCourseItems(course.items); // This will always use latest value of count
@@ -71,7 +76,7 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
   const lessonListQueryResult = useList<ILessonData>({
     resource: Resource.LESSON,
   });
-  // comapre and get unique data from both API
+  // Compare and get unique data from both API
   const options = [] as Array<ILessonData>;
 
   // get data after filter array
@@ -87,16 +92,16 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
     }
   });
 
-  // handle code when paage_content updated from one lesson to another
+  // handle code when page_content updated from one lesson to another
   const [selectionType] = useState<"radio">("radio");
-  const { edit, editUrl } = useEdit(Resource.LESSON, itemId, 2);
+  const { edit, editUrl } = useDesignerEdit(Resource.LESSON, itemId);
 
   const handleSubmit = async (id: any) => {
     mutate(
       {
         resource: Resource.LESSON,
         id: id || "",
-        values: { page_content: selectedLessonData[0]?.page_content },
+        values: { page_content: selectedLessonFullData?.data?.data?.page_content },
         mutationMode: "pessimistic",
       },
       {
@@ -134,6 +139,7 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
               </Button>
             </Space>,
           ]}
+          onCancel={() => setIsModalVisible(false)}
         >
           <Row justify='space-between'>
             <Col>
@@ -142,9 +148,9 @@ export const AddContentModal: React.FC<IUpdateLessonProps> = ({
               </Button>
             </Col>
             <Col>
-              <Button size='middle'>
+              {/* <Button size='middle'>
                 <a href='#'>{t("buttons.blank-quiz")}</a>
-              </Button>
+              </Button> */}
             </Col>
           </Row>
           <Divider plain>

@@ -71,6 +71,7 @@ export const Container: React.FC = memo(function Container() {
         id: course?.id || "",
         values: { items: items },
         mutationMode: "optimistic",
+        successNotification: false,
       },
       {
         onError: (error, variables, context) => {
