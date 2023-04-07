@@ -20,3 +20,11 @@ export const getObjectValuesAsArray = (obj) => {
 export const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+export const toTitleCase = (string: string) => {
+  return string
+    .toLowerCase()
+    .split(" ")
+    .map((resourse: string) => resourse.charAt(0).toUpperCase() + resourse.slice(1))
+    .join(" ");
+};

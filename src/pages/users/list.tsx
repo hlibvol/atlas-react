@@ -5,79 +5,20 @@ import {
   useNavigation,
   BaseRecord,
 } from "@pankod/refine-core";
-import { Table, Avatar, BooleanField, Tag, UrlField, Button } from "@pankod/refine-antd";
-import { useTableProps, useTableActionProps, usePageSize, defaultColumnProps } from "hooks/table";
+import { BooleanField, Tag, UrlField, Button } from "@pankod/refine-antd";
 import { Resource, Action } from "services/enums";
-import { IUser, IRole } from "interfaces";
-import type { ColumnsType } from "antd/es/table";
+import { IRole } from "interfaces";
 import Drawer from "components/resource/drawer";
 import List from "components/resource/list";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { openDrawer, setDrawerTitle } from "redux/slices/drawerSlice";
+import { useAppDispatch } from "redux/hooks";
+import { openDrawer } from "redux/slices/drawerSlice";
 
 export const UsersList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const { editUrl, showUrl } = useNavigation();
-  // const tableProps = useTableProps({ resource: Resource.USER });
-  // const tableActionProps = useTableActionProps();
-  // const pageSize = usePageSize();
+  const { editUrl } = useNavigation();
   const { data: roles } = useList<IRole>({ resource: Resource.ROLE });
-
-  // const columns: ColumnsType<IUser> = [
-  //   {
-  //     align: "center",
-  //     dataIndex: ["avatar"],
-  //     title: t("users.fields.avatar.label"),
-  //     render: () => <Avatar src='user_default_img.png' />,
-  //   },
-  //   {
-  //     dataIndex: "first_name",
-  //     title: t("users.fields.first_name"),
-  //     render: (first_name: string, record: IUser) => (
-  //       <UrlField value={showUrl(Resource.USER, record.id)}>{first_name}</UrlField>
-  //     ),
-  //   },
-  //   {
-  //     dataIndex: "last_name",
-  //     title: t("users.fields.last_name"),
-  //   },
-  //   {
-  //     dataIndex: "email",
-  //     title: t("users.fields.email"),
-  //   },
-  //   {
-  //     dataIndex: "is_designer",
-  //     title: t("users.fields.is_designer.label"),
-  //     render: (value) => <BooleanField value={value} />,
-  //   },
-  //   {
-  //     dataIndex: "is_superuser",
-  //     title: t("users.fields.is_superuser.label"),
-  //     render: (value) => <BooleanField value={value} />,
-  //   },
-  //   {
-  //     ...tableActionProps,
-  //   },
-  // ];
-
-  // return (
-  //   <List breadcrumb={false}>
-  //     <Table
-  //       {...tableProps}
-  //       {...(pageSize && { pagination: { ...tableProps.pagination, pageSize } })}
-  //       // @ts-ignore
-  //       columns={columns.map((item) => ({ ...item, ...defaultColumnProps }))}
-  //     ></Table>
-  //   </List>
-  // );
-
   const dispatch = useAppDispatch();
   const columns = [
-    // {
-    //   dataIndex: ["avatar"],
-    //   title: t("users.fields.avatar.label"),
-    //   render: () => <Avatar src='user_default_img.png' />,
-    // },
     {
       dataIndex: "first_name",
       title: t("users.fields.first_name"),

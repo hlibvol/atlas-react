@@ -153,6 +153,7 @@
 
     "fields": {
       "id": "ID",
+      "resourceLabel": "User",
       "avatar": {
         "label": "Avatar",
         "description": "Click or drag avatar image to this area to upload."
@@ -162,7 +163,7 @@
       "last_name": "Last Name",
       "email": "Email Id",
       "password": "Password",
-      "role": "Associated Role",
+      "role": "Role",
       "is_active": {
         "label": "Is Active",
         "true": "Yes",
@@ -212,6 +213,7 @@
     },
     "fields": {
       "id": "Role ID",
+      "resourceLabel": "Role",
       "title": "Role Name",
       "description": "Description",
       "associatedJob": "Associated Jobs",
@@ -230,6 +232,7 @@
     },
     "fields": {
       "id": " App URL ID",
+      "resourceLabel": "Application Url",
       "title": "Name",
       "description": "Description",
       "url": "Application URL",
@@ -248,6 +251,7 @@
     },
     "fields": {
       "id": " Job ID",
+      "resourceLabel": "Job",
       "title": "Name",
       "description": "Description",
       "application-type": "Application Type",
@@ -273,6 +277,7 @@
     },
     "fields": {
       "id": " Playbook ID",
+      "resourceLabel": "Playbook",
       "title": "Name",
       "description": "Description",
       "page-content": "Page Content",
@@ -290,6 +295,7 @@
     },
     "fields": {
       "id": " Screen ID",
+      "resourceLabel": "Screen",
       "title": "Name",
       "description": "Description",
       "page-content": "Page Content",
@@ -310,6 +316,7 @@
     },
     "fields": {
       "id": " Course ID",
+      "resourceLabel": "Course",
       "title": "Name",
       "description": "Description",
       "duration": "Duration",
@@ -328,6 +335,7 @@
     },
     "fields": {
       "id": " Lesson ID",
+      "resourceLabel": "Lesson",
       "title": "Name",
       "description": "Description",
       "duration": "Duration",
@@ -350,6 +358,7 @@
     },
     "fields": {
       "id": "Use Case ID",
+      "resourceLabel": "Use Case",
       "title": "Name",
       "description": "Description",
       "table-config": "Table Config",

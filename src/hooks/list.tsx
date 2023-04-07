@@ -162,6 +162,7 @@ export const useTableActionProps = (props: TableActionProps) => {
     previewButton,
     designerButton,
   } = props;
+  const tooltipLabel = t(`${resource}.fields.resourceLabel`);
   const buttonProps = (id: BaseKey | undefined, disabled: boolean | string | undefined) => {
     return {
       hideText: true,
@@ -219,7 +220,7 @@ export const useTableActionProps = (props: TableActionProps) => {
             </Tooltip>
           )}
           {previewButton && (
-            <Tooltip title={`Preview ${resource}`} color='green'>
+            <Tooltip title={`Preview ${tooltipLabel}`} color='green'>
               <Button
                 icon={<EyeOutlined />}
                 size='small'
@@ -232,7 +233,7 @@ export const useTableActionProps = (props: TableActionProps) => {
             </Tooltip>
           )}
           {designerButton && (
-            <Tooltip title={`Design ${resource}`} color='green'>
+            <Tooltip title={`Design ${tooltipLabel}`} color='green'>
               <Button
                 icon={<PlayCircleOutlined />}
                 size='small'
@@ -288,7 +289,7 @@ export const useTableActionProps = (props: TableActionProps) => {
             </Tooltip>
           )}
           {hasPlaybook && (
-            <Tooltip title='Associated Playbook' color='green'>
+            <Tooltip title='Associated Playbooks' color='green'>
               <Button
                 size='small'
                 type='primary'
@@ -309,7 +310,7 @@ export const useTableActionProps = (props: TableActionProps) => {
             </Tooltip>
           )}
           {hasScreen && (
-            <Tooltip title='Associated Screen' color='green'>
+            <Tooltip title='Associated Screens' color='green'>
               <Button
                 size='small'
                 type='primary'
@@ -330,7 +331,7 @@ export const useTableActionProps = (props: TableActionProps) => {
             </Tooltip>
           )}
           {roleJobsMatrix && (
-            <Tooltip title='Role-Job Matrix' color='green'>
+            <Tooltip title='Role Job Matrix' color='green'>
               <Button
                 icon={<SettingOutlined />}
                 size='small'
@@ -369,7 +370,7 @@ export const useTableActionProps = (props: TableActionProps) => {
               </Tooltip>
             </Space>
           )}
-          <Tooltip title={`Edit ${resource}`} color='green'>
+          <Tooltip title={`Edit ${tooltipLabel}`} color='green'>
             <EditButton
               {...buttonProps(record.id, disabledEdit)}
               onClick={() =>
@@ -385,7 +386,7 @@ export const useTableActionProps = (props: TableActionProps) => {
               }
             />
           </Tooltip>
-          <Tooltip title={`Delete ${resource}`} color='green'>
+          <Tooltip title={`Delete ${tooltipLabel}`} color='green'>
             <DeleteButton {...buttonProps(record.id, disabledDelete)} />
           </Tooltip>
         </Space>

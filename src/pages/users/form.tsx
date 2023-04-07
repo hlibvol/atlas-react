@@ -1,44 +1,21 @@
 import React from "react";
 
-import { IResourceComponentsProps, BaseRecord, useApiUrl, useTranslate } from "@pankod/refine-core";
-import {
-  Form,
-  Edit,
-  Select,
-  Upload,
-  Input,
-  Button,
-  SaveButton,
-  Steps,
-  getValueFromEvent,
-  useStepsForm,
-  useSelect,
-  Typography,
-  Space,
-  Avatar,
-  Row,
-  Col,
-  InputProps,
-  Radio,
-} from "@pankod/refine-antd";
+import { IResourceComponentsProps, BaseRecord, useTranslate } from "@pankod/refine-core";
+import { Form, Select, Input, useSelect, Row, Col, Radio } from "@pankod/refine-antd";
 
 import { DrawerForm } from "components/resource/form";
-import { Action, Resource } from "services/enums";
-import { useAppSelector, useAppDispatch } from "redux/hooks";
+import { Resource } from "services/enums";
+import { useAppSelector } from "redux/hooks";
 import { IRole, IUser } from "interfaces";
 
 export const UserForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { action, itemId } = useAppSelector((state) => state.drawer);
-
   const resource = Resource.USER;
-  const apiUrl = useApiUrl();
-  const { Text } = Typography;
   const { selectProps: roleSelectProps } = useSelect<IRole>({
     resource: "roles",
     optionLabel: "name",
     optionValue: "id",
-    // defaultValue: userData?.store.id,
   });
   const renderFields = (lesson: IUser | BaseRecord) => (
     <>
@@ -82,7 +59,7 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
           },
         ]}
       >
-        <Select {...roleSelectProps} />
+        <Select placeholder='Select Role' {...roleSelectProps} />
       </Form.Item>
       <Row key='relations' gutter={20}>
         <Col xs={12} lg={12}>

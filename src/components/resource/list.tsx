@@ -6,7 +6,7 @@ import { useAppDispatch } from "redux/hooks";
 import { openDrawer } from "redux/slices/drawerSlice";
 import { BaseRecord } from "@pankod/refine-core";
 import { defaultColumnProps, useListProps } from "../../hooks/list";
-import { capitalizeFirstLetter, getObjectValuesAsArray } from "services/utils";
+import { getObjectValuesAsArray, toTitleCase } from "services/utils";
 
 const { Search } = Input;
 const { Text } = Typography;
@@ -34,7 +34,7 @@ const List: React.FC<ABListProps> = (props) => {
     : tableProps.dataSource;
 
   const _columns: ColumnsType<BaseRecord> = [...defaultColumns, ...columns, ...tableActionProps];
-  const title = capitalizeFirstLetter(resource.replace("-", " "));
+  const title = toTitleCase(resource.replace("-", " "));
 
   return (
     <AntDList
