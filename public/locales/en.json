@@ -100,7 +100,7 @@
     "add-content": "Add Content",
     "design-job": "Design Job",
     "execute-job": "Execute Job",
-    "design-use-case": "Design Use Case"
+    "role-job-matrix": "Role Job Matrix"
   },
   "loading": "Loading",
   "tags": {
@@ -218,7 +218,7 @@
       "description": "Description",
       "associatedJob": "Associated Jobs",
       "associatedUseCases": "Associated Use Cases",
-      "associatedPlayBook": "Associated Playbook"
+      "associatedPlayBook": "Associated Playbooks"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -257,7 +257,7 @@
       "application-type": "Application Type",
       "application-url-id": "Application URL",
       "process-role": "Process Role",
-      "associatedScreen": "Associated Screen",
+      "associatedScreen": "Associated Screens",
       "associatedUseCases": "Associated Use Cases",
       "is-template": {
         "label": "Is Template",

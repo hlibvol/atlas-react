@@ -1,5 +1,11 @@
-import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { Form, Input, Button } from "@pankod/refine-antd";
+import {
+  BaseRecord,
+  IResourceComponentsProps,
+  useNavigation,
+  useTranslate,
+} from "@pankod/refine-core";
+import { Form, Input, Button, Space } from "@pankod/refine-antd";
+import { EyeOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { Action, Resource } from "services/enums";
 import { DrawerForm } from "components/resource/form";
 import { ILesson } from "interfaces";
@@ -10,6 +16,7 @@ export const LessonForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const resource = Resource.LESSON;
   const { action, itemId } = useAppSelector((state) => state.drawer);
+  const { showUrl } = useNavigation();
 
   const renderFields = (lesson: ILesson | BaseRecord) => (
     <>
@@ -22,9 +29,24 @@ export const LessonForm: React.FC<IResourceComponentsProps> = () => {
 
   const footer =
     itemId && action === Action.EDIT ? (
-      <Button href={`/editor/${resource}/${itemId}`} target='_blank'>
-        Open Designer
-      </Button>
+      <Space>
+        <Button
+          icon={<PlayCircleOutlined />}
+          type='primary'
+          href={`/editor/${resource}/${itemId}`}
+          target='_blank'
+        >
+          Design {t(`${resource}.fields.resourceLabel`)}
+        </Button>
+        <Button
+          icon={<EyeOutlined />}
+          type='primary'
+          href={showUrl(resource, itemId)}
+          target='_blank'
+        >
+          Preview {t(`${resource}.fields.resourceLabel`)}
+        </Button>
+      </Space>
     ) : null;
 
   return <DrawerForm resource={resource} renderFields={renderFields} footer={footer} />;

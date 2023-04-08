@@ -200,7 +200,7 @@ export const useTableActionProps = (props: TableActionProps) => {
       render: (_: unknown, record: BaseRecord) => (
         <Space>
           {hasRoles && (
-            <Tooltip title='Process Role' color='green'>
+            <Tooltip title='Process Roles' color='green'>
               <Button
                 icon={<UserOutlined />}
                 size='small'
