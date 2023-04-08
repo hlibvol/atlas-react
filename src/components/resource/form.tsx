@@ -180,16 +180,32 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
   };
 
   formProps.onValuesChange = () => {
-    const drawerOnClose = form.isFieldsTouched()
-      ? () => {
-          Modal.confirm({
-            title: "Unsaved changes",
-            content: "Are you sure you want to leave? You have unsaved changes.",
-            onOk: defaultOnClose,
-          });
+    const previousRecords = queryResult?.data?.data;
+    const currentRecords: any = form.getFieldsValue();
+
+    let hasChanges = false;
+
+    for (const key in currentRecords) {
+      if (currentRecords.hasOwnProperty(key)) {
+        if (previousRecords?.hasOwnProperty(key) && previousRecords[key] !== currentRecords[key]) {
+          hasChanges = true;
+          break;
         }
-      : defaultOnClose;
-    dispatch(setDrawerOnClose(drawerOnClose));
+      }
+    }
+
+    if (hasChanges) {
+      const drawerOnClose = form.isFieldsTouched()
+        ? () => {
+            Modal.confirm({
+              title: "Unsaved changes",
+              content: "Are you sure you want to leave? You have unsaved changes.",
+              onOk: defaultOnClose,
+            });
+          }
+        : defaultOnClose;
+      dispatch(setDrawerOnClose(drawerOnClose));
+    }
   };
 
   useEffect(() => {
