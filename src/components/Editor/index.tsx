@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import grapesjs from "grapesjs";
 import gjsPresetWebpage from "grapesjs-preset-webpage";
 import gjsBlockBasic from "grapesjs-blocks-basic";
@@ -11,16 +11,35 @@ import "./styles.scss";
 import { Config } from "services/config";
 import { TOKEN_KEY } from "services/constants";
 import { useParams } from "react-router-dom";
+import { useList } from "@pankod/refine-core";
 import { abCustomPlugin } from "./abCustomPlugin";
+import { IJob, IUseCase } from "interfaces";
+import { Resource } from "services/enums";
 
 export const Editor: React.FC = () => {
-  const { resource, itemId } = useParams<{ resource: string; itemId: string }>();
+  const editorRef = useRef(null);
+  const { resource, itemId } = useParams<{ resource: string; itemId: any }>();
   const designEndpoint = `${Config.apiEndpoint}/v1/${resource}/${itemId}`;
   const token = localStorage.getItem(TOKEN_KEY);
+
+  const jobs = useList<IJob>({
+    resource: Resource.JOB,
+  });
+
+  const useCases = useList<IUseCase>({
+    resource: Resource.USE_CASE,
+  });
+
   useEffect(() => {
-    grapesjs.init({
-      container: "#editor",
-      width: "auto",
+    if (!editorRef.current) {
+      return;
+    }
+
+    const editor = grapesjs.init({
+      container: editorRef.current,
+      components: "",
+      style: "",
+      fromElement: true,
       plugins: [
         gjsPresetWebpage,
         gjsBlockBasic,
@@ -33,7 +52,10 @@ export const Editor: React.FC = () => {
         gjsBlockBasic,
         "gjs-blocks-flexbox": {},
         grapesjsPluginForms,
-        abCustomPlugin,
+        abCustomPlugin: {
+          jobs,
+          useCases,
+        },
       },
       storageManager: {
         type: "remote",
@@ -73,12 +95,12 @@ export const Editor: React.FC = () => {
         },
       },
     });
-  }, []);
+  }, [jobs, useCases, editorRef]);
+
   return (
     <div>
-      <div className='main-content'>
-        <div id='editor'></div>
-      </div>
+      <div className='main-content'></div>
+      <div ref={editorRef}></div>
     </div>
   );
 };

@@ -15,6 +15,7 @@ import { Header, Title } from "components";
 import { useResources } from "hooks/resource";
 import { Editor } from "components/Editor";
 import { UseCaseDesign } from "pages/useCases/roleJobMatrix";
+import { UseCaseMatrixTable } from "components/designer/useCaseMatrixTable";
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -48,6 +49,10 @@ const App: React.FC = () => {
                 path: "/use-cases/:itemId",
                 element: <UseCaseDesign />,
                 layout: true,
+              },
+              {
+                path: "/use-case-designer-view/:resource/:itemId",
+                element: <UseCaseMatrixTable />,
               },
             ],
           }}
