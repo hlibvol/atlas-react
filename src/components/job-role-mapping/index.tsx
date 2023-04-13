@@ -63,7 +63,7 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
       {
         resource: "use-cases",
         id,
-        values: { table_config: configData },
+        values: { job_ids: jobId.map((v: any) => v.Id), role_ids: roleId.map((v: any) => v.Id) },
         mutationMode: "optimistic",
         successNotification: false,
       },
@@ -81,6 +81,7 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
   };
   let roleData = useCaseTableConfig?.roles || [];
   let jobData = useCaseTableConfig?.jobs || [];
+
   const handleChange = (value: any) => {
     if (value.length > roleData.length) {
       value.map((v: any) => {
@@ -131,7 +132,7 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
         deafultMapping[1] === key.id[1] &&
         deafultMapping[2] === key.id[2]
       ) {
-        param.setValue(key.id[3]);
+        // param.setValue(key.id[3]);
       }
     });
 
@@ -165,7 +166,7 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
     mutate(
       {
         resource: "jobs",
-        id: param.data.id || "",
+        id: param.data.id,
         values: { role_ids: roleId },
         successNotification: false,
         // mutationMode: "optimistic",
@@ -175,7 +176,7 @@ export const UseCaseTable: React.FC<IfirstChildProps> = ({
           console.log("data error", error);
         },
         onSuccess: (data, variables, error) => {
-          param.setValue(param.value);
+          // param.setValue(param.value);
           // setColumnData(data.data.roles);
         },
       }

@@ -16,15 +16,22 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
   const useCase = queryResult.data?.data;
   const [useCaseTableData, setUseCaseTableData] = useState([]) as Array<any>;
 
-  const useCaseConfig = useCase?.table_config;
+  const parseArr = (arr: any, ids: any) => {
+    return ids.map((Id: any, i: number) => {
+      const filteredIdData = arr.filter(({ id }: any) => id == Id)?.[0];
+      return { ...filteredIdData, Id, width: 150, order: i };
+    });
+  };
+
+  const useCaseConfig = useCase && {
+    roles: parseArr(useCase.roles, useCase.role_ids),
+    jobs: parseArr(useCase.jobs, useCase.job_ids),
+  };
 
   useEffect(() => {
-    const tableData = setTimeout(
-      () => useCaseConfig && setUseCaseTableData(JSON.parse(useCaseConfig)),
-      1000
-    );
+    const tableData = setTimeout(() => useCaseConfig && setUseCaseTableData(useCaseConfig), 1000);
     return () => clearTimeout(tableData);
-  }, [useCaseConfig]);
+  }, [useCase]);
 
   // role value for column data in matrix table
   let roleIDs = Array();
@@ -118,7 +125,9 @@ export const UseCaseDesign: React.FC<IResourceComponentsProps> = () => {
         subTitle: "(Job - Role Matrix)",
       }}
     >
-      <UseCaseTable colHeader={columns} rowHeader={rowData} useCaseTableConfig={useCaseTableData} />
+      {useCaseConfig && (
+        <UseCaseTable colHeader={columns} rowHeader={rowData} useCaseTableConfig={useCaseConfig} />
+      )}
     </Show>
   );
 };
