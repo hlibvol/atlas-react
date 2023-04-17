@@ -1,15 +1,15 @@
 import { Icons } from "@pankod/refine-antd";
 
 import { ApplicationURLForm, ApplicationURLList } from "pages/applicationUrl";
-import { JobForm, JobList, JobShow } from "pages/jobs";
+import { JobForm, JobList } from "pages/jobs";
 import { PlayBookList, PlaybookForm, PlayBookShow } from "pages/playbooks";
 import { CourseForm, CourseList } from "pages/courses";
 
 import { LessonForm, LessonList, LessonShow } from "pages/lessons";
 import { UseCaseForm, UseCaseList } from "pages/useCases";
 
-import { UsersList, UserShow, UserForm } from "pages/users";
-import { RoleForm, RoleList, RoleShow } from "pages/roles";
+import { UsersList, UserForm } from "pages/users";
+import { RoleForm, RoleList } from "pages/roles";
 import { Resource } from "services/enums";
 import { ScreenForm, ScreenList } from "pages/screens";
 

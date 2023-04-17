@@ -6,8 +6,8 @@ import { UrlField } from "@pankod/refine-antd";
 import { TagList } from "components/core";
 import { IJob } from "interfaces";
 import { Resource } from "services/enums";
-import List from "components/resource/list";
-import Drawer from "components/resource/drawer";
+import List from "components/Resource/list";
+import Drawer from "components/Resource/drawer";
 
 export const ApplicationURLList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();

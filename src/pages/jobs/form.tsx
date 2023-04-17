@@ -15,7 +15,7 @@ import {
   FormInstance,
 } from "@pankod/refine-antd";
 import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
-import { DrawerForm } from "components/resource/form";
+import { DrawerForm } from "components/Resource/form";
 import { IAppUrl, IUseCase, IScreen, IAppType, IJob } from "interfaces";
 import { Resource, Action } from "services/enums";
 import { useAppSelector } from "redux/hooks";

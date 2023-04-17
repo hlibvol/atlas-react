@@ -8,8 +8,8 @@ import {
 import { BooleanField, Tag, UrlField, Button } from "@pankod/refine-antd";
 import { Resource, Action } from "services/enums";
 import { IRole } from "interfaces";
-import Drawer from "components/resource/drawer";
-import List from "components/resource/list";
+import Drawer from "components/Resource/drawer";
+import List from "components/Resource/list";
 import { useAppDispatch } from "redux/hooks";
 import { openDrawer } from "redux/slices/drawerSlice";
 

@@ -3,7 +3,7 @@ import React from "react";
 import { IResourceComponentsProps, useNavigation } from "@pankod/refine-core";
 import { Button, Space } from "@pankod/refine-antd";
 import { EyeOutlined, PlayCircleOutlined } from "@ant-design/icons";
-import { DrawerForm } from "components/resource/form";
+import { DrawerForm } from "components/Resource/form";
 import { Action, Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 

@@ -337,7 +337,7 @@ export const useTableActionProps = (props: TableActionProps) => {
                 size='small'
                 type='primary'
                 ghost
-                href={`/use-cases/${record.id}`}
+                href={`/${Resource.USE_CASE}/${record.id}`}
                 target='_blank'
               />
             </Tooltip>

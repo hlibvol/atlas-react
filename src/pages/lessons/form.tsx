@@ -7,7 +7,7 @@ import {
 import { Form, Input, Button, Space } from "@pankod/refine-antd";
 import { EyeOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { Action, Resource } from "services/enums";
-import { DrawerForm } from "components/resource/form";
+import { DrawerForm } from "components/Resource/form";
 import { ILesson } from "interfaces";
 import { useAppSelector } from "redux/hooks";
 import React from "react";

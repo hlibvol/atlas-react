@@ -11,8 +11,8 @@ import { Resource } from "services/enums";
 import { IAppUrl, IJob, IRole } from "interfaces";
 import type { ColumnsType } from "antd/es/table";
 import { TagList } from "components/core";
-import Drawer from "components/resource/drawer";
-import List from "components/resource/list";
+import Drawer from "components/Resource/drawer";
+import List from "components/Resource/list";
 
 export const JobList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();

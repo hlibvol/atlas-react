@@ -1,10 +1,10 @@
+import React, { useEffect } from "react";
 import { useOne } from "@pankod/refine-core";
 import { useParams } from "@pankod/refine-react-router-v6";
 import { IJob, IRole, IUseCase } from "interfaces";
-import { useEffect } from "react";
 import { Resource } from "services/enums";
 
-export const UseCaseMatrixTable = () => {
+export const MatrixTableView: React.FC = () => {
   const { itemId } = useParams();
   const queryResult = useOne<IUseCase>({
     resource: Resource.USE_CASE,

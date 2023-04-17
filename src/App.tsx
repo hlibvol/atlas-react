@@ -13,9 +13,7 @@ import { AuthPage } from "./pages/auth";
 import { useTranslation } from "react-i18next";
 import { Header, Title } from "components";
 import { useResources } from "hooks/resource";
-import { Editor } from "components/Editor";
-import { UseCaseDesign } from "pages/useCases/roleJobMatrix";
-import { UseCaseMatrixTable } from "components/designer/useCaseMatrixTable";
+import { useRoutes } from "hooks/routes";
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -32,29 +30,7 @@ const App: React.FC = () => {
         <Refine
           routerProvider={{
             ...routerProvider,
-            routes: [
-              {
-                path: "/forgot-password",
-                element: <AuthPage type='forgotPassword' />,
-              },
-              {
-                path: "/update-password",
-                element: <AuthPage type='updatePassword' />,
-              },
-              {
-                path: "/editor/:resource/:itemId",
-                element: <Editor />,
-              },
-              {
-                path: "/use-cases/:itemId",
-                element: <UseCaseDesign />,
-                layout: true,
-              },
-              {
-                path: "/use-case-designer-view/:resource/:itemId",
-                element: <UseCaseMatrixTable />,
-              },
-            ],
+            routes: useRoutes(),
           }}
           dataProvider={dataProvider}
           authProvider={authProvider()}

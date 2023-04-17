@@ -3,7 +3,7 @@ import React from "react";
 import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 import { Collapse } from "@pankod/refine-antd";
 
-import { DrawerForm } from "components/resource/form";
+import { DrawerForm } from "components/Resource/form";
 import { Resource } from "services/enums";
 import { usePanelHeader } from "hooks/common";
 import { DndProvider } from "react-dnd";

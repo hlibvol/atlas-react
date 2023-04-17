@@ -1,6 +1,6 @@
 import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 import { Resource } from "services/enums";
-import { DrawerForm } from "components/resource/form";
+import { DrawerForm } from "components/Resource/form";
 import { IJob, IPlayBook, IUseCase, IRole } from "interfaces";
 import { Form, Select, useSelect } from "@pankod/refine-antd";
 import { useAppSelector } from "redux/hooks";

@@ -3,7 +3,7 @@ import React from "react";
 import { BaseRecord, IResourceComponentsProps, useList, useTranslate } from "@pankod/refine-core";
 import { Form, Input, Select, useSelect } from "@pankod/refine-antd";
 
-import { DrawerForm } from "components/resource/form";
+import { DrawerForm } from "components/Resource/form";
 import { IAppType, IAppUrl, IJob } from "interfaces";
 import { Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";

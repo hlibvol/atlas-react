@@ -12,8 +12,8 @@ import { IRole, IJob } from "interfaces";
 import { TagList } from "components/core";
 import type { ColumnsType } from "antd/es/table";
 
-import List from "components/resource/list";
-import Drawer from "components/resource/drawer";
+import List from "components/Resource/list";
+import Drawer from "components/Resource/drawer";
 
 export const RoleList: React.FC<IResourceComponentsProps> = () => {
   return (

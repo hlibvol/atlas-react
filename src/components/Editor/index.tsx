@@ -12,7 +12,7 @@ import { Config } from "services/config";
 import { TOKEN_KEY } from "services/constants";
 import { useParams } from "react-router-dom";
 import { useList } from "@pankod/refine-core";
-import { abCustomPlugin } from "./abCustomPlugin";
+import { CustomPlugin } from "./CustomPlugin";
 import { IJob, IUseCase } from "interfaces";
 import { Resource } from "services/enums";
 
@@ -45,14 +45,14 @@ export const Editor: React.FC = () => {
         gjsBlockBasic,
         "gjs-blocks-flexbox",
         grapesjsPluginForms,
-        abCustomPlugin,
+        CustomPlugin,
       ],
       pluginsOpts: {
         gjsPresetWebpage: {},
         gjsBlockBasic,
         "gjs-blocks-flexbox": {},
         grapesjsPluginForms,
-        abCustomPlugin: {
+        CustomPlugin: {
           jobs,
           useCases,
         },

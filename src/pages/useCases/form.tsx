@@ -1,7 +1,7 @@
 import React from "react";
 
 import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { DrawerForm } from "components/resource/form";
+import { DrawerForm } from "components/Resource/form";
 import { Action, Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 import { Button } from "@pankod/refine-antd";

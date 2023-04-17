@@ -1,5 +1,5 @@
 import "./style.less";
-import { GlobeIcon } from "components/icons/globe";
+import { GlobeIcon } from "components/Layouts/Icons/globe";
 
 type TitleProps = {
   collapsed: boolean;

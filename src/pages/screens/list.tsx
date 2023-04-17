@@ -2,8 +2,8 @@ import React from "react";
 
 import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
 import { Resource } from "services/enums";
-import List from "components/resource/list";
-import Drawer from "components/resource/drawer";
+import List from "components/Resource/list";
+import Drawer from "components/Resource/drawer";
 import { Tag } from "@pankod/refine-antd";
 
 export const ScreenList: React.FC<IResourceComponentsProps> = () => {
