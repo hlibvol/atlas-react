@@ -89,6 +89,8 @@ export interface ICourse {
   items: ICourseItem[];
   enroll_required: boolean;
   passing_percentage: number;
+  created_at: any;
+  updated_at: any;
 }
 
 export interface ILesson {

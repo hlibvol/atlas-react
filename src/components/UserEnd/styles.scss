@@ -1,0 +1,12 @@
+@import "../../styles/variables.scss";
+
+.logo-color {
+  color: $primaryColor;
+}
+.header {
+  background-color: $bgColor;
+}
+.logo-link {
+  float: left;
+  margin-right: 10px;
+}

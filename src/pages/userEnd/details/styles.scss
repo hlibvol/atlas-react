@@ -1,0 +1,83 @@
+.avatar-demo {
+  background-color: #fde3cf;
+  color: #f56a00;
+}
+.description {
+  word-wrap: "break-word";
+  line-height: 3.3rem;
+  font-size: 1.3rem;
+  font-family: "Merriweather";
+  color: #000;
+}
+
+.btn-action-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.btn-action-link:last-child {
+  margin-right: 0;
+}
+
+.btn-action-link {
+  background: #a0f698;
+  border: 0.2rem solid transparent;
+  border-radius: 7rem;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1.7rem;
+  min-width: 9.8rem;
+  padding: 0.6rem 1.2rem;
+  text-align: center;
+  text-transform: uppercase;
+  transition: transform 0.15s ease-in-out;
+  white-space: nowrap;
+  width: auto;
+}
+
+.btn-action-link-text {
+  font-size: 10px;
+  font-weight: 700;
+  color: #4a4a4a;
+}
+.btn-action-link:active {
+  transform: scale(0.95);
+  transition-duration: 0.1s;
+}
+.btn-action-link:hover {
+  transform: scale(1.05);
+}
+
+.section-title {
+  margin: 0;
+  font-family: "Lato";
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+  border-bottom-width: 0;
+  color: #000;
+  font-size: 0.9rem !important;
+  font-weight: 700;
+  letter-spacing: 0.06rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  text-transform: uppercase !important;
+}
+
+.learn-course-title {
+  margin: 0;
+  color: #000;
+  display: block;
+  font-family: "Lato";
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6rem;
+  text-decoration: none;
+  width: 100%;
+}
+
+.loading-icon {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #285f9f;
+}

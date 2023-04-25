@@ -1,8 +1,10 @@
 import { AuthPage } from "pages/auth";
 import { Editor } from "components/Editor";
+import { UserEnd } from "pages/userEnd";
 import { MatrixTableEdit } from "components/UseCaseMatrix/MatrixTableEdit";
 import { MatrixTableView } from "components/UseCaseMatrix/MatrixTableView";
 import { Resource } from "services/enums";
+import { UserEndCourseDetails } from "pages/userEnd/details/courseDetails";
 
 export const useRoutes = () => {
   return [
@@ -17,6 +19,14 @@ export const useRoutes = () => {
     {
       path: "/editor/:resource/:itemId",
       element: <Editor />,
+    },
+    {
+      path: "/learning",
+      element: <UserEnd />,
+    },
+    {
+      path: "/learning/course/:itemId",
+      element: <UserEndCourseDetails />,
     },
     {
       path: `/${Resource.USE_CASE}/:itemId`,

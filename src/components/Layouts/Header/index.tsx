@@ -20,9 +20,10 @@ import {
   Row,
   Col,
   AutoComplete,
+  Button,
 } from "@pankod/refine-antd";
 
-import RefineReactRouter from "@pankod/refine-react-router-v6";
+import RefineReactRouter, { NavLink } from "@pankod/refine-react-router-v6";
 
 import { useTranslation } from "react-i18next";
 import debounce from "lodash/debounce";
@@ -62,10 +63,10 @@ export const Header: React.FC = () => {
     </div>
   );
 
-  const renderItem = (title: string, imageUrl: string, link: string) => ({
+  const renderItem = (title: string, imageUrl: string) => ({
     value: title,
     label: (
-      <Link to={link} style={{ display: "flex", alignItems: "center" }}>
+      <Link to='#' style={{ display: "flex", alignItems: "center" }}>
         <Avatar size={64} src={imageUrl} style={{ minWidth: "64px" }} />
         <Text style={{ marginLeft: "16px" }}>{title}</Text>
       </Link>
@@ -84,7 +85,7 @@ export const Header: React.FC = () => {
       enabled: false,
       onSuccess: (data) => {
         const orderOptionGroup = data.data.map((item) =>
-          renderItem(`${item.first_name}`, "/images/user-default-img.png", `/users/show/${item.id}`)
+          renderItem(`${item.first_name}`, "/images/user-default-img.png")
         );
         if (orderOptionGroup.length > 0) {
           setOptions((prevOptions) => [
@@ -108,7 +109,7 @@ export const Header: React.FC = () => {
       enabled: false,
       onSuccess: (data) => {
         const storeOptionGroup = data.data.map((item) =>
-          renderItem(item.name, "/images/default-store-img.png", `/roles/edit/${item.id}`)
+          renderItem(item.name, "/images/default-store-img.png")
         );
         if (storeOptionGroup.length > 0) {
           setOptions((prevOptions) => [
@@ -128,27 +129,6 @@ export const Header: React.FC = () => {
     config: {
       filters: [{ field: "q", operator: "contains", value }],
     },
-    // queryOptions: {
-    //   enabled: false,
-    //   onSuccess: (data) => {
-    //     const courierOptionGroup = data.data.map((item) =>
-    //       renderItem(
-    //         `${item.name} ${item.surname}`,
-    //         item.avatar[0].url,
-    //         `/couriers/show/${item.id}`
-    //       )
-    //     );
-    //     if (courierOptionGroup.length > 0) {
-    //       setOptions((prevOptions) => [
-    //         ...prevOptions,
-    //         {
-    //           label: renderTitle(t("couriers.couriers")),
-    //           options: courierOptionGroup,
-    //         },
-    //       ]);
-    //     }
-    //   },
-    // },
   });
 
   useEffect(() => {
@@ -222,6 +202,20 @@ export const Header: React.FC = () => {
               {user?.name}
             </Text>
             <Avatar size='large' src={user?.avatar} alt={user?.name} />
+          </Space>
+          <Space>
+            <Button
+              href='/learning'
+              type='primary'
+              size='small'
+              target='_blank'
+              style={{
+                fontSize: "12px",
+                marginLeft: "6px",
+              }}
+            >
+              User End
+            </Button>
           </Space>
         </Col>
       </Row>
