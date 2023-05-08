@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { AntdLayout, Col, Row, Spin, Typography } from "@pankod/refine-antd";
-import { LeftOutlined } from "@ant-design/icons";
 import { UserEndHeader } from "components/UserEnd/Header";
 import { useParams } from "react-router-dom";
 import { useShow } from "@pankod/refine-core";
@@ -9,6 +8,7 @@ import { Resource } from "services/enums";
 import { CourseListItems } from "./courseListItems";
 import "./styles.scss";
 import { Banner } from "./components/Banner";
+import { BackButton } from "components/UserEnd/BackButton";
 
 export const UserEndCourseDetails: React.FC = () => {
   const { itemId } = useParams<{ itemId: any }>();
@@ -19,7 +19,7 @@ export const UserEndCourseDetails: React.FC = () => {
 
   if (isLoading) {
     return (
-      <Spin tip='Loading' size='large' style={{ paddingTop: "50%" }}>
+      <Spin tip='Loading Content' size='large' style={{ paddingTop: "50%" }}>
         <div className='content' />
       </Spin>
     );
@@ -44,17 +44,18 @@ export const UserEndCourseDetails: React.FC = () => {
 
   const lessonCount = courseItemsCountData?.length;
 
+  const singleLearningRecord = courseItemsCountData?.slice(0, 1)[0];
+
+  const singleLearningRecordId = singleLearningRecord?.item_id;
+
   return (
     <AntdLayout style={{ minHeight: "100vh", flexDirection: "row" }}>
       <AntdLayout>
         <UserEndHeader />
         <AntdLayout.Content>
           <div style={{ minHeight: 360 }}>
-            <h5 style={{ padding: 24 }}>
-              <LeftOutlined />
-              <span style={{ marginLeft: "5px" }}>Back To Courses</span>
-            </h5>
-            <Banner course={course} />
+            <BackButton />
+            <Banner course={course} singleLearningRecordId={singleLearningRecordId} />
             <div style={{ padding: 30 }}>
               <Row>
                 <Col span={20} offset={3}>

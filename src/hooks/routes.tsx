@@ -5,6 +5,7 @@ import { MatrixTableEdit } from "components/UseCaseMatrix/MatrixTableEdit";
 import { MatrixTableView } from "components/UseCaseMatrix/MatrixTableView";
 import { Resource } from "services/enums";
 import { UserEndCourseDetails } from "pages/userEnd/details/courseDetails";
+import { LearningModules } from "pages/userEnd/learningModules";
 
 export const useRoutes = () => {
   return [
@@ -27,6 +28,10 @@ export const useRoutes = () => {
     {
       path: "/learning/course/:itemId",
       element: <UserEndCourseDetails />,
+    },
+    {
+      path: "/learning/course/:courseId/learn-course/:itemId",
+      element: <LearningModules />,
     },
     {
       path: `/${Resource.USE_CASE}/:itemId`,

@@ -35,7 +35,7 @@ export const UserEndCourseCard: React.FC = () => {
                   <ClockCircleOutlined /> 1h:40m
                 </Col>
                 <Col span={12} offset={2}>
-                  <Link to={`/learning/course/${course.id}`}>Go To Course</Link>
+                  <Link to={`course/${course.id}`}>Go To Course</Link>
                 </Col>
               </Row>
             </Card>

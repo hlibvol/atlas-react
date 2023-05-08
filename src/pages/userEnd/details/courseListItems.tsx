@@ -18,7 +18,7 @@ export const CourseListItems = memo(function CourseListItems({ itemId, courseIte
         renderItem={(item: any) => (
           <List.Item>
             {item.item_id ? (
-              <Link to={`course/learn-course/${item.item_id}`}>
+              <Link to={`learn-course/${item.item_id}`}>
                 <Text key={itemId} className='learn-course-title'>
                   <AlignLeftOutlined />
                   &nbsp;&nbsp;{item.item_title}
