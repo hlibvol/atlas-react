@@ -17,9 +17,16 @@ export const LearningItems: React.FC<IToggleProps> = ({ collapsed, courseItems, 
       trigger={null}
       collapsible
       collapsed={collapsed}
+      width={200}
+      style={{
+        overflow: "auto",
+        height: "100vh",
+        position: "fixed",
+        left: 0,
+      }}
     >
       <div className='logo' style={{ backgroundColor: "#fff" }}>
-        <BackButton />
+        <BackButton itemdetailslink={`/learning/course/${courseId}`} courseId={courseId} />
       </div>
       <Menu theme='light' mode='inline' className='learning-module-menu'>
         {courseItems &&

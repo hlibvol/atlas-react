@@ -54,7 +54,7 @@ export const UserEndCourseDetails: React.FC = () => {
         <UserEndHeader />
         <AntdLayout.Content>
           <div style={{ minHeight: 360 }}>
-            <BackButton />
+            <BackButton itemdetailslink='/learning' courseId={itemId} />
             <Banner course={course} singleLearningRecordId={singleLearningRecordId} />
             <div style={{ padding: 30 }}>
               <Row>

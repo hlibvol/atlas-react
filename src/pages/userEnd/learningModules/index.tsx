@@ -16,23 +16,12 @@ export const LearningModules: React.FC = () => {
   const course = data?.data;
   const [courseItems, setCourseItems] = useState([]) as Array<any>;
   const [collapsed, setCollapsed] = useState(false);
-
   if (course && course.items != courseItems) {
     const sortedArray = course.items.sort((a: any, b: any) => {
       return a.item_order - b.item_order;
     });
     setCourseItems(sortedArray);
   }
-
-  // let currentOrder = 0;
-  // for (let i = 0; i < courseItems.length; i++) {
-  //   const newCourseItems = courseItems[i];
-  //   if (newCourseItems.item_id !== 0) {
-  //     currentOrder++;
-  //     newCourseItems.item_new_order = currentOrder;
-  //   }
-  //   setCourseItems(newCourseItems);
-  // }
 
   const courseItemsCountData = course?.items.filter((lesson) => lesson.item_id !== 0);
 
@@ -41,15 +30,16 @@ export const LearningModules: React.FC = () => {
   const toggle = () => {
     setCollapsed(!collapsed);
   };
+
   return (
     <AntdLayout className='learning-module-layout'>
       {!collapsed && (
         <LearningItems collapsed={collapsed} courseItems={courseItems} courseId={courseId} />
       )}
-      <AntdLayout className='learning-module-layout'>
+      <AntdLayout className='learning-module-layout' style={{ marginLeft: 200 }}>
         <AntdLayout.Header
           style={{
-            position: "sticky",
+            position: "fixed",
             top: 0,
             zIndex: 1,
             width: "100%",
@@ -61,7 +51,10 @@ export const LearningModules: React.FC = () => {
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </span>
         </AntdLayout.Header>
-        <LearningContent totalLessonCount={totalLessonCount} />
+        <LearningContent
+          totalLessonCount={totalLessonCount}
+          courseItemsCountData={courseItemsCountData}
+        />
       </AntdLayout>
     </AntdLayout>
   );
