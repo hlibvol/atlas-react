@@ -1,57 +1,41 @@
 import { AntdLayout, Button, Col, Row, Spin } from "@pankod/refine-antd";
-import { useShow } from "@pankod/refine-core";
+import { useOne } from "@pankod/refine-core";
 import { RightCircleOutlined, LeftCircleOutlined } from "@ant-design/icons";
 import "../styles.scss";
-import { useNavigate, useParams } from "@pankod/refine-react-router-v6";
+import { useParams } from "@pankod/refine-react-router-v6";
 import { Resource } from "services/enums";
-import { ILesson } from "interfaces";
+import { ICourseItem, ILesson } from "interfaces";
 import { renderPagesHtml } from "hooks/common";
 import { useEffect, useState } from "react";
 
 interface IContentProps {
-  totalLessonCount: number | undefined;
-  courseItemsCountData: any | undefined;
+  courseItems: ICourseItem[];
 }
 
-export const LearningContent: React.FC<IContentProps> = (props) => {
-  const { itemId, courseId } = useParams();
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [url, setUrl] = useState<any>();
-  const navigate = useNavigate();
+export const LearningContent: React.FC<IContentProps> = ({ courseItems }: IContentProps) => {
+  const { itemId } = useParams();
+  const [currentIndex, setCurrentIndex] = useState<number>(1);
 
   useEffect(() => {
-    setUrl(props);
-  }, [props]);
+    if (courseItems.length == 0) return;
+    const currentIndex =
+      courseItems.findIndex((item: ICourseItem) => item.item_id === Number(itemId)) || 0;
+    setCurrentIndex(currentIndex + 1);
+  }, [courseItems]);
 
-  const nextLearningPage = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === props.courseItemsCountData.length - 1 ? 0 : prevIndex + 1
-    );
-    setCurrentPage(currentPage + 1);
-    navigate(
-      `/learning/course/${courseId}/learn-course/${url?.courseItemsCountData[currentIndex].item_id}`
-    );
-  };
-
-  const previousLearningPage = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? props.courseItemsCountData.length - 1 : prevIndex - 1
-    );
-    setCurrentPage(currentPage === 1 ? 1 : currentPage - 1);
-    navigate(
-      `/learning/course/${courseId}/learn-course/${url?.courseItemsCountData[currentIndex].item_id}`
-    );
-  };
-
-  const currentItem = props.courseItemsCountData && props.courseItemsCountData[currentIndex];
-
-  const { queryResult } = useShow<ILesson>({
+  const { data, isLoading, isError } = useOne<ILesson>({
     resource: Resource.LESSON,
-    id: currentItem?.item_id ? currentItem?.item_id : itemId,
+    id: courseItems.length == 0 ? Number(itemId) : courseItems[currentIndex - 1]?.item_id,
   });
-  const { data, isLoading, isError } = queryResult;
-  const lesson = data?.data;
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentItem = data?.data;
+
+  const nextPageClick = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === courseItems.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const previousPageClick = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? courseItems.length - 1 : prevIndex - 1));
+  };
 
   if (isLoading) {
     return (
@@ -62,11 +46,11 @@ export const LearningContent: React.FC<IContentProps> = (props) => {
   }
 
   if (isError) {
-    return <div>Something went wrong!</div>;
+    return <div>Something went wrong</div>;
   }
 
   const pagesHtml =
-    lesson && lesson.page_content ? JSON.parse(lesson.page_content).pagesHtml : null;
+    currentItem && currentItem.page_content ? JSON.parse(currentItem.page_content).pagesHtml : null;
 
   return (
     <AntdLayout.Content
@@ -82,11 +66,11 @@ export const LearningContent: React.FC<IContentProps> = (props) => {
         <Col span={16} offset={4}>
           <div className='lesson-header__counter'>
             <div>
-              Lesson {currentPage} of {props.totalLessonCount}
+              Lesson {currentIndex} of {courseItems.length}
             </div>
           </div>
           <div className='lesson-header__title'>
-            <p>{lesson?.name}</p>
+            <p>{currentItem?.name}</p>
           </div>
           <div className='lesson-header__author'></div>
         </Col>
@@ -104,8 +88,8 @@ export const LearningContent: React.FC<IContentProps> = (props) => {
                 type='primary'
                 shape='round'
                 size='large'
-                onClick={previousLearningPage}
-                {...(currentPage === 1 ? { disabled: true } : {})}
+                onClick={previousPageClick}
+                {...(currentIndex === 1 ? { disabled: true } : {})}
               >
                 <LeftCircleOutlined /> Prev
               </Button>
@@ -115,8 +99,8 @@ export const LearningContent: React.FC<IContentProps> = (props) => {
                 type='primary'
                 shape='round'
                 size='large'
-                onClick={nextLearningPage}
-                {...(currentPage === props.totalLessonCount ? { disabled: true } : {})}
+                onClick={nextPageClick}
+                {...(currentIndex === courseItems.length ? { disabled: true } : {})}
               >
                 Next <RightCircleOutlined />
               </Button>

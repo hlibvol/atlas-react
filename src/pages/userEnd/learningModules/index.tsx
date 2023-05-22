@@ -23,10 +23,6 @@ export const LearningModules: React.FC = () => {
     setCourseItems(sortedArray);
   }
 
-  const courseItemsCountData = course?.items.filter((lesson) => lesson.item_id !== 0);
-
-  const totalLessonCount = courseItemsCountData?.length;
-
   const toggle = () => {
     setCollapsed(!collapsed);
   };
@@ -52,8 +48,7 @@ export const LearningModules: React.FC = () => {
           </span>
         </AntdLayout.Header>
         <LearningContent
-          totalLessonCount={totalLessonCount}
-          courseItemsCountData={courseItemsCountData}
+          courseItems={course?.items.filter((lesson) => lesson.item_id !== 0) ?? []}
         />
       </AntdLayout>
     </AntdLayout>
