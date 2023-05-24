@@ -5,7 +5,7 @@ import {
   useNavigation,
   BaseRecord,
 } from "@pankod/refine-core";
-import { BooleanField, Tag, UrlField, Button } from "@pankod/refine-antd";
+import { BooleanField, Tag, UrlField, Button, TagField, Typography } from "@pankod/refine-antd";
 import { Resource, Action } from "services/enums";
 import { IRole } from "interfaces";
 import Drawer from "components/Resource/drawer";
@@ -53,6 +53,16 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
       title: t("users.fields.email"),
     },
     {
+      dataIndex: ["users.source_id"],
+      title: t("users.fields.source"),
+      render: (id: number, user: BaseRecord) => (
+        <TagField
+          color={user.source_id ? "cyan" : "green"}
+          value={user.source_id ? t(`status.external`) : t(`status.internal`)}
+        />
+      ),
+    },
+    {
       dataIndex: ["role_id"],
       title: t("users.fields.role"),
       render: (roleId: number) => {
@@ -73,6 +83,21 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
       dataIndex: "is_superuser",
       title: t("users.fields.is_superuser.label"),
       render: (value: boolean) => <BooleanField value={value} />,
+    },
+
+    {
+      dataIndex: "users.id",
+      title: t("users.fields.updated-by"),
+      width: 120,
+      render: (id: number, user: BaseRecord) => (
+        <>
+          {user.updated_by ? (
+            <Typography.Text>{user.updated_by}</Typography.Text>
+          ) : (
+            <Typography.Text type='secondary'>No Updated</Typography.Text>
+          )}
+        </>
+      ),
     },
   ];
 

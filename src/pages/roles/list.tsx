@@ -1,63 +1,43 @@
-import { IResourceComponentsProps, useList } from "@pankod/refine-core";
-import { Table } from "@pankod/refine-antd";
-import {
-  useTableProps,
-  useTableActionProps,
-  useDefaultColumns,
-  defaultColumnProps,
-  usePageSize,
-} from "hooks/table";
+import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
+
 import { Resource } from "services/enums";
-import { IRole, IJob } from "interfaces";
-import { TagList } from "components/core";
-import type { ColumnsType } from "antd/es/table";
 
 import List from "components/Resource/list";
 import Drawer from "components/Resource/drawer";
+import { TagField, Typography } from "@pankod/refine-antd";
 
 export const RoleList: React.FC<IResourceComponentsProps> = () => {
+  const t = useTranslate();
+  const columns = [
+    {
+      dataIndex: ["roles.source_id"],
+      title: t("roles.fields.source"),
+      render: (id: number, role: BaseRecord) => (
+        <TagField
+          color={role.source_id ? "cyan" : "green"}
+          value={role.source_id ? t(`status.external`) : t(`status.internal`)}
+        />
+      ),
+    },
+    {
+      dataIndex: "roles.id",
+      title: t("roles.fields.updated-by"),
+      width: 120,
+      render: (id: number, role: BaseRecord) => (
+        <>
+          {role.updated_by ? (
+            <Typography.Text>{role.updated_by}</Typography.Text>
+          ) : (
+            <Typography.Text type='secondary'>No Updated</Typography.Text>
+          )}
+        </>
+      ),
+    },
+  ];
   return (
     <>
-      <List resource={Resource.ROLE} />
+      <List columns={columns} resource={Resource.ROLE} />
       <Drawer />
     </>
   );
-  // const tableProps = useTableProps({ resource: Resource.ROLE });
-  // const defaultColumns = useDefaultColumns(Resource.ROLE);
-  // const { data: jobs } = useList<IJob>({
-  //   resource: Resource.JOB,
-  // });
-  // const tableActionProps = useTableActionProps({
-  //   disabledDelete:
-  //     jobs && jobs?.data.length
-  //       ? "Cannot delete this role as it is already assigned to a job."
-  //       : false,
-  // });
-  // const pageSize = usePageSize();
-
-  // const renderAssociatedJobs = (roleId: number) => {
-  //   const associatedJobs = jobs ? jobs.data.filter((item) => item.role_ids.includes(roleId)) : [];
-  //   return <TagList resource={Resource.JOB} records={associatedJobs} />;
-  // };
-
-  // const columns: ColumnsType<IRole> = [
-  //   ...defaultColumns,
-  //   {
-  //     dataIndex: "id",
-  //     title: "Associate jobs",
-  //     render: renderAssociatedJobs,
-  //   },
-  //   tableActionProps,
-  // ];
-
-  // return (
-  //   <List breadcrumb={false}>
-  //     <Table
-  //       {...tableProps}
-  //       {...(pageSize && { pagination: { ...tableProps.pagination, pageSize } })}
-  //       // @ts-ignore
-  //       columns={columns.map((item) => ({ ...item, ...defaultColumnProps }))}
-  //     ></Table>
-  //   </List>
-  // );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IResourceComponentsProps, BaseRecord, useTranslate } from "@pankod/refine-core";
+import { IResourceComponentsProps, BaseRecord, useTranslate, useOne } from "@pankod/refine-core";
 import { Form, Select, Input, useSelect, Row, Col, Radio } from "@pankod/refine-antd";
 
 import { DrawerForm } from "components/Resource/form";
@@ -12,6 +12,12 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { action, itemId } = useAppSelector((state) => state.drawer);
   const resource = Resource.USER;
+
+  const { data } = useOne<IUser>({
+    resource: Resource.USER,
+    id: Number(itemId),
+  });
+
   const { selectProps: roleSelectProps } = useSelect<IRole>({
     resource: "roles",
     optionLabel: "name",
@@ -97,5 +103,7 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
       </Row>
     </>
   );
-  return <DrawerForm resource={resource} renderFields={renderFields} />;
+  return (
+    <DrawerForm resource={resource} isExternal={data?.data.source_id} renderFields={renderFields} />
+  );
 };

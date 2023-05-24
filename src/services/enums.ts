@@ -10,9 +10,9 @@ export enum Resource {
   APPLICATION_TYPE = "application-types",
   SCREEN = "screens",
   PORTFOLIOS = "portfolios",
-  TOFTS = "tofts",
+  PROGRAMS = "programs",
   TEAMS = "teams",
-  COST_CENTER = "cost-center",
+  COST_CENTER = "cost-centers",
 }
 
 export enum Action {

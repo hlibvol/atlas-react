@@ -10,6 +10,7 @@ import { UseCaseForm, UseCaseList } from "pages/useCases";
 
 import { UsersList, UserForm } from "pages/users";
 import { RoleForm, RoleList } from "pages/roles";
+import { ProgramForm, ProgramList } from "pages/programs";
 import { Resource } from "services/enums";
 import { ScreenForm, ScreenList } from "pages/screens";
 
@@ -44,12 +45,12 @@ export const useResources = () => {
       options: { route: Resource.PORTFOLIOS },
     },
     {
-      name: Resource.TOFTS,
+      name: Resource.PROGRAMS,
       parentName: "organization-design",
-      list: RoleList,
-      form: <RoleForm />,
+      list: ProgramList,
+      form: <ProgramForm />,
       hasDefaultFields: true,
-      options: { route: Resource.TOFTS },
+      options: { route: Resource.PROGRAMS },
     },
     {
       name: Resource.TEAMS,

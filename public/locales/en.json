@@ -115,7 +115,9 @@
   },
   "status": {
     "enable": "Enable",
-    "disable": "Disable"
+    "disable": "Disable",
+    "external": "External",
+    "internal": "Internal"
   },
   "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
   "notifications": {
@@ -164,6 +166,8 @@
       "email": "Email Id",
       "password": "Password",
       "role": "Role",
+      "source": "Source",
+      "updated-by": "Updated By",
       "is_active": {
         "label": "Is Active",
         "true": "Yes",
@@ -218,7 +222,9 @@
       "description": "Description",
       "associatedJob": "Associated Jobs",
       "associatedUseCases": "Associated Use Cases",
-      "associatedPlayBook": "Associated Playbooks"
+      "associatedPlayBook": "Associated Playbooks",
+      "source": "Source",
+      "updated-by": "Updated By"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -364,6 +370,77 @@
       "table-config": "Table Config",
       "use-case-role": "Use Case Role",
       "use-case-job": "Use Case Job"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "portfolios": {
+    "portfolios": "Portfolios",
+    "titles": {
+      "create": "Create Portfolio",
+      "edit": "Edit Portfolio",
+      "list": "Portfolios"
+    },
+    "fields": {
+      "id": "Portfolio ID",
+      "resourceLabel": "Portfolio",
+      "title": "Portfolio Name",
+      "description": "Description",
+      "associatedTOFTs": "Associated TOFTs",
+      "source": "Source"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "programs": {
+    "programs": "TOFTs",
+    "titles": {
+      "create": "Create TOFT",
+      "edit": "Edit TOFT",
+      "list": "TOFT"
+    },
+    "fields": {
+      "id": "TOFTs ID",
+      "resourceLabel": "TOFTs",
+      "title": "TOFTs Name",
+      "description": "Description",
+      "associatedTeams": "Associated Teams",
+      "source": "Source"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "teams": {
+    "teams": "Teams",
+    "titles": {
+      "create": "Create Team",
+      "edit": "Edit Team",
+      "list": "Team"
+    },
+    "fields": {
+      "id": "Team ID",
+      "resourceLabel": "Team",
+      "title": "Team Name",
+      "description": "Description",
+      "associatedUsers": "Associated Users",
+      "source": "Source"
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
+  },
+  "cost-centers": {
+    "cost-centers": "Cost Centers",
+    "titles": {
+      "create": "Create Cost Center",
+      "edit": "Edit Cost Center",
+      "list": "Cost Centers"
+    },
+    "fields": {
+      "id": "Cost Center ID",
+      "resourceLabel": "Cost Center",
+      "title": "Cost Center",
+      "description": "Description",
+      "source": "Source"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"

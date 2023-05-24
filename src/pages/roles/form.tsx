@@ -1,4 +1,4 @@
-import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
+import { BaseRecord, IResourceComponentsProps, useOne, useTranslate } from "@pankod/refine-core";
 import { Resource } from "services/enums";
 import { DrawerForm } from "components/Resource/form";
 import { IJob, IPlayBook, IUseCase, IRole } from "interfaces";
@@ -6,9 +6,14 @@ import { Form, Select, useSelect } from "@pankod/refine-antd";
 import { useAppSelector } from "redux/hooks";
 
 export const RoleForm: React.FC<IResourceComponentsProps> = () => {
-  const { activeField } = useAppSelector((state) => state.drawer);
+  const { itemId, activeField } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
   const resource = Resource.ROLE;
+
+  const { data } = useOne<IRole>({
+    resource: Resource.ROLE,
+    id: Number(itemId),
+  });
 
   const { selectProps: jobSelectProps } = useSelect<IJob>({
     resource: Resource.JOB,
@@ -56,5 +61,7 @@ export const RoleForm: React.FC<IResourceComponentsProps> = () => {
       </Form.Item>
     </>
   );
-  return <DrawerForm resource={resource} renderFields={renderFields} />;
+  return (
+    <DrawerForm resource={resource} isExternal={data?.data.source_id} renderFields={renderFields} />
+  );
 };

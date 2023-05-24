@@ -150,11 +150,12 @@ type DrawerFormProps = {
   resource: Resource;
   renderFields?: (record: BaseRecord, form: FormInstance) => JSX.Element;
   footer?: JSX.Element | null;
+  isExternal?: number;
 };
 
 export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
   const { action, itemId } = useAppSelector((state) => state.drawer);
-  const { resource, renderFields = () => null, footer } = props;
+  const { resource, renderFields = () => null, footer, isExternal } = props;
 
   const resources = useResources();
   const { hasDefaultFields, hasRoles } = resources.find((r) => r.name === resource) ?? {};
@@ -213,23 +214,25 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
       setDrawerFooter(
         <>
           {footer}
-          <Button
-            loading={formLoading}
-            onClick={() => {
-              form
-                .validateFields()
-                .then(() => {
-                  onFinish(); // or form.submit()
-                })
-                .catch((errorInfo) => {
-                  console.log(errorInfo);
-                });
-            }}
-            type='primary'
-            style={{ float: "right" }}
-          >
-            Save
-          </Button>
+          {!isExternal && (
+            <Button
+              loading={formLoading}
+              onClick={() => {
+                form
+                  .validateFields()
+                  .then(() => {
+                    onFinish(); // or form.submit()
+                  })
+                  .catch((errorInfo) => {
+                    console.log(errorInfo);
+                  });
+              }}
+              type='primary'
+              style={{ float: "right" }}
+            >
+              Save
+            </Button>
+          )}
         </>
       )
     );

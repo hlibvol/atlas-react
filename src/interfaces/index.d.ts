@@ -15,6 +15,7 @@ export interface IUser {
   role_id: number;
   avatar: IFile[];
   address: string;
+  source_id: number;
 }
 
 export interface IAddress {
@@ -37,6 +38,7 @@ export interface IRole {
   name: string;
   description: string;
   job_ids: number[];
+  source_id: number;
 }
 export interface IAppUrl {
   id: number;
