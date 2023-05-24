@@ -16,9 +16,9 @@ import { ScreenForm, ScreenList } from "pages/screens";
 export const useResources = () => {
   return [
     {
-      name: "user-management",
-      icon: <Icons.UsergroupAddOutlined />,
-      options: { label: "User Management" },
+      name: "organization-design",
+      icon: <Icons.BankOutlined />,
+      options: { label: "Org Design" },
     },
     {
       name: "jobs-design",
@@ -36,8 +36,40 @@ export const useResources = () => {
       options: { label: "Learning Design" },
     },
     {
+      name: Resource.PORTFOLIOS,
+      parentName: "organization-design",
+      list: RoleList,
+      form: <RoleForm />,
+      hasDefaultFields: true,
+      options: { route: Resource.PORTFOLIOS },
+    },
+    {
+      name: Resource.TOFTS,
+      parentName: "organization-design",
+      list: RoleList,
+      form: <RoleForm />,
+      hasDefaultFields: true,
+      options: { route: Resource.TOFTS },
+    },
+    {
+      name: Resource.TEAMS,
+      parentName: "organization-design",
+      list: RoleList,
+      form: <RoleForm />,
+      hasDefaultFields: true,
+      options: { route: Resource.TEAMS },
+    },
+    {
+      name: Resource.COST_CENTER,
+      parentName: "organization-design",
+      list: RoleList,
+      form: <RoleForm />,
+      hasDefaultFields: true,
+      options: { route: Resource.COST_CENTER },
+    },
+    {
       name: Resource.ROLE,
-      parentName: "user-management",
+      parentName: "organization-design",
       list: RoleList,
       form: <RoleForm />,
       hasDefaultFields: true,
@@ -48,7 +80,7 @@ export const useResources = () => {
     },
     {
       name: Resource.USER,
-      parentName: "user-management",
+      parentName: "organization-design",
       list: UsersList,
       form: <UserForm />,
       hasDefaultFields: false,
