@@ -4,7 +4,7 @@ import { IResourceComponentsProps, BaseRecord, useTranslate, useOne } from "@pan
 import { Form, Select, Input, useSelect, Row, Col, Radio } from "@pankod/refine-antd";
 
 import { DrawerForm } from "components/Resource/form";
-import { Resource } from "services/enums";
+import { Action, Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 import { IRole, IUser } from "interfaces";
 
@@ -23,7 +23,7 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
     optionLabel: "name",
     optionValue: "id",
   });
-  const renderFields = (lesson: IUser | BaseRecord) => (
+  const renderFields = (UserRecord: IUser | BaseRecord) => (
     <>
       <Form.Item label={t("users.fields.first_name")} name='first_name'>
         <Input />
@@ -101,6 +101,27 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
           </Form.Item>
         </Col>
       </Row>
+      {itemId && action === Action.EDIT ? (
+        <Row>
+          <Col span={11}>
+            <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
+              <Input placeholder='Updated By' disabled value={UserRecord.updated_by} />
+            </Form.Item>
+          </Col>
+          <Col span={2}></Col>
+          <Col span={11}>
+            <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+              <Input placeholder='Created By' disabled value={UserRecord.created_by} />
+            </Form.Item>
+          </Col>
+        </Row>
+      ) : (
+        <Col span={11}>
+          <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+            <Input placeholder='Created By' disabled value={UserRecord.created_by} />
+          </Form.Item>
+        </Col>
+      )}
     </>
   );
   return (

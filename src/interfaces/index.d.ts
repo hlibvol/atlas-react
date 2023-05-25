@@ -16,6 +16,8 @@ export interface IUser {
   avatar: IFile[];
   address: string;
   source_id: number;
+  created_by: number;
+  updated_by: number;
 }
 
 export interface IAddress {
@@ -39,6 +41,8 @@ export interface IRole {
   description: string;
   job_ids: number[];
   source_id: number;
+  created_by: number;
+  updated_by: number;
 }
 export interface IAppUrl {
   id: number;
@@ -128,4 +132,34 @@ export interface IAppType {
   id: number;
   name: string;
   description: string;
+}
+
+export interface IProgram {
+  id: number;
+  name: string;
+  description: string;
+  teams: ITeams[];
+  team_ids: number[];
+  portfolio_id: number;
+  source_id: number;
+  is_deleted: boolean;
+  created_by: number;
+  updated_by: number;
+}
+
+export interface ITeams {
+  id: number;
+  name: string;
+  description: string;
+  screen_url: string;
+  application_type_id: number;
+  application_type: IAppType;
+  program_id: number;
+  is_active: boolean;
+  sprint_prefix: string;
+  source_id: number;
+  is_deleted: boolean;
+  created_by: boolean;
+  updated_by: boolean;
+  user_ids: number[];
 }

@@ -1,12 +1,12 @@
 import { BaseRecord, IResourceComponentsProps, useOne, useTranslate } from "@pankod/refine-core";
-import { Resource } from "services/enums";
+import { Resource, Action } from "services/enums";
 import { DrawerForm } from "components/Resource/form";
 import { IJob, IPlayBook, IUseCase, IRole } from "interfaces";
-import { Form, Select, useSelect } from "@pankod/refine-antd";
+import { Col, Form, Input, Row, Select, useSelect } from "@pankod/refine-antd";
 import { useAppSelector } from "redux/hooks";
 
 export const RoleForm: React.FC<IResourceComponentsProps> = () => {
-  const { itemId, activeField } = useAppSelector((state) => state.drawer);
+  const { itemId, activeField, action } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
   const resource = Resource.ROLE;
 
@@ -59,6 +59,28 @@ export const RoleForm: React.FC<IResourceComponentsProps> = () => {
           placeholder='Select Playbook'
         />
       </Form.Item>
+
+      {itemId && action === Action.EDIT ? (
+        <Row>
+          <Col span={11}>
+            <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
+              <Input placeholder='Updated By' disabled value={jobRole.updated_by} />
+            </Form.Item>
+          </Col>
+          <Col span={2}></Col>
+          <Col span={11}>
+            <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+              <Input placeholder='Created By' disabled value={jobRole.created_by} />
+            </Form.Item>
+          </Col>
+        </Row>
+      ) : (
+        <Col span={11}>
+          <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+            <Input placeholder='Created By' disabled value={jobRole.created_by} />
+          </Form.Item>
+        </Col>
+      )}
     </>
   );
   return (

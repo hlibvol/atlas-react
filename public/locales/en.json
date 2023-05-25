@@ -167,6 +167,7 @@
       "password": "Password",
       "role": "Role",
       "source": "Source",
+      "created-by": "Created By",
       "updated-by": "Updated By",
       "is_active": {
         "label": "Is Active",
@@ -224,6 +225,7 @@
       "associatedUseCases": "Associated Use Cases",
       "associatedPlayBook": "Associated Playbooks",
       "source": "Source",
+      "created-by": "Created By",
       "updated-by": "Updated By"
     },
     "tagFilterDescription": "Use tags to filter your search",
@@ -387,7 +389,9 @@
       "title": "Portfolio Name",
       "description": "Description",
       "associatedTOFTs": "Associated TOFTs",
-      "source": "Source"
+      "source": "Source",
+      "created-by": "Created By",
+      "updated-by": "Updated By"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -405,7 +409,9 @@
       "title": "TOFTs Name",
       "description": "Description",
       "associatedTeams": "Associated Teams",
-      "source": "Source"
+      "source": "Source",
+      "created-by": "Created By",
+      "updated-by": "Updated By"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -423,7 +429,9 @@
       "title": "Team Name",
       "description": "Description",
       "associatedUsers": "Associated Users",
-      "source": "Source"
+      "source": "Source",
+      "created-by": "Created By",
+      "updated-by": "Updated By"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -440,7 +448,9 @@
       "resourceLabel": "Cost Center",
       "title": "Cost Center",
       "description": "Description",
-      "source": "Source"
+      "source": "Source",
+      "created-by": "Created By",
+      "updated-by": "Updated By"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"

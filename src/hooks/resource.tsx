@@ -13,6 +13,7 @@ import { RoleForm, RoleList } from "pages/roles";
 import { ProgramForm, ProgramList } from "pages/programs";
 import { Resource } from "services/enums";
 import { ScreenForm, ScreenList } from "pages/screens";
+import { CostCenterForm, CostCenterList } from "pages/costCenters";
 
 export const useResources = () => {
   return [
@@ -63,8 +64,8 @@ export const useResources = () => {
     {
       name: Resource.COST_CENTER,
       parentName: "organization-design",
-      list: RoleList,
-      form: <RoleForm />,
+      list: CostCenterList,
+      form: <CostCenterForm />,
       hasDefaultFields: true,
       options: { route: Resource.COST_CENTER },
     },
