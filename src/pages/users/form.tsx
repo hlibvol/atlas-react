@@ -6,7 +6,7 @@ import { Form, Select, Input, useSelect, Row, Col, Radio } from "@pankod/refine-
 import { DrawerForm } from "components/Resource/form";
 import { Action, Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
-import { IRole, IUser } from "interfaces";
+import { IRole, IUser, ICostCenter } from "interfaces";
 
 export const UserForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
@@ -23,13 +23,19 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
     optionLabel: "name",
     optionValue: "id",
   });
+
+  const { selectProps: costCenterSelectProps } = useSelect<ICostCenter>({
+    resource: Resource.COST_CENTER,
+    optionLabel: "name",
+    optionValue: "id",
+  });
   const renderFields = (UserRecord: IUser | BaseRecord) => (
     <>
       <Form.Item label={t("users.fields.first_name")} name='first_name'>
-        <Input />
+        <Input {...(UserRecord.source_id ? { disabled: true } : null)} />
       </Form.Item>
       <Form.Item label={t("users.fields.last_name")} name='last_name'>
-        <Input />
+        <Input {...(UserRecord.source_id ? { disabled: true } : null)} />
       </Form.Item>
       <Form.Item
         label={t("users.fields.email")}
@@ -41,7 +47,7 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
           },
         ]}
       >
-        <Input />
+        <Input {...(UserRecord.source_id ? { disabled: true } : null)} />
       </Form.Item>
       {action === "create" ? (
         <Form.Item
@@ -53,7 +59,11 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <Input type='password' placeholder='●●●●●●●●' />
+          <Input
+            type='password'
+            placeholder='●●●●●●●●'
+            {...(UserRecord.source_id ? { disabled: true } : null)}
+          />
         </Form.Item>
       ) : null}
       <Form.Item
@@ -65,7 +75,18 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
           },
         ]}
       >
-        <Select placeholder='Select Role' {...roleSelectProps} />
+        <Select
+          placeholder='Select Role'
+          {...roleSelectProps}
+          {...(UserRecord.source_id ? { disabled: true } : null)}
+        />
+      </Form.Item>
+      <Form.Item label={t("users.fields.cost-center")} name='cost_center_id'>
+        <Select
+          {...costCenterSelectProps}
+          placeholder='Select Cost Center'
+          {...(UserRecord.source_id ? { disabled: true } : null)}
+        />
       </Form.Item>
       <Row key='relations' gutter={20}>
         <Col xs={12} lg={12}>

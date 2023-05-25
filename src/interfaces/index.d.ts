@@ -134,6 +134,18 @@ export interface IAppType {
   description: string;
 }
 
+export interface IPortfolio {
+  id: number;
+  name: string;
+  description: string;
+  teams: ITeams[];
+  team_ids: number[];
+  is_active: boolean;
+  source_id: number;
+  is_deleted: boolean;
+  created_by: number;
+  updated_by: number;
+}
 export interface IProgram {
   id: number;
   name: string;
@@ -162,4 +174,10 @@ export interface ITeams {
   created_by: boolean;
   updated_by: boolean;
   user_ids: number[];
+}
+
+export interface ICostCenter {
+  id: number;
+  name: string;
+  description: string;
 }

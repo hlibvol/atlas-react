@@ -88,7 +88,7 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
 };
 */
 
-export const useDefaultFormItems = (resource: string) => {
+export const useDefaultFormItems = (resource: string, isExternal: number = 0) => {
   const { activeField } = useAppSelector((state) => state.drawer);
 
   const t = useTranslate();
@@ -107,6 +107,7 @@ export const useDefaultFormItems = (resource: string) => {
           placeholder={`Enter ${t(`${resource}.fields.title`)}`}
           autoFocus={!activeField}
           tabIndex={1}
+          {...(isExternal ? { disabled: true } : null)}
         />
       </Form.Item>
       <Form.Item label={t(`${resource}.fields.description`)} name='description'>
@@ -115,6 +116,7 @@ export const useDefaultFormItems = (resource: string) => {
           placeholder={`Enter ${t(`${resource}.fields.description`)}..`}
           autoFocus={activeField === "description"}
           tabIndex={2}
+          isExternal={isExternal}
         />
       </Form.Item>
     </>
@@ -160,7 +162,7 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
   const resources = useResources();
   const { hasDefaultFields, hasRoles } = resources.find((r) => r.name === resource) ?? {};
 
-  const defaultFormItems = hasDefaultFields ? useDefaultFormItems(resource) : null;
+  const defaultFormItems = hasDefaultFields ? useDefaultFormItems(resource, isExternal) : null;
   const roleFormItem = hasRoles ? useRoleItem() : null;
 
   const dispatch = useAppDispatch();

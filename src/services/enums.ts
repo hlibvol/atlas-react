@@ -9,9 +9,9 @@ export enum Resource {
   APPLICATION_URL = "application-urls",
   APPLICATION_TYPE = "application-types",
   SCREEN = "screens",
-  PORTFOLIOS = "portfolios",
-  PROGRAMS = "programs",
-  TEAMS = "teams",
+  PORTFOLIO = "portfolios",
+  PROGRAM = "programs",
+  TEAM = "teams",
   COST_CENTER = "cost-centers",
 }
 

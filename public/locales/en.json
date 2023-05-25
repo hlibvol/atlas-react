@@ -169,6 +169,7 @@
       "source": "Source",
       "created-by": "Created By",
       "updated-by": "Updated By",
+      "cost-center": "Cost Center",
       "is_active": {
         "label": "Is Active",
         "true": "Yes",
@@ -410,6 +411,7 @@
       "description": "Description",
       "associatedTeams": "Associated Teams",
       "source": "Source",
+      "portfolio": "Portfolio",
       "created-by": "Created By",
       "updated-by": "Updated By"
     },

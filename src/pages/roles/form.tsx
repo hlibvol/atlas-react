@@ -39,6 +39,7 @@ export const RoleForm: React.FC<IResourceComponentsProps> = () => {
           autoFocus={activeField === "job_ids"}
           placeholder='Select Jobs'
           mode='multiple'
+          {...(jobRole.source_id ? { disabled: true } : null)}
         />
       </Form.Item>
 
@@ -48,6 +49,7 @@ export const RoleForm: React.FC<IResourceComponentsProps> = () => {
           autoFocus={activeField === "use_case_ids"}
           mode='multiple'
           placeholder='Select Use Cases'
+          {...(jobRole.source_id ? { disabled: true } : null)}
         />
       </Form.Item>
 
@@ -57,6 +59,7 @@ export const RoleForm: React.FC<IResourceComponentsProps> = () => {
           autoFocus={activeField === "playbook_ids"}
           mode='multiple'
           placeholder='Select Playbook'
+          {...(jobRole.source_id ? { disabled: true } : null)}
         />
       </Form.Item>
 

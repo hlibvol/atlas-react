@@ -7,7 +7,7 @@ import {
 } from "@pankod/refine-core";
 import { BooleanField, Tag, UrlField, Button, TagField, Typography } from "@pankod/refine-antd";
 import { Resource, Action } from "services/enums";
-import { IRole } from "interfaces";
+import { ICostCenter, IRole } from "interfaces";
 import Drawer from "components/Resource/drawer";
 import List from "components/Resource/list";
 import { useAppDispatch } from "redux/hooks";
@@ -17,6 +17,7 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { editUrl } = useNavigation();
   const { data: roles } = useList<IRole>({ resource: Resource.ROLE });
+  const { data: costcenters } = useList<ICostCenter>({ resource: Resource.COST_CENTER });
   const dispatch = useAppDispatch();
   const columns = [
     {
@@ -70,6 +71,22 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
         return (
           <Tag color='green'>
             {role ? <UrlField value={editUrl(Resource.ROLE, role.id)}>{role.name}</UrlField> : null}
+          </Tag>
+        );
+      },
+    },
+    {
+      dataIndex: ["cost_center_id"],
+      title: t("users.fields.cost-center"),
+      render: (costcenterId: number) => {
+        const costcenter = costcenters?.data.find((item) => item.id === costcenterId);
+        return (
+          <Tag color='red-1'>
+            {costcenter ? (
+              <UrlField value={editUrl(Resource.COST_CENTER, costcenter.id)}>
+                {costcenter.name}
+              </UrlField>
+            ) : null}
           </Tag>
         );
       },
