@@ -1,7 +1,7 @@
 import React from "react";
 
 import { IResourceComponentsProps, BaseRecord, useTranslate, useOne } from "@pankod/refine-core";
-import { Form, Select, Input, useSelect, Row, Col, Radio } from "@pankod/refine-antd";
+import { Form, Select, Input, useSelect, Row, Col, Radio, Tag } from "@pankod/refine-antd";
 
 import { DrawerForm } from "components/Resource/form";
 import { Action, Resource } from "services/enums";
@@ -123,23 +123,31 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
         </Col>
       </Row>
       {itemId && action === Action.EDIT ? (
-        <Row>
-          <Col span={11}>
-            <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
-              <Input placeholder='Updated By' disabled value={UserRecord.updated_by} />
-            </Form.Item>
-          </Col>
-          <Col span={2}></Col>
-          <Col span={11}>
-            <Form.Item label={t("programs.fields.created-by")} name='created_by'>
-              <Input placeholder='Created By' disabled value={UserRecord.created_by} />
-            </Form.Item>
-          </Col>
-        </Row>
+        <>
+          <Row>
+            <Col span={11}>
+              <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
+                <Input disabled />
+              </Form.Item>
+            </Col>
+            <Col span={2}></Col>
+            <Col span={11}>
+              <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+                <Input disabled />
+              </Form.Item>
+            </Col>
+          </Row>
+          <h4 style={{ fontWeight: "bold" }}>Active Status</h4>
+          {UserRecord.is_active ? (
+            <Tag color='#87d068'>Active</Tag>
+          ) : (
+            <Tag color='#f50'>Inactive</Tag>
+          )}
+        </>
       ) : (
         <Col span={11}>
           <Form.Item label={t("programs.fields.created-by")} name='created_by'>
-            <Input placeholder='Created By' disabled value={UserRecord.created_by} />
+            <Input disabled />
           </Form.Item>
         </Col>
       )}

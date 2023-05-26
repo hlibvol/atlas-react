@@ -174,10 +174,13 @@ export interface ITeams {
   created_by: boolean;
   updated_by: boolean;
   user_ids: number[];
+  type: number;
 }
 
 export interface ICostCenter {
   id: number;
   name: string;
   description: string;
+  source_id: number;
+  hr_rate: number;
 }

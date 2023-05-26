@@ -67,13 +67,13 @@ export const RoleForm: React.FC<IResourceComponentsProps> = () => {
         <Row>
           <Col span={11}>
             <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
-              <Input placeholder='Updated By' disabled value={jobRole.updated_by} />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={2}></Col>
           <Col span={11}>
             <Form.Item label={t("programs.fields.created-by")} name='created_by'>
-              <Input placeholder='Created By' disabled value={jobRole.created_by} />
+              <Input disabled />
             </Form.Item>
           </Col>
         </Row>

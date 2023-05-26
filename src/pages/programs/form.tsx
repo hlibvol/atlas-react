@@ -1,4 +1,14 @@
-import { Col, Form, Input, Row, Select, Space, Typography, useSelect } from "@pankod/refine-antd";
+import {
+  Col,
+  Form,
+  Input,
+  Row,
+  Select,
+  Space,
+  Tag,
+  Typography,
+  useSelect,
+} from "@pankod/refine-antd";
 import {
   BaseRecord,
   IResourceComponentsProps,
@@ -34,17 +44,17 @@ export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
     id: Number(itemId),
   });
 
+  const filteredAssociatedTeams = data?.data.teams.map((team) => {
+    return (
+      <Tag color='default' style={{ fontSize: "13px" }}>
+        {team.name}
+      </Tag>
+    );
+  });
+
   const renderFields = (programTeam: IProgram | BaseRecord) => (
     <>
-      <Form.Item label={t("programs.fields.associatedTeams")} name='team_id'>
-        <Select
-          {...teamSelectProps}
-          placeholder='Select Teams'
-          {...(programTeam.source_id ? { disabled: true } : null)}
-        />
-      </Form.Item>
-
-      <Form.Item label={t("programs.fields.portfolio")} name='portfolio_id'>
+      <Form.Item label={t("programs.fields.portfolio")} name='portfolio_id' required>
         <Select
           {...portfolioSelectProps}
           placeholder='Select Parent Portfolio'
@@ -52,28 +62,39 @@ export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
         />
       </Form.Item>
 
+      <Form.Item label={t("programs.fields.programTeams")} name='team_id'>
+        <Select
+          {...teamSelectProps}
+          placeholder='Select Teams'
+          {...(programTeam.source_id ? { disabled: true } : null)}
+        />
+      </Form.Item>
+
       {itemId && action === Action.EDIT ? (
-        <Row>
-          <Col span={11}>
-            <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
-              <Input placeholder='Updated By' disabled value={programTeam.updated_by} />
-            </Form.Item>
-          </Col>
-          <Col span={2}></Col>
-          <Col span={11}>
-            <Form.Item label={t("programs.fields.created-by")} name='created_by'>
-              <Input placeholder='Created By' disabled value={programTeam.created_by} />
-            </Form.Item>
-          </Col>
-        </Row>
+        <>
+          <Row>
+            <Col span={11}>
+              <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
+                <Input disabled />
+              </Form.Item>
+            </Col>
+            <Col span={2}></Col>
+            <Col span={11}>
+              <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+                <Input disabled />
+              </Form.Item>
+            </Col>
+          </Row>
+          <>
+            <h4 style={{ fontWeight: "bold" }}>Associated Teams</h4>
+            {filteredAssociatedTeams}
+          </>
+        </>
       ) : (
         <Col span={11}>
           <Typography>
             <pre>Created By: {user.name}</pre>
           </Typography>
-          <Form.Item name='created_by'>
-            <Input type='hidden' defaultValue='mysite' />
-          </Form.Item>
         </Col>
       )}
     </>

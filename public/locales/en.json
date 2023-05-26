@@ -410,6 +410,7 @@
       "title": "TOFTs Name",
       "description": "Description",
       "associatedTeams": "Associated Teams",
+      "programTeams": "Program Teams",
       "source": "Source",
       "portfolio": "Portfolio",
       "created-by": "Created By",
@@ -451,6 +452,7 @@
       "title": "Cost Center",
       "description": "Description",
       "source": "Source",
+      "hrRate": "Hourly Rate",
       "created-by": "Created By",
       "updated-by": "Updated By"
     },
