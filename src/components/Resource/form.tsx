@@ -88,7 +88,7 @@ export const EditForm: React.FC<EditFormProps> = (props) => {
 };
 */
 
-export const useDefaultFormItems = (resource: string, isExternal: number = 0) => {
+export const useDefaultFormItems = (resource: string, isExternal = false) => {
   const { activeField } = useAppSelector((state) => state.drawer);
 
   const t = useTranslate();
@@ -116,7 +116,7 @@ export const useDefaultFormItems = (resource: string, isExternal: number = 0) =>
           placeholder={`Enter ${t(`${resource}.fields.description`)}..`}
           autoFocus={activeField === "description"}
           tabIndex={2}
-          isExternal={isExternal}
+          readOnly={isExternal}
         />
       </Form.Item>
     </>
@@ -152,17 +152,15 @@ type DrawerFormProps = {
   resource: Resource;
   renderFields?: (record: BaseRecord, form: FormInstance) => JSX.Element;
   footer?: JSX.Element | null;
-  isExternal?: number;
 };
 
 export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
   const { action, itemId } = useAppSelector((state) => state.drawer);
-  const { resource, renderFields = () => null, footer, isExternal } = props;
+  const { resource, renderFields = () => null, footer } = props;
 
   const resources = useResources();
   const { hasDefaultFields, hasRoles } = resources.find((r) => r.name === resource) ?? {};
 
-  const defaultFormItems = hasDefaultFields ? useDefaultFormItems(resource, isExternal) : null;
   const roleFormItem = hasRoles ? useRoleItem() : null;
 
   const dispatch = useAppDispatch();
@@ -178,19 +176,24 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
     warnWhenUnsavedChanges: true,
   });
 
+  const currentRecord = queryResult?.data?.data;
+  const isExternal = currentRecord?.source_id ? true : false;
+
+  const defaultFormItems = hasDefaultFields ? useDefaultFormItems(resource, isExternal) : null;
+
   const defaultOnClose = () => {
     dispatch(closeDrawer());
   };
 
   formProps.onValuesChange = () => {
-    const previousRecords = queryResult?.data?.data;
-    const currentRecords: any = form.getFieldsValue();
-
+    const newRecord: any = form.getFieldsValue();
     let hasChanges = false;
 
-    for (const key in currentRecords) {
-      if (currentRecords.hasOwnProperty(key)) {
-        if (previousRecords?.hasOwnProperty(key) && previousRecords[key] !== currentRecords[key]) {
+    for (const key in newRecord) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (newRecord.hasOwnProperty(key)) {
+        // eslint-disable-next-line no-prototype-builtins
+        if (currentRecord?.hasOwnProperty(key) && currentRecord[key] !== newRecord[key]) {
           hasChanges = true;
           break;
         }

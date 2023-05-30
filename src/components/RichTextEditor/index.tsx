@@ -41,7 +41,7 @@ type Props = {
   autoFocus?: boolean;
   onChange: OnChangeHandler;
   tabIndex?: number;
-  isExternal?: number;
+  readOnly?: boolean;
 };
 
 export const useFocusAndSetRef = (ref: any) => {
@@ -65,7 +65,7 @@ const RichTextEditor: React.FC<Props> = ({
   placeholder,
   autoFocus,
   tabIndex,
-  isExternal,
+  readOnly = false,
 }) => {
   let editorRef;
   // eslint-disable-next-line prefer-const
@@ -81,7 +81,7 @@ const RichTextEditor: React.FC<Props> = ({
       className='quill-editor'
       ref={autoFocus ? editorRef : null}
       tabIndex={tabIndex || -1}
-      {...(isExternal ? { readOnly: true } : null)}
+      readOnly={readOnly}
     />
   );
 };

@@ -159,7 +159,7 @@ export interface IProgram {
   updated_by: number;
 }
 
-export interface ITeams {
+export interface ITeam {
   id: number;
   name: string;
   description: string;

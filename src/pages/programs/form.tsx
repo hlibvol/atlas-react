@@ -1,24 +1,13 @@
-import {
-  Col,
-  Form,
-  Input,
-  Row,
-  Select,
-  Space,
-  Tag,
-  Typography,
-  useSelect,
-} from "@pankod/refine-antd";
+import { Col, Form, Input, Row, Select, Tag, Typography, useSelect } from "@pankod/refine-antd";
 import {
   BaseRecord,
   IResourceComponentsProps,
   useGetIdentity,
-  useOne,
   useTranslate,
 } from "@pankod/refine-core";
 
 import { DrawerForm } from "components/Resource/form";
-import { IPortfolio, IProgram, ITeams } from "interfaces";
+import { IPortfolio, IProgram, ITeam } from "interfaces";
 import { useAppSelector } from "redux/hooks";
 import { Action, Resource } from "services/enums";
 
@@ -27,7 +16,7 @@ export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
   const { action, itemId } = useAppSelector((state) => state.drawer);
   const { data: user } = useGetIdentity();
 
-  const { selectProps: teamSelectProps } = useSelect<ITeams>({
+  const { selectProps: teamSelectProps } = useSelect<ITeam>({
     resource: Resource.TEAM,
     optionLabel: "name",
     optionValue: "id",
@@ -39,26 +28,13 @@ export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
     optionValue: "id",
   });
 
-  const { data } = useOne<IProgram>({
-    resource: Resource.PROGRAM,
-    id: Number(itemId),
-  });
-
-  const filteredAssociatedTeams = data?.data.teams.map((team) => {
-    return (
-      <Tag color='default' style={{ fontSize: "13px" }}>
-        {team.name}
-      </Tag>
-    );
-  });
-
-  const renderFields = (programTeam: IProgram | BaseRecord) => (
+  const renderFields = (program: IProgram | BaseRecord) => (
     <>
       <Form.Item label={t("programs.fields.portfolio")} name='portfolio_id' required>
         <Select
           {...portfolioSelectProps}
           placeholder='Select Parent Portfolio'
-          {...(programTeam.source_id ? { disabled: true } : null)}
+          {...(program.source_id ? { disabled: true } : null)}
         />
       </Form.Item>
 
@@ -66,7 +42,7 @@ export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
         <Select
           {...teamSelectProps}
           placeholder='Select Teams'
-          {...(programTeam.source_id ? { disabled: true } : null)}
+          {...(program.source_id ? { disabled: true } : null)}
         />
       </Form.Item>
 
@@ -87,7 +63,13 @@ export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
           </Row>
           <>
             <h4 style={{ fontWeight: "bold" }}>Associated Teams</h4>
-            {filteredAssociatedTeams}
+            {program?.teams?.map((team: ITeam) => {
+              return (
+                <Tag color='default' style={{ fontSize: "13px" }}>
+                  {team.name}
+                </Tag>
+              );
+            })}
           </>
         </>
       ) : (
@@ -99,11 +81,5 @@ export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
       )}
     </>
   );
-  return (
-    <DrawerForm
-      resource={Resource.PROGRAM}
-      isExternal={data?.data.source_id}
-      renderFields={renderFields}
-    />
-  );
+  return <DrawerForm resource={Resource.PROGRAM} renderFields={renderFields} />;
 };
