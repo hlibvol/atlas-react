@@ -6,6 +6,7 @@ import { EyeOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { DrawerForm } from "components/Resource/form";
 import { Action, Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
+import { RoleSelect } from "components/Select";
 
 export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
   const { action, itemId } = useAppSelector((state) => state.drawer);
@@ -33,5 +34,9 @@ export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
       </Space>
     ) : null;
 
-  return <DrawerForm resource={resource} footer={footer} />;
+  const renderFields = () => {
+    return <RoleSelect />;
+  };
+
+  return <DrawerForm resource={resource} footer={footer} renderFields={renderFields} />;
 };

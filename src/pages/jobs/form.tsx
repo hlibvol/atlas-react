@@ -19,6 +19,7 @@ import { DrawerForm } from "components/Resource/form";
 import { IAppUrl, IUseCase, IScreen, IAppType, IJob } from "interfaces";
 import { Resource, Action } from "services/enums";
 import { useAppSelector } from "redux/hooks";
+import { RoleSelect } from "components/Select";
 
 export const JobForm: React.FC<IResourceComponentsProps> = () => {
   const { selectProps: typeSelectProps } = useSelect<IAppType>({
@@ -99,6 +100,7 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
 
     return (
       <>
+        <RoleSelect />
         <Form.Item
           label={t("jobs.fields.application-type")}
           name='application_type_id'

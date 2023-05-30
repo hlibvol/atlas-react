@@ -14,12 +14,14 @@ const { Text } = Typography;
 type ABListProps = {
   resource: Resource;
   columns?: ColumnsType<BaseRecord>;
+  renderActions?: (record: BaseRecord) => JSX.Element;
 };
 
 const List: React.FC<ABListProps> = (props) => {
-  const { resource, columns = [] } = props;
+  const { resource, columns = [], renderActions } = props;
   const { tableProps, tableActionProps, defaultColumns } = useListProps({
     resource,
+    renderActions,
   });
   const dispatch = useAppDispatch();
   const [searchQuery, setSearchQuery] = React.useState<string>("");

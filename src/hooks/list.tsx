@@ -43,10 +43,9 @@ type TablePropsType = TableProps<BaseRecord> & {
   sorter: CrudSorting | undefined;
 };
 
-export const useTableProps = (props: unknown = {}) => {
+export const useTableProps = () => {
   const { tableProps, sorter } = useTable({
     // @ts-ignore
-    ...props,
     initialPageSize: 1000,
     hasPagination: false,
     initialSorter: [
@@ -130,7 +129,7 @@ export const useDefaultColumns = (props: defaultColumnProps) => {
 
 type TableActionProps = {
   resource: Resource;
-  hasRoles: boolean | undefined;
+  renderActions?: (record: BaseRecord) => JSX.Element;
   previewButton: boolean | undefined;
   designerButton: boolean | undefined;
   hasJobs: boolean | undefined;
@@ -152,7 +151,7 @@ export const useTableActionProps = (props: TableActionProps) => {
     disabledEdit,
     disabledDelete,
     resource,
-    hasRoles,
+    renderActions,
     hasJobs,
     hasUseCases,
     hasPlaybook,
@@ -199,26 +198,7 @@ export const useTableActionProps = (props: TableActionProps) => {
       dataIndex: "actions",
       render: (_: unknown, record: BaseRecord) => (
         <Space>
-          {hasRoles && (
-            <Tooltip title='Process Roles' color='green'>
-              <Button
-                icon={<UserOutlined />}
-                size='small'
-                type='primary'
-                ghost
-                onClick={() => {
-                  dispatch(
-                    openDrawer({
-                      resource: resource,
-                      action: Action.EDIT,
-                      itemId: record.id,
-                      activeField: "role_ids",
-                    })
-                  );
-                }}
-              />
-            </Tooltip>
-          )}
+          {renderActions && renderActions(record)}
           {previewButton && (
             <Tooltip title={`Preview ${tooltipLabel}`} color='green'>
               <Button
@@ -429,20 +409,18 @@ export const usePageSize = () => {
 
 type ListProps = {
   resource: Resource;
-  tableProps?: TablePropsType;
-  tableActionProps?: TableActionProps;
+  renderActions?: (record: BaseRecord) => JSX.Element;
 };
 
 export const useListProps = (props: ListProps) => {
-  const { resource, tableProps: _tableProps, tableActionProps: _tableActionProps } = props;
+  const { resource, renderActions } = props;
 
-  const tableProps = useTableProps(_tableProps);
+  const tableProps = useTableProps();
   // const pageSize = usePageSize();
 
   const resources = useResources();
   const {
     hasDefaultFields,
-    hasRoles,
     hasJobs,
     hasUseCases,
     hasPlaybook,
@@ -453,9 +431,8 @@ export const useListProps = (props: ListProps) => {
     designerButton,
   } = resources.find((r) => r.name === resource) ?? {};
   const tableActionProps = useTableActionProps({
-    ..._tableActionProps,
     resource,
-    hasRoles,
+    renderActions,
     previewButton,
     designerButton,
     hasJobs,
