@@ -81,21 +81,19 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
     dispatch(closeDrawer());
   };
 
-  formProps.onValuesChange = () => {
+  const handleValuesChange = () => {
     const newRecord: BaseRecord = form.getFieldsValue();
     let hasChanges = false;
-
     for (const key in newRecord) {
       // eslint-disable-next-line no-prototype-builtins
       if (newRecord.hasOwnProperty(key)) {
         // eslint-disable-next-line no-prototype-builtins
-        if (currentRecord?.hasOwnProperty(key) && currentRecord[key] !== newRecord[key]) {
+        if ((currentRecord && currentRecord[key] !== newRecord[key]) || !currentRecord) {
           hasChanges = true;
           break;
         }
       }
     }
-
     if (hasChanges) {
       const drawerOnClose = form.isFieldsTouched()
         ? () => {
@@ -109,6 +107,8 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
       dispatch(setDrawerOnClose(drawerOnClose));
     }
   };
+
+  formProps.onValuesChange = handleValuesChange;
 
   useEffect(() => {
     dispatch(

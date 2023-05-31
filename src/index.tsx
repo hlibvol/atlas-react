@@ -10,11 +10,11 @@ import "i18n";
 const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
-  <React.StrictMode>
-    <React.Suspense fallback='loading'>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </React.Suspense>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <React.Suspense fallback='loading'>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.Suspense>
+  // </React.StrictMode>
 );

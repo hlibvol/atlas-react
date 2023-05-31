@@ -263,12 +263,12 @@
       "resourceLabel": "Job",
       "title": "Name",
       "description": "Description",
-      "application-type": "Application Type",
-      "application-url-id": "Application URL",
-      "process-role": "Process Role",
-      "associatedScreen": "Associated Screens",
-      "associatedUseCases": "Associated Use Cases",
-      "is-template": {
+      "application_type_id": "Application Type",
+      "application_url_id": "Application URL",
+      "role_ids": "Process Role",
+      "screen_ids": "Associated Screens",
+      "use_case_ids": "Associated Use Cases",
+      "is_template": {
         "label": "Is Template",
         "true": "Yes",
         "false": "No"
@@ -290,7 +290,7 @@
       "title": "Name",
       "description": "Description",
       "page-content": "Page Content",
-      "process-role": "Process Roles"
+      "role_ids": "Process Roles"
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
