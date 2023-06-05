@@ -7,6 +7,7 @@ import { openDrawer } from "redux/slices/drawerSlice";
 import { BaseRecord } from "@pankod/refine-core";
 import { defaultColumnProps, useListProps } from "../../hooks/list";
 import { getObjectValuesAsArray, toTitleCase } from "services/utils";
+import Drawer from "./drawer";
 
 const { Search } = Input;
 const { Text } = Typography;
@@ -76,6 +77,7 @@ const List: React.FC<ABListProps> = (props) => {
           item.dataIndex !== "actions" ? { ...defaultColumnProps, ...item } : item
         )}
       ></Table>
+      <Drawer />
     </AntDList>
   );
 };

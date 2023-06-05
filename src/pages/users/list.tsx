@@ -8,7 +8,6 @@ import {
 import { BooleanField, Tag, UrlField, Button, TagField, Typography } from "@pankod/refine-antd";
 import { Resource, Action } from "services/enums";
 import { ICostCenter, IRole } from "interfaces";
-import Drawer from "components/Resource/drawer";
 import List from "components/Resource/list";
 import { useAppDispatch } from "redux/hooks";
 import { openDrawer } from "redux/slices/drawerSlice";
@@ -17,26 +16,23 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { editUrl } = useNavigation();
   const { data: roles } = useList<IRole>({ resource: Resource.ROLE });
-  const { data: costcenters } = useList<ICostCenter>({ resource: Resource.COST_CENTER });
+  const { data: costCenters } = useList<ICostCenter>({ resource: Resource.COST_CENTER });
   const dispatch = useAppDispatch();
   const columns = [
     {
       dataIndex: "first_name",
       title: t("users.fields.first_name"),
-      render: (id: number, record: BaseRecord) => (
+      render: (first_name: string, record: BaseRecord) => (
         <Button
           type='link'
           onClick={() => {
-            console.log(record);
-            let name = record.first_name + " " + record.last_name;
-            record["name"] = name;
             dispatch(
               openDrawer({
                 resource: Resource.USER,
                 action: Action.EDIT,
                 itemId: record.id,
                 activeField: "first_name",
-                title: record.name,
+                title: record.first_name + " " + record.last_name,
               })
             );
           }}
@@ -54,17 +50,17 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
       title: t("users.fields.email"),
     },
     {
-      dataIndex: ["users.source_id"],
+      dataIndex: "source_id",
       title: t("users.fields.source"),
-      render: (id: number, user: BaseRecord) => (
+      render: (sourceId: number | undefined) => (
         <TagField
-          color={user.source_id ? "cyan" : "green"}
-          value={user.source_id ? t(`status.external`) : t(`status.internal`)}
+          color={sourceId ? "cyan" : "green"}
+          value={sourceId ? t("status.external") : t("status.internal")}
         />
       ),
     },
     {
-      dataIndex: ["role_id"],
+      dataIndex: "role_id",
       title: t("users.fields.role"),
       render: (roleId: number) => {
         const role = roles?.data.find((item) => item.id === roleId);
@@ -76,15 +72,15 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
       },
     },
     {
-      dataIndex: ["cost_center_id"],
+      dataIndex: "cost_center_id",
       title: t("users.fields.cost-center"),
-      render: (costcenterId: number) => {
-        const costcenter = costcenters?.data.find((item) => item.id === costcenterId);
+      render: (costCenterId: number) => {
+        const costCenter = costCenters?.data.find((item) => item.id === costCenterId);
         return (
           <Tag color='red-1'>
-            {costcenter ? (
-              <UrlField value={editUrl(Resource.COST_CENTER, costcenter.id)}>
-                {costcenter.name}
+            {costCenter ? (
+              <UrlField value={editUrl(Resource.COST_CENTER, costCenterId)}>
+                {costCenter.name}
               </UrlField>
             ) : null}
           </Tag>
@@ -103,25 +99,13 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
     },
 
     {
-      dataIndex: "users.id",
+      dataIndex: "updated_by",
       title: t("users.fields.updated-by"),
       width: 120,
-      render: (id: number, user: BaseRecord) => (
-        <>
-          {user.updated_by ? (
-            <Typography.Text>{user.updated_by}</Typography.Text>
-          ) : (
-            <Typography.Text type='secondary'>No Updated</Typography.Text>
-          )}
-        </>
-      ),
+      render: (updatedBy: string | undefined) =>
+        updatedBy ? <Typography.Text>{updatedBy}</Typography.Text> : "",
     },
   ];
 
-  return (
-    <>
-      <List columns={columns} resource={Resource.USER} />
-      <Drawer />
-    </>
-  );
+  return <List columns={columns} resource={Resource.USER} />;
 };

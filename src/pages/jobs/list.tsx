@@ -2,7 +2,6 @@ import { useTranslate, IResourceComponentsProps, BaseRecord } from "@pankod/refi
 import { TagField, UrlField } from "@pankod/refine-antd";
 import { Resource } from "services/enums";
 import { IRole } from "interfaces";
-import Drawer from "components/Resource/drawer";
 import List from "components/Resource/list";
 import { RoleAction } from "components/ListAction";
 
@@ -38,10 +37,5 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
     );
   };
 
-  return (
-    <>
-      <List columns={columns} resource={Resource.JOB} renderActions={renderActions} />
-      <Drawer />
-    </>
-  );
+  return <List columns={columns} resource={Resource.JOB} renderActions={renderActions} />;
 };

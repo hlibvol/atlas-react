@@ -3,7 +3,6 @@ import { Resource } from "services/enums";
 
 import { BaseRecord, IResourceComponentsProps } from "@pankod/refine-core";
 import List from "components/Resource/list";
-import Drawer from "components/Resource/drawer";
 import { RoleAction } from "components/ListAction";
 import { IRole } from "interfaces";
 
@@ -16,10 +15,5 @@ export const PlayBookList: React.FC<IResourceComponentsProps> = () => {
     );
   };
 
-  return (
-    <>
-      <List resource={Resource.PLAYBOOK} renderActions={renderActions} />
-      <Drawer />
-    </>
-  );
+  return <List resource={Resource.PLAYBOOK} renderActions={renderActions} />;
 };

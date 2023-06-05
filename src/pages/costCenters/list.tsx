@@ -1,6 +1,5 @@
 import { useTranslate, IResourceComponentsProps, BaseRecord } from "@pankod/refine-core";
 import { Resource } from "services/enums";
-import Drawer from "components/Resource/drawer";
 import List from "components/Resource/list";
 import { TagField, Typography } from "@pankod/refine-antd";
 
@@ -8,34 +7,22 @@ export const CostCenterList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const columns = [
     {
-      dataIndex: ["costcenters.source_id"],
+      dataIndex: ["source_id"],
       title: t("cost-centers.fields.source"),
-      render: (id: number, costcenter: BaseRecord) => (
+      render: (sourceId: number | undefined) => (
         <TagField
-          color={costcenter.source_id ? "cyan" : "green"}
-          value={costcenter.source_id ? t(`status.external`) : t(`status.internal`)}
+          color={sourceId ? "cyan" : "green"}
+          value={sourceId ? t("status.external") : t("status.internal")}
         />
       ),
     },
     {
-      dataIndex: "costcenters.id",
+      dataIndex: "updated_by",
       title: t("cost-centers.fields.updated-by"),
       width: 120,
-      render: (id: number, costcenter: BaseRecord) => (
-        <>
-          {costcenter.updated_by ? (
-            <Typography.Text>{costcenter.updated_by}</Typography.Text>
-          ) : (
-            <Typography.Text type='secondary'>No Updated</Typography.Text>
-          )}
-        </>
-      ),
+      render: (updatedBy: number) =>
+        updatedBy ? <Typography.Text>{updatedBy}</Typography.Text> : "",
     },
   ];
-  return (
-    <>
-      <List columns={columns} resource={Resource.COST_CENTER} />
-      <Drawer />
-    </>
-  );
+  return <List columns={columns} resource={Resource.COST_CENTER} />;
 };
