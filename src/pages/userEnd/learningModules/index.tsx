@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { AntdLayout } from "@pankod/refine-antd";
+import { Layout } from "antd";
 import { LearningItems } from "./components/LearningItems";
 import "./styles.scss";
 import { LearningContent } from "./components/LearningContent";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { Resource } from "services/enums";
-import { useParams } from "@pankod/refine-react-router-v6";
-import { useShow } from "@pankod/refine-core";
+import { useParams } from "react-router-dom";
+import { useShow } from "@refinedev/core";
 import { ICourse } from "interfaces";
 
 export const LearningModules: React.FC = () => {
@@ -28,12 +28,12 @@ export const LearningModules: React.FC = () => {
   };
 
   return (
-    <AntdLayout className='learning-module-layout'>
+    <Layout className='learning-module-layout'>
       {!collapsed && (
         <LearningItems collapsed={collapsed} courseItems={courseItems} courseId={courseId} />
       )}
-      <AntdLayout className='learning-module-layout' style={{ marginLeft: 200 }}>
-        <AntdLayout.Header
+      <Layout className='learning-module-layout' style={{ marginLeft: 200 }}>
+        <Layout.Header
           style={{
             position: "fixed",
             top: 0,
@@ -44,13 +44,17 @@ export const LearningModules: React.FC = () => {
           }}
         >
           <span onClick={toggle} className='trigger'>
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            {collapsed ? (
+              <MenuUnfoldOutlined rev={undefined} />
+            ) : (
+              <MenuFoldOutlined rev={undefined} />
+            )}
           </span>
-        </AntdLayout.Header>
+        </Layout.Header>
         <LearningContent
           courseItems={course?.items.filter((lesson) => lesson.item_id !== 0) ?? []}
         />
-      </AntdLayout>
-    </AntdLayout>
+      </Layout>
+    </Layout>
   );
 };

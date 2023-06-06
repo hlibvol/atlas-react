@@ -1,7 +1,7 @@
 import React from "react";
-import { Tooltip, Button } from "@pankod/refine-antd";
+import { Tooltip, Button } from "antd";
 import { Action } from "services/enums";
-import { BaseRecord } from "@pankod/refine-core";
+import { BaseRecord } from "@refinedev/core";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { UserOutlined } from "@ant-design/icons";
 import { openDrawer } from "redux/slices/drawerSlice";
@@ -16,7 +16,7 @@ export const RoleAction: React.FC<ListActionProps> = ({ record }) => {
   return (
     <Tooltip title='Process Roles' color='green'>
       <Button
-        icon={<UserOutlined />}
+        icon={<UserOutlined rev={undefined} />}
         size='small'
         type='primary'
         ghost

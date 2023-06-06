@@ -1,10 +1,11 @@
-import { Avatar, Card, Col, Progress, Row, Typography } from "@pankod/refine-antd";
-import { Link } from "@pankod/refine-react-router-v6";
+import { Avatar, Card, Col, Progress, Row, Typography } from "antd";
+import { ICourse } from "interfaces";
+import { Link } from "react-router-dom";
 interface Props {
-  course: any;
+  course: ICourse | undefined;
   singleLearningRecordId: number | undefined;
 }
-export const Banner: React.FC<Props> = ({ course, singleLearningRecordId }) => {
+export const Banner: React.FC<Props> = ({ course, singleLearningRecordId }: Props) => {
   const status = false;
 
   return (

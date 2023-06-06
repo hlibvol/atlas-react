@@ -1,6 +1,5 @@
-import { useMemo } from "react";
-import { useApiUrl, useCustom, useTranslate } from "@pankod/refine-core";
-import { Typography } from "@pankod/refine-antd";
+import { useApiUrl, useCustom, useTranslate } from "@refinedev/core";
+import { Typography } from "antd";
 
 import { IUser } from "interfaces";
 import "./style.less";
@@ -10,7 +9,7 @@ export const TotalUsers: React.FC = () => {
   const API_URL = useApiUrl();
 
   const url = `${API_URL}/users`;
-  const { data, isLoading } = useCustom<{
+  const { data } = useCustom<{
     data: IUser[];
     total: number;
     trend: number;

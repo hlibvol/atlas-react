@@ -1,10 +1,5 @@
-import {
-  BaseRecord,
-  IResourceComponentsProps,
-  useNavigation,
-  useTranslate,
-} from "@pankod/refine-core";
-import { Form, Input, Button, Space } from "@pankod/refine-antd";
+import { BaseRecord, IResourceComponentsProps, useNavigation, useTranslate } from "@refinedev/core";
+import { Form, Input, Button, Space } from "antd";
 import { EyeOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { Action, Resource } from "services/enums";
 import { DrawerForm } from "components/Resource/form";
@@ -31,7 +26,7 @@ export const LessonForm: React.FC<IResourceComponentsProps> = () => {
     itemId && action === Action.EDIT ? (
       <Space>
         <Button
-          icon={<PlayCircleOutlined />}
+          icon={<PlayCircleOutlined rev={undefined} />}
           type='primary'
           href={`/editor/${resource}/${itemId}`}
           target='_blank'
@@ -39,7 +34,7 @@ export const LessonForm: React.FC<IResourceComponentsProps> = () => {
           Design {t(`${resource}.fields.resourceLabel`)}
         </Button>
         <Button
-          icon={<EyeOutlined />}
+          icon={<EyeOutlined rev={undefined} />}
           type='primary'
           href={showUrl(resource, itemId)}
           target='_blank'

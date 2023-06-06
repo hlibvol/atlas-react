@@ -1,10 +1,10 @@
-import { Card, Col, Row, Spin } from "@pankod/refine-antd";
+import { Card, Col, Row, Spin } from "antd";
 import bgImg from "../images/course_bg_image.jpg";
 import { ClockCircleOutlined } from "@ant-design/icons";
-import { Link } from "@pankod/refine-react-router-v6";
+import { Link } from "react-router-dom";
 import { Resource } from "services/enums";
 import { ICourse } from "interfaces";
-import { useList } from "@pankod/refine-core";
+import { useList } from "@refinedev/core";
 export const UserEndCourseCard: React.FC = () => {
   const { data, isLoading, isError } = useList<ICourse>({
     resource: Resource.COURSE,
@@ -32,7 +32,7 @@ export const UserEndCourseCard: React.FC = () => {
               <Card.Meta title={course.name} />
               <Row style={{ marginTop: "8px" }}>
                 <Col span={10}>
-                  <ClockCircleOutlined /> 1h:40m
+                  <ClockCircleOutlined rev={undefined} /> 1h:40m
                 </Col>
                 <Col span={12} offset={2}>
                   <Link to={`course/${course.id}`}>Go To Course</Link>

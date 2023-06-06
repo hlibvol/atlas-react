@@ -1,6 +1,6 @@
 import React from "react";
-import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { UrlField } from "@pankod/refine-antd";
+import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
+import { UrlField } from "@refinedev/antd";
 import { Resource } from "services/enums";
 import List from "components/Resource/list";
 

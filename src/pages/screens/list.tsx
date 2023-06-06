@@ -1,16 +1,16 @@
 import React from "react";
 
-import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
+import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
 import { Resource } from "services/enums";
 import List from "components/Resource/list";
-import { Tag } from "@pankod/refine-antd";
+import { Tag } from "antd";
 
 export const ScreenList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const columns = [
     {
       dataIndex: ["application_type", "name"],
-      title: t("screens.fields.application-type"),
+      title: t("screens.fields.application_type_id"),
       render: (name: string) => (name ? <Tag color='blue'>{name}</Tag> : null),
     },
   ];

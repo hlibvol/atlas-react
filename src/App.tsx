@@ -1,8 +1,9 @@
 import React from "react";
-import { Refine } from "@pankod/refine-core";
-import { RefineKbarProvider } from "@pankod/refine-kbar";
-import routerProvider from "@pankod/refine-react-router-v6";
-import { ConfigProvider, notificationProvider, Layout, ErrorComponent } from "@pankod/refine-antd";
+import { Refine } from "@refinedev/core";
+import { RefineKbarProvider } from "@refinedev/kbar";
+import legacyRouterProvider from "@refinedev/react-router-v6/legacy";
+import { notificationProvider, ErrorComponent } from "@refinedev/antd";
+import { ConfigProvider } from "antd";
 import de_DE from "antd/lib/locale/de_DE";
 import { authProvider, dataProvider } from "./services/providers";
 
@@ -11,9 +12,9 @@ import "styles/antd.less";
 import { DashboardPage } from "./pages/dashboard";
 import { AuthPage } from "./pages/auth";
 import { useTranslation } from "react-i18next";
-import { Header, Title } from "components";
 import { useResources } from "hooks/resource";
 import { useRoutes } from "hooks/routes";
+import { Layout } from "components/Layouts";
 
 const App: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -28,17 +29,15 @@ const App: React.FC = () => {
     <RefineKbarProvider>
       <ConfigProvider locale={locale === "de" ? de_DE : undefined}>
         <Refine
-          routerProvider={{
-            ...routerProvider,
+          legacyRouterProvider={{
+            ...legacyRouterProvider,
             routes: useRoutes(),
           }}
           dataProvider={dataProvider}
-          authProvider={authProvider()}
+          legacyAuthProvider={authProvider()}
           i18nProvider={i18nProvider}
           DashboardPage={DashboardPage}
           LoginPage={() => <AuthPage type='login' />}
-          Title={Title}
-          Header={Header}
           Layout={Layout}
           options={{
             reactQuery: {

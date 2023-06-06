@@ -1,8 +1,8 @@
-import { AntdLayout, Button, Col, Row, Spin } from "@pankod/refine-antd";
-import { useOne } from "@pankod/refine-core";
+import { Layout, Button, Col, Row, Spin } from "antd";
+import { useOne } from "@refinedev/core";
 import { RightCircleOutlined, LeftCircleOutlined } from "@ant-design/icons";
 import "../styles.scss";
-import { useParams } from "@pankod/refine-react-router-v6";
+import { useParams } from "react-router-dom";
 import { Resource } from "services/enums";
 import { ICourseItem, ILesson } from "interfaces";
 import { renderPagesHtml } from "hooks/common";
@@ -53,7 +53,7 @@ export const LearningContent: React.FC<IContentProps> = ({ courseItems }: IConte
     currentItem && currentItem.page_content ? JSON.parse(currentItem.page_content).pagesHtml : null;
 
   return (
-    <AntdLayout.Content
+    <Layout.Content
       style={{
         margin: "24px 0 0 1px",
         padding: 24,
@@ -91,7 +91,7 @@ export const LearningContent: React.FC<IContentProps> = ({ courseItems }: IConte
                 onClick={previousPageClick}
                 {...(currentIndex === 1 ? { disabled: true } : {})}
               >
-                <LeftCircleOutlined /> Prev
+                <LeftCircleOutlined rev={undefined} /> Prev
               </Button>
             </Col>
             <Col span={10}>
@@ -102,12 +102,12 @@ export const LearningContent: React.FC<IContentProps> = ({ courseItems }: IConte
                 onClick={nextPageClick}
                 {...(currentIndex === courseItems.length ? { disabled: true } : {})}
               >
-                Next <RightCircleOutlined />
+                Next <RightCircleOutlined rev={undefined} />
               </Button>
             </Col>
           </Row>
         </Col>
       </Row>
-    </AntdLayout.Content>
+    </Layout.Content>
   );
 };

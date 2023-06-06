@@ -1,18 +1,22 @@
-import { AntdLayout, Divider } from "@pankod/refine-antd";
+import { Layout, Divider, Menu } from "antd";
 import { AlignLeftOutlined } from "@ant-design/icons";
-import { Link } from "@pankod/refine-react-router-v6";
-import { Menu } from "antd";
+import { Link } from "react-router-dom";
 import { BackButton } from "components/UserEnd/BackButton";
+import { ICourseItem } from "interfaces";
 const { SubMenu } = Menu;
 
 interface IToggleProps {
   collapsed: boolean;
-  courseItems: Array<any>;
+  courseItems: ICourseItem[];
   courseId: number;
 }
-export const LearningItems: React.FC<IToggleProps> = ({ collapsed, courseItems, courseId }) => {
+export const LearningItems: React.FC<IToggleProps> = ({
+  collapsed,
+  courseItems,
+  courseId,
+}: IToggleProps) => {
   return (
-    <AntdLayout.Sider
+    <Layout.Sider
       className='learning-module-sider'
       trigger={null}
       collapsible
@@ -30,12 +34,12 @@ export const LearningItems: React.FC<IToggleProps> = ({ collapsed, courseItems, 
       </div>
       <Menu theme='light' mode='inline' className='learning-module-menu'>
         {courseItems &&
-          courseItems.map((item: any) => (
+          courseItems.map((item) => (
             <>
               {item.item_id ? (
                 <Menu.Item key={item.id} className='learning-module-menu-items'>
                   <Link to={`/learning/course/${courseId}/learn-course/${item.item_id}`}>
-                    <AlignLeftOutlined />
+                    <AlignLeftOutlined rev={undefined} />
                     <span className='nav-text'>{item.item_title}</span>
                   </Link>
                 </Menu.Item>
@@ -52,6 +56,6 @@ export const LearningItems: React.FC<IToggleProps> = ({ collapsed, courseItems, 
             </>
           ))}
       </Menu>
-    </AntdLayout.Sider>
+    </Layout.Sider>
   );
 };

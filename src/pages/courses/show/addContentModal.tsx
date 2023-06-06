@@ -1,6 +1,6 @@
-import { Avatar, Button, Col, Row, Divider, Modal, Space, Table, Tag } from "@pankod/refine-antd";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { BaseKey, useList, useOne, useShow, useTranslate, useUpdate } from "@pankod/refine-core";
+import { Avatar, Button, Col, Row, Divider, Modal, Space, Table, Tag } from "antd";
+import { useEffect, useState } from "react";
+import { BaseKey, useList, useOne, useShow, useTranslate, useUpdate } from "@refinedev/core";
 import { ICourse, ILesson } from "interfaces";
 import type { ColumnsType } from "antd/es/table";
 import { useDesignerEdit } from "hooks/common";

@@ -1,5 +1,5 @@
-import { IResourceComponentsProps, useShow, useList } from "@pankod/refine-core";
-import { Show } from "@pankod/refine-antd";
+import { IResourceComponentsProps, useShow, useList } from "@refinedev/core";
+import { Show } from "@refinedev/antd";
 import { ABDivider, HTMLContent, TagList } from "components/core";
 import { IJob, IRole } from "interfaces";
 import { Resource } from "services/enums";

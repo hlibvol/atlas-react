@@ -1,20 +1,20 @@
 import React from "react";
-import { AntdLayout } from "@pankod/refine-antd";
+import { Layout } from "antd";
 
 import { UserEndHeader } from "components/UserEnd/Header";
 import { UserEndCourseCard } from "components/UserEnd/UserEndCourseCard";
 export const UserEnd: React.FC = () => {
   return (
-    <AntdLayout style={{ minHeight: "100vh", flexDirection: "row" }}>
-      <AntdLayout>
+    <Layout style={{ minHeight: "100vh", flexDirection: "row" }}>
+      <Layout>
         <UserEndHeader />
-        <AntdLayout.Content>
+        <Layout.Content>
           <div style={{ padding: 24, minHeight: 360 }}>
             <h1>Courses</h1>
             <UserEndCourseCard />
           </div>
-        </AntdLayout.Content>
-      </AntdLayout>
-    </AntdLayout>
+        </Layout.Content>
+      </Layout>
+    </Layout>
   );
 };

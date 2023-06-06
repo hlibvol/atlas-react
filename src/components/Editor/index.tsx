@@ -11,7 +11,7 @@ import "./styles.scss";
 import { Config } from "services/config";
 import { TOKEN_KEY } from "services/constants";
 import { useParams } from "react-router-dom";
-import { useList } from "@pankod/refine-core";
+import { useList } from "@refinedev/core";
 import { CustomPlugin } from "./CustomPlugin";
 import { IJob, IUseCase } from "interfaces";
 import { Resource } from "services/enums";

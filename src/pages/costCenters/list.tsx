@@ -1,7 +1,8 @@
-import { useTranslate, IResourceComponentsProps, BaseRecord } from "@pankod/refine-core";
+import { useTranslate, IResourceComponentsProps } from "@refinedev/core";
 import { Resource } from "services/enums";
 import List from "components/Resource/list";
-import { TagField, Typography } from "@pankod/refine-antd";
+import { TagField } from "@refinedev/antd";
+import { Typography } from "antd";
 
 export const CostCenterList: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();

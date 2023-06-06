@@ -1,9 +1,8 @@
-import { Progress, Typography } from "@pankod/refine-antd";
+import { Typography, List } from "antd";
 import { memo } from "react";
-import { useTranslate } from "@pankod/refine-core";
+import { useTranslate } from "@refinedev/core";
 import { AlignLeftOutlined, Loading3QuartersOutlined } from "@ant-design/icons";
-import { List } from "antd";
-import { Link } from "@pankod/refine-react-router-v6";
+import { Link } from "react-router-dom";
 import "./styles.scss";
 const { Text } = Typography;
 
@@ -20,7 +19,7 @@ export const CourseListItems = memo(function CourseListItems({ itemId, courseIte
             {item.item_id ? (
               <Link to={`learn-course/${item.item_id}`}>
                 <Text key={itemId} className='learn-course-title'>
-                  <AlignLeftOutlined />
+                  <AlignLeftOutlined rev={undefined} />
                   &nbsp;&nbsp;{item.item_title}
                 </Text>
               </Link>
@@ -29,7 +28,9 @@ export const CourseListItems = memo(function CourseListItems({ itemId, courseIte
                 {item.item_title}
               </h2>
             )}
-            {item.item_id !== 0 && <Loading3QuartersOutlined className='loading-icon' />}
+            {item.item_id !== 0 && (
+              <Loading3QuartersOutlined className='loading-icon' rev={undefined} />
+            )}
           </List.Item>
         )}
       />

@@ -1,11 +1,13 @@
 import React from "react";
 
-import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { Form, FormInstance, Input, Select, useSelect } from "@pankod/refine-antd";
+import { BaseRecord, IResourceComponentsProps, useTranslate } from "@refinedev/core";
+import { Form, FormInstance, Input, Select } from "antd";
+import { useSelect } from "@refinedev/antd";
 import { DrawerForm } from "components/Resource/form";
 import { Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 import { IAppType, IJob, IScreen } from "interfaces";
+import { SelectResource } from "components/Resource/select";
 
 export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
   const { activeField } = useAppSelector((state) => state.drawer);
@@ -13,11 +15,6 @@ export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
   const resource = Resource.SCREEN;
   const { selectProps: jobSelectProps, queryResult: jobs } = useSelect<IJob>({
     resource: Resource.JOB,
-    optionLabel: "name",
-    optionValue: "id",
-  });
-  const { selectProps: typeSelectProps } = useSelect<IAppType>({
-    resource: Resource.APPLICATION_TYPE,
     optionLabel: "name",
     optionValue: "id",
   });
@@ -40,34 +37,18 @@ export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
 
     return (
       <>
-        <Form.Item
-          label={t("jobs.fields.application-type")}
+        <SelectResource
           name='application_type_id'
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          {
-            // @ts-ignore
-            <Select
-              {...typeSelectProps}
-              placeholder='Select Application Type'
-              onChange={handleAppTypeChange}
-            />
-          }
-        </Form.Item>
-        <Form.Item label={t("screens.fields.associatedJob")} name='job_ids'>
-          <Select
-            options={jobOptions}
-            autoFocus={activeField === "job_ids"}
-            placeholder='Select Jobs'
-            mode='multiple'
-          />
-        </Form.Item>
+          resource={Resource.APPLICATION_TYPE}
+          onChange={() => {
+            handleAppTypeChange;
+          }}
+          required
+        />
+        <SelectResource resource={Resource.JOB} name='job_ids' options={jobOptions} isMulti />
+
         <Form.Item
-          label={t("screens.fields.screenUrl")}
+          label={t("screens.fields.screen_url")}
           name='screen_url'
           rules={[
             {
@@ -75,7 +56,7 @@ export const ScreenForm: React.FC<IResourceComponentsProps> = () => {
             },
           ]}
         >
-          <Input placeholder={`Enter ${t("screens.fields.screenUrl")}`} tabIndex={1} />
+          <Input placeholder={`Enter ${t("screens.fields.screen_url")}`} tabIndex={1} />
         </Form.Item>
       </>
     );

@@ -4,8 +4,9 @@ import {
   useList,
   useNavigation,
   BaseRecord,
-} from "@pankod/refine-core";
-import { BooleanField, Tag, UrlField, Button, TagField, Typography } from "@pankod/refine-antd";
+} from "@refinedev/core";
+import { BooleanField, UrlField, TagField } from "@refinedev/antd";
+import { Button, Typography, Tag } from "antd";
 import { Resource, Action } from "services/enums";
 import { ICostCenter, IRole } from "interfaces";
 import List from "components/Resource/list";
@@ -51,7 +52,7 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
     },
     {
       dataIndex: "source_id",
-      title: t("users.fields.source"),
+      title: t("users.fields.source_id"),
       render: (sourceId: number | undefined) => (
         <TagField
           color={sourceId ? "cyan" : "green"}
@@ -61,7 +62,7 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
     },
     {
       dataIndex: "role_id",
-      title: t("users.fields.role"),
+      title: t("users.fields.role_id"),
       render: (roleId: number) => {
         const role = roles?.data.find((item) => item.id === roleId);
         return (
@@ -73,7 +74,7 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
     },
     {
       dataIndex: "cost_center_id",
-      title: t("users.fields.cost-center"),
+      title: t("users.fields.cost_center_id"),
       render: (costCenterId: number) => {
         const costCenter = costCenters?.data.find((item) => item.id === costCenterId);
         return (
@@ -99,8 +100,8 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
     },
 
     {
-      dataIndex: "updated_by",
-      title: t("users.fields.updated-by"),
+      dataIndex: "updated_by_user",
+      title: t("users.fields.updated_by_user"),
       width: 120,
       render: (updatedBy: string | undefined) =>
         updatedBy ? <Typography.Text>{updatedBy}</Typography.Text> : "",

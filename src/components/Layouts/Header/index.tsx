@@ -1,16 +1,9 @@
 import { useState, useEffect } from "react";
-import {
-  useGetLocale,
-  useSetLocale,
-  useGetIdentity,
-  useTranslate,
-  useList,
-} from "@pankod/refine-core";
+import { useGetLocale, useSetLocale, useGetIdentity, useTranslate, useList } from "@refinedev/core";
 
 import {
-  AntdLayout,
+  Layout,
   Menu,
-  Icons,
   Dropdown,
   Input,
   Avatar,
@@ -21,15 +14,13 @@ import {
   Col,
   AutoComplete,
   Button,
-} from "@pankod/refine-antd";
-
-import RefineReactRouter, { NavLink } from "@pankod/refine-react-router-v6";
+} from "antd";
+import { SearchOutlined, DownOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 import debounce from "lodash/debounce";
 
-const { Link } = RefineReactRouter;
-const { SearchOutlined, DownOutlined } = Icons;
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
 
@@ -50,7 +41,7 @@ export const Header: React.FC = () => {
   const { i18n } = useTranslation();
   const locale = useGetLocale();
   const changeLanguage = useSetLocale();
-  const { data: user } = useGetIdentity();
+  const { data: user } = useGetIdentity<IUser>();
   const screens = useBreakpoint();
   const t = useTranslate();
 
@@ -157,7 +148,7 @@ export const Header: React.FC = () => {
   );
 
   return (
-    <AntdLayout.Header
+    <Layout.Header
       style={{
         padding: "0px 24px",
         height: "64px",
@@ -167,13 +158,17 @@ export const Header: React.FC = () => {
       <Row align='middle' justify={screens.sm ? "space-between" : "end"}>
         <Col xs={0} sm={12}>
           <AutoComplete
-            dropdownClassName='header-search'
+            popupClassName='header-search'
             style={{ width: "100%", maxWidth: "550px" }}
             options={options}
             filterOption={false}
             onSearch={debounce((value: string) => setValue(value), 300)}
           >
-            <Input size='large' placeholder={t("search.placeholder")} suffix={<SearchOutlined />} />
+            <Input
+              size='large'
+              placeholder={t("search.placeholder")}
+              suffix={<SearchOutlined rev={undefined} />}
+            />
           </AutoComplete>
         </Col>
         <Col>
@@ -193,15 +188,17 @@ export const Header: React.FC = () => {
                         fontSize: "12px",
                         marginLeft: "6px",
                       }}
+                      rev={undefined}
                     />
                   </div>
                 </Space>
               </a>
             </Dropdown>
             <Text ellipsis strong>
-              {user?.name}
+              {user?.first_name}
             </Text>
-            <Avatar size='large' src={user?.avatar} alt={user?.name} />
+            {/* @ts-ignore */}
+            <Avatar size='large' src={user?.avatar} alt={user?.first_name} />
           </Space>
           <Space>
             <Button
@@ -219,6 +216,6 @@ export const Header: React.FC = () => {
           </Space>
         </Col>
       </Row>
-    </AntdLayout.Header>
+    </Layout.Header>
   );
 };

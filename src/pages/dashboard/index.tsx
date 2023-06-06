@@ -1,13 +1,7 @@
-import { Row, Col, Card, Typography } from "@pankod/refine-antd";
-import { useTranslation } from "react-i18next";
-
+import { Row, Col, Card } from "antd";
 import { TotalUsers, TotalJobs, TotalRoles } from "components";
 
-const { Text } = Typography;
-
 export const DashboardPage: React.FC = () => {
-  const { t } = useTranslation();
-
   return (
     <Row gutter={[16, 16]}>
       <Col md={24}>

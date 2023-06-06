@@ -1,62 +1,39 @@
-import { Col, Form, Input, Row, Select, Tag, Typography, useSelect } from "@pankod/refine-antd";
+import { Col, Form, Input, Row, Tag, Typography } from "antd";
 import {
   BaseRecord,
   IResourceComponentsProps,
   useGetIdentity,
   useTranslate,
-} from "@pankod/refine-core";
+} from "@refinedev/core";
 
 import { DrawerForm } from "components/Resource/form";
-import { IPortfolio, IProgram, ITeam } from "interfaces";
+import { IProgram, ITeam, IUser } from "interfaces";
 import { useAppSelector } from "redux/hooks";
 import { Action, Resource } from "services/enums";
+import { SelectResource } from "components/Resource/select";
 
 export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { action, itemId } = useAppSelector((state) => state.drawer);
-  const { data: user } = useGetIdentity();
-
-  const { selectProps: teamSelectProps } = useSelect<ITeam>({
-    resource: Resource.TEAM,
-    optionLabel: "name",
-    optionValue: "id",
-  });
-
-  const { selectProps: portfolioSelectProps } = useSelect<IPortfolio>({
-    resource: Resource.PORTFOLIO,
-    optionLabel: "name",
-    optionValue: "id",
-  });
+  const { data: user } = useGetIdentity<IUser>();
 
   const renderFields = (program: IProgram | BaseRecord) => (
     <>
-      <Form.Item label={t("programs.fields.portfolio")} name='portfolio_id' required>
-        <Select
-          {...portfolioSelectProps}
-          placeholder='Select Parent Portfolio'
-          {...(program.source_id ? { disabled: true } : null)}
-        />
-      </Form.Item>
+      <SelectResource resource={Resource.PORTFOLIO} name='portfolio_id' />
 
-      <Form.Item label={t("programs.fields.programTeams")} name='team_id'>
-        <Select
-          {...teamSelectProps}
-          placeholder='Select Teams'
-          {...(program.source_id ? { disabled: true } : null)}
-        />
-      </Form.Item>
+      <SelectResource resource={Resource.TEAM} name='team_id' />
 
       {itemId && action === Action.EDIT ? (
         <>
           <Row>
             <Col span={11}>
-              <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
+              <Form.Item label={t("programs.fields.updated_by_user")} name='updated_by_user'>
                 <Input disabled />
               </Form.Item>
             </Col>
             <Col span={2}></Col>
             <Col span={11}>
-              <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+              <Form.Item label={t("programs.fields.created_by_user")} name='created_by_user'>
                 <Input disabled />
               </Form.Item>
             </Col>
@@ -75,7 +52,7 @@ export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
       ) : (
         <Col span={11}>
           <Typography>
-            <pre>Created By: {user.name}</pre>
+            <pre>Created By: {user?.first_name}</pre>
           </Typography>
         </Col>
       )}

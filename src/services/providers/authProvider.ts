@@ -1,12 +1,12 @@
-import { AuthProvider } from "@pankod/refine-core";
-import { notification } from "@pankod/refine-antd";
+import { LegacyAuthProvider } from "@refinedev/core";
+import { notification } from "antd";
 
 import decodeJwt from "jwt-decode";
 import { TOKEN_KEY } from "../constants";
 import { Config } from "../config";
 import axios from "axios";
 
-export const authProvider = (): AuthProvider => {
+export const authProvider = (): LegacyAuthProvider => {
   return {
     login: async ({ email, password }) => {
       const formData = new FormData();

@@ -1,7 +1,7 @@
 import React from "react";
 
-import { IResourceComponentsProps, useNavigation } from "@pankod/refine-core";
-import { Button, Space } from "@pankod/refine-antd";
+import { IResourceComponentsProps, useNavigation } from "@refinedev/core";
+import { Button, Space } from "antd";
 import { EyeOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { DrawerForm } from "components/Resource/form";
 import { Action, Resource } from "services/enums";
@@ -16,7 +16,7 @@ export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
     itemId && action === Action.EDIT ? (
       <Space>
         <Button
-          icon={<PlayCircleOutlined />}
+          icon={<PlayCircleOutlined rev={undefined} />}
           type='primary'
           href={`/editor/${resource}/${itemId}`}
           target='_blank'
@@ -24,7 +24,7 @@ export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
           Design Playbook
         </Button>
         <Button
-          icon={<EyeOutlined />}
+          icon={<EyeOutlined rev={undefined} />}
           type='primary'
           href={showUrl(Resource.PLAYBOOK, itemId)}
           target='_blank'

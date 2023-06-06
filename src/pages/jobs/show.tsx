@@ -1,22 +1,17 @@
-import {
-  IResourceComponentsProps,
-  useShow,
-  useGetIdentity,
-  useTranslate,
-} from "@pankod/refine-core";
-
-import { Show, Space, Button, UrlField } from "@pankod/refine-antd";
+import { IResourceComponentsProps, useShow, useGetIdentity, useTranslate } from "@refinedev/core";
+import { Space, Button } from "antd";
+import { Show, UrlField } from "@refinedev/antd";
 import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
 
 import { ABDivider, HTMLContent, TagList } from "components/core";
-import { IJob } from "interfaces";
+import { IJob, IUser } from "interfaces";
 import { Resource } from "services/enums";
 
 export const JobShow: React.FC<IResourceComponentsProps> = () => {
   const { queryResult: jobQueryResult } = useShow<IJob>();
   const { data, isLoading } = jobQueryResult;
   const job = data?.data;
-  const { data: user } = useGetIdentity();
+  const { data: user } = useGetIdentity<IUser>();
   const t = useTranslate();
   const urlSuffix = `${user?.id}/${job?.id}/${(Math.random() + 1).toString(36).substring(2)}`;
 
@@ -45,17 +40,17 @@ export const JobShow: React.FC<IResourceComponentsProps> = () => {
             <Button
               type='primary'
               size='small'
-              icon={<PlayCircleOutlined />}
+              icon={<PlayCircleOutlined rev={undefined} />}
               target='_blank'
               href={`ab:job/executor/${urlSuffix}`}
             >
               Execute Job
             </Button>
-            {user.is_designer && (
+            {user?.is_designer && (
               <Button
                 type='primary'
                 size='small'
-                icon={<AntDesignOutlined />}
+                icon={<AntDesignOutlined rev={undefined} />}
                 target='_blank'
                 href={`ab:job/designer/${urlSuffix}`}
               >

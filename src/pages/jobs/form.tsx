@@ -3,19 +3,12 @@ import {
   IResourceComponentsProps,
   useTranslate,
   useGetIdentity,
-} from "@pankod/refine-core";
-import {
-  Space,
-  Form,
-  useSelect,
-  Checkbox,
-  Typography,
-  Button,
-  FormInstance,
-} from "@pankod/refine-antd";
+} from "@refinedev/core";
+import { Space, Form, Checkbox, Typography, Button, FormInstance } from "antd";
+import { useSelect } from "@refinedev/antd";
 import { PlayCircleOutlined, AntDesignOutlined } from "@ant-design/icons";
 import { DrawerForm } from "components/Resource/form";
-import { IAppUrl, IJob } from "interfaces";
+import { IAppUrl, IJob, IUser } from "interfaces";
 import { Resource, Action } from "services/enums";
 import { useAppSelector } from "redux/hooks";
 import { SelectResource } from "components/Resource/select";
@@ -30,18 +23,18 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
 
   const t = useTranslate();
   const { Text } = Typography;
-  const { data: user } = useGetIdentity();
+  const { data: user } = useGetIdentity<IUser>();
   const urlSuffix = `${user?.id}/${itemId}/${(Math.random() + 1).toString(36).substring(2)}`;
 
   const footer =
     itemId && action === Action.EDIT ? (
       <>
         <Space wrap>
-          {user.is_designer && (
+          {user?.is_designer && (
             <Button
               type='primary'
               size='small'
-              icon={<AntDesignOutlined />}
+              icon={<AntDesignOutlined rev={undefined} />}
               target='_blank'
               href={`ab:job/designer/${urlSuffix}`}
             >
@@ -51,7 +44,7 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
           <Button
             type='primary'
             size='small'
-            icon={<PlayCircleOutlined />}
+            icon={<PlayCircleOutlined rev={undefined} />}
             target='_blank'
             href={`ab:job/executor/${urlSuffix}`}
           >

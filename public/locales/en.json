@@ -165,11 +165,11 @@
       "last_name": "Last Name",
       "email": "Email Id",
       "password": "Password",
-      "role": "Role",
-      "source": "Source",
-      "created-by": "Created By",
-      "updated-by": "Updated By",
-      "cost-center": "Cost Center",
+      "role_id": "Role",
+      "source_id": "Source",
+      "created_by_user": "Created By",
+      "updated_by_user": "Updated By",
+      "cost_center_id": "Cost Center",
       "is_active": {
         "label": "Is Active",
         "true": "Yes",
@@ -222,12 +222,17 @@
       "resourceLabel": "Role",
       "title": "Role Name",
       "description": "Description",
-      "associatedJob": "Associated Jobs",
-      "associatedUseCases": "Associated Use Cases",
-      "associatedPlayBook": "Associated Playbooks",
-      "source": "Source",
-      "created-by": "Created By",
-      "updated-by": "Updated By"
+      "job_ids": "Associated Jobs",
+      "use_case_ids": "Associated Use Cases",
+      "playbook_ids": "Associated Playbooks",
+      "source_id": "Source",
+      "created_by_user": "Created By",
+      "updated_by_user": "Updated By",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -245,8 +250,13 @@
       "title": "Name",
       "description": "Description",
       "url": "Application URL",
-      "job": "Associated Jobs",
-      "type": "Application Type"
+      "job_ids": "Associated Jobs",
+      "application_type_id": "Application Type",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -272,6 +282,11 @@
         "label": "Is Template",
         "true": "Yes",
         "false": "No"
+      },
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
       }
     },
     "tagFilterDescription": "Use tags to filter your search",
@@ -289,8 +304,13 @@
       "resourceLabel": "Playbook",
       "title": "Name",
       "description": "Description",
-      "page-content": "Page Content",
-      "role_ids": "Process Roles"
+      "page_content": "Page Content",
+      "role_ids": "Process Roles",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -307,11 +327,16 @@
       "resourceLabel": "Screen",
       "title": "Name",
       "description": "Description",
-      "page-content": "Page Content",
-      "process-role": "Process Roles",
-      "associatedJob": "Associated Jobs",
-      "screenUrl": "Screen URL",
-      "application-type": "Application Type"
+      "page_content": "Page Content",
+      "role_ids": "Process Roles",
+      "job_ids": "Associated Jobs",
+      "screen_url": "Screen URL",
+      "application_type_id": "Application Type",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -329,8 +354,13 @@
       "title": "Name",
       "description": "Description",
       "duration": "Duration",
-      "enroll-required": "Enroll Required",
-      "passing-percentage": "Passing Percentage"
+      "enroll_required": "Enroll Required",
+      "passing_percentage": "Passing Percentage",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -348,9 +378,14 @@
       "title": "Name",
       "description": "Description",
       "duration": "Duration",
-      "page-content": "Page Content",
-      "is-template": {
+      "page_content": "Page Content",
+      "is_template": {
         "label": "Is Template",
+        "true": "Yes",
+        "false": "No"
+      },
+      "is_active": {
+        "label": "Is Active",
         "true": "Yes",
         "false": "No"
       }
@@ -370,9 +405,14 @@
       "resourceLabel": "Use Case",
       "title": "Name",
       "description": "Description",
-      "table-config": "Table Config",
-      "use-case-role": "Use Case Role",
-      "use-case-job": "Use Case Job"
+      "table_config": "Table Config",
+      "role_ids": "Use Case Role",
+      "job_ids": "Use Case Job",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -389,10 +429,15 @@
       "resourceLabel": "Portfolio",
       "title": "Portfolio Name",
       "description": "Description",
-      "associatedTOFTs": "Associated TOFTs",
-      "source": "Source",
-      "created-by": "Created By",
-      "updated-by": "Updated By"
+      "programs": "Associated TOFTs",
+      "source_id": "Source",
+      "created_by_user": "Created By",
+      "updated_by_user": "Updated By",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -409,12 +454,17 @@
       "resourceLabel": "TOFTs",
       "title": "TOFTs Name",
       "description": "Description",
-      "associatedTeams": "Associated Teams",
-      "programTeams": "Program Teams",
-      "source": "Source",
-      "portfolio": "Portfolio",
-      "created-by": "Created By",
-      "updated-by": "Updated By"
+      "teams": "Associated Teams",
+      "team_id": "Program Teams",
+      "source_id": "Source",
+      "portfolio_id": "Portfolio",
+      "created_by_user": "Created By",
+      "updated_by_user": "Updated By",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -431,10 +481,18 @@
       "resourceLabel": "Team",
       "title": "Team Name",
       "description": "Description",
-      "associatedUsers": "Associated Users",
-      "source": "Source",
-      "created-by": "Created By",
-      "updated-by": "Updated By"
+      "user_ids": "Associated Users",
+      "program_id": "Program",
+      "source_id": "Source",
+      "sprint_prefix": "Sprint Prefix",
+      "short_name": "Short Name",
+      "created_by_user": "Created By",
+      "updated_by_user": "Updated By",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
@@ -451,10 +509,15 @@
       "resourceLabel": "Cost Center",
       "title": "Cost Center",
       "description": "Description",
-      "source": "Source",
-      "hrRate": "Hourly Rate",
-      "created-by": "Created By",
-      "updated-by": "Updated By"
+      "source_id": "Source",
+      "hr_rate": "Hourly Rate",   
+      "created_by_user": "Created By",
+      "updated_by_user": "Updated By",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"

@@ -1,6 +1,5 @@
-import { useMemo, useState } from "react";
-import { useApiUrl, useCustom, useTranslate } from "@pankod/refine-core";
-import { Typography, DatePicker, NumberField } from "@pankod/refine-antd";
+import { useApiUrl, useCustom, useTranslate } from "@refinedev/core";
+import { Typography } from "antd";
 
 import { IJob } from "interfaces";
 import "./style.less";
@@ -10,7 +9,7 @@ export const TotalJobs: React.FC = () => {
   const API_URL = useApiUrl();
 
   const url = `${API_URL}/jobs`;
-  const { data, isLoading } = useCustom<{
+  const { data } = useCustom<{
     data: IJob[];
     total: number;
     trend: number;

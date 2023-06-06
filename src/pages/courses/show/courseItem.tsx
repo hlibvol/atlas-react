@@ -1,9 +1,10 @@
-import { Button, Col, Icons, Row, Space, Typography, Popconfirm } from "@pankod/refine-antd";
+import { Button, Col, Row, Space, Typography, Popconfirm } from "antd";
+import { UnorderedListOutlined, DeleteOutlined } from "@ant-design/icons";
 import { memo, useEffect, useState } from "react";
 import { DropTargetMonitor, useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 import { AddContentModal } from "./addContentModal";
-import { useOne, useTranslate } from "@pankod/refine-core";
+import { useOne, useTranslate } from "@refinedev/core";
 import { ILesson } from "interfaces";
 import { Resource } from "services/enums";
 
@@ -87,7 +88,7 @@ export const CourseItem = memo(function CourseItem({
           <Col span={12}>
             {itemId ? (
               <Text style={{ margin: 0 }} key={itemId}>
-                <Icons.UnorderedListOutlined />
+                <UnorderedListOutlined rev={undefined} />
                 &nbsp;&nbsp;{itemTitle}
               </Text>
             ) : (
@@ -126,7 +127,12 @@ export const CourseItem = memo(function CourseItem({
                     }}
                     title='Are you sure?'
                   >
-                    <Button shape='circle' size='small' icon={<Icons.DeleteOutlined />} danger />
+                    <Button
+                      shape='circle'
+                      size='small'
+                      icon={<DeleteOutlined rev={undefined} />}
+                      danger
+                    />
                   </Popconfirm>
                 </>
               ) : (
@@ -144,7 +150,7 @@ export const CourseItem = memo(function CourseItem({
                     shape='circle'
                     size='small'
                     style={{ marginLeft: "73px" }}
-                    icon={<Icons.DeleteOutlined />}
+                    icon={<DeleteOutlined rev={undefined} />}
                     danger
                   />
                 </Popconfirm>

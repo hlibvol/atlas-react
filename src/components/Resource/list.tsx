@@ -1,10 +1,11 @@
 import React from "react";
-import { Input, List as AntDList, Table, Typography } from "@pankod/refine-antd";
+import { Input, Table, Typography } from "antd";
+import { List as AntDList } from "@refinedev/antd";
 import type { ColumnsType } from "antd/es/table";
 import { Action, Resource } from "services/enums";
 import { useAppDispatch } from "redux/hooks";
 import { openDrawer } from "redux/slices/drawerSlice";
-import { BaseRecord } from "@pankod/refine-core";
+import { BaseRecord } from "@refinedev/core";
 import { defaultColumnProps, useListProps } from "../../hooks/list";
 import { getObjectValuesAsArray, toTitleCase } from "services/utils";
 import Drawer from "./drawer";

@@ -1,8 +1,9 @@
 import React from "react";
-import { Form, useSelect, Select } from "@pankod/refine-antd";
+import { Form, Select } from "antd";
+import { useSelect } from "@refinedev/antd";
 import { DefaultOptionType } from "antd/lib/select";
 import { Resource } from "services/enums";
-import { BaseRecord, useTranslate } from "@pankod/refine-core";
+import { useTranslate } from "@refinedev/core";
 import { useAppSelector } from "redux/hooks";
 
 type ISelectProps = {
@@ -10,6 +11,7 @@ type ISelectProps = {
   name: string;
   isMulti?: boolean;
   required?: boolean;
+  disabledField?: boolean;
   options?: DefaultOptionType[];
   onChange?: () => void;
   placeholder?: string;
@@ -17,11 +19,12 @@ type ISelectProps = {
 };
 
 export const SelectResource: React.FC<ISelectProps> = (props) => {
-  const { resource, name, options, isMulti, onChange, required, label, placeholder } = props;
+  const { resource, name, options, isMulti, onChange, required, placeholder, disabledField } =
+    props;
   const { activeField, resource: formResource } = useAppSelector((state) => state.drawer);
-  const { selectProps } = useSelect<BaseRecord>({
+  const { selectProps } = useSelect({
     resource: resource,
-    optionLabel: label ?? "name",
+    optionLabel: resource == Resource.USER ? "first_name" : "name",
     optionValue: "id",
     queryOptions: {
       enabled: options ? false : true,
@@ -44,6 +47,7 @@ export const SelectResource: React.FC<ISelectProps> = (props) => {
           {...selectProps}
           placeholder={placeholder ?? `Select ${filedLabel}`}
           mode={isMulti ? "multiple" : undefined}
+          {...(disabledField ? { disabled: true } : null)}
           autoFocus={activeField === name}
           {...(onChange && { onChange })}
           {...(options && { options })}

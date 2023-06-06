@@ -1,7 +1,7 @@
 import React from "react";
 import { Resource } from "services/enums";
 
-import { BaseRecord, IResourceComponentsProps } from "@pankod/refine-core";
+import { BaseRecord, IResourceComponentsProps } from "@refinedev/core";
 import List from "components/Resource/list";
 import { RoleAction } from "components/ListAction";
 import { IRole } from "interfaces";

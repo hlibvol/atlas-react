@@ -1,7 +1,8 @@
-import { useTranslate, IResourceComponentsProps, useList } from "@pankod/refine-core";
+import { useTranslate, IResourceComponentsProps, useList } from "@refinedev/core";
 import { Resource } from "services/enums";
 import List from "components/Resource/list";
-import { TagField, Typography } from "@pankod/refine-antd";
+import { TagField } from "@refinedev/antd";
+import { Typography } from "antd";
 import { IPortfolio } from "interfaces";
 
 export const ProgramList: React.FC<IResourceComponentsProps> = () => {
@@ -10,7 +11,7 @@ export const ProgramList: React.FC<IResourceComponentsProps> = () => {
   const columns = [
     {
       dataIndex: ["portfolio_id"],
-      title: t("programs.fields.portfolio"),
+      title: t("programs.fields.portfolio_id"),
       render: (portfolioId: number) => {
         const portfolio = portfolios?.data.find((item) => item.id === portfolioId);
         return (
@@ -23,7 +24,7 @@ export const ProgramList: React.FC<IResourceComponentsProps> = () => {
     },
     {
       dataIndex: ["source_id"],
-      title: t("programs.fields.source"),
+      title: t("programs.fields.source_id"),
       render: (sourceId: number | undefined) => (
         <TagField
           color={sourceId ? "cyan" : "green"}
@@ -32,8 +33,8 @@ export const ProgramList: React.FC<IResourceComponentsProps> = () => {
       ),
     },
     {
-      dataIndex: "updated_by",
-      title: t("programs.fields.updated-by"),
+      dataIndex: "updated_by_user",
+      title: t("programs.fields.updated_by_user"),
       width: 120,
       render: (updatedBy: number) =>
         updatedBy ? <Typography.Text>{updatedBy}</Typography.Text> : "",

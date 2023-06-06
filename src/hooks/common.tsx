@@ -1,5 +1,5 @@
-import { Typography } from "@pankod/refine-antd";
-import { useNavigation, BaseKey } from "@pankod/refine-core";
+import { Typography } from "antd";
+import { BaseKey } from "@refinedev/core";
 import { useNavigate } from "react-router-dom";
 
 export const usePanelHeader = (title: string, description = "") => {

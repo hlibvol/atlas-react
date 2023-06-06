@@ -1,6 +1,4 @@
-import { Icon } from "@pankod/refine-antd";
-
-const BikeWhiteSVG: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+export const BikeWhiteSVG: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     width='32'
     height='25'
@@ -17,5 +15,3 @@ const BikeWhiteSVG: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     />
   </svg>
 );
-
-export const BikeWhiteIcon = (props: any) => <Icon component={BikeWhiteSVG} {...props} />;

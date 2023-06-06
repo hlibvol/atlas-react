@@ -1,7 +1,9 @@
 import React, { useMemo } from "react";
 
-import { useOne, useUpdate } from "@pankod/refine-core";
-import { Col, Form, Icons, Row, Select, Show, useSelect } from "@pankod/refine-antd";
+import { useOne, useUpdate } from "@refinedev/core";
+import { Col, Form, Row, Select } from "antd";
+import { Show, useSelect } from "@refinedev/antd";
+import { SmileOutlined } from "@ant-design/icons";
 import { Resource } from "services/enums";
 import { IJob, IRole, IUseCase } from "interfaces";
 import { useParams } from "react-router-dom";
@@ -107,7 +109,7 @@ export const MatrixTableEdit: React.FC = () => {
       title={useCase && useCase.name ? useCase.name : "Use case"}
       isLoading={queryResult.isLoading || !useCase}
       canEdit
-      goBack={<Icons.SmileOutlined />}
+      goBack={<SmileOutlined rev={undefined} />}
       headerProps={{
         subTitle: "(Job - Role Matrix)",
       }}

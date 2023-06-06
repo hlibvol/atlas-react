@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { AntdLayout, Col, Row, Spin, Typography } from "@pankod/refine-antd";
+import { Layout, Col, Row, Spin, Typography } from "antd";
 import { UserEndHeader } from "components/UserEnd/Header";
 import { useParams } from "react-router-dom";
-import { useShow } from "@pankod/refine-core";
-import { ICourse } from "interfaces";
+import { useShow } from "@refinedev/core";
+import { ICourse, ICourseItem } from "interfaces";
 import { Resource } from "services/enums";
 import { CourseListItems } from "./courseListItems";
 import "./styles.scss";
@@ -11,11 +11,11 @@ import { Banner } from "./components/Banner";
 import { BackButton } from "components/UserEnd/BackButton";
 
 export const UserEndCourseDetails: React.FC = () => {
-  const { itemId } = useParams<{ itemId: any }>();
+  const { itemId } = useParams<{ itemId: string }>();
   const { queryResult } = useShow<ICourse>({ resource: Resource.COURSE, id: itemId });
   const { data, isLoading, isError } = queryResult;
   const course = data?.data;
-  const [courseItems, setCourseItems] = useState([]) as Array<any>;
+  const [courseItems, setCourseItems] = useState<ICourseItem[]>([]);
 
   if (isLoading) {
     return (
@@ -31,30 +31,25 @@ export const UserEndCourseDetails: React.FC = () => {
 
   const date = course?.created_at ? course?.created_at : course?.updated_at;
   const published_date = new Date(date).toDateString();
-  // useEffect(() => {
   if (course && course.items != courseItems) {
-    const sortedArray = course.items.sort((a: any, b: any) => {
+    const sortedArray = course.items.sort((a, b) => {
       return a.item_order - b.item_order;
     });
     setCourseItems(sortedArray);
   }
-  // }, [course?.items]);
 
   const courseItemsCountData = course?.items.filter((lesson) => lesson.item_id !== 0);
-
   const lessonCount = courseItemsCountData?.length;
-
   const singleLearningRecord = courseItemsCountData?.slice(0, 1)[0];
-
   const singleLearningRecordId = singleLearningRecord?.item_id;
 
   return (
-    <AntdLayout style={{ minHeight: "100vh", flexDirection: "row" }}>
-      <AntdLayout>
+    <Layout style={{ minHeight: "100vh", flexDirection: "row" }}>
+      <Layout>
         <UserEndHeader />
-        <AntdLayout.Content>
+        <Layout.Content>
           <div style={{ minHeight: 360 }}>
-            <BackButton itemdetailslink='/learning' courseId={itemId} />
+            <BackButton itemdetailslink='/learning' courseId={Number(itemId)} />
             <Banner course={course} singleLearningRecordId={singleLearningRecordId} />
             <div style={{ padding: 30 }}>
               <Row>
@@ -91,8 +86,8 @@ export const UserEndCourseDetails: React.FC = () => {
               </Row>
             </div>
           </div>
-        </AntdLayout.Content>
-      </AntdLayout>
-    </AntdLayout>
+        </Layout.Content>
+      </Layout>
+    </Layout>
   );
 };

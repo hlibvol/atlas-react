@@ -1,6 +1,4 @@
-import { Icon } from "@pankod/refine-antd";
-
-const PizzaIconSVG: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+export const PizzaIconSVG: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     width='15'
     height='15'
@@ -17,5 +15,3 @@ const PizzaIconSVG: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     />
   </svg>
 );
-
-export const PizzaIcon = (props: any) => <Icon component={PizzaIconSVG} {...props} />;

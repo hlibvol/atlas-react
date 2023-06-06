@@ -1,10 +1,9 @@
 import React from "react";
-// import {  Drawer as AntDDrawer } from "@pankod/refine-antd";
 import { Drawer as AntDDrawer } from "antd";
 
 import { Action } from "services/enums";
 import { useAppSelector } from "redux/hooks";
-import { useTranslate } from "@pankod/refine-core";
+import { useTranslate } from "@refinedev/core";
 import { useResources } from "hooks/resource";
 
 const Drawer: React.FC = () => {
@@ -14,21 +13,21 @@ const Drawer: React.FC = () => {
   const t = useTranslate();
   const resources = useResources();
   const formElement = resources.find((r) => r.name === resource)?.form;
+  const Form = formElement ? formElement : () => null;
   return (
     <AntDDrawer
       title={action === Action.CREATE ? t(`${resource}.titles.create`) : title}
       width='100%'
       onClose={onClose}
-      visible={action === Action.CREATE || action === Action.EDIT}
+      open={action === Action.CREATE || action === Action.EDIT}
       bodyStyle={{ paddingBottom: 80 }}
       extra={extra}
       footer={footer}
-      getContainer={() => document.getElementsByClassName("ant-page-header")[0] as HTMLElement}
-      style={{ position: "absolute" }}
-      contentWrapperStyle={{ height: "inherit" }}
+      getContainer={false}
+      contentWrapperStyle={{ height: "-webkit-fill-available" }}
       placement='top'
     >
-      {formElement}
+      <Form />
     </AntDDrawer>
   );
 };

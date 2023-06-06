@@ -1,80 +1,41 @@
-import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
+import { BaseRecord, IResourceComponentsProps, useTranslate } from "@refinedev/core";
 import { Resource, Action } from "services/enums";
 import { DrawerForm } from "components/Resource/form";
-import { IJob, IPlayBook, IUseCase, IRole } from "interfaces";
-import { Col, Form, Input, Row, Select, useSelect } from "@pankod/refine-antd";
+import { IRole } from "interfaces";
+import { Col, Form, Input, Row } from "antd";
 import { useAppSelector } from "redux/hooks";
+import { SelectResource } from "components/Resource/select";
 
 export const RoleForm: React.FC<IResourceComponentsProps> = () => {
-  const { itemId, activeField, action } = useAppSelector((state) => state.drawer);
+  const { itemId, action } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
   const resource = Resource.ROLE;
 
-  const { selectProps: jobSelectProps } = useSelect<IJob>({
-    resource: Resource.JOB,
-    optionLabel: "name",
-    optionValue: "id",
-  });
-  const { selectProps: useCaseSelectProps } = useSelect<IUseCase>({
-    resource: Resource.USE_CASE,
-    optionLabel: "name",
-    optionValue: "id",
-  });
-  const { selectProps: playBookSelectProps } = useSelect<IPlayBook>({
-    resource: Resource.PLAYBOOK,
-    optionLabel: "name",
-    optionValue: "id",
-  });
-
   const renderFields = (jobRole: IRole | BaseRecord) => (
     <>
-      <Form.Item label={t("roles.fields.associatedJob")} name='job_ids'>
-        <Select
-          {...jobSelectProps}
-          autoFocus={activeField === "job_ids"}
-          placeholder='Select Jobs'
-          mode='multiple'
-          {...(jobRole.source_id ? { disabled: true } : null)}
-        />
-      </Form.Item>
+      <SelectResource resource={Resource.JOB} name='job_ids' isMulti />
 
-      <Form.Item label={t("roles.fields.associatedUseCases")} name='use_case_ids'>
-        <Select
-          {...useCaseSelectProps}
-          autoFocus={activeField === "use_case_ids"}
-          mode='multiple'
-          placeholder='Select Use Cases'
-          {...(jobRole.source_id ? { disabled: true } : null)}
-        />
-      </Form.Item>
+      <SelectResource resource={Resource.USE_CASE} name='use_case_ids' isMulti />
 
-      <Form.Item label={t("roles.fields.associatedPlayBook")} name='playbook_ids'>
-        <Select
-          {...playBookSelectProps}
-          autoFocus={activeField === "playbook_ids"}
-          mode='multiple'
-          placeholder='Select Playbook'
-          {...(jobRole.source_id ? { disabled: true } : null)}
-        />
-      </Form.Item>
+      <SelectResource resource={Resource.PLAYBOOK} name='playbook_ids' isMulti />
 
       {itemId && action === Action.EDIT ? (
         <Row>
           <Col span={11}>
-            <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
+            <Form.Item label={t("roles.fields.updated_by_user")} name='updated_by'>
               <Input disabled />
             </Form.Item>
           </Col>
           <Col span={2}></Col>
           <Col span={11}>
-            <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+            <Form.Item label={t("roles.fields.created_by_user")} name='created_by'>
               <Input disabled />
             </Form.Item>
           </Col>
         </Row>
       ) : (
         <Col span={11}>
-          <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+          <Form.Item label={t("roles.fields.created_by_user")} name='created_by'>
             <Input placeholder='Created By' disabled value={jobRole.created_by} />
           </Form.Item>
         </Col>

@@ -1,7 +1,7 @@
-import { useTranslate, IResourceComponentsProps, useShow, useList } from "@pankod/refine-core";
+import { useTranslate, IResourceComponentsProps, useShow, useList } from "@refinedev/core";
 
-import { Card, Icons, Space, Row, Col, Grid, Typography, Avatar, Badge } from "@pankod/refine-antd";
-
+import { Card, Space, Row, Col, Grid, Typography, Avatar, Badge } from "antd";
+import { MailOutlined, CheckOutlined } from "@ant-design/icons";
 import { IRole, IUser } from "interfaces";
 import { ABDivider, TagList } from "components/core";
 import { Resource } from "services/enums";
@@ -38,11 +38,11 @@ export const UserShow: React.FC<IResourceComponentsProps> = () => {
               }}
             >
               <Typography.Text>
-                <Icons.MailOutlined /> {user?.email}
+                <MailOutlined rev={undefined} /> {user?.email}
               </Typography.Text>
               <Typography.Text>
                 {"Active: "}
-                <Icons.CheckOutlined />{" "}
+                <CheckOutlined rev={undefined} />{" "}
                 <Badge className='site-badge-count-109' style={{ backgroundColor: "#52c41a" }}>
                   {user?.is_active
                     ? t("users.fields.is_active.true")

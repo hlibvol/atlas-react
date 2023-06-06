@@ -1,7 +1,7 @@
 import React from "react";
 
-import { IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
-import { Collapse } from "@pankod/refine-antd";
+import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
+import { Collapse } from "antd";
 
 import { DrawerForm } from "components/Resource/form";
 import { Resource } from "services/enums";
@@ -10,7 +10,7 @@ import { DndProvider } from "react-dnd";
 import { Container } from "./show/container";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { CaretRightOutlined } from "@ant-design/icons";
-import { useSearchParams } from "@pankod/refine-react-router-v6";
+import { useSearchParams } from "react-router-dom";
 
 export const CourseForm: React.FC<IResourceComponentsProps> = () => {
   const resource = Resource.COURSE;
@@ -24,7 +24,9 @@ export const CourseForm: React.FC<IResourceComponentsProps> = () => {
       <Collapse
         defaultActiveKey={activeKey ? [activeKey] : ["1"]}
         style={{ gap: "8px" }}
-        expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+        expandIcon={({ isActive }) => (
+          <CaretRightOutlined rotate={isActive ? 90 : 0} rev={undefined} />
+        )}
       >
         <Panel
           header={usePanelHeader("Course designer", "Page content")}

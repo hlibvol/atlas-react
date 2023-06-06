@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useOne } from "@pankod/refine-core";
-import { useParams } from "@pankod/refine-react-router-v6";
+import { useOne } from "@refinedev/core";
+import { useParams } from "react-router-dom";
 import { IJob, IRole, IUseCase } from "interfaces";
 import { Resource } from "services/enums";
 

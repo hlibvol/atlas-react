@@ -3,20 +3,18 @@ import { memo, useCallback, useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { CourseItem } from "./courseItem";
 import { ItemTypes } from "./ItemTypes";
-import { Col, Input, message, Row, Typography } from "@pankod/refine-antd";
-import { useShow, useUpdate } from "@pankod/refine-core";
+import { Col, Input, message, Row, Typography } from "antd";
+import { useShow, useUpdate } from "@refinedev/core";
 import { ICourse } from "interfaces";
-import { useParams } from "react-router";
 import { useAppSelector } from "redux/hooks";
-const { Text, Title } = Typography;
+const { Text } = Typography;
 
 const style = {
   width: "100%",
 };
 
 export const Container: React.FC = memo(function Container() {
-  const { action, itemId } = useAppSelector((state) => state.drawer);
-  // const { itemId } = useParams();
+  const { itemId } = useAppSelector((state) => state.drawer);
   const { mutate } = useUpdate();
   const { queryResult } = useShow<ICourse>({ id: itemId });
   const { data, isLoading } = queryResult;

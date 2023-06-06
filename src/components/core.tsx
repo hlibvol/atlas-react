@@ -1,6 +1,7 @@
 import { IBaseResource } from "interfaces";
-import { BaseRecord, useNavigation } from "@pankod/refine-core";
-import { UrlField, Tag, Divider } from "@pankod/refine-antd";
+import { BaseRecord, useNavigation } from "@refinedev/core";
+import { Tag, Divider } from "antd";
+import { UrlField } from "@refinedev/antd";
 import { useParams } from "react-router-dom";
 import { Action, Resource } from "services/enums";
 import { openDrawer } from "redux/slices/drawerSlice";

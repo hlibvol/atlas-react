@@ -1,5 +1,5 @@
-import { useTranslate, IResourceComponentsProps, BaseRecord } from "@pankod/refine-core";
-import { TagField, UrlField } from "@pankod/refine-antd";
+import { useTranslate, IResourceComponentsProps, BaseRecord } from "@refinedev/core";
+import { TagField, UrlField } from "@refinedev/antd";
 import { Resource } from "services/enums";
 import { IRole } from "interfaces";
 import List from "components/Resource/list";
@@ -18,12 +18,12 @@ export const JobList: React.FC<IResourceComponentsProps> = () => {
     {
       key: "is_template",
       dataIndex: "is_template",
-      title: t("jobs.fields.is-template.label"),
+      title: t("jobs.fields.is_template.label"),
       width: 120,
       render: (value: boolean) => (
         <TagField
           color={value ? "green" : "red"}
-          value={t(`jobs.fields.is-template.${value ? "true" : "false"}`)}
+          value={t(`jobs.fields.is_template.${value ? "true" : "false"}`)}
         />
       ),
     },

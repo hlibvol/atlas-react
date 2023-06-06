@@ -1,15 +1,15 @@
 import React from "react";
 
-import { BaseRecord, IResourceComponentsProps, useList, useTranslate } from "@pankod/refine-core";
-import { Form, Input, Select, useSelect } from "@pankod/refine-antd";
-
+import { BaseRecord, IResourceComponentsProps, useList, useTranslate } from "@refinedev/core";
+import { Form, Input } from "antd";
 import { DrawerForm } from "components/Resource/form";
-import { IAppType, IAppUrl, IJob } from "interfaces";
+import { IAppUrl, IJob } from "interfaces";
 import { Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
+import { SelectResource } from "components/Resource/select";
 
 export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
-  const { itemId, activeField } = useAppSelector((state) => state.drawer);
+  const { itemId } = useAppSelector((state) => state.drawer);
   const t = useTranslate();
   const resource = Resource.APPLICATION_URL;
 
@@ -22,12 +22,6 @@ export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
   const filteredAssociatedJob = allJobs
     .filter((job) => job.application_url_id === itemId)
     .map((job) => job.name);
-
-  const { selectProps: typeSelectProps } = useSelect<IAppType>({
-    resource: Resource.APPLICATION_TYPE,
-    optionLabel: "name",
-    optionValue: "id",
-  });
 
   const renderFields = (applicationUrl: IAppUrl | BaseRecord) => (
     <>
@@ -42,7 +36,7 @@ export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
       >
         <Input />
       </Form.Item>
-      <Form.Item label={t("screens.fields.associatedJob")} name='job_ids'>
+      {/* <Form.Item label={t("application-urls.fields.job_ids")} name='job_ids'>
         <Select
           mode='multiple'
           disabled
@@ -50,18 +44,9 @@ export const ApplicationURLForm: React.FC<IResourceComponentsProps> = () => {
           autoFocus={activeField === "job_ids"}
           defaultValue={filteredAssociatedJob}
         />
-      </Form.Item>
-      <Form.Item
-        label={t("application-urls.fields.type")}
-        name='application_type_id'
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Select {...typeSelectProps} placeholder='Select Application Type' />
-      </Form.Item>
+      </Form.Item> */}
+      <SelectResource resource={Resource.JOB} name='job_ids' isMulti disabledField />
+      <SelectResource resource={Resource.APPLICATION_TYPE} name='application_type_id' required />
     </>
   );
 

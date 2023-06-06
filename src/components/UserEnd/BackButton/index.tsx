@@ -1,5 +1,5 @@
 import { LeftOutlined } from "@ant-design/icons";
-import { useNavigate } from "@pankod/refine-react-router-v6";
+import { useNavigate } from "react-router-dom";
 
 interface IBtnProps {
   itemdetailslink: string;
@@ -17,7 +17,7 @@ export const BackButton: React.FC<IBtnProps> = (props) => {
   };
   return (
     <h5 style={{ padding: 24 }}>
-      <LeftOutlined />
+      <LeftOutlined rev={undefined} />
       <span style={{ marginLeft: "5px", cursor: "pointer", fontWeight: 700 }} onClick={goBack}>
         Back To Learning
       </span>

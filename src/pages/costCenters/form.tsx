@@ -1,5 +1,5 @@
-import { Form, Input } from "@pankod/refine-antd";
-import { BaseRecord, IResourceComponentsProps, useTranslate } from "@pankod/refine-core";
+import { Form, Input } from "antd";
+import { BaseRecord, IResourceComponentsProps, useTranslate } from "@refinedev/core";
 
 import { DrawerForm } from "components/Resource/form";
 import { ICostCenter } from "interfaces";

@@ -1,29 +1,19 @@
 import React from "react";
 
-import { IResourceComponentsProps, BaseRecord, useTranslate } from "@pankod/refine-core";
-import { Form, Select, Input, useSelect, Row, Col, Radio, Tag } from "@pankod/refine-antd";
+import { IResourceComponentsProps, BaseRecord, useTranslate } from "@refinedev/core";
+import { Form, Input, Row, Col, Radio, Tag } from "antd";
 
 import { DrawerForm } from "components/Resource/form";
 import { Action, Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
-import { IRole, IUser, ICostCenter } from "interfaces";
+import { IUser } from "interfaces";
+import { SelectResource } from "components/Resource/select";
 
 export const UserForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
   const { action, itemId } = useAppSelector((state) => state.drawer);
   const resource = Resource.USER;
 
-  const { selectProps: roleSelectProps } = useSelect<IRole>({
-    resource: "roles",
-    optionLabel: "name",
-    optionValue: "id",
-  });
-
-  const { selectProps: costCenterSelectProps } = useSelect<ICostCenter>({
-    resource: Resource.COST_CENTER,
-    optionLabel: "name",
-    optionValue: "id",
-  });
   const renderFields = (UserRecord: IUser | BaseRecord) => (
     <>
       <Form.Item label={t("users.fields.first_name")} name='first_name'>
@@ -61,28 +51,8 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
           />
         </Form.Item>
       ) : null}
-      <Form.Item
-        label={t("users.fields.role")}
-        name='role_id'
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Select
-          placeholder='Select Role'
-          {...roleSelectProps}
-          {...(UserRecord.source_id ? { disabled: true } : null)}
-        />
-      </Form.Item>
-      <Form.Item label={t("users.fields.cost-center")} name='cost_center_id'>
-        <Select
-          {...costCenterSelectProps}
-          placeholder='Select Cost Center'
-          {...(UserRecord.source_id ? { disabled: true } : null)}
-        />
-      </Form.Item>
+      <SelectResource resource={Resource.ROLE} name='role_id' required />
+      <SelectResource resource={Resource.COST_CENTER} name='cost_center_id' required />
       <Row key='relations' gutter={20}>
         <Col xs={12} lg={12}>
           <Form.Item
@@ -121,13 +91,13 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
         <>
           <Row>
             <Col span={11}>
-              <Form.Item label={t("programs.fields.updated-by")} name='updated_by'>
+              <Form.Item label={t("users.fields.updated_by_user")} name='updated_by_user'>
                 <Input disabled />
               </Form.Item>
             </Col>
             <Col span={2}></Col>
             <Col span={11}>
-              <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+              <Form.Item label={t("users.fields.created_by_user")} name='created_by_user'>
                 <Input disabled />
               </Form.Item>
             </Col>
@@ -141,7 +111,7 @@ export const UserForm: React.FC<IResourceComponentsProps> = () => {
         </>
       ) : (
         <Col span={11}>
-          <Form.Item label={t("programs.fields.created-by")} name='created_by'>
+          <Form.Item label={t("users.fields.created_by_user")} name='created_by_user'>
             <Input disabled />
           </Form.Item>
         </Col>

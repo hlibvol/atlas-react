@@ -1,4 +1,4 @@
-import { Menu } from "@pankod/refine-antd";
+import { Menu } from "antd";
 
 export const UserEndMenu: React.FC = () => {
   return (

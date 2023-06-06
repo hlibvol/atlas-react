@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { useUpdate } from "@pankod/refine-core";
+import { useUpdate } from "@refinedev/core";
 import { ColDef, GetRowIdParams, ICellRendererParams } from "ag-grid-community";
 import { Resource } from "services/enums";
 

@@ -1,4 +1,4 @@
-import SimpleDataProvider from "@pankod/refine-simple-rest";
+import SimpleDataProvider from "@refinedev/simple-rest";
 import apiProvider from "./apiProvider";
 import { Config } from "../config";
 

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { Form, useForm, Spin, Input, Button, Modal, FormInstance, Tabs } from "@pankod/refine-antd";
+import { Form, Spin, Input, Button, Modal, FormInstance } from "antd";
+import { useForm } from "@refinedev/antd";
 import { Action, Resource } from "services/enums";
-import { BaseRecord, GetOneResponse, useTranslate } from "@pankod/refine-core";
+import { BaseRecord, GetOneResponse, useTranslate } from "@refinedev/core";
 import {
   closeDrawer,
   openDrawer,
