@@ -11,7 +11,7 @@ type ISelectProps = {
   name: string;
   isMulti?: boolean;
   required?: boolean;
-  disabledField?: boolean;
+  disabled?: boolean;
   options?: DefaultOptionType[];
   onChange?: () => void;
   placeholder?: string;
@@ -19,8 +19,16 @@ type ISelectProps = {
 };
 
 export const SelectResource: React.FC<ISelectProps> = (props) => {
-  const { resource, name, options, isMulti, onChange, required, placeholder, disabledField } =
-    props;
+  const {
+    resource,
+    name,
+    options,
+    isMulti,
+    onChange,
+    required,
+    placeholder,
+    disabled = false,
+  } = props;
   const { activeField, resource: formResource } = useAppSelector((state) => state.drawer);
   const { selectProps } = useSelect({
     resource: resource,
@@ -47,7 +55,7 @@ export const SelectResource: React.FC<ISelectProps> = (props) => {
           {...selectProps}
           placeholder={placeholder ?? `Select ${filedLabel}`}
           mode={isMulti ? "multiple" : undefined}
-          {...(disabledField ? { disabled: true } : null)}
+          disabled={disabled}
           autoFocus={activeField === name}
           {...(onChange && { onChange })}
           {...(options && { options })}

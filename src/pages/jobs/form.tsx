@@ -33,7 +33,6 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
           {user?.is_designer && (
             <Button
               type='primary'
-              size='small'
               icon={<AntDesignOutlined rev={undefined} />}
               target='_blank'
               href={`ab:job/designer/${urlSuffix}`}
@@ -43,7 +42,6 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
           )}
           <Button
             type='primary'
-            size='small'
             icon={<PlayCircleOutlined rev={undefined} />}
             target='_blank'
             href={`ab:job/executor/${urlSuffix}`}
@@ -64,32 +62,44 @@ export const JobForm: React.FC<IResourceComponentsProps> = () => {
     const appUrlOptions =
       urlSelectProps.options?.filter((url) => appUrlIds?.includes(url.value as number)) || [];
 
-    return (
-      <>
-        <SelectResource resource={Resource.ROLE} name='role_ids' isMulti />
-        <SelectResource
-          name='application_type_id'
-          resource={Resource.APPLICATION_TYPE}
-          onChange={() => {
-            form.setFieldsValue({ application_url_id: null });
-          }}
-          required
-        />
-        <SelectResource
-          resource={Resource.APPLICATION_URL}
-          name='application_url_id'
-          options={appUrlOptions}
-          required
-        />
-        <SelectResource resource={Resource.USE_CASE} name='use_case_ids' isMulti />
-        <SelectResource resource={Resource.SCREEN} name='screen_ids' isMulti />
-        <Form.Item name='is_template' valuePropName='checked'>
-          <Checkbox>
-            <Text strong>{t("jobs.fields.is_template.label")}</Text>{" "}
-          </Checkbox>
-        </Form.Item>
-      </>
-    );
+    return [
+      {
+        tabKey: "1",
+        field: (
+          <>
+            <SelectResource
+              name='application_type_id'
+              resource={Resource.APPLICATION_TYPE}
+              onChange={() => {
+                form.setFieldsValue({ application_url_id: null });
+              }}
+              required
+            />
+            <SelectResource
+              resource={Resource.APPLICATION_URL}
+              name='application_url_id'
+              options={appUrlOptions}
+              required
+            />
+            <Form.Item name='is_template' valuePropName='checked'>
+              <Checkbox>
+                <Text strong>{t("jobs.fields.is_template.label")}</Text>{" "}
+              </Checkbox>
+            </Form.Item>
+          </>
+        ),
+      },
+      {
+        tabKey: "2",
+        field: (
+          <>
+            <SelectResource resource={Resource.ROLE} name='role_ids' isMulti />
+            <SelectResource resource={Resource.USE_CASE} name='use_case_ids' isMulti />
+            <SelectResource resource={Resource.SCREEN} name='screen_ids' isMulti />
+          </>
+        ),
+      },
+    ];
   };
   return <DrawerForm resource={Resource.JOB} renderFields={renderFields} footer={footer} />;
 };

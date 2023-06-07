@@ -79,7 +79,7 @@ export const useDefaultColumns = (props: defaultColumnProps) => {
                 action: Action.EDIT,
                 itemId: record.id,
                 activeField: "name",
-                title: record?.name,
+                title: record.name ? record.name : record.first_name ? record.first_name : "",
               })
             );
           }}
@@ -176,7 +176,7 @@ export const useTableActionProps = (props: TableActionProps) => {
                     action: Action.EDIT,
                     itemId: record.id,
                     activeField: "name",
-                    title: record?.name,
+                    title: record.name ? record.name : record.first_name ? record.first_name : "",
                   })
                 )
               }

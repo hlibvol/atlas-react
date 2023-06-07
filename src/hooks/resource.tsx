@@ -4,6 +4,8 @@ import {
   ReadOutlined,
   BookOutlined,
   FundProjectionScreenOutlined,
+  TeamOutlined,
+  ApartmentOutlined,
 } from "@ant-design/icons";
 
 import { ApplicationURLForm, ApplicationURLList } from "pages/applicationUrl";
@@ -54,6 +56,7 @@ export const useResources = () => {
       form: ProgramForm,
       hasDefaultFields: true,
       meta: { route: Resource.PROGRAM },
+      tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
     },
     {
       name: Resource.TEAM,
@@ -78,6 +81,7 @@ export const useResources = () => {
       form: RoleForm,
       hasDefaultFields: true,
       meta: { route: Resource.ROLE },
+      tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
     },
     {
       name: Resource.USER,
@@ -94,6 +98,7 @@ export const useResources = () => {
       list: ApplicationURLList,
       meta: { route: Resource.APPLICATION_URL },
       hasDefaultFields: true,
+      tabs: [{ name: "Associated Jobs", icon: TeamOutlined }],
     },
     {
       name: Resource.JOB,
@@ -102,6 +107,7 @@ export const useResources = () => {
       form: JobForm,
       meta: { route: Resource.JOB },
       hasDefaultFields: true,
+      tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
     },
     {
       name: Resource.PLAYBOOK,
@@ -111,6 +117,7 @@ export const useResources = () => {
       show: PlayBookShow,
       meta: { route: Resource.PLAYBOOK },
       hasDefaultFields: true,
+      tabs: [{ name: "Associated Roles", icon: TeamOutlined }],
     },
     {
       name: Resource.COURSE,

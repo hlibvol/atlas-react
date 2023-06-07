@@ -15,6 +15,7 @@
   }
   .ql-editor {
     height: 200px;
+    background-color: $bgColor;
   }
   &:has(.ql-editor:focus) {
     border: 1px solid $primaryColor;

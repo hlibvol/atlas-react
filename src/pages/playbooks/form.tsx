@@ -34,9 +34,12 @@ export const PlaybookForm: React.FC<IResourceComponentsProps> = () => {
       </Space>
     ) : null;
 
-  const renderFields = () => {
-    return <SelectResource resource={Resource.ROLE} name='role_ids' isMulti />;
-  };
+  const renderFields = () => [
+    {
+      tabKey: "2",
+      field: <SelectResource resource={Resource.ROLE} name='role_ids' isMulti />,
+    },
+  ];
 
   return <DrawerForm resource={resource} footer={footer} renderFields={renderFields} />;
 };

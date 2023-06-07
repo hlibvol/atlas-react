@@ -7,15 +7,16 @@ import { Resource } from "services/enums";
 
 export const CostCenterForm: React.FC<IResourceComponentsProps> = () => {
   const t = useTranslate();
-  const renderFields = (costCenter: ICostCenter | BaseRecord) => (
-    <>
-      <Form.Item label={t("cost-centers.fields.hrRate")} name='hr_rate'>
-        <Input
-          placeholder='Enter Hourly Rate'
-          {...(costCenter.source_id ? { disabled: true } : null)}
-        />
-      </Form.Item>
-    </>
-  );
+  const renderFields = (costCenter: ICostCenter | BaseRecord) => {
+    return [
+      {
+        field: (
+          <Form.Item label={t("cost-centers.fields.hrRate")} name='hr_rate'>
+            <Input placeholder='Enter Hourly Rate' disabled={!!costCenter.source_id} />
+          </Form.Item>
+        ),
+      },
+    ];
+  };
   return <DrawerForm renderFields={renderFields} resource={Resource.COST_CENTER} />;
 };

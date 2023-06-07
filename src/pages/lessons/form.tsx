@@ -13,14 +13,22 @@ export const LessonForm: React.FC<IResourceComponentsProps> = () => {
   const { action, itemId } = useAppSelector((state) => state.drawer);
   const { showUrl } = useNavigation();
 
-  const renderFields = (lesson: ILesson | BaseRecord) => (
-    <>
-      <Form.Item name='is_template' hidden initialValue={true} />
-      <Form.Item label={t("lessons.fields.duration")} name='duration'>
-        <Input />
-      </Form.Item>
-    </>
-  );
+  const renderFields = (lesson: ILesson | BaseRecord) => {
+    return [
+      {
+        key: "1",
+        field: (
+          <>
+            {" "}
+            <Form.Item name='is_template' hidden initialValue={true} />
+            <Form.Item label={t("lessons.fields.duration")} name='duration'>
+              <Input type='number' min={1} placeholder='min' />
+            </Form.Item>
+          </>
+        ),
+      },
+    ];
+  };
 
   const footer =
     itemId && action === Action.EDIT ? (

@@ -1,65 +1,28 @@
 import React, { useEffect } from "react";
-import { Form, Spin, Input, Button, Modal, FormInstance } from "antd";
-import { useForm } from "@refinedev/antd";
+import { Form, Spin, Button, Modal, FormInstance, Space } from "antd";
+import { DeleteButton, useForm } from "@refinedev/antd";
 import { Action, Resource } from "services/enums";
-import { BaseRecord, GetOneResponse, useTranslate } from "@refinedev/core";
+import { BaseRecord, GetOneResponse } from "@refinedev/core";
 import {
   closeDrawer,
   openDrawer,
   setDrawerFooter,
   setDrawerOnClose,
+  setDrawerExtra,
 } from "redux/slices/drawerSlice";
 import { useAppSelector, useAppDispatch } from "redux/hooks";
-import RichTextEditor from "components/RichTextEditor";
-import { useResources } from "hooks/resource";
-
-export const useDefaultFormItems = (resource: string, isExternal = false) => {
-  const { activeField } = useAppSelector((state) => state.drawer);
-
-  const t = useTranslate();
-  return (
-    <>
-      <Form.Item
-        label={t(`${resource}.fields.title`)}
-        name='name'
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input
-          placeholder={`Enter ${t(`${resource}.fields.title`)}`}
-          autoFocus={!activeField}
-          tabIndex={1}
-          {...(isExternal ? { disabled: true } : null)}
-        />
-      </Form.Item>
-      <Form.Item label={t(`${resource}.fields.description`)} name='description'>
-        {/* @ts-ignore */}
-        <RichTextEditor
-          placeholder={`Enter ${t(`${resource}.fields.description`)}..`}
-          autoFocus={activeField === "description"}
-          tabIndex={2}
-          readOnly={isExternal}
-        />
-      </Form.Item>
-    </>
-  );
-};
+import { IDrawerField } from "interfaces";
+import { Tabs } from "./tabs";
 
 type DrawerFormProps = {
   resource: Resource;
-  renderFields?: (record: BaseRecord, form: FormInstance) => JSX.Element;
+  renderFields?: (record: BaseRecord, form: FormInstance) => IDrawerField[];
   footer?: JSX.Element | null;
 };
 
 export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
   const { action, itemId } = useAppSelector((state) => state.drawer);
   const { resource, renderFields = () => null, footer } = props;
-
-  const resources = useResources();
-  const { hasDefaultFields } = resources.find((r) => r.name === resource) ?? {};
   const dispatch = useAppDispatch();
 
   const { formProps, formLoading, queryResult, onFinish, form } = useForm({
@@ -67,16 +30,14 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
     resource,
     action: action,
     onMutationSuccess: (data: GetOneResponse) => {
-      const { id } = data.data;
-      dispatch(openDrawer({ resource, action: Action.EDIT, itemId: id }));
+      const { id, name } = data.data;
+      dispatch(openDrawer({ resource, action: Action.EDIT, itemId: id, title: name }));
     },
     warnWhenUnsavedChanges: true,
   });
 
   const currentRecord = queryResult?.data?.data;
   const isExternal = currentRecord?.source_id ? true : false;
-
-  const defaultFormItems = hasDefaultFields ? useDefaultFormItems(resource, isExternal) : null;
 
   const defaultOnClose = () => {
     dispatch(closeDrawer());
@@ -111,41 +72,53 @@ export const DrawerForm: React.FC<DrawerFormProps> = (props) => {
 
   formProps.onValuesChange = handleValuesChange;
 
-  useEffect(() => {
-    dispatch(
-      setDrawerFooter(
-        <>
-          {footer}
-          {!isExternal && (
-            <Button
-              loading={formLoading}
-              onClick={() => {
-                form
-                  .validateFields()
-                  .then(() => {
-                    onFinish(); // or form.submit()
-                  })
-                  .catch((errorInfo) => {
-                    console.log(errorInfo);
-                  });
-              }}
-              type='primary'
-              style={{ float: "right" }}
-            >
-              Save
-            </Button>
-          )}
-        </>
-      )
+  const getActionButtons = () => {
+    return (
+      <Space>
+        <Button
+          loading={formLoading}
+          onClick={() => {
+            form
+              .validateFields()
+              .then(() => {
+                onFinish(); // or form.submit()
+              })
+              .catch((errorInfo) => {
+                console.log(errorInfo);
+              });
+          }}
+          type='primary'
+          disabled={isExternal}
+        >
+          Save
+        </Button>
+        {action == Action.EDIT ? (
+          <DeleteButton
+            resource={resource}
+            recordItemId={itemId}
+            disabled={isExternal}
+            hideText
+            onSuccess={defaultOnClose}
+          />
+        ) : null}
+      </Space>
     );
+  };
+
+  useEffect(() => {
+    dispatch(setDrawerFooter(footer));
+    dispatch(setDrawerExtra(getActionButtons()));
     dispatch(setDrawerOnClose(defaultOnClose));
   }, [formLoading]);
 
   return (
     <Spin spinning={formLoading}>
       <Form {...formProps} layout='vertical'>
-        {defaultFormItems}
-        {renderFields(queryResult?.data?.data ?? {}, form)}
+        <Tabs
+          record={currentRecord}
+          resource={resource}
+          fields={renderFields(currentRecord ?? {}, form)}
+        />
         {/* <SaveButton {...saveButtonProps}>Save</SaveButton> */}
       </Form>
     </Spin>

@@ -63,6 +63,7 @@ export const {
   closeDrawer,
   setDrawerTitle,
   setDrawerFooter,
+  setDrawerExtra,
   removeActiveField,
   setDrawerOnClose,
 } = drawerSlice.actions;

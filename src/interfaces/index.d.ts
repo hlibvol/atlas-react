@@ -151,7 +151,7 @@ export interface IProgram {
   name: string;
   description: string;
   teams: ITeams[];
-  team_ids: number[];
+  team_id: number[];
   portfolio_id: number;
   source_id: number;
   is_deleted: boolean;
@@ -183,4 +183,9 @@ export interface ICostCenter {
   description: string;
   source_id: number;
   hr_rate: number;
+}
+
+export interface IDrawerField {
+  tabKey?: string;
+  field: JSX.Element;
 }
