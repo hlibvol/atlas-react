@@ -1,12 +1,11 @@
 import React, { useMemo } from "react";
 
 import { useOne, useUpdate } from "@refinedev/core";
-import { Col, Form, Row, Select } from "antd";
+import { Col, Form, Row, Select, Spin } from "antd";
 import { Show, useSelect } from "@refinedev/antd";
 import { SmileOutlined } from "@ant-design/icons";
 import { Resource } from "services/enums";
 import { IJob, IRole, IUseCase } from "interfaces";
-import { useParams } from "react-router-dom";
 import { MatrixTable } from "./MatrixTable";
 import { ColDef } from "ag-grid-community";
 
@@ -14,9 +13,14 @@ interface customColDef extends ColDef {
   roleId: number;
 }
 
-export const MatrixTableEdit: React.FC = () => {
+type MatrixTableEditProps = {
+  itemId: number;
+};
+
+export const MatrixTableEdit: React.FC<MatrixTableEditProps> = ({
+  itemId,
+}: MatrixTableEditProps) => {
   const { mutate } = useUpdate();
-  const { itemId } = useParams();
   const queryResult = useOne<IUseCase>({ resource: Resource.USE_CASE, id: Number(itemId) });
   const useCase = queryResult.data?.data;
 
@@ -105,15 +109,7 @@ export const MatrixTableEdit: React.FC = () => {
   };
 
   return (
-    <Show
-      title={useCase && useCase.name ? useCase.name : "Use case"}
-      isLoading={queryResult.isLoading || !useCase}
-      canEdit
-      goBack={<SmileOutlined rev={undefined} />}
-      headerProps={{
-        subTitle: "(Job - Role Matrix)",
-      }}
-    >
+    <Spin spinning={queryResult.isLoading || !useCase}>
       <Row justify={"space-between"}>
         <Col>
           <Form.Item label='Jobs'>
@@ -156,6 +152,6 @@ export const MatrixTableEdit: React.FC = () => {
           onRoleChange={onRoleChange}
         />
       </Row>
-    </Show>
+    </Spin>
   );
 };

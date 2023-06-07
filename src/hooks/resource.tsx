@@ -6,6 +6,7 @@ import {
   FundProjectionScreenOutlined,
   TeamOutlined,
   ApartmentOutlined,
+  TableOutlined,
 } from "@ant-design/icons";
 
 import { ApplicationURLForm, ApplicationURLList } from "pages/applicationUrl";
@@ -142,6 +143,7 @@ export const useResources = () => {
       form: UseCaseForm,
       meta: { route: Resource.USE_CASE, icon: <ReadOutlined rev={undefined} /> },
       hasDefaultFields: true,
+      tabs: [{ name: "Role - Job Matrix", icon: TableOutlined }],
     },
     {
       name: Resource.SCREEN,

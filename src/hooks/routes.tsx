@@ -34,11 +34,6 @@ export const useRoutes = () => {
       element: <LearningModules />,
     },
     {
-      path: `/${Resource.USE_CASE}/:itemId`,
-      element: <MatrixTableEdit />,
-      layout: true,
-    },
-    {
       path: `/${Resource.USE_CASE}-view/:itemId`,
       element: <MatrixTableView />,
     },

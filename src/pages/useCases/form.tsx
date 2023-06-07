@@ -1,28 +1,22 @@
 import React from "react";
 
-import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
+import { IResourceComponentsProps } from "@refinedev/core";
 import { DrawerForm } from "components/Resource/form";
-import { Action, Resource } from "services/enums";
+import { Resource } from "services/enums";
 import { useAppSelector } from "redux/hooks";
-import { Button } from "antd";
-import { BorderHorizontalOutlined } from "@ant-design/icons";
+import { MatrixTableEdit } from "components/UseCaseMatrix/MatrixTableEdit";
 
 export const UseCaseForm: React.FC<IResourceComponentsProps> = () => {
-  const t = useTranslate();
-  const { action, itemId } = useAppSelector((state) => state.drawer);
+  const { itemId } = useAppSelector((state) => state.drawer);
   const resource = Resource.USE_CASE;
+  const renderFields = () => {
+    return [
+      {
+        tabKey: "2",
+        field: itemId ? <MatrixTableEdit itemId={itemId} /> : <>No data available</>,
+      },
+    ];
+  };
 
-  const footer =
-    itemId && action === Action.EDIT ? (
-      <Button
-        icon={<BorderHorizontalOutlined rev={undefined} />}
-        type='primary'
-        href={`/${resource}/${itemId}`}
-        target='_blank'
-      >
-        {t("buttons.role-job-matrix")}
-      </Button>
-    ) : null;
-
-  return <DrawerForm resource={resource} footer={footer} />;
+  return <DrawerForm resource={resource} renderFields={renderFields} />;
 };
