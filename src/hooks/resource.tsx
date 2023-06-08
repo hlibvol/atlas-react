@@ -25,6 +25,8 @@ import { ScreenForm, ScreenList } from "pages/screens";
 import { CostCenterForm, CostCenterList } from "pages/costCenters";
 import { PortfolioForm, PortfolioList } from "pages/portfolios";
 
+import { TeamList, TeamForm } from "pages/teams";
+
 export const useResources = () => {
   return [
     {
@@ -64,10 +66,11 @@ export const useResources = () => {
     {
       name: Resource.TEAM,
       parentName: "organization-design",
-      list: RoleList,
-      form: RoleForm,
+      list: TeamList,
+      form: TeamForm,
       hasDefaultFields: true,
       meta: { route: Resource.TEAM },
+      tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
     },
     {
       name: Resource.COST_CENTER,
