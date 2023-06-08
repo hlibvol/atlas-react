@@ -23,6 +23,7 @@ import { ProgramForm, ProgramList } from "pages/programs";
 import { Resource } from "services/enums";
 import { ScreenForm, ScreenList } from "pages/screens";
 import { CostCenterForm, CostCenterList } from "pages/costCenters";
+import { PortfolioForm, PortfolioList } from "pages/portfolios";
 
 export const useResources = () => {
   return [
@@ -45,10 +46,11 @@ export const useResources = () => {
     {
       name: Resource.PORTFOLIO,
       parentName: "organization-design",
-      list: RoleList,
-      form: RoleForm,
+      list: PortfolioList,
+      form: PortfolioForm,
       hasDefaultFields: true,
       meta: { route: Resource.PORTFOLIO },
+      tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
     },
     {
       name: Resource.PROGRAM,

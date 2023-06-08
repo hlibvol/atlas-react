@@ -8,13 +8,20 @@ import { SelectResource } from "components/Resource/select";
 
 export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
   const renderFields = (program: IProgram | BaseRecord) => {
+    const isExternal = !!program?.source_id;
     return [
       {
         tabKey: "2",
         field: (
           <>
-            <SelectResource resource={Resource.PORTFOLIO} name='portfolio_id' />
-            {program?.team_id && <SelectResource resource={Resource.TEAM} name='team_id' />}
+            <SelectResource
+              resource={Resource.PORTFOLIO}
+              name='portfolio_id'
+              disabled={isExternal}
+            />
+            {program?.team_id && (
+              <SelectResource resource={Resource.TEAM} name='team_id' disabled={isExternal} />
+            )}
             {program?.teams?.length && (
               <>
                 <h4 style={{ fontWeight: "bold" }}>Associated Teams</h4>

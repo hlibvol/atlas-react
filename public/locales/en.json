@@ -429,6 +429,7 @@
       "resourceLabel": "Portfolio",
       "title": "Portfolio Name",
       "description": "Description",
+      "team_id": "Portfolio Team",
       "programs": "Associated TOFTs",
       "source_id": "Source",
       "created_by_user": "Created By",
@@ -510,7 +511,7 @@
       "title": "Cost Center",
       "description": "Description",
       "source_id": "Source",
-      "hr_rate": "Hourly Rate",   
+      "hr_rate": "Hourly Rate",
       "created_by_user": "Created By",
       "updated_by_user": "Updated By",
       "is_active": {

@@ -145,6 +145,8 @@ export interface IPortfolio {
   is_deleted: boolean;
   created_by: number;
   updated_by: number;
+  team_id: number;
+  programs: IProgram[];
 }
 export interface IProgram {
   id: number;
