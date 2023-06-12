@@ -11,7 +11,7 @@ export const CostCenterForm: React.FC<IResourceComponentsProps> = () => {
     return [
       {
         field: (
-          <Form.Item label={t("cost-centers.fields.hrRate")} name='hr_rate'>
+          <Form.Item label={t("cost-centers.fields.hr_rate")} name='hr_rate'>
             <Input placeholder='Enter Hourly Rate' disabled={!!costCenter.source_id} />
           </Form.Item>
         ),

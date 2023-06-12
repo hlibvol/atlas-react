@@ -23,7 +23,7 @@ export const PortfolioForm: React.FC<IResourceComponentsProps> = () => {
               <>
                 <h4 style={{ fontWeight: "bold" }}>Associated Programs</h4>
                 {portfolio.programs?.map((program: IProgram) => (
-                  <Tag color='default' style={{ fontSize: "13px" }}>
+                  <Tag color='default' style={{ fontSize: "13px", margin: "5px", padding: "5px" }}>
                     {program.name}
                   </Tag>
                 ))}

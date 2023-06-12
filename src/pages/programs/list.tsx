@@ -22,23 +22,6 @@ export const ProgramList: React.FC<IResourceComponentsProps> = () => {
         );
       },
     },
-    {
-      dataIndex: ["source_id"],
-      title: t("programs.fields.source_id"),
-      render: (sourceId: number | undefined) => (
-        <TagField
-          color={sourceId ? "cyan" : "green"}
-          value={sourceId ? t("status.external") : t("status.internal")}
-        />
-      ),
-    },
-    {
-      dataIndex: "updated_by_user",
-      title: t("programs.fields.updated_by_user"),
-      width: 120,
-      render: (updatedBy: number) =>
-        updatedBy ? <Typography.Text>{updatedBy}</Typography.Text> : "",
-    },
   ];
   return <List columns={columns} resource={Resource.PROGRAM} />;
 };

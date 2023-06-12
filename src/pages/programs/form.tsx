@@ -22,15 +22,17 @@ export const ProgramForm: React.FC<IResourceComponentsProps> = () => {
             {program?.team_id && (
               <SelectResource resource={Resource.TEAM} name='team_id' disabled={isExternal} />
             )}
-            {program?.teams?.length && (
+            {program?.teams?.length ? (
               <>
                 <h4 style={{ fontWeight: "bold" }}>Associated Teams</h4>
                 {program.teams?.map((team: ITeam) => (
-                  <Tag color='default' style={{ fontSize: "13px" }}>
+                  <Tag color='default' style={{ fontSize: "13px", margin: "5px", padding: "5px" }}>
                     {team.name}
                   </Tag>
                 ))}
               </>
+            ) : (
+              <></>
             )}
           </>
         ),

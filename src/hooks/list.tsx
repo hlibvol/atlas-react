@@ -1,14 +1,6 @@
-import { DeleteButton, EditButton, useTable } from "@refinedev/antd";
+import { DeleteButton, EditButton, TagField, useTable } from "@refinedev/antd";
 import { Space, TableProps, Tooltip, Typography, Button } from "antd";
-import {
-  BaseKey,
-  BaseRecord,
-  CrudSorting,
-  OpenNotificationParams,
-  useGetIdentity,
-  useNavigation,
-  useTranslate,
-} from "@refinedev/core";
+import { BaseKey, BaseRecord, CrudSorting, useTranslate } from "@refinedev/core";
 import { FixedType } from "rc-table/lib/interface";
 import { useEffect, useState } from "react";
 import { extractContent } from "services/utils";
@@ -16,12 +8,6 @@ import { extractContent } from "services/utils";
 import { openDrawer } from "redux/slices/drawerSlice";
 import { Resource, Action } from "services/enums";
 import { useAppDispatch } from "redux/hooks";
-import {
-  EyeOutlined,
-  PlayCircleOutlined,
-  AntDesignOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
 import moment from "moment";
 import { useResources } from "hooks/resource";
 
@@ -118,39 +104,38 @@ export const useDefaultColumns = (props: defaultColumnProps) => {
 type TableActionProps = {
   resource: Resource;
   renderActions?: (record: BaseRecord) => JSX.Element;
-  disabledEdit?: boolean;
-  disabledDelete?: boolean;
+  hasExternal?: boolean;
 };
 
 export const useTableActionProps = (props: TableActionProps) => {
   const t = useTranslate();
   const dispatch = useAppDispatch();
-  const { showUrl } = useNavigation();
-  const { data: user }: BaseRecord = useGetIdentity();
-  const { disabledEdit, disabledDelete, resource, renderActions } = props;
+  const { resource, renderActions, hasExternal } = props;
   const tooltipLabel = t(`${resource}.fields.resourceLabel`);
-  const buttonProps = (id: BaseKey | undefined, disabled: boolean | string | undefined) => {
+  const buttonProps = (id: BaseKey | undefined) => {
     return {
       hideText: true,
       size: "small" as const,
       recordItemId: id,
-      ...(!disabled
-        ? {}
-        : {
-            errorNotification: () => {
-              return {
-                description: disabled,
-                type: "error",
-              } as OpenNotificationParams;
-            },
-          }),
     };
   };
 
   return [
+    hasExternal
+      ? {
+          title: "Source",
+          dataIndex: "source_id",
+          render: (sourceId: number | undefined) => (
+            <TagField
+              color={sourceId ? "cyan" : "green"}
+              value={sourceId ? t("status.external") : t("status.internal")}
+            />
+          ),
+        }
+      : {},
     {
       title: "Updated",
-      dataIndex: "updated_at",
+      dataIndex: hasExternal ? "source_update_at" : "updated_at",
       render: (updated_at: string, record: BaseRecord) =>
         updated_at || record?.created_at ? (
           <Typography.Text type='secondary' italic>
@@ -168,7 +153,7 @@ export const useTableActionProps = (props: TableActionProps) => {
           {renderActions && renderActions(record)}
           <Tooltip title={`Edit ${tooltipLabel}`} color='green'>
             <EditButton
-              {...buttonProps(record.id, disabledEdit)}
+              {...buttonProps(record.id)}
               onClick={() =>
                 dispatch(
                   openDrawer({
@@ -180,17 +165,18 @@ export const useTableActionProps = (props: TableActionProps) => {
                   })
                 )
               }
+              disabled={!!record.source_id}
             />
           </Tooltip>
           <Tooltip title={`Delete ${tooltipLabel}`} color='green'>
-            <DeleteButton {...buttonProps(record.id, disabledDelete)} />
+            <DeleteButton {...buttonProps(record.id)} disabled={!!record.source_id} />
           </Tooltip>
         </Space>
       ),
       width: 230,
       fixed: "right" as FixedType,
     },
-  ];
+  ].filter((item) => Object.keys(item).length !== 0);
 };
 
 export const usePageSize = () => {
@@ -235,10 +221,11 @@ export const useListProps = (props: ListProps) => {
   // const pageSize = usePageSize();
 
   const resources = useResources();
-  const { hasDefaultFields } = resources.find((r) => r.name === resource) ?? {};
+  const { hasDefaultFields, hasExternal } = resources.find((r) => r.name === resource) ?? {};
   const tableActionProps = useTableActionProps({
     resource,
     renderActions,
+    hasExternal,
   });
   const defaultColumns = hasDefaultFields ? useDefaultColumns({ resource }) : [];
   return { tableProps, tableActionProps, defaultColumns };

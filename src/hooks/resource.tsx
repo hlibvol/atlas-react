@@ -53,6 +53,7 @@ export const useResources = () => {
       hasDefaultFields: true,
       meta: { route: Resource.PORTFOLIO },
       tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
+      hasExternal: true,
     },
     {
       name: Resource.PROGRAM,
@@ -62,6 +63,7 @@ export const useResources = () => {
       hasDefaultFields: true,
       meta: { route: Resource.PROGRAM },
       tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
+      hasExternal: true,
     },
     {
       name: Resource.TEAM,
@@ -71,6 +73,7 @@ export const useResources = () => {
       hasDefaultFields: true,
       meta: { route: Resource.TEAM },
       tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
+      hasExternal: true,
     },
     {
       name: Resource.COST_CENTER,
@@ -79,6 +82,7 @@ export const useResources = () => {
       form: CostCenterForm,
       hasDefaultFields: true,
       meta: { route: Resource.COST_CENTER },
+      hasExternal: true,
     },
     {
       name: Resource.ROLE,
@@ -88,6 +92,7 @@ export const useResources = () => {
       hasDefaultFields: true,
       meta: { route: Resource.ROLE },
       tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
+      hasExternal: true,
     },
     {
       name: Resource.USER,
@@ -96,6 +101,7 @@ export const useResources = () => {
       form: UserForm,
       hasDefaultFields: false,
       meta: { route: Resource.USER },
+      hasExternal: true,
     },
     {
       name: Resource.APPLICATION_URL,

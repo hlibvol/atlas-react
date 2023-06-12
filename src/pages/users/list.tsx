@@ -5,8 +5,8 @@ import {
   useNavigation,
   BaseRecord,
 } from "@refinedev/core";
-import { BooleanField, UrlField, TagField } from "@refinedev/antd";
-import { Button, Typography, Tag } from "antd";
+import { BooleanField, UrlField } from "@refinedev/antd";
+import { Button, Tag } from "antd";
 import { Resource, Action } from "services/enums";
 import { ICostCenter, IRole } from "interfaces";
 import List from "components/Resource/list";
@@ -51,16 +51,6 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
       title: t("users.fields.email"),
     },
     {
-      dataIndex: "source_id",
-      title: t("users.fields.source_id"),
-      render: (sourceId: number | undefined) => (
-        <TagField
-          color={sourceId ? "cyan" : "green"}
-          value={sourceId ? t("status.external") : t("status.internal")}
-        />
-      ),
-    },
-    {
       dataIndex: "role_id",
       title: t("users.fields.role_id"),
       render: (roleId: number) => {
@@ -97,14 +87,6 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
       dataIndex: "is_superuser",
       title: t("users.fields.is_superuser.label"),
       render: (value: boolean) => <BooleanField value={value} />,
-    },
-
-    {
-      dataIndex: "updated_by_user",
-      title: t("users.fields.updated_by_user"),
-      width: 120,
-      render: (updatedBy: string | undefined) =>
-        updatedBy ? <Typography.Text>{updatedBy}</Typography.Text> : "",
     },
   ];
 

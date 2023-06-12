@@ -34,7 +34,7 @@ export const MainTab: React.FC<MainTabProps> = (props: MainTabProps) => {
                     ? moment(moment.utc(record.created_at).toDate()).local().fromNow()
                     : "Unknown"}
                 </Text>
-                <Text italic>By: {record?.created_by ?? "Unknown"}</Text>
+                <Text italic>By: {record?.created_by_user?.name ?? "Unknown"}</Text>
               </Space>
               <Space direction='vertical'>
                 <Text type='secondary' italic>

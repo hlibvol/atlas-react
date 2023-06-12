@@ -176,6 +176,7 @@ export interface ITeam {
   created_by: boolean;
   updated_by: boolean;
   user_ids: number[];
+  users: IUser[];
   type: number;
 }
 
