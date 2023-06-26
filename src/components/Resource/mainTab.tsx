@@ -44,7 +44,7 @@ export const MainTab: React.FC<MainTabProps> = (props: MainTabProps) => {
                     : record?.updated_at &&
                       moment(moment.utc(record.updated_at).toDate()).local().fromNow()}
                 </Text>
-                <Text italic>By: {record?.updated_by ?? "Unknown"}</Text>
+                <Text italic>By: {record?.updated_by_user?.name ?? "Unknown"}</Text>
               </Space>
               <Space direction='vertical'>
                 <TagField

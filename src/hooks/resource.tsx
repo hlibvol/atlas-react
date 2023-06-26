@@ -24,6 +24,7 @@ import { Resource } from "services/enums";
 import { ScreenForm, ScreenList } from "pages/screens";
 import { CostCenterForm, CostCenterList } from "pages/costCenters";
 import { PortfolioForm, PortfolioList } from "pages/portfolios";
+import { AssessmentList, AssessmentForm } from "pages/assessments";
 
 import { TeamList, TeamForm } from "pages/teams";
 
@@ -130,6 +131,15 @@ export const useResources = () => {
       meta: { route: Resource.PLAYBOOK },
       hasDefaultFields: true,
       tabs: [{ name: "Associated Roles", icon: TeamOutlined }],
+    },
+    {
+      name: Resource.ASSESSMENT,
+      parentName: "learning-design",
+      list: AssessmentList,
+      form: AssessmentForm,
+      hasDefaultFields: true,
+      meta: { route: Resource.ASSESSMENT },
+      tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
     },
     {
       name: Resource.COURSE,

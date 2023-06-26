@@ -192,3 +192,21 @@ export interface IDrawerField {
   tabKey?: string;
   field: JSX.Element;
 }
+
+export interface IAssessment {
+  id: number;
+  name: string;
+  description: string;
+  dimensions: IDimension[];
+  created_by: number;
+  updated_by: number;
+}
+export interface IDimension {
+  id: number;
+  name: string;
+  description: string;
+  assessment_id: number;
+  questions: [];
+  created_by: number;
+  updated_by: number;
+}

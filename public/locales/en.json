@@ -522,5 +522,30 @@
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
+  },
+  "assessments": {
+    "assessments": "Assessments",
+    "titles": {
+      "create": "Create Assessment",
+      "edit": "Edit Assessments",
+      "list": "Assessments"
+    },
+    "fields": {
+      "id": "Assessment ID",
+      "resourceLabel": "Assessments",
+      "title": "Assessment Name",
+      "description": "Description",
+      "source_id": "Source",
+      "dimensions": "Associated Dimensions",
+      "created_by_user": "Created By",
+      "updated_by_user": "Updated By",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
   }
 }
