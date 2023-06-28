@@ -25,7 +25,7 @@ import { ScreenForm, ScreenList } from "pages/screens";
 import { CostCenterForm, CostCenterList } from "pages/costCenters";
 import { PortfolioForm, PortfolioList } from "pages/portfolios";
 import { AssessmentList, AssessmentForm } from "pages/assessments";
-
+import { DimensionList, DimensionForm } from "pages/dimensions";
 import { TeamList, TeamForm } from "pages/teams";
 
 export const useResources = () => {
@@ -139,6 +139,15 @@ export const useResources = () => {
       form: AssessmentForm,
       hasDefaultFields: true,
       meta: { route: Resource.ASSESSMENT },
+      tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
+    },
+    {
+      name: Resource.DIMENSION,
+      parentName: "learning-design",
+      list: DimensionList,
+      form: DimensionForm,
+      hasDefaultFields: true,
+      meta: { route: Resource.DIMENSION },
       tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
     },
     {

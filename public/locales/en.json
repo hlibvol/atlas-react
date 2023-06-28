@@ -547,5 +547,32 @@
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
+  },
+  "dimensions": {
+    "dimensions": "Dimensions",
+    "titles": {
+      "create": "Create Dimension",
+      "edit": "Edit Dimension",
+      "list": "Dimensions"
+    },
+    "fields": {
+      "id": "Dimension ID",
+      "resourceLabel": "Dimensions",
+      "title": "Dimension Name",
+      "description": "Description",
+      "assessment_id": "Assessment",
+      "questions": "Questions",
+      "baseline_value": "Baseline",
+      "ideal_value": "Ideal Value",
+      "created_by_user": "Created By",
+      "updated_by_user": "Updated By",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
   }
 }

@@ -210,3 +210,12 @@ export interface IDimension {
   created_by: number;
   updated_by: number;
 }
+
+export interface IQuestion {
+  id: number;
+  name: string;
+  description: string;
+  dimension_id: number;
+  created_by: number;
+  updated_by: number;
+}
