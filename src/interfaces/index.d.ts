@@ -219,3 +219,11 @@ export interface IQuestion {
   created_by: number;
   updated_by: number;
 }
+export interface IJobSnippets {
+  id: number;
+  name: string;
+  description: string;
+  steps: {};
+  created_by: number;
+  updated_by: number;
+}

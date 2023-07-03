@@ -27,6 +27,7 @@ import { PortfolioForm, PortfolioList } from "pages/portfolios";
 import { AssessmentList, AssessmentForm } from "pages/assessments";
 import { DimensionList, DimensionForm } from "pages/dimensions";
 import { TeamList, TeamForm } from "pages/teams";
+import { JobSnippetsList, JobSnippetsForm } from "pages/jobSnippets";
 
 export const useResources = () => {
   return [
@@ -119,6 +120,15 @@ export const useResources = () => {
       list: JobList,
       form: JobForm,
       meta: { route: Resource.JOB },
+      hasDefaultFields: true,
+      tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
+    },
+    {
+      name: Resource.JOB_SNIPPETS,
+      parentName: "jobs-design",
+      list: JobSnippetsList,
+      form: JobSnippetsForm,
+      meta: { route: Resource.JOB_SNIPPETS },
       hasDefaultFields: true,
       tabs: [{ name: "Associated Data", icon: ApartmentOutlined }],
     },

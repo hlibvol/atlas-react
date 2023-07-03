@@ -15,6 +15,7 @@ export enum Resource {
   COST_CENTER = "cost-centers",
   ASSESSMENT = "assessments",
   DIMENSION = "dimensions",
+  JOB_SNIPPETS = "job-snippets",
 }
 
 export enum Action {

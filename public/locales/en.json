@@ -574,5 +574,30 @@
     },
     "tagFilterDescription": "Use tags to filter your search",
     "all": "All"
+  },
+  "job-snippets": {
+    "job-snippets": "Job Snippets",
+    "titles": {
+      "create": "Create Job Snippet",
+      "edit": "Edit Job Snippet",
+      "list": "Job Snippets"
+    },
+    "fields": {
+      "id": "Job Snippet ID",
+      "resourceLabel": "Job Snippets",
+      "title": "Snippets Name",
+      "description": "Description",
+      "steps": "Steps",
+      "job_ids":"Associated Jobs",
+      "created_by_user": "Created By",
+      "updated_by_user": "Updated By",
+      "is_active": {
+        "label": "Is Active",
+        "true": "Yes",
+        "false": "No"
+      }
+    },
+    "tagFilterDescription": "Use tags to filter your search",
+    "all": "All"
   }
 }
